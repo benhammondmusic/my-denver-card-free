@@ -21,11 +21,11 @@ func main() {
 		log.Fatalf("failed to unmarshal venues: %v", err)
 	}
 
-	if err := os.MkdirAll("public", 0755); err != nil {
-		log.Fatalf("failed to create public dir: %v", err)
+	if err := os.MkdirAll("docs", 0755); err != nil {
+		log.Fatalf("failed to create docs dir: %v", err)
 	}
 
-	f, err := os.Create("public/index.html")
+	f, err := os.Create("docs/index.html")
 	if err != nil {
 		log.Fatalf("failed to create public/index.html: %v", err)
 	}
@@ -35,5 +35,5 @@ func main() {
 		log.Fatalf("failed to render template: %v", err)
 	}
 
-	log.Println("generated public/index.html")
+	log.Println("generated docs/index.html")
 }

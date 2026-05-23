@@ -14,3 +14,4 @@ scrape: generate
 
 generate-site: generate
 	go run ./cmd/generate/main.go
+	@echo "→ docs/index.html"
