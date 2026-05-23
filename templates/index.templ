@@ -43,11 +43,11 @@ templ VenueRow(v models.Venue) {
 			} else {
 				switch {
 					case v.AdultsIncluded >= 2:
-						<span class="badge badge-green">Free — { fmt.Sprintf("%d", v.AdultsIncluded) } adults included</span>
+						<span class="badge badge-green">Free +{ fmt.Sprintf("%d", v.AdultsIncluded) } Adults</span>
 					case v.AdultsIncluded == 1:
-						<span class="badge badge-green">Free — 1 adult included</span>
+						<span class="badge badge-green">Free +1 Adult</span>
 					default:
-						<span class="badge badge-yellow">Free — no adults</span>
+						<span class="badge badge-yellow">Free</span>
 				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
 			}
