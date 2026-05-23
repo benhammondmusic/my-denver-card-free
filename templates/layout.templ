@@ -99,23 +99,13 @@ templ Layout(title string) {
 
 				.bear-wrap {
 					flex-shrink: 0;
+					line-height: 0;
+					margin-right: -2rem;
 					z-index: 3;
-					width: 180px;
-					height: 160px;
-					border: 3px solid rgba(255,255,255,0.25);
-					border-bottom: none;
-					border-radius: 0.5rem 0.5rem 0 0;
-					overflow: hidden;
-					position: relative;
-					margin-right: 1.5rem;
-					align-self: flex-end;
 				}
 
 				.bear-wrap img {
-					position: absolute;
-					bottom: 0;
-					right: -12px;
-					width: 210px;
+					width: 240px;
 					height: auto;
 					display: block;
 				}
@@ -372,14 +362,8 @@ templ Layout(title string) {
 						font-size: clamp(3rem, 16vw, 4.5rem);
 					}
 
-					.bear-wrap {
-						width: 120px;
-						height: 110px;
-					}
-
 					.bear-wrap img {
-						width: 145px;
-						right: -8px;
+						width: 160px;
 					}
 
 					.venue-row {
