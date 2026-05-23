@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>myDenverCard Free — Denver Cultural Venues</title><script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2uQ8DvwEMkEqMJ0aXYHpK/n7rJjL7GHqkL" crossorigin="anonymous"></script><style>
+				*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+				body {
+					font-family: system-ui, -apple-system, sans-serif;
+					background: #f5f5f4;
+					color: #1c1917;
+					min-height: 100vh;
+				}
+
+				header {
+					background: #1d4ed8;
+					color: white;
+					padding: 1.25rem 1.5rem;
+				}
+
+				header h1 {
+					font-size: 1.5rem;
+					font-weight: 700;
+					letter-spacing: -0.025em;
+				}
+
+				header p {
+					margin-top: 0.25rem;
+					font-size: 0.875rem;
+					opacity: 0.85;
+				}
+
+				main {
+					max-width: 720px;
+					margin: 2rem auto;
+					padding: 0 1rem;
+				}
+
+				.venue-list {
+					list-style: none;
+					display: flex;
+					flex-direction: column;
+					gap: 0.75rem;
+				}
+
+				.venue-row {
+					background: white;
+					border: 1px solid #e7e5e4;
+					border-radius: 0.5rem;
+					padding: 0.875rem 1rem;
+					display: flex;
+					align-items: baseline;
+					justify-content: space-between;
+					gap: 1rem;
+				}
+
+				.venue-name {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+					font-weight: 600;
+				}
+
+				.venue-name a {
+					color: #1d4ed8;
+					text-decoration: none;
+				}
+
+				.venue-name a:hover { text-decoration: underline; }
+
+				.venue-status {
+					display: flex;
+					align-items: center;
+					gap: 0.625rem;
+					flex-shrink: 1;
+					min-width: 0;
+				}
+
+				.months {
+					font-size: 0.8125rem;
+					color: #78716c;
+				}
+
+				.badge {
+					display: inline-block;
+					padding: 0.2rem 0.6rem;
+					border-radius: 9999px;
+					font-size: 0.75rem;
+					font-weight: 600;
+					line-height: 1.4;
+					white-space: nowrap;
+				}
+
+				.badge-green  { background: #dcfce7; color: #166534; }
+				.badge-yellow { background: #fef9c3; color: #854d0e; }
+				.badge-red    { background: #fee2e2; color: #991b1b; }
+				.badge-gray   { background: #f3f4f6; color: #374151; }
+
+				.closure-reason {
+					font-size: 0.8125rem;
+					color: #78716c;
+					font-style: italic;
+					white-space: normal;
+					word-break: break-word;
+				}
+
+				footer {
+					text-align: center;
+					padding: 2rem 1rem;
+					font-size: 0.8125rem;
+					color: #a8a29e;
+				}
+			</style></head><body><header><h1>myDenverCard Free</h1><p>Find free-entry days at Denver cultural venues for myDenverCard holders</p></header><main><ul class="venue-list"><li class="venue-row"><div class="venue-name"><a href="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" target="_blank" rel="noopener noreferrer">Clyfford Still Museum</a> </div><div class="venue-status"><span class="badge badge-green">Free — adults included</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://www.denverartmuseum.org/en/free-kids" target="_blank" rel="noopener noreferrer">Denver Art Museum</a> <span class="badge badge-gray">no card needed</span> </div><div class="venue-status"><span class="badge badge-yellow">Free — adults excluded</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://www.botanicgardens.org/my-denver-card" target="_blank" rel="noopener noreferrer">Denver Botanic Gardens</a> </div><div class="venue-status"><span class="badge badge-green">Free — adults included</span> <span class="months">January, February, March</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://www.dmns.org/visit/pricing-and-discounts/" target="_blank" rel="noopener noreferrer">Denver Museum of Nature &amp; Science</a> </div><div class="venue-status"><span class="badge badge-yellow">Free — adults excluded</span> <span class="months">June, July, August</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://www.winterindenver.com/rink" target="_blank" rel="noopener noreferrer">Downtown Denver Rink</a> <span class="badge badge-gray">temporarily closed</span> </div><div class="venue-status"><span class="closure-reason">Closed for 2025–2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://museo.org/plan-your-visit/" target="_blank" rel="noopener noreferrer">Museo de las Americas</a> <span class="badge badge-gray">no card needed</span> </div><div class="venue-status"><span class="badge badge-yellow">Free — adults excluded</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://mcadenver.org/visit" target="_blank" rel="noopener noreferrer">MCA Denver</a> </div><div class="venue-status"><span class="badge badge-green">Free — adults included</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://mollybrown.org/faq/" target="_blank" rel="noopener noreferrer">Molly Brown House Museum</a> </div><div class="venue-status"><span class="badge badge-yellow">Free — adults excluded</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://www.historycolorado.org/history-colorado-center" target="_blank" rel="noopener noreferrer">History Colorado Center</a> <span class="badge badge-gray">no card needed</span> </div><div class="venue-status"><span class="badge badge-yellow">Free — adults excluded</span> <span class="months">Year-round</span></div></li><li class="venue-row"><div class="venue-name"><a href="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" target="_blank" rel="noopener noreferrer">Denver Zoo</a> </div><div class="venue-status"><span class="badge badge-green">Free — adults included</span> <span class="months">Year-round</span></div></li></ul></main><footer>Data updated weekly via GitHub Actions. Always verify with the venue before visiting.</footer></body></html>
