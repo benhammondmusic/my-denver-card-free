@@ -6,6 +6,15 @@ import (
 	"github.com/benhammondmusic/my-denver-card-free/internal/models"
 )
 
+var monthsFull = []string{
+	"January", "February", "March", "April", "May", "June",
+	"July", "August", "September", "October", "November", "December",
+}
+
+var monthsAbbr = []string{
+	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+}
 
 func freeMonthsLabel(v models.Venue) string {
 	if len(v.FreeMonths) == 12 {
@@ -14,33 +23,66 @@ func freeMonthsLabel(v models.Venue) string {
 	return strings.Join(v.FreeMonths, ", ")
 }
 
+func boolStr(b bool) string {
+	if b {
+		return "true"
+	}
+	return "false"
+}
+
 templ Index(venues []models.Venue) {
-	@Layout("myDenverCard Free — Denver Cultural Venues") {
-		<ul class="venue-list">
+	@Layout("My Denver Card Free -- Denver Cultural Venues") {
+		<div class="filter-bar">
+			<div class="filter-tabs">
+				<button class="filter-tab" data-filter="all">All</button>
+				<button class="filter-tab" data-filter="now">Free Now</button>
+				<button class="filter-tab" data-filter="summer">Summer</button>
+				<button class="filter-tab" data-filter="yearround">Year-Round</button>
+			</div>
+			<div class="month-strip">
+				for i, abbr := range monthsAbbr {
+					<button class="month-btn" data-month-name={ monthsFull[i] }>{ abbr }</button>
+				}
+			</div>
+		</div>
+		<p class="venue-count"></p>
+		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
 				@VenueRow(v)
 			}
 		</ul>
+		@filterScript()
 	}
 }
 
 templ VenueRow(v models.Venue) {
-	<li class="venue-row">
-		<div class="venue-name">
-			<a href={ templ.SafeURL(v.URL) } target="_blank" rel="noopener noreferrer">{ v.Name }</a>
+	<li
+		class={ "venue-row", templ.KV("program-general", v.Program == models.ProgramGeneral), templ.KV("venue-closed", v.TemporarilyClosed) }
+		data-free-months={ strings.Join(v.FreeMonths, ",") }
+		data-schedule={ string(v.FreeSchedule) }
+		data-closed={ boolStr(v.TemporarilyClosed) }
+		data-program={ string(v.Program) }
+	>
+		<div class="venue-main">
+			<div class="venue-name-row">
+				<a href={ templ.SafeURL(v.URL) } target="_blank" rel="noopener noreferrer">{ v.Name }</a>
+				if v.TemporarilyClosed {
+					<span class="badge badge-gray">temporarily closed</span>
+				} else if v.Program == models.ProgramGeneral {
+					<span class="badge badge-gray">no card needed</span>
+				}
+				if v.ScrapeFailed {
+					<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
+				}
+			</div>
 			if v.TemporarilyClosed {
-				<span class="badge badge-gray">temporarily closed</span>
-			} else if v.Program == models.ProgramGeneral {
-				<span class="badge badge-gray">no card needed</span>
-			}
-			if v.ScrapeFailed {
-				<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
+				<p class="closure-reason">{ v.ClosureReason }</p>
+			} else if v.Notes != "" {
+				<p class="venue-notes">{ v.Notes }</p>
 			}
 		</div>
-		<div class="venue-status">
-			if v.TemporarilyClosed {
-				<span class="closure-reason">{ v.ClosureReason }</span>
-			} else {
+		if !v.TemporarilyClosed {
+			<div class="venue-status">
 				switch {
 					case v.AdultsIncluded >= 2:
 						<span class="badge badge-green">Free +{ fmt.Sprintf("%d", v.AdultsIncluded) } Adults</span>
@@ -50,7 +92,127 @@ templ VenueRow(v models.Venue) {
 						<span class="badge badge-yellow">Free</span>
 				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
-			}
-		</div>
+			</div>
+		}
 	</li>
+}
+
+templ filterScript() {
+	@templ.Raw(`<script>
+(function () {
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var today = new Date();
+  var currentMonthName = MONTHS[today.getMonth()];
+  var dow = today.getDay(); // 0=Sun 6=Sat
+  var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
+
+  // School break approximation -- update annually for DPS calendar
+  function isSchoolBreak(d) {
+    var m = d.getMonth(), day = d.getDate();
+    if ((m === 11 && day >= 20) || (m === 0 && day <= 5)) return true; // Winter
+    if (m === 2 && day >= 15 && day <= 29) return true;                 // Spring
+    if (m >= 5 && m <= 7) return true;                                   // Summer Jun-Aug
+    return false;
+  }
+  var inBreak = isSchoolBreak(today);
+
+  function freeMonths(row) {
+    return (row.dataset.freeMonths || '').split(',').filter(Boolean);
+  }
+
+  function freeNow(row) {
+    if (row.dataset.closed === 'true') return false;
+    if (freeMonths(row).indexOf(currentMonthName) === -1) return false;
+    var sched = row.dataset.schedule || 'daily';
+    if (sched === 'weekends') return isWeekend;
+    if (sched === 'weekends_and_breaks') return isWeekend || inBreak;
+    return true;
+  }
+
+  function freeInMonth(row, m) {
+    return row.dataset.closed !== 'true' && freeMonths(row).indexOf(m) !== -1;
+  }
+
+  function isSummer(row) {
+    if (row.dataset.closed === 'true') return false;
+    var fm = freeMonths(row);
+    return fm.indexOf('June') !== -1 || fm.indexOf('July') !== -1 || fm.indexOf('August') !== -1;
+  }
+
+  function isYearRound(row) {
+    return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
+  }
+
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
+  var tabs = document.querySelectorAll('.filter-tab');
+  var monthBtns = document.querySelectorAll('.month-btn');
+  var countEl = document.querySelector('.venue-count');
+
+  var activeFilter = 'now';
+  var activeMonth = null;
+
+  function applyFilter() {
+    var visible = 0;
+    rows.forEach(function (row) {
+      var closed = row.dataset.closed === 'true';
+      var show;
+      if (activeMonth) {
+        show = closed || freeInMonth(row, activeMonth);
+      } else {
+        switch (activeFilter) {
+          case 'now':       show = closed || freeNow(row);       break;
+          case 'summer':    show = closed || isSummer(row);      break;
+          case 'yearround': show = closed || isYearRound(row);   break;
+          default:          show = true;
+        }
+      }
+      row.classList.toggle('hidden', !show);
+      if (show && !closed) visible++;
+    });
+
+    var label = visible + (visible === 1 ? ' venue' : ' venues');
+    if (activeMonth) {
+      label += ' free in ' + activeMonth;
+    } else if (activeFilter === 'now') {
+      label += ' free today';
+      if (visible === 0) label = 'No venues free right now -- try "All" or pick a month';
+    }
+    if (countEl) countEl.textContent = label;
+  }
+
+  monthBtns.forEach(function (btn) {
+    if (btn.dataset.monthName === currentMonthName) btn.classList.add('current-month');
+    btn.addEventListener('click', function () {
+      if (activeMonth === btn.dataset.monthName) {
+        activeMonth = null;
+        btn.classList.remove('active');
+        setTab('now');
+      } else {
+        activeMonth = btn.dataset.monthName;
+        monthBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+      }
+      applyFilter();
+    });
+  });
+
+  function setTab(filter) {
+    activeFilter = filter;
+    activeMonth = null;
+    monthBtns.forEach(function (b) { b.classList.remove('active'); });
+    tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      setTab(tab.dataset.filter);
+      applyFilter();
+    });
+  });
+
+  setTab('now');
+  applyFilter();
+})();
+</script>`)
 }
