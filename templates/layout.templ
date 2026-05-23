@@ -62,13 +62,13 @@ templ Layout(title string) {
 				}
 
 				header h1 {
-					font-size: clamp(4rem, 13vw, 7.5rem);
+					font-size: clamp(3.5rem, 11vw, 6.5rem);
 					font-weight: 900;
 					color: var(--gold);
 					letter-spacing: -0.05em;
 					line-height: 0.85;
 					display: inline-block;
-					transform: skewX(7deg);
+					transform: skewX(8deg);
 					transform-origin: left bottom;
 				}
 
@@ -86,13 +86,15 @@ templ Layout(title string) {
 				.bear-wrap {
 					flex-shrink: 0;
 					line-height: 0;
-					margin-right: -1rem;
+					margin-right: -2rem;
+					z-index: 3;
 				}
 
 				.bear-wrap img {
-					width: 270px;
+					width: 240px;
 					height: auto;
 					display: block;
+					transform: scaleX(-1);
 				}
 
 				/* ---- MAIN ---- */
