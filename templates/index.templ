@@ -1,6 +1,7 @@
 package templates
 
 import (
+	"fmt"
 	"strings"
 	"github.com/benhammondmusic/my-denver-card-free/internal/models"
 )
@@ -40,10 +41,13 @@ templ VenueRow(v models.Venue) {
 			if v.TemporarilyClosed {
 				<span class="closure-reason">{ v.ClosureReason }</span>
 			} else {
-				if v.AdultFree {
-					<span class="badge badge-green">Free — adults included</span>
-				} else {
-					<span class="badge badge-yellow">Free — adults excluded</span>
+				switch {
+					case v.AdultsIncluded >= 2:
+						<span class="badge badge-green">Free — { fmt.Sprintf("%d", v.AdultsIncluded) } adults included</span>
+					case v.AdultsIncluded == 1:
+						<span class="badge badge-green">Free — 1 adult included</span>
+					default:
+						<span class="badge badge-yellow">Free — no adults</span>
 				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
 			}

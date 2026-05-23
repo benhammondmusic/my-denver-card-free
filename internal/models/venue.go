@@ -11,15 +11,15 @@ const (
 )
 
 type Venue struct {
-	Name               string    `json:"name"`
-	URL                string    `json:"url"`
-	Program            Program   `json:"program"`
-	FreeMonths         []string  `json:"free_months"`
-	AdultFree          bool      `json:"adult_free"`
-	Notes              string    `json:"notes"`
-	TemporarilyClosed  bool      `json:"temporarily_closed"`
-	ClosureReason      string    `json:"closure_reason"`
-	LastChecked        time.Time `json:"last_checked"`
-	ScrapeFailed       bool      `json:"scrape_failed"`
-	ScrapeError        string    `json:"scrape_error"`
+	Name              string    `json:"name"`
+	URL               string    `json:"url"`
+	Program           Program   `json:"program"`
+	FreeMonths        []string  `json:"free_months"`
+	AdultsIncluded    int       `json:"adults_included"` // 0 = none, 1 = one adult, 2 = two adults, etc.
+	Notes             string    `json:"notes"`
+	TemporarilyClosed bool      `json:"temporarily_closed"`
+	ClosureReason     string    `json:"closure_reason"`
+	LastChecked       time.Time `json:"last_checked"`
+	ScrapeFailed      bool      `json:"scrape_failed"`
+	ScrapeError       string    `json:"scrape_error"`
 }

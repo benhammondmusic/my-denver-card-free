@@ -115,6 +115,12 @@ templ Layout(title string) {
 					padding: 2rem 1rem;
 					font-size: 0.8125rem;
 					color: #a8a29e;
+					line-height: 1.8;
+				}
+
+				footer a {
+					color: #a8a29e;
+					text-decoration: underline;
 				}
 			</style>
 		</head>
@@ -127,7 +133,10 @@ templ Layout(title string) {
 				{ children... }
 			</main>
 			<footer>
-				Data updated weekly via GitHub Actions. Always verify with the venue before visiting.
+				<a href="https://github.com/benhammondmusic/my-denver-card-free" target="_blank" rel="noopener noreferrer">Auto-updated weekly.</a>
+				Always verify with the venue before visiting.
+				<br/>
+				<a href="https://github.com/benhammondmusic/my-denver-card-free/issues" target="_blank" rel="noopener noreferrer">Found missing or wrong info? Report it.</a>
 			</footer>
 		</body>
 	</html>
