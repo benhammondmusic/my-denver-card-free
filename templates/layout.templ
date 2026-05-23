@@ -8,6 +8,9 @@ templ Layout(title string) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title }</title>
 			<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2uQ8DvwEMkEqMJ0aXYHpK/n7rJjL7GHqkL" crossorigin="anonymous"></script>
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+			<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 			<style>
 				*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,14 +20,16 @@ templ Layout(title string) {
 					--gold: #e8960a;
 					--gold-light: #fef3c7;
 					--red: #bf0a30;
-					--off-white: #f5f7fb;
+					--off-white: #eef2fb;
 					--stone: #6b7280;
-					--border: #e5e7eb;
+					--border: #dde3ef;
 				}
 
 				body {
-					font-family: system-ui, -apple-system, sans-serif;
+					font-family: 'Outfit', system-ui, -apple-system, sans-serif;
 					background: var(--off-white);
+					background-image: radial-gradient(circle, rgba(0,40,104,0.07) 1px, transparent 1px);
+					background-size: 22px 22px;
 					color: #111827;
 					min-height: 100vh;
 					display: flex;
@@ -34,14 +39,15 @@ templ Layout(title string) {
 				/* ---- HEADER ---- */
 
 				header {
-					background: var(--bear-blue);
+					background: linear-gradient(140deg, #001540 0%, var(--bear-blue) 55%, #003a8c 100%);
 					color: white;
 					padding: 1.75rem 2rem 0 0;
 					display: flex;
 					align-items: flex-end;
 					overflow: hidden;
-					min-height: 170px;
+					min-height: 180px;
 					gap: 0;
+					position: relative;
 				}
 
 				.header-text {
@@ -53,29 +59,31 @@ templ Layout(title string) {
 				}
 
 				.header-eyebrow {
-					font-size: 0.75rem;
+					font-size: 0.65rem;
 					font-weight: 700;
-					letter-spacing: 0.15em;
+					letter-spacing: 0.22em;
 					text-transform: uppercase;
-					opacity: 0.6;
-					margin-bottom: 0.2rem;
+					opacity: 0.55;
+					margin-bottom: 0.1rem;
 				}
 
 				header h1 {
-					font-size: clamp(3.5rem, 11vw, 6.5rem);
-					font-weight: 900;
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: clamp(5.5rem, 15vw, 11rem);
+					font-weight: 400;
 					color: var(--gold);
-					letter-spacing: -0.05em;
-					line-height: 0.85;
+					letter-spacing: 0.03em;
+					line-height: 0.82;
 					display: inline-block;
-					transform: skewX(-8deg);
+					transform: skewX(-6deg);
 					transform-origin: left bottom;
+					text-shadow: 5px 5px 0 rgba(0,0,0,0.25);
 				}
 
 				.header-sub {
-					margin-top: 0.5rem;
+					margin-top: 0.6rem;
 					font-size: 0.875rem;
-					opacity: 0.65;
+					opacity: 0.6;
 					font-weight: 400;
 					max-width: 28rem;
 					line-height: 1.4;
@@ -134,15 +142,17 @@ templ Layout(title string) {
 				}
 
 				.filter-tab {
-					padding: 0.4rem 0.9rem;
+					padding: 0.5rem 1.125rem;
 					border: 2px solid var(--border);
 					border-radius: 9999px;
 					background: white;
-					font-size: 0.8125rem;
-					font-weight: 600;
+					font-family: 'Outfit', sans-serif;
+					font-size: 0.875rem;
+					font-weight: 700;
 					cursor: pointer;
 					color: var(--stone);
 					transition: all 0.15s;
+					letter-spacing: 0.01em;
 				}
 
 				.filter-tab:hover {
@@ -154,6 +164,7 @@ templ Layout(title string) {
 					background: var(--bear-blue);
 					border-color: var(--bear-blue);
 					color: white;
+					box-shadow: 0 4px 12px rgba(0,40,104,0.35);
 				}
 
 				.month-strip {
@@ -168,14 +179,15 @@ templ Layout(title string) {
 
 				.month-btn {
 					flex-shrink: 0;
-					min-width: 2.625rem;
-					padding: 0.3rem 0.4rem;
+					min-width: 2.75rem;
+					padding: 0.35rem 0.4rem;
 					border: 1.5px solid var(--border);
-					border-radius: 0.375rem;
+					border-radius: 0.5rem;
 					background: white;
+					font-family: 'Outfit', sans-serif;
 					font-size: 0.6875rem;
 					font-weight: 700;
-					letter-spacing: 0.03em;
+					letter-spacing: 0.04em;
 					cursor: pointer;
 					color: var(--stone);
 					text-align: center;
@@ -192,28 +204,32 @@ templ Layout(title string) {
 					border-color: var(--gold);
 					background: var(--gold-light);
 					color: #92400e;
+					font-weight: 800;
 				}
 
 				.month-btn.active {
 					background: var(--sky-blue);
 					border-color: var(--sky-blue);
 					color: white;
+					box-shadow: 0 2px 10px rgba(26,86,219,0.35);
 				}
 
 				.month-btn.active.current-month {
 					background: var(--gold);
 					border-color: var(--gold);
 					color: #1c1917;
+					box-shadow: 0 2px 10px rgba(232,150,10,0.45);
 				}
 
 				/* ---- VENUE COUNT ---- */
 
 				.venue-count {
-					font-size: 0.875rem;
-					color: var(--stone);
-					margin-bottom: 0.875rem;
-					min-height: 1.25rem;
-					font-weight: 500;
+					font-size: 1rem;
+					font-weight: 700;
+					color: var(--bear-blue);
+					margin-bottom: 1rem;
+					min-height: 1.5rem;
+					letter-spacing: -0.01em;
 				}
 
 				/* ---- VENUE LIST ---- */
@@ -222,33 +238,41 @@ templ Layout(title string) {
 					list-style: none;
 					display: flex;
 					flex-direction: column;
-					gap: 0.5rem;
+					gap: 0.625rem;
 				}
 
 				.venue-row {
 					background: white;
-					border: 1px solid var(--border);
-					border-left: 4px solid var(--bear-blue);
-					border-radius: 0 0.625rem 0.625rem 0;
-					padding: 0.875rem 1rem;
+					border: 1.5px solid var(--border);
+					border-left: 5px solid var(--bear-blue);
+					border-radius: 1rem;
+					padding: 0.9rem 1.1rem;
 					display: flex;
 					justify-content: space-between;
 					align-items: flex-start;
 					gap: 1rem;
-					transition: opacity 0.2s, box-shadow 0.15s;
+					transition: transform 0.18s, box-shadow 0.18s;
+					box-shadow: 0 1px 4px rgba(0,40,104,0.06);
 				}
 
 				.venue-row:hover {
-					box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+					transform: translateY(-3px);
+					box-shadow: 0 8px 24px rgba(0,40,104,0.12);
 				}
 
 				.venue-row.program-general {
-					border-left-color: #9ca3af;
+					border-left-color: var(--gold);
 				}
 
 				.venue-row.venue-closed {
 					opacity: 0.5;
-					border-left-color: #d1d5db;
+					border-left-color: var(--stone);
+					box-shadow: none;
+				}
+
+				.venue-row.venue-closed:hover {
+					transform: none;
+					box-shadow: none;
 				}
 
 				.venue-row.hidden {
@@ -310,7 +334,7 @@ templ Layout(title string) {
 
 				.badge {
 					display: inline-block;
-					padding: 0.175rem 0.55rem;
+					padding: 0.2rem 0.6rem;
 					border-radius: 9999px;
 					font-size: 0.6875rem;
 					font-weight: 700;
@@ -320,10 +344,10 @@ templ Layout(title string) {
 					white-space: nowrap;
 				}
 
-				.badge-green  { background: #d1fae5; color: #065f46; }
-				.badge-yellow { background: #fef9c3; color: #854d0e; }
-				.badge-red    { background: #fee2e2; color: #991b1b; }
-				.badge-gray   { background: #f3f4f6; color: #6b7280; }
+				.badge-green  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+				.badge-yellow { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+				.badge-red    { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+				.badge-gray   { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
 
 				/* ---- MOUNTAINS ---- */
 
@@ -337,7 +361,7 @@ templ Layout(title string) {
 				/* ---- FOOTER ---- */
 
 				footer {
-					background: #e8edf5;
+					background: #dde5f5;
 					text-align: center;
 					padding: 1.25rem 1rem 1.75rem;
 					font-size: 0.8125rem;
@@ -346,7 +370,7 @@ templ Layout(title string) {
 				}
 
 				footer a {
-					color: #4b5563;
+					color: #374151;
 					text-decoration: underline;
 				}
 
@@ -355,11 +379,11 @@ templ Layout(title string) {
 				@media (max-width: 560px) {
 					header {
 						padding: 1.25rem 0 0 1.25rem;
-						min-height: 130px;
+						min-height: 140px;
 					}
 
 					header h1 {
-						font-size: clamp(3rem, 16vw, 4.5rem);
+						font-size: clamp(4.5rem, 20vw, 6.5rem);
 					}
 
 					.bear-wrap img {
@@ -384,41 +408,41 @@ templ Layout(title string) {
 		<body>
 			<header>
 				<div class="header-bg" aria-hidden="true">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" preserveAspectRatio="xMidYMax slice">
-						<path fill="white" opacity="0.07" d="M0,170 V62 L80,16 L150,50 L230,6 L310,46 L405,2 L482,40 L572,0 L652,38 L742,0 L824,40 L912,3 L992,43 L1082,1 L1162,40 L1252,3 L1342,40 L1440,10 V170 Z"/>
-						<g fill="white" opacity="0.05">
-							<rect x="440" y="136" width="22" height="34"/>
-							<rect x="465" y="124" width="20" height="46"/>
-							<rect x="488" y="136" width="22" height="34"/>
-							<rect x="524" y="132" width="24" height="38"/>
-							<rect x="551" y="118" width="22" height="52"/>
-							<rect x="576" y="104" width="20" height="66"/>
-							<rect x="599" y="89" width="18" height="81"/>
-							<rect x="620" y="74" width="16" height="96"/>
-							<rect x="639" y="59" width="14" height="111"/>
-							<rect x="656" y="50" width="13" height="120"/>
-							<rect x="672" y="59" width="14" height="111"/>
-							<rect x="689" y="72" width="16" height="98"/>
-							<rect x="708" y="86" width="18" height="84"/>
-							<rect x="729" y="100" width="20" height="70"/>
-							<rect x="752" y="114" width="22" height="56"/>
-							<rect x="777" y="126" width="24" height="44"/>
-							<rect x="820" y="130" width="20" height="40"/>
-							<rect x="843" y="118" width="18" height="52"/>
-							<rect x="864" y="128" width="20" height="42"/>
-							<rect x="910" y="134" width="22" height="36"/>
-							<rect x="935" y="124" width="18" height="46"/>
-							<rect x="956" y="134" width="22" height="36"/>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice">
+						<path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"/>
+						<g fill="white" opacity="0.045">
+							<rect x="440" y="148" width="22" height="32"/>
+							<rect x="465" y="136" width="20" height="44"/>
+							<rect x="488" y="148" width="22" height="32"/>
+							<rect x="524" y="144" width="24" height="36"/>
+							<rect x="551" y="130" width="22" height="50"/>
+							<rect x="576" y="116" width="20" height="64"/>
+							<rect x="599" y="100" width="18" height="80"/>
+							<rect x="620" y="84" width="16" height="96"/>
+							<rect x="639" y="68" width="14" height="112"/>
+							<rect x="656" y="58" width="13" height="122"/>
+							<rect x="672" y="68" width="14" height="112"/>
+							<rect x="689" y="82" width="16" height="98"/>
+							<rect x="708" y="96" width="18" height="84"/>
+							<rect x="729" y="112" width="20" height="68"/>
+							<rect x="752" y="126" width="22" height="54"/>
+							<rect x="777" y="138" width="24" height="42"/>
+							<rect x="820" y="142" width="20" height="38"/>
+							<rect x="843" y="130" width="18" height="50"/>
+							<rect x="864" y="140" width="20" height="40"/>
+							<rect x="910" y="146" width="22" height="34"/>
+							<rect x="935" y="136" width="18" height="44"/>
+							<rect x="956" y="146" width="22" height="34"/>
 						</g>
-						<g fill="white" opacity="0.06">
-							<polygon points="28,170 46,136 64,170"/>
-							<polygon points="52,170 74,126 96,170"/>
-							<polygon points="82,170 102,140 122,170"/>
-							<polygon points="108,170 126,148 144,170"/>
-							<polygon points="1296,170 1314,136 1332,170"/>
-							<polygon points="1322,170 1344,126 1366,170"/>
-							<polygon points="1354,170 1374,138 1394,170"/>
-							<polygon points="1388,170 1408,130 1428,170"/>
+						<g fill="white" opacity="0.055">
+							<polygon points="28,180 46,146 64,180"/>
+							<polygon points="52,180 74,136 96,180"/>
+							<polygon points="82,180 102,150 122,180"/>
+							<polygon points="108,180 126,158 144,180"/>
+							<polygon points="1296,180 1314,146 1332,180"/>
+							<polygon points="1322,180 1344,136 1366,180"/>
+							<polygon points="1354,180 1374,148 1394,180"/>
+							<polygon points="1388,180 1408,140 1428,180"/>
 						</g>
 					</svg>
 				</div>
@@ -436,8 +460,8 @@ templ Layout(title string) {
 			</main>
 			<div class="mountains" aria-hidden="true">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64">
-					<path fill="#dde5f4" d="M0,64 L0,48 L90,18 L200,52 L310,14 L430,50 L540,8 L660,44 L770,20 L890,50 L1000,16 L1120,48 L1230,10 L1350,42 L1440,22 L1440,64 Z"/>
-					<path fill="#e8edf5" d="M0,64 L0,56 L110,38 L230,58 L350,30 L470,54 L590,34 L710,58 L830,40 L950,60 L1070,32 L1190,55 L1310,36 L1440,52 L1440,64 Z"/>
+					<path fill="#c8d4ee" d="M0,64 L0,48 L90,18 L200,52 L310,14 L430,50 L540,8 L660,44 L770,20 L890,50 L1000,16 L1120,48 L1230,10 L1350,42 L1440,22 L1440,64 Z"/>
+					<path fill="#dde5f5" d="M0,64 L0,56 L110,38 L230,58 L350,30 L470,54 L590,34 L710,58 L830,40 L950,60 L1070,32 L1190,55 L1310,36 L1440,52 L1440,64 Z"/>
 				</svg>
 			</div>
 			<footer>
