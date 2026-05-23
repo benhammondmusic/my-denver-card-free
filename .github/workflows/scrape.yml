@@ -1,0 +1,61 @@
+name: Weekly Scrape
+
+on:
+  schedule:
+    - cron: "0 6 * * 0"  # Sunday 6am UTC
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Generate templ files
+        run: |
+          go install github.com/a-h/templ/cmd/templ@latest
+          templ generate
+
+      - name: Build scraper
+        run: go build -o bin/scraper ./cmd/scraper/main.go
+
+      - name: Run scraper
+        run: ./bin/scraper
+
+      - name: Build generator
+        run: go build -o bin/generate ./cmd/generate/main.go
+
+      - name: Run generator
+        run: ./bin/generate
+
+      - name: Commit updated data and static site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ public/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update venue data and static site [skip ci]"
+            git push
+          fi
+
+      - name: Open issue for scrape failures
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if grep -q '"scrape_failed": true' data/venues.json; then
+            FAILED=$(jq -r '.[] | select(.scrape_failed == true) | .name' data/venues.json | paste -sd ', ')
+            gh issue create \
+              --title "Scrape failure: ${FAILED}" \
+              --body "The weekly scraper failed for the following venues: **${FAILED}**. Please investigate." \
+              --label "scrape-failure" || true
+          fi

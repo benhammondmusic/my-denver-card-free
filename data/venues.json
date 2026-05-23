@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Denver Art Museum",
+    "url": "https://www.denverartmuseum.org/en/mydenvercard",
+    "free_months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "adult_free": true,
+    "notes": "Free general admission year-round for myDenverCard holders. Special exhibitions may require a ticket.",
+    "last_checked": "2026-05-01T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": ""
+  },
+  {
+    "name": "Denver Museum of Nature & Science",
+    "url": "https://www.dmns.org/visit/mydenvercard/",
+    "free_months": ["January", "February", "March", "September", "October", "November", "December"],
+    "adult_free": true,
+    "notes": "Free general admission during select months. IMAX and planetarium shows require separate tickets.",
+    "last_checked": "2026-05-01T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": ""
+  },
+  {
+    "name": "Denver Zoo",
+    "url": "https://www.denverzoo.org/mydenvercard/",
+    "free_months": ["January", "February", "March"],
+    "adult_free": false,
+    "notes": "Free for Denver residents (children and seniors). Adults pay reduced admission. Free months are January through March.",
+    "last_checked": "2026-05-01T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": ""
+  }
+]
