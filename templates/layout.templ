@@ -71,20 +71,17 @@ templ Layout(title string) {
 
 				.bear-wrap {
 					position: absolute;
-					right: -6px;
-					bottom: -28px;
+					right: 0;
+					bottom: 0;
 					z-index: 1;
-					cursor: default;
 					line-height: 0;
+					pointer-events: none;
 				}
 
-				.bear-wrap .bear-eye {
-					fill: transparent;
-					transition: fill 0.2s ease;
-				}
-
-				.bear-wrap:hover .bear-eye {
-					fill: #dd1111;
+				.bear-wrap img {
+					width: 130px;
+					height: auto;
+					display: block;
 				}
 
 				/* ---- MAIN ---- */
@@ -343,9 +340,8 @@ templ Layout(title string) {
 
 					.months { text-align: left; }
 
-					.bear-wrap svg {
-						width: 70px;
-						height: auto;
+					.bear-wrap img {
+						width: 90px;
 					}
 				}
 			</style>
@@ -356,18 +352,8 @@ templ Layout(title string) {
 					<h1>My Denver Card <span>Free</span></h1>
 					<p>Free admission for Denver kids at museums, gardens, zoos, and more</p>
 				</div>
-				<div class="bear-wrap" title="(the eyes were not my idea)">
-					<svg viewBox="0 0 120 200" width="105" height="175" aria-hidden="true" focusable="false">
-						<ellipse cx="60" cy="152" rx="42" ry="54" fill="rgba(255,255,255,0.10)"/>
-						<ellipse cx="22" cy="120" rx="14" ry="33" fill="rgba(255,255,255,0.10)" transform="rotate(-25 22 120)"/>
-						<ellipse cx="98" cy="120" rx="14" ry="33" fill="rgba(255,255,255,0.10)" transform="rotate(25 98 120)"/>
-						<circle cx="60" cy="72" r="40" fill="rgba(255,255,255,0.10)"/>
-						<circle cx="28" cy="40" r="16" fill="rgba(255,255,255,0.10)"/>
-						<circle cx="92" cy="40" r="16" fill="rgba(255,255,255,0.10)"/>
-						<circle class="bear-eye" cx="47" cy="65" r="5.5"/>
-						<circle class="bear-eye" cx="73" cy="65" r="5.5"/>
-						<ellipse cx="60" cy="84" rx="11" ry="7" fill="rgba(255,255,255,0.17)"/>
-					</svg>
+				<div class="bear-wrap">
+					<img src="bear.png" alt="The Big Blue Bear"/>
 				</div>
 			</header>
 			<main>

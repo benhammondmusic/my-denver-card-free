@@ -15,7 +15,8 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /", handlers.Index)
+	mux.HandleFunc("GET /{$}", handlers.Index)
+	mux.Handle("GET /", http.FileServer(http.Dir("docs")))
 
 	addr := ":" + port
 	log.Printf("server listening on http://localhost%s", addr)
