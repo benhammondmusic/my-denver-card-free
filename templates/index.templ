@@ -63,14 +63,18 @@ templ VenueRow(v models.Venue) {
 		data-closed={ boolStr(v.TemporarilyClosed) }
 		data-program={ string(v.Program) }
 	>
-		<div class="venue-main">
+		<div class="venue-band">
+			if v.TemporarilyClosed {
+				<span class="band-label">Closed</span>
+			} else if v.Program == models.ProgramGeneral {
+				<span class="band-label">Free</span>
+			} else {
+				<span class="band-label">Card</span>
+			}
+		</div>
+		<div class="venue-body">
 			<div class="venue-name-row">
 				<a href={ templ.SafeURL(v.URL) } target="_blank" rel="noopener noreferrer">{ v.Name }</a>
-				if v.TemporarilyClosed {
-					<span class="badge badge-gray">temporarily closed</span>
-				} else if v.Program == models.ProgramGeneral {
-					<span class="badge badge-gray">no card needed</span>
-				}
 				if v.ScrapeFailed {
 					<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
 				}
