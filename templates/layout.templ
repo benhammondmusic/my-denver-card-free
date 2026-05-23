@@ -46,7 +46,7 @@ templ Layout(title string) {
 
 				.header-text {
 					position: relative;
-					z-index: 2;
+					z-index: 3;
 					padding-bottom: 1.5rem;
 					flex: 1;
 					min-width: 0;
@@ -68,7 +68,7 @@ templ Layout(title string) {
 					letter-spacing: -0.05em;
 					line-height: 0.85;
 					display: inline-block;
-					transform: skewX(8deg);
+					transform: skewX(-8deg);
 					transform-origin: left bottom;
 				}
 
@@ -81,20 +81,43 @@ templ Layout(title string) {
 					line-height: 1.4;
 				}
 
+				/* ---- HEADER BG ---- */
+
+				.header-bg {
+					position: absolute;
+					inset: 0;
+					pointer-events: none;
+					overflow: hidden;
+				}
+
+				.header-bg svg {
+					width: 100%;
+					height: 100%;
+				}
+
 				/* ---- BEAR ---- */
 
 				.bear-wrap {
 					flex-shrink: 0;
-					line-height: 0;
-					margin-right: -2rem;
 					z-index: 3;
+					width: 180px;
+					height: 160px;
+					border: 3px solid rgba(255,255,255,0.25);
+					border-bottom: none;
+					border-radius: 0.5rem 0.5rem 0 0;
+					overflow: hidden;
+					position: relative;
+					margin-right: 1.5rem;
+					align-self: flex-end;
 				}
 
 				.bear-wrap img {
-					width: 240px;
+					position: absolute;
+					bottom: 0;
+					right: -12px;
+					width: 210px;
 					height: auto;
 					display: block;
-					transform: scaleX(-1);
 				}
 
 				/* ---- MAIN ---- */
@@ -349,8 +372,14 @@ templ Layout(title string) {
 						font-size: clamp(3rem, 16vw, 4.5rem);
 					}
 
+					.bear-wrap {
+						width: 120px;
+						height: 110px;
+					}
+
 					.bear-wrap img {
-						width: 160px;
+						width: 145px;
+						right: -8px;
 					}
 
 					.venue-row {
@@ -370,6 +399,45 @@ templ Layout(title string) {
 		</head>
 		<body>
 			<header>
+				<div class="header-bg" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 170" preserveAspectRatio="xMidYMax slice">
+						<path fill="white" opacity="0.07" d="M0,170 V62 L80,16 L150,50 L230,6 L310,46 L405,2 L482,40 L572,0 L652,38 L742,0 L824,40 L912,3 L992,43 L1082,1 L1162,40 L1252,3 L1342,40 L1440,10 V170 Z"/>
+						<g fill="white" opacity="0.05">
+							<rect x="440" y="136" width="22" height="34"/>
+							<rect x="465" y="124" width="20" height="46"/>
+							<rect x="488" y="136" width="22" height="34"/>
+							<rect x="524" y="132" width="24" height="38"/>
+							<rect x="551" y="118" width="22" height="52"/>
+							<rect x="576" y="104" width="20" height="66"/>
+							<rect x="599" y="89" width="18" height="81"/>
+							<rect x="620" y="74" width="16" height="96"/>
+							<rect x="639" y="59" width="14" height="111"/>
+							<rect x="656" y="50" width="13" height="120"/>
+							<rect x="672" y="59" width="14" height="111"/>
+							<rect x="689" y="72" width="16" height="98"/>
+							<rect x="708" y="86" width="18" height="84"/>
+							<rect x="729" y="100" width="20" height="70"/>
+							<rect x="752" y="114" width="22" height="56"/>
+							<rect x="777" y="126" width="24" height="44"/>
+							<rect x="820" y="130" width="20" height="40"/>
+							<rect x="843" y="118" width="18" height="52"/>
+							<rect x="864" y="128" width="20" height="42"/>
+							<rect x="910" y="134" width="22" height="36"/>
+							<rect x="935" y="124" width="18" height="46"/>
+							<rect x="956" y="134" width="22" height="36"/>
+						</g>
+						<g fill="white" opacity="0.06">
+							<polygon points="28,170 46,136 64,170"/>
+							<polygon points="52,170 74,126 96,170"/>
+							<polygon points="82,170 102,140 122,170"/>
+							<polygon points="108,170 126,148 144,170"/>
+							<polygon points="1296,170 1314,136 1332,170"/>
+							<polygon points="1322,170 1344,126 1366,170"/>
+							<polygon points="1354,170 1374,138 1394,170"/>
+							<polygon points="1388,170 1408,130 1428,170"/>
+						</g>
+					</svg>
+				</div>
 				<div class="bear-wrap">
 					<img src="bear.png" alt="The Big Blue Bear"/>
 				</div>
