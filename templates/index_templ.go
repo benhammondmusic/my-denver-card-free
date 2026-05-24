@@ -149,7 +149,7 @@ func Index(venues []models.Venue) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = Layout("My Denver Card Free -- Denver Cultural Venues").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Layout("My Denver Card Free: Denver Cultural Venues").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -458,7 +458,7 @@ func filterScript() templ.Component {
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
 
-  // School break approximation -- update annually for DPS calendar
+  // School break approximation; update annually for DPS calendar
   function isSchoolBreak(d) {
     var m = d.getMonth(), day = d.getDate();
     if ((m === 11 && day >= 20) || (m === 0 && day <= 5)) return true; // Winter
@@ -527,7 +527,7 @@ func filterScript() templ.Component {
       label += ' free in ' + activeMonth;
     } else if (activeFilter === 'now') {
       label += ' free today';
-      if (visible === 0) label = 'No venues free right now -- try "All" or pick a month';
+      if (visible === 0) label = 'No venues free right now. Try "All" or pick a month.';
     }
     if (countEl) countEl.textContent = label;
   }

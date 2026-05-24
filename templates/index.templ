@@ -31,7 +31,7 @@ func boolStr(b bool) string {
 }
 
 templ Index(venues []models.Venue) {
-	@Layout("My Denver Card Free -- Denver Cultural Venues") {
+	@Layout("My Denver Card Free: Denver Cultural Venues") {
 		<div class="filter-bar">
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="all">All</button>
@@ -130,7 +130,7 @@ templ filterScript() {
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
 
-  // School break approximation -- update annually for DPS calendar
+  // School break approximation; update annually for DPS calendar
   function isSchoolBreak(d) {
     var m = d.getMonth(), day = d.getDate();
     if ((m === 11 && day >= 20) || (m === 0 && day <= 5)) return true; // Winter
@@ -199,7 +199,7 @@ templ filterScript() {
       label += ' free in ' + activeMonth;
     } else if (activeFilter === 'now') {
       label += ' free today';
-      if (visible === 0) label = 'No venues free right now -- try "All" or pick a month';
+      if (visible === 0) label = 'No venues free right now. Try "All" or pick a month.';
     }
     if (countEl) countEl.textContent = label;
   }
