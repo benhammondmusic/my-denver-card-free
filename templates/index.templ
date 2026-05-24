@@ -46,6 +46,7 @@ templ Index(venues []models.Venue) {
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="all">All</button>
 				<button class="filter-tab" data-filter="now">Free Now</button>
+				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
 				<button class="filter-tab" data-filter="yearround">Year-Round</button>
 			</div>
@@ -121,6 +122,12 @@ templ VenueRow(v models.Venue) {
 					default:
 						<span class="badge badge-yellow">Free</span>
 				}
+				switch v.FreeSchedule {
+					case models.ScheduleWeekends:
+						<span class="badge badge-gray">Weekends only</span>
+					case models.ScheduleWeekendsAndBreaks:
+						<span class="badge badge-gray">Weekends + breaks</span>
+				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
 			</div>
 		}
@@ -136,6 +143,16 @@ templ filterScript() {
   var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
+
+  // Fri/Sat/Sun of the current or upcoming weekend
+  var weekendDates = (function () {
+    var daysToFri = dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow;
+    return [0, 1, 2].map(function (i) {
+      var d = new Date(today);
+      d.setDate(today.getDate() + daysToFri + i);
+      return d;
+    });
+  })();
 
   // School break approximation; update annually for DPS calendar
   function isSchoolBreak(d) {
@@ -158,6 +175,17 @@ templ filterScript() {
     if (sched === 'weekends') return isWeekend;
     if (sched === 'weekends_and_breaks') return isWeekend || inBreak;
     return true;
+  }
+
+  function freeThisWeekend(row) {
+    if (row.dataset.closed === 'true') return false;
+    var sched = row.dataset.schedule || 'daily';
+    return weekendDates.some(function (d) {
+      var monthName = MONTHS[d.getMonth()];
+      if (freeMonths(row).indexOf(monthName) === -1) return false;
+      // daily venues: free any day; weekends/weekends_and_breaks: Fri/Sat/Sun always qualify
+      return true;
+    });
   }
 
   function freeInMonth(row, m) {
@@ -191,9 +219,10 @@ templ filterScript() {
         show = closed || freeInMonth(row, activeMonth);
       } else {
         switch (activeFilter) {
-          case 'now':       show = closed || freeNow(row);       break;
-          case 'summer':    show = closed || isSummer(row);      break;
-          case 'yearround': show = closed || isYearRound(row);   break;
+          case 'now':       show = closed || freeNow(row);          break;
+          case 'weekend':   show = closed || freeThisWeekend(row);  break;
+          case 'summer':    show = closed || isSummer(row);         break;
+          case 'yearround': show = closed || isYearRound(row);      break;
           default:          show = true;
         }
       }
@@ -207,6 +236,9 @@ templ filterScript() {
     } else if (activeFilter === 'now') {
       label += ' free today';
       if (visible === 0) label = 'No venues free right now. Try "All" or pick a month.';
+    } else if (activeFilter === 'weekend') {
+      label += ' free this weekend';
+      if (visible === 0) label = 'Nothing free this weekend. Try "All" or pick a month.';
     }
     if (countEl) countEl.textContent = label;
   }
@@ -215,7 +247,10 @@ templ filterScript() {
     var nowChips = document.getElementById('free-now-chips');
     var soonChips = document.getElementById('free-soon-chips');
     var heroSoon = document.getElementById('hero-soon');
+    var soonLabel = document.querySelector('.hero-eyebrow.soon');
     if (!nowChips || !soonChips) return;
+
+    if (soonLabel) soonLabel.textContent = 'Free in ' + nextMonthName;
 
     var nowRows = rows.filter(function (row) { return freeNow(row); });
     var soonRows = rows.filter(function (row) {
