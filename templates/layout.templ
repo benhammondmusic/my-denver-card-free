@@ -282,6 +282,52 @@ templ Layout(title string) {
 					display: none;
 				}
 
+				/* ---- FEATURED CARDS ---- */
+
+				.venue-featured {
+					border-top: 3px solid var(--gold);
+					box-shadow: 0 3px 22px rgba(0,40,104,0.13), 0 1px 4px rgba(0,40,104,0.06);
+				}
+
+				.venue-featured .venue-band {
+					width: 4.25rem;
+					border-right: 3px solid rgba(217,119,6,0.3);
+				}
+
+				.venue-featured .venue-body {
+					padding: 1.1rem 0.75rem 1.1rem 1.1rem;
+				}
+
+				.venue-featured .venue-name-row a {
+					font-size: 1.2rem;
+				}
+
+				.venue-featured .venue-status {
+					padding: 1.1rem 1.25rem 1.1rem 0.5rem;
+				}
+
+				/* ---- SECTION DIVIDER ---- */
+
+				.section-divider {
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					margin: 0.5rem 0;
+					color: var(--stone);
+					font-size: 0.75rem;
+					font-weight: 700;
+					letter-spacing: 0.1em;
+					text-transform: uppercase;
+				}
+
+				.section-divider::before,
+				.section-divider::after {
+					content: '';
+					flex: 1;
+					height: 1px;
+					background: var(--border);
+				}
+
 				/* ---- VENUE BAND (left colored column) ---- */
 
 				.venue-band {
@@ -518,7 +564,7 @@ templ Layout(title string) {
 				<div class="header-text">
 					<p class="header-eyebrow">MyDenverCard</p>
 					<h1>Free.</h1>
-					<p class="header-sub">Free admission for Denver kids at museums, gardens, zoos, and more</p>
+					<p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p>
 				</div>
 			</header>
 			<main>

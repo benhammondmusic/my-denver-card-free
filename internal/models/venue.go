@@ -23,6 +23,7 @@ type Venue struct {
 	Name              string       `json:"name"`
 	URL               string       `json:"url"`
 	Program           Program      `json:"program"`
+	Featured          bool         `json:"featured"`
 	FreeMonths        []string     `json:"free_months"`
 	FreeSchedule      FreeSchedule `json:"free_schedule"`
 	AdultsIncluded    int          `json:"adults_included"` // 0 = none, 1 = one adult, 2 = two adults, etc.

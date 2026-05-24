@@ -48,7 +48,20 @@ templ Index(venues []models.Venue) {
 		<p class="venue-count"></p>
 		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
-				@VenueRow(v)
+				if v.Featured && !v.TemporarilyClosed {
+					@VenueRow(v)
+				}
+			}
+			<li class="section-divider" aria-hidden="true"><span>More venues</span></li>
+			for _, v := range venues {
+				if !v.Featured && !v.TemporarilyClosed {
+					@VenueRow(v)
+				}
+			}
+			for _, v := range venues {
+				if v.TemporarilyClosed {
+					@VenueRow(v)
+				}
 			}
 		</ul>
 		@filterScript()
@@ -57,7 +70,7 @@ templ Index(venues []models.Venue) {
 
 templ VenueRow(v models.Venue) {
 	<li
-		class={ "venue-row", templ.KV("program-general", v.Program == models.ProgramGeneral), templ.KV("venue-closed", v.TemporarilyClosed) }
+		class={ "venue-row", templ.KV("venue-featured", v.Featured), templ.KV("program-general", v.Program == models.ProgramGeneral), templ.KV("venue-closed", v.TemporarilyClosed) }
 		data-free-months={ strings.Join(v.FreeMonths, ",") }
 		data-schedule={ string(v.FreeSchedule) }
 		data-closed={ boolStr(v.TemporarilyClosed) }
