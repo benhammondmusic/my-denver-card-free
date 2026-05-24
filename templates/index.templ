@@ -92,6 +92,9 @@ templ VenueRow(v models.Venue) {
 		<div class="venue-body">
 			<div class="venue-name-row">
 				<a href={ templ.SafeURL(v.URL) } target="_blank" rel="noopener noreferrer">{ v.Name }</a>
+				if v.TemporarilyClosed {
+					<span class="badge badge-red">temporarily closed</span>
+				}
 				if v.ScrapeFailed {
 					<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
 				}

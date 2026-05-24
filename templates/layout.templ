@@ -312,13 +312,18 @@ templ Layout(title string) {
 				}
 
 				.venue-row.venue-closed {
-					opacity: 0.5;
-					box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+					background: #f7f7f8;
+					box-shadow: none;
+					border: 1.5px solid #e5e7eb;
 				}
 
 				.venue-row.venue-closed:hover {
 					transform: none;
-					box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+					box-shadow: none;
+				}
+
+				.venue-row.venue-closed .venue-name-row a {
+					color: var(--stone);
 				}
 
 				.venue-row.hidden {
@@ -432,17 +437,16 @@ templ Layout(title string) {
 
 				.venue-notes {
 					margin-top: 0.35rem;
-					font-size: 0.8rem;
+					font-size: 0.875rem;
 					color: var(--stone);
-					line-height: 1.45;
+					line-height: 1.5;
 				}
 
 				.closure-reason {
 					margin-top: 0.35rem;
-					font-size: 0.8rem;
+					font-size: 0.875rem;
 					color: var(--stone);
-					font-style: italic;
-					line-height: 1.45;
+					line-height: 1.5;
 				}
 
 				/* ---- VENUE STATUS (right column) ---- */
@@ -463,7 +467,7 @@ templ Layout(title string) {
 				}
 
 				.months {
-					font-size: 0.75rem;
+					font-size: 0.8125rem;
 					color: var(--stone);
 					text-align: right;
 					line-height: 1.4;
