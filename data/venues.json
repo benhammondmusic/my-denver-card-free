@@ -45,14 +45,14 @@
     "scrape_error": ""
   },
   {
-    "name": "Denver Recreation Centers",
+    "name": "Denver Recreation Centers and Pools",
     "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers",
     "program": "mydenvercard",
     "featured": false,
     "free_months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free drop-in admission at all 30+ Denver Parks and Recreation centers year-round. Show card at the front desk.",
+    "notes": "Free drop-in admission at all 30+ Denver rec centers and swimming pools year-round. Cardholder (ages 5-18) only -- adults pay regular admission. Show card at the front desk.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-23T00:00:00Z",
