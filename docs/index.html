@@ -220,48 +220,143 @@
 					box-shadow: 0 2px 10px rgba(217,119,6,0.45);
 				}
 
-				/* ---- SIGN-UP CALLOUT ---- */
+				/* ---- HERO SECTION ---- */
 
-				.signup-callout {
+				.hero-section {
+					background: white;
+					border-radius: 1.25rem;
+					padding: 1.25rem 1.25rem 1rem;
+					margin-bottom: 1.5rem;
+					box-shadow: 0 2px 16px rgba(0,40,104,0.09);
+					border: 1.5px solid var(--border);
+				}
+
+				.hero-eyebrow {
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.25em;
+					text-transform: uppercase;
+					color: var(--bear-blue);
+					margin-bottom: 0.75rem;
+				}
+
+				.hero-eyebrow.soon {
+					color: var(--stone);
+				}
+
+				.venue-chips {
 					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					gap: 1rem;
-					background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
-					border: 1.5px solid #fcd34d;
-					border-radius: 1rem;
-					padding: 0.875rem 1.25rem;
-					margin-bottom: 1.25rem;
 					flex-wrap: wrap;
+					gap: 0.5rem;
+					min-height: 2rem;
 				}
 
-				.signup-text {
-					font-size: 0.9rem;
-					color: #78350f;
-					line-height: 1.4;
-					flex: 1;
-					min-width: 0;
-				}
-
-				.signup-btn {
-					display: inline-block;
-					padding: 0.5rem 1.25rem;
+				.venue-chip {
+					padding: 0.4rem 1rem;
 					background: var(--bear-blue);
 					color: white;
-					font-family: 'Bebas Neue', sans-serif;
-					font-size: 1rem;
-					letter-spacing: 0.08em;
-					border-radius: 0.5rem;
-					text-decoration: none;
-					white-space: nowrap;
-					flex-shrink: 0;
-					transition: background 0.15s, box-shadow 0.15s;
+					border: none;
+					border-radius: 9999px;
+					font-family: 'Outfit', sans-serif;
+					font-size: 0.875rem;
+					font-weight: 600;
+					cursor: pointer;
+					transition: transform 0.15s, box-shadow 0.15s;
 				}
 
-				.signup-btn:hover {
-					background: #003a8c;
+				.venue-chip:hover {
+					transform: translateY(-2px);
 					box-shadow: 0 4px 12px rgba(0,40,104,0.3);
 				}
+
+				.venue-chip.general {
+					background: var(--gold);
+					color: #1c1917;
+				}
+
+				.venue-chip.chip-soon {
+					background: #f1f5f9;
+					color: var(--stone);
+					border: 1.5px solid var(--border);
+				}
+
+				.venue-chip.chip-soon:hover {
+					background: #e2e8f0;
+					box-shadow: none;
+					transform: none;
+				}
+
+				.hero-divider {
+					height: 1px;
+					background: var(--border);
+					margin: 1rem 0 0.75rem;
+				}
+
+				.browse-label {
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.25em;
+					text-transform: uppercase;
+					color: var(--stone);
+					margin-bottom: 0.75rem;
+				}
+
+				.chip-empty {
+					font-size: 0.875rem;
+					color: var(--stone);
+					font-style: italic;
+				}
+
+				@keyframes chipHighlight {
+					0%, 100% { outline: 3px solid transparent; }
+					15%, 85%  { outline: 3px solid var(--sky-blue); }
+				}
+
+				.chip-highlight {
+					animation: chipHighlight 1.8s ease forwards;
+					outline-offset: 4px;
+				}
+
+				/* ---- SIGN-UP TOAST ---- */
+
+				.signup-toast {
+					position: fixed;
+					bottom: 1.25rem;
+					right: 1.25rem;
+					background: white;
+					border: 1.5px solid var(--border);
+					border-radius: 0.875rem;
+					padding: 0.75rem 1rem;
+					box-shadow: 0 8px 32px rgba(0,40,104,0.15);
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					font-size: 0.875rem;
+					color: #374151;
+					z-index: 100;
+					max-width: 280px;
+				}
+
+				.toast-link {
+					color: var(--bear-blue);
+					font-weight: 700;
+					text-decoration: underline;
+					white-space: nowrap;
+				}
+
+				.toast-dismiss {
+					background: none;
+					border: none;
+					cursor: pointer;
+					color: var(--stone);
+					font-size: 1.1rem;
+					line-height: 1;
+					padding: 0 0.1rem;
+					margin-left: auto;
+					flex-shrink: 0;
+				}
+
+				.toast-dismiss:hover { color: #111827; }
 
 				/* ---- VENUE COUNT ---- */
 
@@ -557,11 +652,12 @@
 
 					.months { text-align: left; }
 				}
-			</style></head><body><header><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p></div></div></header><main><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button></div><div class="month-strip"><button class="month-btn" data-month-name="January">Jan</button><button class="month-btn" data-month-name="February">Feb</button><button class="month-btn" data-month-name="March">Mar</button><button class="month-btn" data-month-name="April">Apr</button><button class="month-btn" data-month-name="May">May</button><button class="month-btn" data-month-name="June">Jun</button><button class="month-btn" data-month-name="July">Jul</button><button class="month-btn" data-month-name="August">Aug</button><button class="month-btn" data-month-name="September">Sep</button><button class="month-btn" data-month-name="October">Oct</button><button class="month-btn" data-month-name="November">Nov</button><button class="month-btn" data-month-name="December">Dec</button></div></div><div class="signup-callout"><p class="signup-text"><strong>No card yet?</strong> Free for Denver kids ages 5-18. Sign up online or pick one up at any rec center.</p><a href="https://apm.activecommunities.com/denver/Membership" class="signup-btn" target="_blank" rel="noopener noreferrer">Get your card</a></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" target="_blank" rel="noopener noreferrer">Denver Zoo</a> </div><p class="venue-notes">Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.dmns.org/visit/pricing-and-discounts/" target="_blank" rel="noopener noreferrer">Denver Museum of Nature &amp; Science</a> </div><p class="venue-notes">Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">June, July, August</span></div></li><li class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.botanicgardens.org/my-denver-card" target="_blank" rel="noopener noreferrer">Denver Botanic Gardens</a> </div><p class="venue-notes">Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers" target="_blank" rel="noopener noreferrer">Denver Recreation Centers and Pools</a> </div><p class="venue-notes">Free drop-in admission at all 30+ Denver rec centers and swimming pools year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" target="_blank" rel="noopener noreferrer">Clyfford Still Museum</a> </div><p class="venue-notes">Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denverartmuseum.org/en/free-kids" target="_blank" rel="noopener noreferrer">Denver Art Museum</a> </div><p class="venue-notes">Free for all kids under 18 year-round. No myDenverCard required.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.historycolorado.org/history-colorado-center" target="_blank" rel="noopener noreferrer">History Colorado Center</a> </div><p class="venue-notes">Free for children year-round. No myDenverCard required. Adults pay regular admission.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mcadenver.org/visit" target="_blank" rel="noopener noreferrer">MCA Denver</a> </div><p class="venue-notes">Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.</p></div><div class="venue-status"><span class="badge badge-green">Free +2 Adults</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mollybrown.org/faq/" target="_blank" rel="noopener noreferrer">Molly Brown House Museum</a> </div><p class="venue-notes">Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://museo.org/plan-your-visit/" target="_blank" rel="noopener noreferrer">Museo de las Americas</a> </div><p class="venue-notes">Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.winterindenver.com/rink" target="_blank" rel="noopener noreferrer">Downtown Denver Rink</a> <span class="badge badge-red">temporarily closed</span> </div><p class="closure-reason">Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</p></div></li></ul><script>
+			</style></head><body><header><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p></div></div></header><main><div class="hero-section"><p class="hero-eyebrow">Free right now</p><div id="free-now-chips" class="venue-chips"></div><div id="hero-soon"><div class="hero-divider"></div><p class="hero-eyebrow soon">Free next month</p><div id="free-soon-chips" class="venue-chips"></div></div></div><p class="browse-label">Browse all venues</p><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button></div><div class="month-strip"><button class="month-btn" data-month-name="January">Jan</button><button class="month-btn" data-month-name="February">Feb</button><button class="month-btn" data-month-name="March">Mar</button><button class="month-btn" data-month-name="April">Apr</button><button class="month-btn" data-month-name="May">May</button><button class="month-btn" data-month-name="June">Jun</button><button class="month-btn" data-month-name="July">Jul</button><button class="month-btn" data-month-name="August">Aug</button><button class="month-btn" data-month-name="September">Sep</button><button class="month-btn" data-month-name="October">Oct</button><button class="month-btn" data-month-name="November">Nov</button><button class="month-btn" data-month-name="December">Dec</button></div></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" target="_blank" rel="noopener noreferrer">Denver Zoo</a> </div><p class="venue-notes">Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.dmns.org/visit/pricing-and-discounts/" target="_blank" rel="noopener noreferrer">Denver Museum of Nature &amp; Science</a> </div><p class="venue-notes">Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">June, July, August</span></div></li><li class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.botanicgardens.org/my-denver-card" target="_blank" rel="noopener noreferrer">Denver Botanic Gardens</a> </div><p class="venue-notes">Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers" target="_blank" rel="noopener noreferrer">Denver Recreation Centers and Pools</a> </div><p class="venue-notes">Free drop-in admission at all 30+ Denver rec centers and swimming pools year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" target="_blank" rel="noopener noreferrer">Clyfford Still Museum</a> </div><p class="venue-notes">Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door.</p></div><div class="venue-status"><span class="badge badge-green">Free +1 Adult</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denverartmuseum.org/en/free-kids" target="_blank" rel="noopener noreferrer">Denver Art Museum</a> </div><p class="venue-notes">Free for all kids under 18 year-round. No myDenverCard required.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.historycolorado.org/history-colorado-center" target="_blank" rel="noopener noreferrer">History Colorado Center</a> </div><p class="venue-notes">Free for children year-round. No myDenverCard required. Adults pay regular admission.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mcadenver.org/visit" target="_blank" rel="noopener noreferrer">MCA Denver</a> </div><p class="venue-notes">Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.</p></div><div class="venue-status"><span class="badge badge-green">Free +2 Adults</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mollybrown.org/faq/" target="_blank" rel="noopener noreferrer">Molly Brown House Museum</a> </div><p class="venue-notes">Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://museo.org/plan-your-visit/" target="_blank" rel="noopener noreferrer">Museo de las Americas</a> </div><p class="venue-notes">Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.</p></div><div class="venue-status"><span class="badge badge-yellow">Free</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard"><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.winterindenver.com/rink" target="_blank" rel="noopener noreferrer">Downtown Denver Rink</a> <span class="badge badge-red">temporarily closed</span> </div><p class="closure-reason">Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</p></div></li></ul><script>
 (function () {
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var today = new Date();
   var currentMonthName = MONTHS[today.getMonth()];
+  var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
 
@@ -639,6 +735,57 @@
     if (countEl) countEl.textContent = label;
   }
 
+  function buildHero() {
+    var nowChips = document.getElementById('free-now-chips');
+    var soonChips = document.getElementById('free-soon-chips');
+    var heroSoon = document.getElementById('hero-soon');
+    if (!nowChips || !soonChips) return;
+
+    var nowRows = rows.filter(function (row) { return freeNow(row); });
+    var soonRows = rows.filter(function (row) {
+      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
+    });
+
+    function makeName(row) {
+      var a = row.querySelector('.venue-name-row a');
+      return a ? a.textContent : '';
+    }
+
+    function makeChip(row, isSoon) {
+      var btn = document.createElement('button');
+      var cls = 'venue-chip';
+      if (row.dataset.program === 'general') cls += ' general';
+      if (isSoon) cls += ' chip-soon';
+      btn.className = cls;
+      btn.textContent = makeName(row);
+      btn.addEventListener('click', function () {
+        if (row.classList.contains('hidden')) {
+          setTab('all');
+          applyFilter();
+        }
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.add('chip-highlight');
+        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
+      });
+      return btn;
+    }
+
+    if (nowRows.length === 0) {
+      var empty = document.createElement('span');
+      empty.className = 'chip-empty';
+      empty.textContent = 'Nothing is free right now. Pick a month below to plan ahead.';
+      nowChips.appendChild(empty);
+    } else {
+      nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
+    }
+
+    if (soonRows.length === 0) {
+      if (heroSoon) heroSoon.style.display = 'none';
+    } else {
+      soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
+    }
+  }
+
   monthBtns.forEach(function (btn) {
     if (btn.dataset.monthName === currentMonthName) btn.classList.add('current-month');
     btn.addEventListener('click', function () {
@@ -672,5 +819,6 @@
 
   setTab('now');
   applyFilter();
+  buildHero();
 })();
-</script></main><div class="mountains" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64"><path fill="#c8d4ee" d="M0,64 L0,48 L90,18 L200,52 L310,14 L430,50 L540,8 L660,44 L770,20 L890,50 L1000,16 L1120,48 L1230,10 L1350,42 L1440,22 L1440,64 Z"></path> <path fill="#dde5f5" d="M0,64 L0,56 L110,38 L230,58 L350,30 L470,54 L590,34 L710,58 L830,40 L950,60 L1070,32 L1190,55 L1310,36 L1440,52 L1440,64 Z"></path></svg></div><footer>Auto-updated weekly. Always verify with the venue before visiting.<br><a href="https://github.com/benhammondmusic/my-denver-card-free/issues" target="_blank" rel="noopener noreferrer">Found missing or wrong info? Report it.</a><br><a href="https://benhammondmusic.tech" target="_blank" rel="noopener noreferrer" style="font-size:0.7rem; opacity:0.6;">benhammondmusic.tech</a></footer></body></html>
+</script></main><div class="mountains" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64"><path fill="#c8d4ee" d="M0,64 L0,48 L90,18 L200,52 L310,14 L430,50 L540,8 L660,44 L770,20 L890,50 L1000,16 L1120,48 L1230,10 L1350,42 L1440,22 L1440,64 Z"></path> <path fill="#dde5f5" d="M0,64 L0,56 L110,38 L230,58 L350,30 L470,54 L590,34 L710,58 L830,40 L950,60 L1070,32 L1190,55 L1310,36 L1440,52 L1440,64 Z"></path></svg></div><footer>Auto-updated weekly. Always verify with the venue before visiting.<br><a href="https://github.com/benhammondmusic/my-denver-card-free/issues" target="_blank" rel="noopener noreferrer">Found missing or wrong info? Report it.</a><br><a href="https://benhammondmusic.tech" target="_blank" rel="noopener noreferrer" style="font-size:0.7rem; opacity:0.6;">benhammondmusic.tech</a></footer><div class="signup-toast" id="signup-toast"><span>No card yet?</span> <a href="https://apm.activecommunities.com/denver/Membership" class="toast-link" target="_blank" rel="noopener noreferrer">Get your card</a> <button class="toast-dismiss" onclick="document.getElementById('signup-toast').style.display='none'" aria-label="Dismiss">x</button></div></body></html>

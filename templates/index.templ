@@ -32,6 +32,16 @@ func boolStr(b bool) string {
 
 templ Index(venues []models.Venue) {
 	@Layout("My Denver Card Free: Denver Cultural Venues") {
+		<div class="hero-section">
+			<p class="hero-eyebrow">Free right now</p>
+			<div id="free-now-chips" class="venue-chips"></div>
+			<div id="hero-soon">
+				<div class="hero-divider"></div>
+				<p class="hero-eyebrow soon">Free next month</p>
+				<div id="free-soon-chips" class="venue-chips"></div>
+			</div>
+		</div>
+		<p class="browse-label">Browse all venues</p>
 		<div class="filter-bar">
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="all">All</button>
@@ -44,10 +54,6 @@ templ Index(venues []models.Venue) {
 					<button class="month-btn" data-month-name={ monthsFull[i] }>{ abbr }</button>
 				}
 			</div>
-		</div>
-		<div class="signup-callout">
-			<p class="signup-text"><strong>No card yet?</strong> Free for Denver kids ages 5-18. Sign up online or pick one up at any rec center.</p>
-			<a href="https://apm.activecommunities.com/denver/Membership" class="signup-btn" target="_blank" rel="noopener noreferrer">Get your card</a>
 		</div>
 		<p class="venue-count"></p>
 		<ul class="venue-list" id="venue-list">
@@ -127,6 +133,7 @@ templ filterScript() {
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var today = new Date();
   var currentMonthName = MONTHS[today.getMonth()];
+  var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
 
@@ -204,6 +211,57 @@ templ filterScript() {
     if (countEl) countEl.textContent = label;
   }
 
+  function buildHero() {
+    var nowChips = document.getElementById('free-now-chips');
+    var soonChips = document.getElementById('free-soon-chips');
+    var heroSoon = document.getElementById('hero-soon');
+    if (!nowChips || !soonChips) return;
+
+    var nowRows = rows.filter(function (row) { return freeNow(row); });
+    var soonRows = rows.filter(function (row) {
+      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
+    });
+
+    function makeName(row) {
+      var a = row.querySelector('.venue-name-row a');
+      return a ? a.textContent : '';
+    }
+
+    function makeChip(row, isSoon) {
+      var btn = document.createElement('button');
+      var cls = 'venue-chip';
+      if (row.dataset.program === 'general') cls += ' general';
+      if (isSoon) cls += ' chip-soon';
+      btn.className = cls;
+      btn.textContent = makeName(row);
+      btn.addEventListener('click', function () {
+        if (row.classList.contains('hidden')) {
+          setTab('all');
+          applyFilter();
+        }
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.add('chip-highlight');
+        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
+      });
+      return btn;
+    }
+
+    if (nowRows.length === 0) {
+      var empty = document.createElement('span');
+      empty.className = 'chip-empty';
+      empty.textContent = 'Nothing is free right now. Pick a month below to plan ahead.';
+      nowChips.appendChild(empty);
+    } else {
+      nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
+    }
+
+    if (soonRows.length === 0) {
+      if (heroSoon) heroSoon.style.display = 'none';
+    } else {
+      soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
+    }
+  }
+
   monthBtns.forEach(function (btn) {
     if (btn.dataset.monthName === currentMonthName) btn.classList.add('current-month');
     btn.addEventListener('click', function () {
@@ -237,6 +295,7 @@ templ filterScript() {
 
   setTab('now');
   applyFilter();
+  buildHero();
 })();
 </script>`)
 }

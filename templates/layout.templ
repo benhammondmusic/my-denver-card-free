@@ -233,48 +233,143 @@ templ Layout(title string) {
 					box-shadow: 0 2px 10px rgba(217,119,6,0.45);
 				}
 
-				/* ---- SIGN-UP CALLOUT ---- */
+				/* ---- HERO SECTION ---- */
 
-				.signup-callout {
+				.hero-section {
+					background: white;
+					border-radius: 1.25rem;
+					padding: 1.25rem 1.25rem 1rem;
+					margin-bottom: 1.5rem;
+					box-shadow: 0 2px 16px rgba(0,40,104,0.09);
+					border: 1.5px solid var(--border);
+				}
+
+				.hero-eyebrow {
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.25em;
+					text-transform: uppercase;
+					color: var(--bear-blue);
+					margin-bottom: 0.75rem;
+				}
+
+				.hero-eyebrow.soon {
+					color: var(--stone);
+				}
+
+				.venue-chips {
 					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					gap: 1rem;
-					background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
-					border: 1.5px solid #fcd34d;
-					border-radius: 1rem;
-					padding: 0.875rem 1.25rem;
-					margin-bottom: 1.25rem;
 					flex-wrap: wrap;
+					gap: 0.5rem;
+					min-height: 2rem;
 				}
 
-				.signup-text {
-					font-size: 0.9rem;
-					color: #78350f;
-					line-height: 1.4;
-					flex: 1;
-					min-width: 0;
-				}
-
-				.signup-btn {
-					display: inline-block;
-					padding: 0.5rem 1.25rem;
+				.venue-chip {
+					padding: 0.4rem 1rem;
 					background: var(--bear-blue);
 					color: white;
-					font-family: 'Bebas Neue', sans-serif;
-					font-size: 1rem;
-					letter-spacing: 0.08em;
-					border-radius: 0.5rem;
-					text-decoration: none;
-					white-space: nowrap;
-					flex-shrink: 0;
-					transition: background 0.15s, box-shadow 0.15s;
+					border: none;
+					border-radius: 9999px;
+					font-family: 'Outfit', sans-serif;
+					font-size: 0.875rem;
+					font-weight: 600;
+					cursor: pointer;
+					transition: transform 0.15s, box-shadow 0.15s;
 				}
 
-				.signup-btn:hover {
-					background: #003a8c;
+				.venue-chip:hover {
+					transform: translateY(-2px);
 					box-shadow: 0 4px 12px rgba(0,40,104,0.3);
 				}
+
+				.venue-chip.general {
+					background: var(--gold);
+					color: #1c1917;
+				}
+
+				.venue-chip.chip-soon {
+					background: #f1f5f9;
+					color: var(--stone);
+					border: 1.5px solid var(--border);
+				}
+
+				.venue-chip.chip-soon:hover {
+					background: #e2e8f0;
+					box-shadow: none;
+					transform: none;
+				}
+
+				.hero-divider {
+					height: 1px;
+					background: var(--border);
+					margin: 1rem 0 0.75rem;
+				}
+
+				.browse-label {
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.25em;
+					text-transform: uppercase;
+					color: var(--stone);
+					margin-bottom: 0.75rem;
+				}
+
+				.chip-empty {
+					font-size: 0.875rem;
+					color: var(--stone);
+					font-style: italic;
+				}
+
+				@keyframes chipHighlight {
+					0%, 100% { outline: 3px solid transparent; }
+					15%, 85%  { outline: 3px solid var(--sky-blue); }
+				}
+
+				.chip-highlight {
+					animation: chipHighlight 1.8s ease forwards;
+					outline-offset: 4px;
+				}
+
+				/* ---- SIGN-UP TOAST ---- */
+
+				.signup-toast {
+					position: fixed;
+					bottom: 1.25rem;
+					right: 1.25rem;
+					background: white;
+					border: 1.5px solid var(--border);
+					border-radius: 0.875rem;
+					padding: 0.75rem 1rem;
+					box-shadow: 0 8px 32px rgba(0,40,104,0.15);
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					font-size: 0.875rem;
+					color: #374151;
+					z-index: 100;
+					max-width: 280px;
+				}
+
+				.toast-link {
+					color: var(--bear-blue);
+					font-weight: 700;
+					text-decoration: underline;
+					white-space: nowrap;
+				}
+
+				.toast-dismiss {
+					background: none;
+					border: none;
+					cursor: pointer;
+					color: var(--stone);
+					font-size: 1.1rem;
+					line-height: 1;
+					padding: 0 0.1rem;
+					margin-left: auto;
+					flex-shrink: 0;
+				}
+
+				.toast-dismiss:hover { color: #111827; }
 
 				/* ---- VENUE COUNT ---- */
 
@@ -640,6 +735,11 @@ templ Layout(title string) {
 				<br/>
 				<a href="https://benhammondmusic.tech" target="_blank" rel="noopener noreferrer" style="font-size:0.7rem; opacity:0.6;">benhammondmusic.tech</a>
 			</footer>
+			<div class="signup-toast" id="signup-toast">
+				<span>No card yet?</span>
+				<a href="https://apm.activecommunities.com/denver/Membership" class="toast-link" target="_blank" rel="noopener noreferrer">Get your card</a>
+				<button class="toast-dismiss" onclick="document.getElementById('signup-toast').style.display='none'" aria-label="Dismiss">x</button>
+			</div>
 		</body>
 	</html>
 }
