@@ -46,18 +46,24 @@ templ Layout(title string) {
 				header {
 					background: linear-gradient(140deg, #001540 0%, var(--bear-blue) 55%, #003a8c 100%);
 					color: white;
-					padding: 1.75rem 2rem 0 0;
-					display: flex;
-					align-items: flex-end;
 					overflow: hidden;
 					min-height: 180px;
-					gap: 0;
 					position: relative;
 				}
 
-				.header-text {
+				.header-inner {
 					position: relative;
 					z-index: 3;
+					max-width: 860px;
+					width: 100%;
+					margin: 0 auto;
+					padding: 1.75rem 1rem 0 1rem;
+					display: flex;
+					align-items: flex-end;
+					gap: 0;
+				}
+
+				.header-text {
 					padding-bottom: 1.5rem;
 					flex: 1;
 					min-width: 0;
@@ -114,7 +120,6 @@ templ Layout(title string) {
 					flex-shrink: 0;
 					line-height: 0;
 					margin-right: -2rem;
-					z-index: 3;
 				}
 
 				.bear-wrap img {
@@ -521,8 +526,11 @@ templ Layout(title string) {
 
 				@media (max-width: 560px) {
 					header {
-						padding: 1.25rem 0 0 1.25rem;
 						min-height: 140px;
+					}
+
+					.header-inner {
+						padding: 1.25rem 0 0 1rem;
 					}
 
 					header h1 {
@@ -566,6 +574,7 @@ templ Layout(title string) {
 		</head>
 		<body>
 			<header>
+				<div class="header-inner">
 				<div class="header-bg" aria-hidden="true">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice">
 						<path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"/>
@@ -612,6 +621,7 @@ templ Layout(title string) {
 					<p class="header-eyebrow">MyDenverCard</p>
 					<h1>Free.</h1>
 					<p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p>
+				</div>
 				</div>
 			</header>
 			<main>
