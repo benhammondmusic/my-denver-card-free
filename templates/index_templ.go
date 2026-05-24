@@ -577,7 +577,7 @@ func filterScript() templ.Component {
     var soonLabel = document.querySelector('.hero-eyebrow.soon');
     if (!nowChips || !soonChips) return;
 
-    if (soonLabel) soonLabel.textContent = 'Free in ' + nextMonthName;
+    if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
 
     var nowRows = rows.filter(function (row) { return freeNow(row); });
     var soonRows = rows.filter(function (row) {
