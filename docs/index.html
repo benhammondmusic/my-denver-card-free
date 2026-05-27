@@ -358,7 +358,7 @@
 					list-style: none;
 					display: flex;
 					flex-direction: column;
-					gap: 0.75rem;
+					gap: 0.5rem;
 				}
 
 				.venue-row {
@@ -370,11 +370,17 @@
 					box-shadow: 0 2px 16px rgba(0,40,104,0.09), 0 1px 3px rgba(0,40,104,0.05);
 					transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s;
 					border: none;
+					cursor: pointer;
 				}
 
 				.venue-row:hover {
-					transform: translateY(-5px) rotate(-0.4deg);
-					box-shadow: 0 18px 48px rgba(0,40,104,0.15);
+					transform: translateY(-3px) rotate(-0.3deg);
+					box-shadow: 0 12px 36px rgba(0,40,104,0.14);
+				}
+
+				.venue-row:focus-visible {
+					outline: 2px solid var(--sky-blue);
+					outline-offset: -2px;
 				}
 
 				.venue-row.venue-closed {
@@ -386,10 +392,6 @@
 				.venue-row.venue-closed:hover {
 					transform: none;
 					box-shadow: none;
-				}
-
-				.venue-row.venue-closed .venue-name-row a {
-					color: var(--stone);
 				}
 
 				.venue-row.hidden {
@@ -408,16 +410,8 @@
 					border-right: 3px solid rgba(217,119,6,0.3);
 				}
 
-				.venue-featured .venue-body {
-					padding: 1.1rem 0.75rem 1.1rem 1.1rem;
-				}
-
-				.venue-featured .venue-name-row a {
-					font-size: 1.2rem;
-				}
-
-				.venue-featured .venue-status {
-					padding: 1.1rem 1.25rem 1.1rem 0.5rem;
+				.venue-featured .venue-name {
+					font-size: 1.15rem;
 				}
 
 				/* ---- SECTION DIVIDER ---- */
@@ -482,49 +476,34 @@
 				.venue-body {
 					flex: 1;
 					min-width: 0;
-					padding: 0.9rem 0.75rem 0.9rem 1rem;
-				}
-
-				.venue-name-row {
+					padding: 0.75rem 0.75rem 0.75rem 1rem;
 					display: flex;
 					align-items: center;
-					gap: 0.5rem;
-					flex-wrap: wrap;
 				}
 
-				.venue-name-row a {
+				/* ---- VENUE NAME ---- */
+
+				.venue-name {
 					font-weight: 700;
 					font-size: 1.0625rem;
-					color: var(--sky-blue);
-					text-decoration: none;
+					color: #111827;
+					line-height: 1.3;
 				}
 
-				.venue-name-row a:hover { text-decoration: underline; }
-
-				.venue-notes {
-					margin-top: 0.35rem;
-					font-size: 0.875rem;
+				.venue-row.venue-closed .venue-name {
 					color: var(--stone);
-					line-height: 1.5;
 				}
 
-				.closure-reason {
-					margin-top: 0.35rem;
-					font-size: 0.875rem;
-					color: var(--stone);
-					line-height: 1.5;
-				}
-
-				/* ---- VENUE STATUS (right column) ---- */
+				/* ---- VENUE STATUS (right summary column) ---- */
 
 				.venue-status {
 					display: flex;
 					flex-direction: column;
 					align-items: flex-end;
-					justify-content: flex-start;
+					justify-content: center;
 					gap: 0.3rem;
 					flex-shrink: 0;
-					padding: 0.9rem 1.1rem 0.9rem 0.5rem;
+					padding: 0.75rem 1rem 0.75rem 0.5rem;
 				}
 
 				.venue-status .badge {
@@ -583,8 +562,6 @@
 					text-decoration: underline;
 				}
 
-				/* ---- RESPONSIVE ---- */
-
 				/* ---- TOOLBAR ---- */
 
 				.toolbar {
@@ -636,53 +613,6 @@
 				.age-select:focus { outline: 2px solid var(--sky-blue); border-color: var(--sky-blue); }
 				.age-select.active { border-color: var(--sky-blue); color: var(--sky-blue); }
 
-				/* ---- MAP PANEL ---- */
-
-				.map-panel {
-					display: none;
-					height: 320px;
-					border-radius: 1rem;
-					overflow: hidden;
-					margin-bottom: 1.5rem;
-					border: 1.5px solid var(--border);
-					box-shadow: 0 2px 16px rgba(0,40,104,0.09);
-				}
-
-				.map-panel.visible { display: block; }
-
-				/* ---- VENUE HOURS ---- */
-
-				.venue-hours {
-					margin-top: 0.25rem;
-					font-size: 0.8rem;
-					color: var(--stone);
-					font-weight: 500;
-				}
-
-				/* ---- VENUE ACTION BUTTONS ---- */
-
-				.venue-actions {
-					display: flex;
-					gap: 0.4rem;
-					margin-top: 0.5rem;
-					flex-wrap: wrap;
-				}
-
-				.action-btn {
-					padding: 0.2rem 0.6rem;
-					border: 1px solid var(--border);
-					border-radius: 0.375rem;
-					background: white;
-					font-size: 0.75rem;
-					font-weight: 600;
-					cursor: pointer;
-					color: var(--stone);
-					transition: all 0.12s;
-					font-family: 'Outfit', sans-serif;
-				}
-
-				.action-btn:hover { border-color: var(--sky-blue); color: var(--sky-blue); background: #f0f5ff; }
-
 				/* ---- DISTANCE BADGE ---- */
 
 				.distance-badge { font-size: 0.75rem; }
@@ -690,6 +620,164 @@
 				/* ---- BADGE: BLUE ---- */
 
 				.badge-blue { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+
+				/* ---- MODAL ---- */
+
+				.modal-overlay {
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.5);
+					z-index: 1000;
+					display: flex;
+					align-items: flex-end;
+					justify-content: center;
+					opacity: 0;
+					pointer-events: none;
+					transition: opacity 0.25s;
+				}
+
+				.modal-overlay.open {
+					opacity: 1;
+					pointer-events: all;
+				}
+
+				.modal-sheet {
+					background: white;
+					width: 100%;
+					max-height: 90vh;
+					border-radius: 1.25rem 1.25rem 0 0;
+					overflow: hidden;
+					display: flex;
+					flex-direction: column;
+					transform: translateY(110%);
+					transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+				}
+
+				.modal-overlay.open .modal-sheet {
+					transform: translateY(0);
+				}
+
+				@media (min-width: 600px) {
+					.modal-overlay { align-items: center; }
+					.modal-sheet {
+						width: 560px;
+						max-height: 85vh;
+						border-radius: 1.25rem;
+						transform: scale(0.94) translateY(8px);
+					}
+					.modal-overlay.open .modal-sheet {
+						transform: scale(1) translateY(0);
+					}
+				}
+
+				.modal-band {
+					height: 6px;
+					flex-shrink: 0;
+					background: var(--bear-blue);
+				}
+
+				.modal-content {
+					overflow-y: auto;
+					padding: 1.25rem;
+					flex: 1;
+					-webkit-overflow-scrolling: touch;
+				}
+
+				.modal-header {
+					display: flex;
+					align-items: flex-start;
+					justify-content: space-between;
+					gap: 1rem;
+					margin-bottom: 1rem;
+				}
+
+				.modal-title {
+					font-family: 'Outfit', sans-serif;
+					font-size: 1.375rem;
+					font-weight: 700;
+					line-height: 1.25;
+					color: #111827;
+				}
+
+				.modal-close {
+					flex-shrink: 0;
+					background: none;
+					border: none;
+					cursor: pointer;
+					color: var(--stone);
+					padding: 0.25rem;
+					line-height: 1;
+					border-radius: 0.375rem;
+					transition: color 0.15s, background 0.15s;
+					display: flex;
+					align-items: center;
+				}
+
+				.modal-close:hover { color: #111827; background: var(--border); }
+
+				.modal-badges {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.4rem;
+					margin-bottom: 1rem;
+				}
+
+				.modal-map {
+					height: 180px;
+					border-radius: 0.75rem;
+					overflow: hidden;
+					margin-bottom: 1rem;
+					border: 1.5px solid var(--border);
+				}
+
+				.modal-details {
+					margin-bottom: 1rem;
+				}
+
+				.modal-notes {
+					font-size: 0.9rem;
+					color: #374151;
+					line-height: 1.6;
+					margin-bottom: 0.6rem;
+				}
+
+				.modal-hours,
+				.modal-months {
+					font-size: 0.875rem;
+					color: var(--stone);
+					margin-bottom: 0.4rem;
+					line-height: 1.5;
+				}
+
+				.modal-actions {
+					display: flex;
+					gap: 0.5rem;
+					flex-wrap: wrap;
+					padding-top: 0.75rem;
+					border-top: 1px solid var(--border);
+				}
+
+				.modal-action-btn {
+					padding: 0.5rem 1.25rem;
+					border: 1.5px solid var(--border);
+					border-radius: 0.5rem;
+					background: white;
+					font-family: 'Outfit', sans-serif;
+					font-size: 0.875rem;
+					font-weight: 600;
+					cursor: pointer;
+					color: var(--stone);
+					text-decoration: none;
+					display: inline-flex;
+					align-items: center;
+					transition: all 0.15s;
+				}
+
+				.modal-action-btn:hover {
+					border-color: var(--sky-blue);
+					color: var(--sky-blue);
+					background: #f0f5ff;
+				}
 
 				/* ---- VIEW TRANSITIONS ---- */
 
@@ -714,17 +802,15 @@
 					& .month-btn:hover { background: #1d2f55; }
 					& .month-btn.current-month { background: #3d2600; border-color: var(--gold); color: #fcd34d; }
 					& .venue-count { background: rgba(30,80,160,0.25); color: #93b4e0; }
-					& .venue-name-row a { color: #60a5fa; }
+					& .venue-name { color: #e0e8f5; }
+					& .venue-row.venue-closed .venue-name { color: #7a8fa8; }
 					& footer { background: #0a1020; color: #5a7090; }
 					& footer a { color: #8099c0; }
 					& .hero-eyebrow { color: #93b4e0; }
 					& .hero-eyebrow.soon { color: #7a8fa8; }
 					& .toolbar-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .toolbar-btn:hover { background: #1d2f55; color: #93b4e0; }
-					& .action-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
-					& .action-btn:hover { background: #1d2f55; color: #60a5fa; }
 					& .age-select { background: #162040; border-color: var(--border); color: #7a8fa8; }
-					& .map-panel { border-color: var(--border); }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }
 					& .badge-gray { background: #1f2937; color: #9ca3af; border-color: #374151; }
@@ -734,6 +820,16 @@
 					& .section-divider::before, & .section-divider::after { background: var(--border); }
 					& .venue-chip { box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
 					& .venue-chip.chip-soon { background: #162040; border-color: var(--border); color: #7a8fa8; }
+					& .modal-sheet { background: #162040; }
+					& .modal-title { color: #e0e8f5; }
+					& .modal-close { color: #7a8fa8; }
+					& .modal-close:hover { color: #e0e8f5; background: #1d2f55; }
+					& .modal-notes { color: #c0cfe8; }
+					& .modal-hours, & .modal-months { color: #7a8fa8; }
+					& .modal-actions { border-color: var(--border); }
+					& .modal-action-btn { background: #162040; border-color: var(--border); color: #93b4e0; }
+					& .modal-action-btn:hover { background: #1d2f55; color: #e0e8f5; border-color: #3b82f6; }
+					& .modal-map { border-color: var(--border); }
 				}
 
 				/* ---- THEME TOGGLE ---- */
@@ -800,12 +896,12 @@
 						justify-content: flex-start;
 						flex-wrap: wrap;
 						gap: 0.5rem;
-						padding: 0 0.875rem 0.875rem 1rem;
+						padding: 0 0.875rem 0.75rem 1rem;
 					}
 
 					.months { text-align: left; }
 				}
-			</style></head><body><header><div class="header-actions"><a href="https://apm.activecommunities.com/denver/Membership" class="card-signup-btn" target="_blank" rel="noopener noreferrer" aria-label="Get your free myDenverCard" title="Get your free myDenverCard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></a> <button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button></div><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p></div></div></header><main><div class="hero-section"><p class="hero-eyebrow">Free right now</p><div id="free-now-chips" class="venue-chips"></div><div id="hero-soon"><div class="hero-divider"></div><p class="hero-eyebrow soon">Free next month</p><div id="free-soon-chips" class="venue-chips"></div></div></div><p class="browse-label">Browse all venues</p><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="weekend">This Weekend</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button></div><div class="month-strip"><button class="month-btn" data-month-name="January">Jan</button><button class="month-btn" data-month-name="February">Feb</button><button class="month-btn" data-month-name="March">Mar</button><button class="month-btn" data-month-name="April">Apr</button><button class="month-btn" data-month-name="May">May</button><button class="month-btn" data-month-name="June">Jun</button><button class="month-btn" data-month-name="July">Jul</button><button class="month-btn" data-month-name="August">Aug</button><button class="month-btn" data-month-name="September">Sep</button><button class="month-btn" data-month-name="October">Oct</button><button class="month-btn" data-month-name="November">Nov</button><button class="month-btn" data-month-name="December">Dec</button></div><div class="toolbar"><button class="toolbar-btn" id="near-me-btn">Near me</button> <button class="toolbar-btn" id="map-toggle-btn">Show map</button> <select id="kid-age" class="age-select" aria-label="Filter by age"><option value="0">All ages</option> <option value="4">Has a toddler (under 5)</option> <option value="8">School age (5-12)</option> <option value="15">Teen (13+)</option></select></div></div><div id="map-panel" class="map-panel"></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.750300" data-lng="-104.951700" data-address="2300 Steele St, Denver, CO 80205" data-indoor="false" data-reservation="true" data-min-age="5" data-max-age="18"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" target="_blank" rel="noopener noreferrer">Denver Zoo</a> <span class="badge badge-yellow">reservation required</span> </div><p class="venue-notes">Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required.</p><p class="venue-hours">9am-5pm daily (last entry 4pm)</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-green">Free +1 adult</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.747600" data-lng="-104.943200" data-address="2001 Colorado Blvd, Denver, CO 80205" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.dmns.org/visit/pricing-and-discounts/" target="_blank" rel="noopener noreferrer">Denver Museum of Nature &amp; Science</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026.</p><p class="venue-hours">9am-5pm daily</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.732200" data-lng="-104.957200" data-address="1007 York St, Denver, CO 80206" data-indoor="false" data-reservation="false" data-min-age="5" data-max-age="18"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.botanicgardens.org/my-denver-card" target="_blank" rel="noopener noreferrer">Denver Botanic Gardens</a> </div><p class="venue-notes">Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events.</p><p class="venue-hours">9am-8pm (May-Sep), 9am-5pm (Oct-Apr)</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-green">Free +1 adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-min-age="5" data-max-age="18"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers" target="_blank" rel="noopener noreferrer">Denver Recreation Centers</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk.</p><p class="venue-hours">Hours vary by location</p> <div class="venue-actions"><button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="false" data-reservation="false" data-min-age="5" data-max-age="18"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" target="_blank" rel="noopener noreferrer">Denver Swimming Pools</a> </div><p class="venue-notes">Free at all Denver indoor and outdoor pools year-round. Cardholder ages 5-18 only. Outdoor pools open June-August only. Show card at the front desk.</p><p class="venue-hours">Hours vary by location</p> <div class="venue-actions"><button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.730800" data-lng="-104.988800" data-address="1250 Bannock St, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="17"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" target="_blank" rel="noopener noreferrer">Clyfford Still Museum</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door.</p><p class="venue-hours">10am-5pm Tue-Sun</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-green">Free +1 adult</span> <span class="badge badge-gray">Weekends + breaks</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.730600" data-lng="-104.987800" data-address="100 W 14th Ave Pkwy, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="17"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.denverartmuseum.org/en/free-kids" target="_blank" rel="noopener noreferrer">Denver Art Museum</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Free for all kids under 18 year-round. No myDenverCard required.</p><p class="venue-hours">10am-5pm Tue-Sun (10am-9pm Fri)</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.732000" data-lng="-104.986200" data-address="1200 Broadway, Denver, CO 80203" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.historycolorado.org/history-colorado-center" target="_blank" rel="noopener noreferrer">History Colorado Center</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Free for children year-round. No myDenverCard required. Adults pay regular admission.</p><p class="venue-hours">10am-5pm daily</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.758600" data-lng="-105.001900" data-address="1485 Delgany St, Denver, CO 80202" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mcadenver.org/visit" target="_blank" rel="noopener noreferrer">MCA Denver</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.</p><p class="venue-hours">11am-5pm Tue-Thu &amp; Sun, 11am-9pm Fri-Sat</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-green">Whole family free</span> <span class="months">Year-round</span></div></li><li class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.736300" data-lng="-104.978000" data-address="1340 Pennsylvania St, Denver, CO 80203" data-indoor="true" data-reservation="false" data-min-age="5" data-max-age="18"><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://mollybrown.org/faq/" target="_blank" rel="noopener noreferrer">Molly Brown House Museum</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks.</p><p class="venue-hours">10am-4pm Tue-Sun (guided tours)</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="badge badge-gray">Weekends + breaks</span> <span class="months">Year-round</span></div></li><li class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.722900" data-lng="-104.991700" data-address="861 Santa Fe Dr, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="13"><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://museo.org/plan-your-visit/" target="_blank" rel="noopener noreferrer">Museo de las Americas</a> <span class="badge badge-gray">indoor</span></div><p class="venue-notes">Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.</p><p class="venue-hours">10am-5pm Tue-Sun</p> <div class="venue-actions"><button class="action-btn directions-btn">Directions</button> <button class="action-btn share-btn">Share</button></div></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard" data-lat="39.749400" data-lng="-104.998200" data-address="Arapahoe St &amp; 15th St, Denver, CO 80202" data-indoor="false" data-reservation="false" data-min-age="0" data-max-age="0"><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><div class="venue-name-row"><a href="https://www.winterindenver.com/rink" target="_blank" rel="noopener noreferrer">Downtown Denver Rink</a> <span class="badge badge-red">temporarily closed</span> </div><p class="closure-reason">Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</p></div></li></ul><script>
+			</style></head><body><header><div class="header-actions"><a href="https://apm.activecommunities.com/denver/Membership" class="card-signup-btn" target="_blank" rel="noopener noreferrer" aria-label="Get your free myDenverCard" title="Get your free myDenverCard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></a> <button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button></div><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Plan your next free field trip. Know where Denver kids get in free, when, and what the card covers.</p></div></div></header><main><div class="hero-section"><p class="hero-eyebrow">Free right now</p><div id="free-now-chips" class="venue-chips"></div><div id="hero-soon"><div class="hero-divider"></div><p class="hero-eyebrow soon">Free next month</p><div id="free-soon-chips" class="venue-chips"></div></div></div><p class="browse-label">Browse all venues</p><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="weekend">This Weekend</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button></div><div class="month-strip"><button class="month-btn" data-month-name="January">Jan</button><button class="month-btn" data-month-name="February">Feb</button><button class="month-btn" data-month-name="March">Mar</button><button class="month-btn" data-month-name="April">Apr</button><button class="month-btn" data-month-name="May">May</button><button class="month-btn" data-month-name="June">Jun</button><button class="month-btn" data-month-name="July">Jul</button><button class="month-btn" data-month-name="August">Aug</button><button class="month-btn" data-month-name="September">Sep</button><button class="month-btn" data-month-name="October">Oct</button><button class="month-btn" data-month-name="November">Nov</button><button class="month-btn" data-month-name="December">Dec</button></div><div class="toolbar"><button class="toolbar-btn" id="near-me-btn">Near me</button> <select id="kid-age" class="age-select" aria-label="Filter by age"><option value="0">All ages</option> <option value="4">Has a toddler (under 5)</option> <option value="8">School age (5-12)</option> <option value="15">Teen (13+)</option></select></div></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.750300" data-lng="-104.951700" data-address="2300 Steele St, Denver, CO 80205" data-indoor="false" data-reservation="true" data-min-age="5" data-max-age="18" data-name="Denver Zoo" data-url="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" data-notes="Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required." data-closure-reason="" data-hours="9am-5pm daily (last entry 4pm)" data-adults="1" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Denver Zoo</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.747600" data-lng="-104.943200" data-address="2001 Colorado Blvd, Denver, CO 80205" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0" data-name="Denver Museum of Nature &amp; Science" data-url="https://www.dmns.org/visit/pricing-and-discounts/" data-notes="Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026." data-closure-reason="" data-hours="9am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Denver Museum of Nature &amp; Science</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.732200" data-lng="-104.957200" data-address="1007 York St, Denver, CO 80206" data-indoor="false" data-reservation="false" data-min-age="5" data-max-age="18" data-name="Denver Botanic Gardens" data-url="https://www.botanicgardens.org/my-denver-card" data-notes="Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events." data-closure-reason="" data-hours="9am-8pm (May-Sep), 9am-5pm (Oct-Apr)" data-adults="1" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Denver Botanic Gardens</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-min-age="5" data-max-age="18" data-name="Denver Recreation Centers" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers" data-notes="Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Denver Recreation Centers</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="false" data-reservation="false" data-min-age="5" data-max-age="18" data-name="Denver Swimming Pools" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" data-notes="Free at all Denver indoor and outdoor pools year-round. Cardholder ages 5-18 only. Outdoor pools open June-August only. Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Denver Swimming Pools</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.730800" data-lng="-104.988800" data-address="1250 Bannock St, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="17" data-name="Clyfford Still Museum" data-url="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" data-notes="Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="1" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Clyfford Still Museum</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.730600" data-lng="-104.987800" data-address="100 W 14th Ave Pkwy, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="17" data-name="Denver Art Museum" data-url="https://www.denverartmuseum.org/en/free-kids" data-notes="Free for all kids under 18 year-round. No myDenverCard required." data-closure-reason="" data-hours="10am-5pm Tue-Sun (10am-9pm Fri)" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><p class="venue-name">Denver Art Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.732000" data-lng="-104.986200" data-address="1200 Broadway, Denver, CO 80203" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0" data-name="History Colorado Center" data-url="https://www.historycolorado.org/history-colorado-center" data-notes="Free for children year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><p class="venue-name">History Colorado Center</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.758600" data-lng="-105.001900" data-address="1485 Delgany St, Denver, CO 80202" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="0" data-name="MCA Denver" data-url="https://mcadenver.org/visit" data-notes="Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round." data-closure-reason="" data-hours="11am-5pm Tue-Thu &amp; Sun, 11am-9pm Fri-Sat" data-adults="2" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">MCA Denver</p></div><div class="venue-status"><span class="badge badge-green">Whole family</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.736300" data-lng="-104.978000" data-address="1340 Pennsylvania St, Denver, CO 80203" data-indoor="true" data-reservation="false" data-min-age="5" data-max-age="18" data-name="Molly Brown House Museum" data-url="https://mollybrown.org/faq/" data-notes="Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks." data-closure-reason="" data-hours="10am-4pm Tue-Sun (guided tours)" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Card</span></div><div class="venue-body"><p class="venue-name">Molly Brown House Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.722900" data-lng="-104.991700" data-address="861 Santa Fe Dr, Denver, CO 80204" data-indoor="true" data-reservation="false" data-min-age="0" data-max-age="13" data-name="Museo de las Americas" data-url="https://museo.org/plan-your-visit/" data-notes="Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Free</span></div><div class="venue-body"><p class="venue-name">Museo de las Americas</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard" data-lat="39.749400" data-lng="-104.998200" data-address="Arapahoe St &amp; 15th St, Denver, CO 80202" data-indoor="false" data-reservation="false" data-min-age="0" data-max-age="0" data-name="Downtown Denver Rink" data-url="https://www.winterindenver.com/rink" data-notes="" data-closure-reason="Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete." data-hours="" data-adults="0" data-scrape-failed="false" data-scrape-error=""><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><p class="venue-name">Downtown Denver Rink</p></div><div class="venue-status"><span class="badge badge-red">closed</span></div></li></ul><div id="modal-overlay" class="modal-overlay" aria-hidden="true"><div class="modal-sheet"><div class="modal-band" id="modal-band"></div><div class="modal-content"><div class="modal-header"><h2 class="modal-title" id="modal-title"></h2><button class="modal-close" id="modal-close" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="modal-badges" id="modal-badges"></div><div id="modal-map" class="modal-map"></div><div class="modal-details" id="modal-details"></div><div class="modal-actions" id="modal-actions"></div></div></div></div><script>
 (function () {
   // === DATE / SCHEDULE CONSTANTS ===
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -837,16 +933,22 @@
   // === STATE ===
   var activeFilter = 'now';
   var activeMonth = null;
-  var kidAge = 0; // 0 = any age
+  var kidAge = 0;
   var userLat = null, userLng = null;
-  var mapInitialized = false;
-  var leafletMap = null;
+  var modalMap = null;
 
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
   var tabs = document.querySelectorAll('.filter-tab');
   var monthBtns = document.querySelectorAll('.month-btn');
   var countEl = document.querySelector('.venue-count');
+  var modalOverlay = document.getElementById('modal-overlay');
+  var modalBand = document.getElementById('modal-band');
+  var modalTitle = document.getElementById('modal-title');
+  var modalBadges = document.getElementById('modal-badges');
+  var modalMapEl = document.getElementById('modal-map');
+  var modalDetails = document.getElementById('modal-details');
+  var modalActions = document.getElementById('modal-actions');
 
   // === VENUE HELPERS ===
   function freeMonths(row) {
@@ -966,27 +1068,14 @@
       return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
     });
 
-    function makeName(row) {
-      var a = row.querySelector('.venue-name-row a');
-      return a ? a.textContent : '';
-    }
-
     function makeChip(row, isSoon) {
       var btn = document.createElement('button');
       var cls = 'venue-chip';
       if (row.dataset.program === 'general') cls += ' general';
       if (isSoon) cls += ' chip-soon';
       btn.className = cls;
-      btn.textContent = makeName(row);
-      btn.addEventListener('click', function () {
-        if (row.classList.contains('hidden')) {
-          setTab('all');
-          applyFilter();
-        }
-        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        row.classList.add('chip-highlight');
-        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
-      });
+      btn.textContent = row.dataset.name || '';
+      btn.addEventListener('click', function () { openModal(row); });
       return btn;
     }
 
@@ -1006,72 +1095,177 @@
     }
   }
 
-  // === MAP ===
-  function initMap() {
-    if (mapInitialized || typeof L === 'undefined') return;
-    mapInitialized = true;
+  // === MODAL HELPERS ===
+  function slugify(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
 
-    leafletMap = L.map('map-panel').setView([39.7392, -104.9849], 12);
+  function addBadge(container, text, cls, title) {
+    var span = document.createElement('span');
+    span.className = 'badge ' + cls;
+    span.textContent = text;
+    if (title) span.title = title;
+    container.appendChild(span);
+  }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19
-    }).addTo(leafletMap);
-
-    rows.forEach(function (row) {
-      var lat = parseFloat(row.dataset.lat || '0');
-      var lng = parseFloat(row.dataset.lng || '0');
-      if (!lat || !lng) return;
-
-      var name = (row.querySelector('.venue-name-row a') || {}).textContent || '';
-      var isFreeNow = freeNow(row);
-      var isClosed = row.dataset.closed === 'true';
-      var isGeneral = row.dataset.program === 'general';
-      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
-
-      var marker = L.circleMarker([lat, lng], {
+  function initModalMap(lat, lng, name, color) {
+    if (typeof L === 'undefined') return;
+    if (modalMap) { modalMap.remove(); modalMap = null; }
+    setTimeout(function () {
+      modalMap = L.map('modal-map', { zoomControl: true, scrollWheelZoom: false }).setView([lat, lng], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(modalMap);
+      L.circleMarker([lat, lng], {
         radius: 10,
         fillColor: color,
         color: 'white',
         weight: 2,
-        opacity: 1,
-        fillOpacity: 0.88
-      });
-
-      var statusHtml = isClosed
-        ? '<span style="color:#991b1b">Temporarily closed</span>'
-        : (isFreeNow
-          ? '<span style="color:#065f46">Free now</span>'
-          : '<span style="color:#6b7280">Not free this month</span>');
-      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
-
-      marker.on('click', function () {
-        if (row.classList.contains('hidden')) { setTab('all'); applyFilter(); }
-        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        row.classList.add('chip-highlight');
-        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
-      });
-
-      marker.addTo(leafletMap);
-      row._marker = marker;
-    });
-
-    setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 100);
+        fillOpacity: 0.9
+      }).bindPopup(name).addTo(modalMap);
+      modalMap.invalidateSize();
+    }, 150);
   }
 
-  function toggleMap() {
-    var panel = document.getElementById('map-panel');
-    var btn = document.getElementById('map-toggle-btn');
-    if (!panel) return;
-    var isVisible = panel.classList.contains('visible');
-    panel.classList.toggle('visible', !isVisible);
-    if (btn) btn.textContent = isVisible ? 'Show map' : 'Hide map';
-    if (btn) btn.classList.toggle('active', !isVisible);
-    if (!isVisible) {
-      initMap();
-      setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 150);
+  // === MODAL ===
+  function openModal(row, skipHistory) {
+    if (!modalOverlay) return;
+
+    var name = row.dataset.name || '';
+    var url = row.dataset.url || '';
+    var notes = row.dataset.notes || '';
+    var closureReason = row.dataset.closureReason || '';
+    var hours = row.dataset.hours || '';
+    var adults = parseInt(row.dataset.adults || '0', 10);
+    var schedule = row.dataset.schedule || 'daily';
+    var months = (row.dataset.freeMonths || '').split(',').filter(Boolean);
+    var closed = row.dataset.closed === 'true';
+    var indoor = row.dataset.indoor === 'true';
+    var reservation = row.dataset.reservation === 'true';
+    var scrapeFailed = row.dataset.scrapeFailed === 'true';
+    var scrapeError = row.dataset.scrapeError || '';
+    var lat = parseFloat(row.dataset.lat || '0');
+    var lng = parseFloat(row.dataset.lng || '0');
+    var program = row.dataset.program || 'mydenvercard';
+    var isFreeNow = freeNow(row);
+
+    var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
+    if (modalBand) modalBand.style.background = bandColor;
+    if (modalTitle) modalTitle.textContent = name;
+
+    // Badges
+    if (modalBadges) {
+      modalBadges.innerHTML = '';
+      if (closed) {
+        addBadge(modalBadges, 'temporarily closed', 'badge-red');
+      } else {
+        if (isFreeNow) addBadge(modalBadges, 'free now', 'badge-green');
+        if (adults >= 2) addBadge(modalBadges, 'whole family free', 'badge-green');
+        else if (adults === 1) addBadge(modalBadges, 'free +1 adult', 'badge-green');
+        else addBadge(modalBadges, 'kids free', 'badge-yellow');
+        if (schedule === 'weekends') addBadge(modalBadges, 'weekends only', 'badge-gray');
+        else if (schedule === 'weekends_and_breaks') addBadge(modalBadges, 'weekends + breaks', 'badge-gray');
+        if (reservation) addBadge(modalBadges, 'reservation required', 'badge-yellow');
+        if (indoor) addBadge(modalBadges, 'indoor', 'badge-gray');
+        if (scrapeFailed) addBadge(modalBadges, 'data outdated', 'badge-red', scrapeError);
+      }
     }
+
+    // Details
+    if (modalDetails) {
+      modalDetails.innerHTML = '';
+      var detailText = closed ? closureReason : notes;
+      if (detailText) {
+        var p = document.createElement('p');
+        p.className = 'modal-notes';
+        p.textContent = detailText;
+        modalDetails.appendChild(p);
+      }
+      if (hours) {
+        var h = document.createElement('p');
+        h.className = 'modal-hours';
+        h.innerHTML = '<strong>Hours:</strong> ' + hours;
+        modalDetails.appendChild(h);
+      }
+      if (!closed && months.length > 0) {
+        var m = document.createElement('p');
+        m.className = 'modal-months';
+        var monthsLabel = months.length === 12 ? 'Year-round' : months.join(', ');
+        m.innerHTML = '<strong>Free in:</strong> ' + monthsLabel;
+        modalDetails.appendChild(m);
+      }
+    }
+
+    // Actions
+    if (modalActions) {
+      modalActions.innerHTML = '';
+      if (url) {
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'modal-action-btn';
+        link.textContent = 'Visit website';
+        modalActions.appendChild(link);
+      }
+      if (row.dataset.address) {
+        var dirBtn = document.createElement('button');
+        dirBtn.className = 'modal-action-btn';
+        dirBtn.textContent = 'Directions';
+        dirBtn.addEventListener('click', function () { getDirections(row); });
+        modalActions.appendChild(dirBtn);
+      }
+      var shareBtn = document.createElement('button');
+      shareBtn.className = 'modal-action-btn';
+      shareBtn.textContent = 'Share';
+      shareBtn.addEventListener('click', function () { shareVenue(shareBtn, name); });
+      modalActions.appendChild(shareBtn);
+    }
+
+    // Map
+    if (lat && lng) {
+      if (modalMapEl) modalMapEl.style.display = 'block';
+      initModalMap(lat, lng, name, bandColor);
+    } else {
+      if (modalMapEl) modalMapEl.style.display = 'none';
+      if (modalMap) { modalMap.remove(); modalMap = null; }
+    }
+
+    // Show modal
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (!skipHistory) history.pushState({ modal: slugify(name) }, '', '#' + slugify(name));
+
+    var closeBtn = document.getElementById('modal-close');
+    if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 50);
   }
+
+  function closeModal(skipHistory) {
+    if (!modalOverlay) return;
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (!skipHistory) history.pushState(null, '', window.location.pathname + window.location.search);
+    if (modalMap) { modalMap.remove(); modalMap = null; }
+  }
+
+  // Modal event wiring
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) closeModal();
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) closeModal();
+  });
+  var modalCloseBtn = document.getElementById('modal-close');
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', function () { closeModal(); });
+  window.addEventListener('popstate', function () {
+    if (modalOverlay && modalOverlay.classList.contains('open')) closeModal(true);
+  });
 
   // === GEOLOCATION / NEAR ME ===
   function hasBoth(row) {
@@ -1118,18 +1312,6 @@
     });
   }
 
-  function addUserMarker() {
-    if (!leafletMap || !userLat || !userLng) return;
-    L.circleMarker([userLat, userLng], {
-      radius: 8,
-      fillColor: '#bf0a30',
-      color: 'white',
-      weight: 2,
-      fillOpacity: 0.9
-    }).bindPopup('You are here').addTo(leafletMap);
-    leafletMap.setView([userLat, userLng], 13);
-  }
-
   function requestLocation() {
     if (!navigator.geolocation) return;
     var btn = document.getElementById('near-me-btn');
@@ -1141,7 +1323,6 @@
         userLng = pos.coords.longitude;
         if (btn) { btn.textContent = 'Near me'; btn.disabled = false; btn.classList.add('active'); }
         sortByDistance();
-        if (mapInitialized) addUserMarker();
       },
       function () {
         if (btn) { btn.textContent = 'Near me'; btn.disabled = false; }
@@ -1150,18 +1331,16 @@
   }
 
   // === SHARE ===
-  function shareVenue(btn, row) {
-    var a = row.querySelector('.venue-name-row a');
-    var name = a ? a.textContent.trim() : 'Denver venue';
-    var url = a ? a.href : window.location.href;
+  function shareVenue(btn, name) {
+    var shareUrl = window.location.origin + window.location.pathname + '#' + slugify(name);
     if (navigator.share) {
       navigator.share({
         title: name + ' is free for Denver kids',
         text: 'Free admission for Denver kids: ' + name,
-        url: url
+        url: shareUrl
       }).catch(function () {});
     } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(url).then(function () {
+      navigator.clipboard.writeText(shareUrl).then(function () {
         var orig = btn.textContent;
         btn.textContent = 'Copied!';
         setTimeout(function () { btn.textContent = orig; }, 2000);
@@ -1176,6 +1355,17 @@
     window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr), '_blank', 'noopener,noreferrer');
   }
 
+  // === WIRE UP ROW CLICKS ===
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () { openModal(row); });
+    row.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(row);
+      }
+    });
+  });
+
   // === AGE FILTER ===
   var kidAgeInput = document.getElementById('kid-age');
   if (kidAgeInput) {
@@ -1184,15 +1374,6 @@
       applyFilter();
     });
   }
-
-  // === WIRE UP ACTION BUTTONS ===
-  rows.forEach(function (row) {
-    var dirBtn = row.querySelector('.directions-btn');
-    if (dirBtn) dirBtn.addEventListener('click', function () { getDirections(row); });
-
-    var shareBtn = row.querySelector('.share-btn');
-    if (shareBtn) shareBtn.addEventListener('click', function () { shareVenue(shareBtn, row); });
-  });
 
   // === MONTH STRIP ===
   monthBtns.forEach(function (btn) {
@@ -1227,17 +1408,25 @@
     });
   });
 
-  // === TOOLBAR BUTTONS ===
+  // === TOOLBAR ===
   var nearMeBtn = document.getElementById('near-me-btn');
   if (nearMeBtn) nearMeBtn.addEventListener('click', requestLocation);
-
-  var mapToggleBtn = document.getElementById('map-toggle-btn');
-  if (mapToggleBtn) mapToggleBtn.addEventListener('click', toggleMap);
 
   // === INIT ===
   setTab('now');
   applyFilter();
   buildHero();
+
+  // Deep link: auto-open modal if URL has a venue hash
+  var initHash = window.location.hash.slice(1);
+  if (initHash) {
+    for (var i = 0; i < rows.length; i++) {
+      if (slugify(rows[i].dataset.name || '') === initHash) {
+        (function (r) { setTimeout(function () { openModal(r, true); }, 200); })(rows[i]);
+        break;
+      }
+    }
+  }
 })();
 </script></main><div class="mountains" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64"><path fill="#c8d4ee" d="M0,64 L0,48 L90,18 L200,52 L310,14 L430,50 L540,8 L660,44 L770,20 L890,50 L1000,16 L1120,48 L1230,10 L1350,42 L1440,22 L1440,64 Z"></path> <path fill="#dde5f5" d="M0,64 L0,56 L110,38 L230,58 L350,30 L470,54 L590,34 L710,58 L830,40 L950,60 L1070,32 L1190,55 L1310,36 L1440,52 L1440,64 Z"></path></svg></div><footer>Auto-updated weekly. Always verify with the venue before visiting.<br><a href="https://github.com/benhammondmusic/my-denver-card-free/issues" target="_blank" rel="noopener noreferrer">Found missing or wrong info? Report it.</a><br><a href="https://benhammondmusic.tech" target="_blank" rel="noopener noreferrer" style="font-size:0.7rem; opacity:0.6;">benhammondmusic.tech</a></footer><script>
 				if ('serviceWorker' in navigator) {

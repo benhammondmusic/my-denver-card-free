@@ -57,7 +57,6 @@ templ Index(venues []models.Venue) {
 			</div>
 			<div class="toolbar">
 				<button class="toolbar-btn" id="near-me-btn">Near me</button>
-				<button class="toolbar-btn" id="map-toggle-btn">Show map</button>
 				<select id="kid-age" class="age-select" aria-label="Filter by age">
 					<option value="0">All ages</option>
 					<option value="4">Has a toddler (under 5)</option>
@@ -66,7 +65,6 @@ templ Index(venues []models.Venue) {
 				</select>
 			</div>
 		</div>
-		<div id="map-panel" class="map-panel"></div>
 		<p class="venue-count"></p>
 		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
@@ -86,12 +84,34 @@ templ Index(venues []models.Venue) {
 				}
 			}
 		</ul>
+		<div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+			<div class="modal-sheet">
+				<div class="modal-band" id="modal-band"></div>
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="modal-title"></h2>
+						<button class="modal-close" id="modal-close" aria-label="Close">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+					</div>
+					<div class="modal-badges" id="modal-badges"></div>
+					<div id="modal-map" class="modal-map"></div>
+					<div class="modal-details" id="modal-details"></div>
+					<div class="modal-actions" id="modal-actions"></div>
+				</div>
+			</div>
+		</div>
 		@filterScript()
 	}
 }
 
 templ VenueRow(v models.Venue) {
 	<li
+		role="button"
+		tabindex="0"
 		class={ "venue-row", templ.KV("venue-featured", v.Featured), templ.KV("program-general", v.Program == models.ProgramGeneral), templ.KV("venue-closed", v.TemporarilyClosed) }
 		data-free-months={ strings.Join(v.FreeMonths, ",") }
 		data-schedule={ string(v.FreeSchedule) }
@@ -104,6 +124,14 @@ templ VenueRow(v models.Venue) {
 		data-reservation={ boolStr(v.ReservationRequired) }
 		data-min-age={ fmt.Sprintf("%d", v.MinAge) }
 		data-max-age={ fmt.Sprintf("%d", v.MaxAge) }
+		data-name={ v.Name }
+		data-url={ v.URL }
+		data-notes={ v.Notes }
+		data-closure-reason={ v.ClosureReason }
+		data-hours={ v.Hours }
+		data-adults={ fmt.Sprintf("%d", v.AdultsIncluded) }
+		data-scrape-failed={ boolStr(v.ScrapeFailed) }
+		data-scrape-error={ v.ScrapeError }
 	>
 		<div class="venue-band">
 			if v.TemporarilyClosed {
@@ -115,57 +143,23 @@ templ VenueRow(v models.Venue) {
 			}
 		</div>
 		<div class="venue-body">
-			<div class="venue-name-row">
-				<a href={ templ.SafeURL(v.URL) } target="_blank" rel="noopener noreferrer">{ v.Name }</a>
-				if v.TemporarilyClosed {
-					<span class="badge badge-red">temporarily closed</span>
-				}
-				if v.ScrapeFailed {
-					<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
-				}
-				if v.ReservationRequired {
-					<span class="badge badge-yellow">reservation required</span>
-				}
-				if v.Indoor {
-					<span class="badge badge-gray">indoor</span>
-				}
-			</div>
-			if v.TemporarilyClosed {
-				<p class="closure-reason">{ v.ClosureReason }</p>
-			} else if v.Notes != "" {
-				<p class="venue-notes">{ v.Notes }</p>
-			}
-			if !v.TemporarilyClosed {
-				if v.Hours != "" {
-					<p class="venue-hours">{ v.Hours }</p>
-				}
-				<div class="venue-actions">
-					if v.Address != "" {
-						<button class="action-btn directions-btn">Directions</button>
-					}
-					<button class="action-btn share-btn">Share</button>
-				</div>
-			}
+			<p class="venue-name">{ v.Name }</p>
 		</div>
-		if !v.TemporarilyClosed {
-			<div class="venue-status">
+		<div class="venue-status">
+			if v.TemporarilyClosed {
+				<span class="badge badge-red">closed</span>
+			} else {
 				switch {
 					case v.AdultsIncluded >= 2:
-						<span class="badge badge-green">Whole family free</span>
+						<span class="badge badge-green">Whole family</span>
 					case v.AdultsIncluded == 1:
-						<span class="badge badge-green">Free +1 adult</span>
+						<span class="badge badge-green">+1 adult</span>
 					default:
 						<span class="badge badge-yellow">Kids free</span>
 				}
-				switch v.FreeSchedule {
-					case models.ScheduleWeekends:
-						<span class="badge badge-gray">Weekends only</span>
-					case models.ScheduleWeekendsAndBreaks:
-						<span class="badge badge-gray">Weekends + breaks</span>
-				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
-			</div>
-		}
+			}
+		</div>
 	</li>
 }
 
@@ -202,16 +196,22 @@ templ filterScript() {
   // === STATE ===
   var activeFilter = 'now';
   var activeMonth = null;
-  var kidAge = 0; // 0 = any age
+  var kidAge = 0;
   var userLat = null, userLng = null;
-  var mapInitialized = false;
-  var leafletMap = null;
+  var modalMap = null;
 
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
   var tabs = document.querySelectorAll('.filter-tab');
   var monthBtns = document.querySelectorAll('.month-btn');
   var countEl = document.querySelector('.venue-count');
+  var modalOverlay = document.getElementById('modal-overlay');
+  var modalBand = document.getElementById('modal-band');
+  var modalTitle = document.getElementById('modal-title');
+  var modalBadges = document.getElementById('modal-badges');
+  var modalMapEl = document.getElementById('modal-map');
+  var modalDetails = document.getElementById('modal-details');
+  var modalActions = document.getElementById('modal-actions');
 
   // === VENUE HELPERS ===
   function freeMonths(row) {
@@ -331,27 +331,14 @@ templ filterScript() {
       return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
     });
 
-    function makeName(row) {
-      var a = row.querySelector('.venue-name-row a');
-      return a ? a.textContent : '';
-    }
-
     function makeChip(row, isSoon) {
       var btn = document.createElement('button');
       var cls = 'venue-chip';
       if (row.dataset.program === 'general') cls += ' general';
       if (isSoon) cls += ' chip-soon';
       btn.className = cls;
-      btn.textContent = makeName(row);
-      btn.addEventListener('click', function () {
-        if (row.classList.contains('hidden')) {
-          setTab('all');
-          applyFilter();
-        }
-        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        row.classList.add('chip-highlight');
-        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
-      });
+      btn.textContent = row.dataset.name || '';
+      btn.addEventListener('click', function () { openModal(row); });
       return btn;
     }
 
@@ -371,72 +358,177 @@ templ filterScript() {
     }
   }
 
-  // === MAP ===
-  function initMap() {
-    if (mapInitialized || typeof L === 'undefined') return;
-    mapInitialized = true;
+  // === MODAL HELPERS ===
+  function slugify(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
 
-    leafletMap = L.map('map-panel').setView([39.7392, -104.9849], 12);
+  function addBadge(container, text, cls, title) {
+    var span = document.createElement('span');
+    span.className = 'badge ' + cls;
+    span.textContent = text;
+    if (title) span.title = title;
+    container.appendChild(span);
+  }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19
-    }).addTo(leafletMap);
-
-    rows.forEach(function (row) {
-      var lat = parseFloat(row.dataset.lat || '0');
-      var lng = parseFloat(row.dataset.lng || '0');
-      if (!lat || !lng) return;
-
-      var name = (row.querySelector('.venue-name-row a') || {}).textContent || '';
-      var isFreeNow = freeNow(row);
-      var isClosed = row.dataset.closed === 'true';
-      var isGeneral = row.dataset.program === 'general';
-      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
-
-      var marker = L.circleMarker([lat, lng], {
+  function initModalMap(lat, lng, name, color) {
+    if (typeof L === 'undefined') return;
+    if (modalMap) { modalMap.remove(); modalMap = null; }
+    setTimeout(function () {
+      modalMap = L.map('modal-map', { zoomControl: true, scrollWheelZoom: false }).setView([lat, lng], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(modalMap);
+      L.circleMarker([lat, lng], {
         radius: 10,
         fillColor: color,
         color: 'white',
         weight: 2,
-        opacity: 1,
-        fillOpacity: 0.88
-      });
-
-      var statusHtml = isClosed
-        ? '<span style="color:#991b1b">Temporarily closed</span>'
-        : (isFreeNow
-          ? '<span style="color:#065f46">Free now</span>'
-          : '<span style="color:#6b7280">Not free this month</span>');
-      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
-
-      marker.on('click', function () {
-        if (row.classList.contains('hidden')) { setTab('all'); applyFilter(); }
-        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        row.classList.add('chip-highlight');
-        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
-      });
-
-      marker.addTo(leafletMap);
-      row._marker = marker;
-    });
-
-    setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 100);
+        fillOpacity: 0.9
+      }).bindPopup(name).addTo(modalMap);
+      modalMap.invalidateSize();
+    }, 150);
   }
 
-  function toggleMap() {
-    var panel = document.getElementById('map-panel');
-    var btn = document.getElementById('map-toggle-btn');
-    if (!panel) return;
-    var isVisible = panel.classList.contains('visible');
-    panel.classList.toggle('visible', !isVisible);
-    if (btn) btn.textContent = isVisible ? 'Show map' : 'Hide map';
-    if (btn) btn.classList.toggle('active', !isVisible);
-    if (!isVisible) {
-      initMap();
-      setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 150);
+  // === MODAL ===
+  function openModal(row, skipHistory) {
+    if (!modalOverlay) return;
+
+    var name = row.dataset.name || '';
+    var url = row.dataset.url || '';
+    var notes = row.dataset.notes || '';
+    var closureReason = row.dataset.closureReason || '';
+    var hours = row.dataset.hours || '';
+    var adults = parseInt(row.dataset.adults || '0', 10);
+    var schedule = row.dataset.schedule || 'daily';
+    var months = (row.dataset.freeMonths || '').split(',').filter(Boolean);
+    var closed = row.dataset.closed === 'true';
+    var indoor = row.dataset.indoor === 'true';
+    var reservation = row.dataset.reservation === 'true';
+    var scrapeFailed = row.dataset.scrapeFailed === 'true';
+    var scrapeError = row.dataset.scrapeError || '';
+    var lat = parseFloat(row.dataset.lat || '0');
+    var lng = parseFloat(row.dataset.lng || '0');
+    var program = row.dataset.program || 'mydenvercard';
+    var isFreeNow = freeNow(row);
+
+    var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
+    if (modalBand) modalBand.style.background = bandColor;
+    if (modalTitle) modalTitle.textContent = name;
+
+    // Badges
+    if (modalBadges) {
+      modalBadges.innerHTML = '';
+      if (closed) {
+        addBadge(modalBadges, 'temporarily closed', 'badge-red');
+      } else {
+        if (isFreeNow) addBadge(modalBadges, 'free now', 'badge-green');
+        if (adults >= 2) addBadge(modalBadges, 'whole family free', 'badge-green');
+        else if (adults === 1) addBadge(modalBadges, 'free +1 adult', 'badge-green');
+        else addBadge(modalBadges, 'kids free', 'badge-yellow');
+        if (schedule === 'weekends') addBadge(modalBadges, 'weekends only', 'badge-gray');
+        else if (schedule === 'weekends_and_breaks') addBadge(modalBadges, 'weekends + breaks', 'badge-gray');
+        if (reservation) addBadge(modalBadges, 'reservation required', 'badge-yellow');
+        if (indoor) addBadge(modalBadges, 'indoor', 'badge-gray');
+        if (scrapeFailed) addBadge(modalBadges, 'data outdated', 'badge-red', scrapeError);
+      }
     }
+
+    // Details
+    if (modalDetails) {
+      modalDetails.innerHTML = '';
+      var detailText = closed ? closureReason : notes;
+      if (detailText) {
+        var p = document.createElement('p');
+        p.className = 'modal-notes';
+        p.textContent = detailText;
+        modalDetails.appendChild(p);
+      }
+      if (hours) {
+        var h = document.createElement('p');
+        h.className = 'modal-hours';
+        h.innerHTML = '<strong>Hours:</strong> ' + hours;
+        modalDetails.appendChild(h);
+      }
+      if (!closed && months.length > 0) {
+        var m = document.createElement('p');
+        m.className = 'modal-months';
+        var monthsLabel = months.length === 12 ? 'Year-round' : months.join(', ');
+        m.innerHTML = '<strong>Free in:</strong> ' + monthsLabel;
+        modalDetails.appendChild(m);
+      }
+    }
+
+    // Actions
+    if (modalActions) {
+      modalActions.innerHTML = '';
+      if (url) {
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'modal-action-btn';
+        link.textContent = 'Visit website';
+        modalActions.appendChild(link);
+      }
+      if (row.dataset.address) {
+        var dirBtn = document.createElement('button');
+        dirBtn.className = 'modal-action-btn';
+        dirBtn.textContent = 'Directions';
+        dirBtn.addEventListener('click', function () { getDirections(row); });
+        modalActions.appendChild(dirBtn);
+      }
+      var shareBtn = document.createElement('button');
+      shareBtn.className = 'modal-action-btn';
+      shareBtn.textContent = 'Share';
+      shareBtn.addEventListener('click', function () { shareVenue(shareBtn, name); });
+      modalActions.appendChild(shareBtn);
+    }
+
+    // Map
+    if (lat && lng) {
+      if (modalMapEl) modalMapEl.style.display = 'block';
+      initModalMap(lat, lng, name, bandColor);
+    } else {
+      if (modalMapEl) modalMapEl.style.display = 'none';
+      if (modalMap) { modalMap.remove(); modalMap = null; }
+    }
+
+    // Show modal
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (!skipHistory) history.pushState({ modal: slugify(name) }, '', '#' + slugify(name));
+
+    var closeBtn = document.getElementById('modal-close');
+    if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 50);
   }
+
+  function closeModal(skipHistory) {
+    if (!modalOverlay) return;
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (!skipHistory) history.pushState(null, '', window.location.pathname + window.location.search);
+    if (modalMap) { modalMap.remove(); modalMap = null; }
+  }
+
+  // Modal event wiring
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) closeModal();
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) closeModal();
+  });
+  var modalCloseBtn = document.getElementById('modal-close');
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', function () { closeModal(); });
+  window.addEventListener('popstate', function () {
+    if (modalOverlay && modalOverlay.classList.contains('open')) closeModal(true);
+  });
 
   // === GEOLOCATION / NEAR ME ===
   function hasBoth(row) {
@@ -483,18 +575,6 @@ templ filterScript() {
     });
   }
 
-  function addUserMarker() {
-    if (!leafletMap || !userLat || !userLng) return;
-    L.circleMarker([userLat, userLng], {
-      radius: 8,
-      fillColor: '#bf0a30',
-      color: 'white',
-      weight: 2,
-      fillOpacity: 0.9
-    }).bindPopup('You are here').addTo(leafletMap);
-    leafletMap.setView([userLat, userLng], 13);
-  }
-
   function requestLocation() {
     if (!navigator.geolocation) return;
     var btn = document.getElementById('near-me-btn');
@@ -506,7 +586,6 @@ templ filterScript() {
         userLng = pos.coords.longitude;
         if (btn) { btn.textContent = 'Near me'; btn.disabled = false; btn.classList.add('active'); }
         sortByDistance();
-        if (mapInitialized) addUserMarker();
       },
       function () {
         if (btn) { btn.textContent = 'Near me'; btn.disabled = false; }
@@ -515,18 +594,16 @@ templ filterScript() {
   }
 
   // === SHARE ===
-  function shareVenue(btn, row) {
-    var a = row.querySelector('.venue-name-row a');
-    var name = a ? a.textContent.trim() : 'Denver venue';
-    var url = a ? a.href : window.location.href;
+  function shareVenue(btn, name) {
+    var shareUrl = window.location.origin + window.location.pathname + '#' + slugify(name);
     if (navigator.share) {
       navigator.share({
         title: name + ' is free for Denver kids',
         text: 'Free admission for Denver kids: ' + name,
-        url: url
+        url: shareUrl
       }).catch(function () {});
     } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(url).then(function () {
+      navigator.clipboard.writeText(shareUrl).then(function () {
         var orig = btn.textContent;
         btn.textContent = 'Copied!';
         setTimeout(function () { btn.textContent = orig; }, 2000);
@@ -541,6 +618,17 @@ templ filterScript() {
     window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr), '_blank', 'noopener,noreferrer');
   }
 
+  // === WIRE UP ROW CLICKS ===
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () { openModal(row); });
+    row.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(row);
+      }
+    });
+  });
+
   // === AGE FILTER ===
   var kidAgeInput = document.getElementById('kid-age');
   if (kidAgeInput) {
@@ -549,15 +637,6 @@ templ filterScript() {
       applyFilter();
     });
   }
-
-  // === WIRE UP ACTION BUTTONS ===
-  rows.forEach(function (row) {
-    var dirBtn = row.querySelector('.directions-btn');
-    if (dirBtn) dirBtn.addEventListener('click', function () { getDirections(row); });
-
-    var shareBtn = row.querySelector('.share-btn');
-    if (shareBtn) shareBtn.addEventListener('click', function () { shareVenue(shareBtn, row); });
-  });
 
   // === MONTH STRIP ===
   monthBtns.forEach(function (btn) {
@@ -592,17 +671,25 @@ templ filterScript() {
     });
   });
 
-  // === TOOLBAR BUTTONS ===
+  // === TOOLBAR ===
   var nearMeBtn = document.getElementById('near-me-btn');
   if (nearMeBtn) nearMeBtn.addEventListener('click', requestLocation);
-
-  var mapToggleBtn = document.getElementById('map-toggle-btn');
-  if (mapToggleBtn) mapToggleBtn.addEventListener('click', toggleMap);
 
   // === INIT ===
   setTab('now');
   applyFilter();
   buildHero();
+
+  // Deep link: auto-open modal if URL has a venue hash
+  var initHash = window.location.hash.slice(1);
+  if (initHash) {
+    for (var i = 0; i < rows.length; i++) {
+      if (slugify(rows[i].dataset.name || '') === initHash) {
+        (function (r) { setTimeout(function () { openModal(r, true); }, 200); })(rows[i]);
+        break;
+      }
+    }
+  }
 })();
 </script>`)
 }
