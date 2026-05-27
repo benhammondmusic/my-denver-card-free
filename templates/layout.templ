@@ -666,33 +666,21 @@ templ Layout(title string) {
 
 				/* ---- AGE FILTER ---- */
 
-				.age-filter {
-					display: flex;
-					align-items: center;
-					gap: 0.4rem;
-					margin-left: auto;
-				}
-
-				.age-filter label {
-					font-size: 0.8125rem;
-					color: var(--stone);
-					font-weight: 500;
-					white-space: nowrap;
-				}
-
-				.age-input {
-					width: 3.5rem;
-					padding: 0.35rem 0.4rem;
+				.age-select {
+					padding: 0.4rem 0.6rem;
 					border: 1.5px solid var(--border);
 					border-radius: 0.5rem;
 					font-size: 0.875rem;
-					text-align: center;
 					font-family: 'Outfit', sans-serif;
+					font-weight: 600;
 					background: white;
-					color: #111827;
+					color: var(--stone);
+					cursor: pointer;
+					margin-left: auto;
 				}
 
-				.age-input:focus { outline: 2px solid var(--sky-blue); border-color: var(--sky-blue); }
+				.age-select:focus { outline: 2px solid var(--sky-blue); border-color: var(--sky-blue); }
+				.age-select.active { border-color: var(--sky-blue); color: var(--sky-blue); }
 
 				/* ---- MAP PANEL ---- */
 
@@ -784,7 +772,7 @@ templ Layout(title string) {
 					& .toolbar-btn:hover { background: #1d2f55; color: #93b4e0; }
 					& .action-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .action-btn:hover { background: #1d2f55; color: #60a5fa; }
-					& .age-input { background: #162040; border-color: var(--border); color: #e0e8f5; }
+					& .age-select { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .map-panel { border-color: var(--border); }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }

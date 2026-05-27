@@ -58,10 +58,12 @@ templ Index(venues []models.Venue) {
 			<div class="toolbar">
 				<button class="toolbar-btn" id="near-me-btn">Near me</button>
 				<button class="toolbar-btn" id="map-toggle-btn">Show map</button>
-				<div class="age-filter">
-					<label for="kid-age">Age:</label>
-					<input type="number" id="kid-age" class="age-input" min="1" max="18" placeholder="any"/>
-				</div>
+				<select id="kid-age" class="age-select" aria-label="Filter by age">
+					<option value="0">All ages</option>
+					<option value="4">Has a toddler (under 5)</option>
+					<option value="8">School age (5-12)</option>
+					<option value="15">Teen (13+)</option>
+				</select>
 			</div>
 		</div>
 		<div id="map-panel" class="map-panel"></div>
@@ -541,7 +543,7 @@ templ filterScript() {
   // === AGE FILTER ===
   var kidAgeInput = document.getElementById('kid-age');
   if (kidAgeInput) {
-    kidAgeInput.addEventListener('input', function () {
+    kidAgeInput.addEventListener('change', function () {
       kidAge = parseInt(this.value, 10) || 0;
       applyFilter();
     });
