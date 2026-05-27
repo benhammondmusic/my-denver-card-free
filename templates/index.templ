@@ -74,7 +74,13 @@ templ Index(venues []models.Venue) {
 			}
 			<li class="section-divider" aria-hidden="true"><span>More venues</span></li>
 			for _, v := range venues {
-				if !v.Featured && !v.TemporarilyClosed {
+				if !v.Featured && !v.TemporarilyClosed && v.Lat != 0 {
+					@VenueRow(v)
+				}
+			}
+			<li class="section-divider" aria-hidden="true"><span>City recreation</span></li>
+			for _, v := range venues {
+				if !v.Featured && !v.TemporarilyClosed && v.Lat == 0 {
 					@VenueRow(v)
 				}
 			}
@@ -548,13 +554,13 @@ templ filterScript() {
 
     var list = document.getElementById('venue-list');
     if (!list) return;
-    var divider = list.querySelector('.section-divider');
+    var dividers = list.querySelectorAll('.section-divider');
 
     var openRows = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
     var closedRows = rows.filter(function (r) { return r.dataset.closed === 'true'; });
     openRows.sort(function (a, b) { return a._distance - b._distance; });
 
-    if (divider) divider.style.display = 'none';
+    dividers.forEach(function (d) { d.style.display = 'none'; });
     openRows.forEach(function (r) { list.appendChild(r); });
     closedRows.forEach(function (r) { list.appendChild(r); });
 
