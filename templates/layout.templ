@@ -421,9 +421,9 @@ templ Layout(title string) {
 
 				.band-label {
 					font-family: 'Bebas Neue', sans-serif;
-					font-size: 0.875rem;
-					letter-spacing: 0.2em;
-					color: rgba(255,255,255,0.65);
+					font-size: 0.7rem;
+					letter-spacing: 0.12em;
+					color: rgba(255,255,255,0.75);
 					writing-mode: vertical-rl;
 					transform: rotate(180deg);
 					text-transform: uppercase;
@@ -589,7 +589,7 @@ templ Layout(title string) {
 				/* ---- MAP PANEL ---- */
 
 				.map-panel {
-					display: none;
+					display: block;
 					height: 320px;
 					border-radius: 1rem;
 					overflow: hidden;
@@ -597,7 +597,6 @@ templ Layout(title string) {
 					border: 1.5px solid var(--border);
 					box-shadow: 0 2px 16px rgba(0,40,104,0.09);
 				}
-				.map-panel.visible { display: block; }
 
 				/* ---- MODAL ---- */
 
