@@ -497,7 +497,7 @@ func VenueRow(v models.Venue) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "<button class=\"action-btn share-btn\">Share</button> <button class=\"action-btn visit-btn\">Been here</button></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "<button class=\"action-btn share-btn\">Share</button></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -547,7 +547,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var25 string
 			templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(freeMonthsLabel(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 165, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 164, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 			if templ_7745c5c3_Err != nil {
@@ -623,12 +623,6 @@ func filterScript() templ.Component {
   var userLat = null, userLng = null;
   var mapInitialized = false;
   var leafletMap = null;
-
-  // === VISIT TRACKER ===
-  var visitedSet = new Set(JSON.parse(localStorage.getItem('mdc-visited') || '[]'));
-  function saveVisited() {
-    try { localStorage.setItem('mdc-visited', JSON.stringify(Array.from(visitedSet))); } catch(e) {}
-  }
 
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
@@ -963,25 +957,6 @@ func filterScript() templ.Component {
     window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr), '_blank', 'noopener,noreferrer');
   }
 
-  // === VISIT TRACKER ===
-  function applyVisitedState() {
-    rows.forEach(function (row) {
-      var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
-      var btn = row.querySelector('.visit-btn');
-      var isVisited = visitedSet.has(name);
-      if (!btn) return;
-      btn.classList.toggle('visited', isVisited);
-      btn.textContent = isVisited ? 'Visited' : 'Been here';
-    });
-  }
-
-  function toggleVisited(btn, row) {
-    var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
-    if (visitedSet.has(name)) { visitedSet.delete(name); } else { visitedSet.add(name); }
-    saveVisited();
-    applyVisitedState();
-  }
-
   // === AGE FILTER ===
   var kidAgeInput = document.getElementById('kid-age');
   if (kidAgeInput) {
@@ -998,9 +973,6 @@ func filterScript() templ.Component {
 
     var shareBtn = row.querySelector('.share-btn');
     if (shareBtn) shareBtn.addEventListener('click', function () { shareVenue(shareBtn, row); });
-
-    var visitBtn = row.querySelector('.visit-btn');
-    if (visitBtn) visitBtn.addEventListener('click', function () { toggleVisited(visitBtn, row); });
   });
 
   // === MONTH STRIP ===
@@ -1047,7 +1019,6 @@ func filterScript() templ.Component {
   setTab('now');
   applyFilter();
   buildHero();
-  applyVisitedState();
 })();
 </script>`).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

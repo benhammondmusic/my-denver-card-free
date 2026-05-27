@@ -72,8 +72,8 @@
     "max_age": 18
   },
   {
-    "name": "Denver Recreation Centers and Pools",
-    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers",
+    "name": "Denver Recreation Centers",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers",
     "program": "mydenvercard",
     "featured": false,
     "free_months": [
@@ -82,7 +82,7 @@
     ],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free drop-in admission at all 30+ Denver rec centers and swimming pools year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk.",
+    "notes": "Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Adults pay regular admission. Show card at the front desk.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-24T23:37:02.470899Z",
@@ -93,6 +93,32 @@
     "address": "",
     "hours": "Hours vary by location",
     "indoor": true,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18
+  },
+  {
+    "name": "Denver Swimming Pools",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free at all Denver indoor and outdoor pools year-round. Cardholder ages 5-18 only. Outdoor pools open June-August only. Show card at the front desk.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-24T23:37:02.470899Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 0,
+    "lng": 0,
+    "address": "",
+    "hours": "Hours vary by location",
+    "indoor": false,
     "reservation_required": false,
     "min_age": 5,
     "max_age": 18

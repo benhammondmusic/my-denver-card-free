@@ -142,7 +142,6 @@ templ VenueRow(v models.Venue) {
 						<button class="action-btn directions-btn">Directions</button>
 					}
 					<button class="action-btn share-btn">Share</button>
-					<button class="action-btn visit-btn">Been here</button>
 				</div>
 			}
 		</div>
@@ -205,12 +204,6 @@ templ filterScript() {
   var userLat = null, userLng = null;
   var mapInitialized = false;
   var leafletMap = null;
-
-  // === VISIT TRACKER ===
-  var visitedSet = new Set(JSON.parse(localStorage.getItem('mdc-visited') || '[]'));
-  function saveVisited() {
-    try { localStorage.setItem('mdc-visited', JSON.stringify(Array.from(visitedSet))); } catch(e) {}
-  }
 
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
@@ -545,25 +538,6 @@ templ filterScript() {
     window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr), '_blank', 'noopener,noreferrer');
   }
 
-  // === VISIT TRACKER ===
-  function applyVisitedState() {
-    rows.forEach(function (row) {
-      var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
-      var btn = row.querySelector('.visit-btn');
-      var isVisited = visitedSet.has(name);
-      if (!btn) return;
-      btn.classList.toggle('visited', isVisited);
-      btn.textContent = isVisited ? 'Visited' : 'Been here';
-    });
-  }
-
-  function toggleVisited(btn, row) {
-    var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
-    if (visitedSet.has(name)) { visitedSet.delete(name); } else { visitedSet.add(name); }
-    saveVisited();
-    applyVisitedState();
-  }
-
   // === AGE FILTER ===
   var kidAgeInput = document.getElementById('kid-age');
   if (kidAgeInput) {
@@ -580,9 +554,6 @@ templ filterScript() {
 
     var shareBtn = row.querySelector('.share-btn');
     if (shareBtn) shareBtn.addEventListener('click', function () { shareVenue(shareBtn, row); });
-
-    var visitBtn = row.querySelector('.visit-btn');
-    if (visitBtn) visitBtn.addEventListener('click', function () { toggleVisited(visitBtn, row); });
   });
 
   // === MONTH STRIP ===
@@ -629,7 +600,6 @@ templ filterScript() {
   setTab('now');
   applyFilter();
   buildHero();
-  applyVisitedState();
 })();
 </script>`)
 }
