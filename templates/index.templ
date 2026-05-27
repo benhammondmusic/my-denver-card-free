@@ -43,12 +43,6 @@ templ Index(venues []models.Venue) {
 			<div class="toolbar">
 				<button class="toolbar-btn" id="near-me-btn" title="Sort venues by distance from your location">Near me</button>
 				<button class="toolbar-btn" id="map-toggle-btn">Show map</button>
-				<select id="kid-age" class="age-select" aria-label="Filter by age">
-					<option value="0">All ages</option>
-					<option value="4">Has a toddler (under 5)</option>
-					<option value="8">School age (5-12)</option>
-					<option value="15">Teen (13+)</option>
-				</select>
 			</div>
 		</div>
 		<div id="map-panel" class="map-panel"></div>
@@ -115,8 +109,6 @@ templ VenueRow(v models.Venue) {
 		data-address={ v.Address }
 		data-indoor={ boolStr(v.Indoor) }
 		data-reservation={ boolStr(v.ReservationRequired) }
-		data-min-age={ fmt.Sprintf("%d", v.MinAge) }
-		data-max-age={ fmt.Sprintf("%d", v.MaxAge) }
 		data-name={ v.Name }
 		data-url={ v.URL }
 		data-notes={ v.Notes }
@@ -188,7 +180,6 @@ templ filterScript() {
 
   // === STATE ===
   var activeFilter = 'now';
-  var kidAge = 0;
   var userLat = null, userLng = null;
   var mapInitialized = false;
   var leafletMap = null;
@@ -244,15 +235,6 @@ templ filterScript() {
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
-  function passesAgeFilter(row) {
-    if (kidAge === 0) return true;
-    var minAge = parseInt(row.dataset.minAge || '0', 10);
-    var maxAge = parseInt(row.dataset.maxAge || '0', 10);
-    if (minAge > 0 && kidAge < minAge) return false;
-    if (maxAge > 0 && kidAge > maxAge) return false;
-    return true;
-  }
-
   // === DISTANCE (Haversine, miles) ===
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 3958.8;
@@ -269,14 +251,13 @@ templ filterScript() {
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
-      var ageOk = closed || passesAgeFilter(row);
       var show;
       switch (activeFilter) {
-        case 'now':       show = closed || (freeNow(row) && ageOk);         break;
-        case 'weekend':   show = closed || (freeThisWeekend(row) && ageOk); break;
-        case 'summer':    show = closed || (isSummer(row) && ageOk);        break;
-        case 'yearround': show = closed || (isYearRound(row) && ageOk);     break;
-        default:          show = closed || ageOk;
+        case 'now':       show = closed || freeNow(row);         break;
+        case 'weekend':   show = closed || freeThisWeekend(row); break;
+        case 'summer':    show = closed || isSummer(row);        break;
+        case 'yearround': show = closed || isYearRound(row);     break;
+        default:          show = true;
       }
       row.classList.toggle('hidden', !show);
       if (show && !closed) visible++;
@@ -290,8 +271,6 @@ templ filterScript() {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
     }
-    var AGE_LABELS = { '4': 'under 5', '8': 'ages 5-12', '15': 'teens 13+' };
-    if (kidAge > 0) label += ' (' + (AGE_LABELS[String(kidAge)] || 'age ' + kidAge) + ')';
     if (countEl) countEl.textContent = label;
   }
 
@@ -685,15 +664,6 @@ templ filterScript() {
       }
     });
   });
-
-  // === AGE FILTER ===
-  var kidAgeInput = document.getElementById('kid-age');
-  if (kidAgeInput) {
-    kidAgeInput.addEventListener('change', function () {
-      kidAge = parseInt(this.value, 10) || 0;
-      applyFilter();
-    });
-  }
 
   // === FILTER TABS ===
   function setTab(filter) {

@@ -560,30 +560,6 @@ templ Layout(title string) {
 
 				.toolbar-btn:disabled { opacity: 0.6; cursor: default; }
 
-				/* ---- AGE FILTER ---- */
-
-				.age-select {
-					padding: 0.4rem 2rem 0.4rem 0.6rem;
-					border: 1.5px solid var(--border);
-					border-radius: 0.5rem;
-					font-size: 0.875rem;
-					font-family: 'Outfit', sans-serif;
-					font-weight: 600;
-					background-color: white;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7280'/%3E%3C/svg%3E");
-					background-repeat: no-repeat;
-					background-position: right 0.6rem center;
-					-webkit-appearance: none;
-					-moz-appearance: none;
-					appearance: none;
-					color: var(--stone);
-					cursor: pointer;
-					margin-left: auto;
-				}
-
-				.age-select:focus { outline: 2px solid var(--sky-blue); border-color: var(--sky-blue); }
-				.age-select.active { border-color: var(--sky-blue); color: var(--sky-blue); }
-
 				/* ---- DISTANCE BADGE ---- */
 
 				.distance-badge { font-size: 0.75rem; }
@@ -875,7 +851,6 @@ templ Layout(title string) {
 					& .hero-eyebrow.soon { color: #7a8fa8; }
 					& .toolbar-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .toolbar-btn:hover { background: #1d2f55; color: #93b4e0; }
-					& .age-select { background-color: #162040; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2393b4e0'/%3E%3C/svg%3E"); border-color: var(--border); color: #7a8fa8; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }
 					& .badge-gray { background: #1f2937; color: #9ca3af; border-color: #374151; }
