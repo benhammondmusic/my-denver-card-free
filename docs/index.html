@@ -523,9 +523,11 @@
 					border: 1.5px solid var(--border);
 					border-radius: 0.5rem;
 					background: white;
-					font-family: 'Outfit', sans-serif;
-					font-size: 0.875rem;
-					font-weight: 600;
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 1.1rem;
+					font-weight: 400;
+					letter-spacing: 0.1em;
+					text-transform: uppercase;
 					cursor: pointer;
 					color: var(--stone);
 					transition: all 0.15s;
@@ -572,6 +574,24 @@
 				/* ---- BADGE: BLUE ---- */
 
 				.badge-blue { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+
+				/* ---- MAP POPUP ---- */
+
+				.map-popup-btn {
+					margin-top: 0.5rem;
+					padding: 0.3rem 0.75rem;
+					background: var(--bear-blue);
+					color: white;
+					border: none;
+					border-radius: 0.375rem;
+					cursor: pointer;
+					font-family: 'Outfit', sans-serif;
+					font-size: 0.8rem;
+					font-weight: 700;
+					display: block;
+					width: 100%;
+				}
+				.map-popup-btn:hover { background: #003a8c; }
 
 				/* ---- MAP PANEL ---- */
 
@@ -1154,10 +1174,16 @@
       var statusHtml = isClosed
         ? '<span style="color:#991b1b">Temporarily closed</span>'
         : (isFreeNow
-          ? '<span style="color:#065f46">Free today</span>'
+          ? '<span style="color:#065f46;font-weight:700">Free today</span>'
           : '<span style="color:#6b7280">Not free this month</span>');
-      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
-      marker.on('click', function () { openModal(row); });
+      var popupHtml = '<div style="min-width:130px"><strong>' + name + '</strong><br>' + statusHtml + '<br><button class="map-popup-btn">View details</button></div>';
+      marker.bindPopup(popupHtml, { maxWidth: 220 });
+      marker.on('popupopen', (function (r, m) {
+        return function (e) {
+          var btn = e.popup.getElement().querySelector('.map-popup-btn');
+          if (btn) btn.onclick = function () { m.closePopup(); openModal(r); };
+        };
+      })(row, marker));
       marker.addTo(leafletMap);
     });
 

@@ -378,10 +378,16 @@ templ filterScript() {
       var statusHtml = isClosed
         ? '<span style="color:#991b1b">Temporarily closed</span>'
         : (isFreeNow
-          ? '<span style="color:#065f46">Free today</span>'
+          ? '<span style="color:#065f46;font-weight:700">Free today</span>'
           : '<span style="color:#6b7280">Not free this month</span>');
-      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
-      marker.on('click', function () { openModal(row); });
+      var popupHtml = '<div style="min-width:130px"><strong>' + name + '</strong><br>' + statusHtml + '<br><button class="map-popup-btn">View details</button></div>';
+      marker.bindPopup(popupHtml, { maxWidth: 220 });
+      marker.on('popupopen', (function (r, m) {
+        return function (e) {
+          var btn = e.popup.getElement().querySelector('.map-popup-btn');
+          if (btn) btn.onclick = function () { m.closePopup(); openModal(r); };
+        };
+      })(row, marker));
       marker.addTo(leafletMap);
     });
 
