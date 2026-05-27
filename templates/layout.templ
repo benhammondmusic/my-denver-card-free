@@ -132,12 +132,30 @@ templ Layout(title string) {
 					flex-shrink: 0;
 					line-height: 0;
 					margin-right: -2rem;
+					position: relative;
 				}
 
 				.bear-wrap img {
 					width: 240px;
 					height: auto;
 					display: block;
+				}
+
+				/* Eye positions are approximate; tune left/top % to match bear.png */
+				.bear-eye {
+					position: absolute;
+					width: 13px;
+					height: 9px;
+					border-radius: 50%;
+					cursor: pointer;
+					background: transparent;
+					transition: background 0.2s, box-shadow 0.4s;
+				}
+				.bear-eye-left  { left: 36%; top: 27%; }
+				.bear-eye-right { left: 55%; top: 27%; }
+				.bear-eye.lit {
+					background: #bf0a30;
+					box-shadow: 0 0 10px 5px rgba(191,10,48,0.75);
 				}
 
 				/* ---- MAIN ---- */
@@ -774,6 +792,13 @@ templ Layout(title string) {
 					line-height: 1.5;
 				}
 
+				.modal-last-checked {
+					font-size: 0.75rem;
+					color: var(--stone);
+					margin-top: 0.5rem;
+					opacity: 0.7;
+				}
+
 				.modal-actions {
 					display: flex;
 					gap: 0.5rem;
@@ -1051,6 +1076,8 @@ templ Layout(title string) {
 				<div class="header-inner">
 				<div class="bear-wrap">
 					<img src="bear.png" alt="The Big Blue Bear"/>
+					<span class="bear-eye bear-eye-left" aria-hidden="true"></span>
+					<span class="bear-eye bear-eye-right" aria-hidden="true"></span>
 				</div>
 				<div class="header-text">
 					<p class="header-eyebrow">MyDenverCard</p>
@@ -1129,6 +1156,51 @@ templ Layout(title string) {
 					});
 					update();
 				})();
+				// Bear eye Easter egg + optional scrape trigger
+				// To enable scrape dispatch, create a fine-grained GitHub PAT with
+				// Actions: write scope on this repo only, and paste it below.
+				(function () {
+					var SCRAPE_TOKEN = ''; // paste fine-grained PAT here
+					var COOLDOWN_MS = 30 * 60 * 1000; // 30 min between API calls
+					var REPO = 'benhammondmusic/my-denver-card-free';
+					var WORKFLOW = 'scrape.yml';
+
+					var eyes = document.querySelectorAll('.bear-eye');
+					if (!eyes.length) return;
+
+					function lightUp() {
+						eyes.forEach(function (e) { e.classList.add('lit'); });
+						setTimeout(function () {
+							eyes.forEach(function (e) { e.classList.remove('lit'); });
+						}, 2500);
+					}
+
+					function canTrigger() {
+						var last = parseInt(localStorage.getItem('mdc-scrape-ts') || '0', 10);
+						return SCRAPE_TOKEN && (Date.now() - last > COOLDOWN_MS);
+					}
+
+					function triggerScrape() {
+						localStorage.setItem('mdc-scrape-ts', String(Date.now()));
+						fetch('https://api.github.com/repos/' + REPO + '/actions/workflows/' + WORKFLOW + '/dispatches', {
+							method: 'POST',
+							headers: {
+								'Authorization': 'Bearer ' + SCRAPE_TOKEN,
+								'Accept': 'application/vnd.github+json',
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({ ref: 'main' })
+						}).catch(function () {});
+					}
+
+					eyes.forEach(function (eye) {
+						eye.addEventListener('click', function () {
+							lightUp();
+							if (canTrigger()) triggerScrape();
+						});
+					});
+				})();
+
 				(function () {
 					var overlay = document.getElementById('card-modal-overlay');
 					var openBtn = document.getElementById('card-info-btn');

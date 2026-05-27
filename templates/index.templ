@@ -116,6 +116,7 @@ templ VenueRow(v models.Venue) {
 		data-adults={ fmt.Sprintf("%d", v.AdultsIncluded) }
 		data-scrape-failed={ boolStr(v.ScrapeFailed) }
 		data-scrape-error={ v.ScrapeError }
+		data-last-checked={ v.LastChecked.Format("2006-01-02") }
 	>
 		<div class="venue-band">
 			if v.TemporarilyClosed {
@@ -464,6 +465,7 @@ templ filterScript() {
     var reservation = row.dataset.reservation === 'true';
     var scrapeFailed = row.dataset.scrapeFailed === 'true';
     var scrapeError = row.dataset.scrapeError || '';
+    var lastChecked = row.dataset.lastChecked || '';
     var lat = parseFloat(row.dataset.lat || '0');
     var lng = parseFloat(row.dataset.lng || '0');
     var program = row.dataset.program || 'mydenvercard';
@@ -511,6 +513,14 @@ templ filterScript() {
         var monthsLabel = months.length === 12 ? 'Year-round' : months.join(', ');
         m.innerHTML = '<strong>Free in:</strong> ' + monthsLabel;
         modalDetails.appendChild(m);
+      }
+      if (lastChecked) {
+        var d = new Date(lastChecked);
+        var dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        var lc = document.createElement('p');
+        lc.className = 'modal-last-checked';
+        lc.textContent = 'Data verified ' + dateStr;
+        modalDetails.appendChild(lc);
       }
     }
 
