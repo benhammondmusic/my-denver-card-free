@@ -590,6 +590,19 @@ templ Layout(title string) {
 
 				.badge-blue { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
 
+				/* ---- MAP PANEL ---- */
+
+				.map-panel {
+					display: none;
+					height: 320px;
+					border-radius: 1rem;
+					overflow: hidden;
+					margin-bottom: 1.5rem;
+					border: 1.5px solid var(--border);
+					box-shadow: 0 2px 16px rgba(0,40,104,0.09);
+				}
+				.map-panel.visible { display: block; }
+
 				/* ---- MODAL ---- */
 
 				.modal-overlay {
@@ -861,6 +874,7 @@ templ Layout(title string) {
 					& .modal-actions { border-color: var(--border); }
 					& .modal-action-btn { background: #162040; border-color: var(--border); color: #93b4e0; }
 					& .modal-action-btn:hover { background: #1d2f55; color: #e0e8f5; border-color: #3b82f6; }
+					& .map-panel { border-color: var(--border); box-shadow: 0 2px 16px rgba(0,0,0,0.4); }
 					& .modal-map { border-color: var(--border); }
 				& .card-info-list li { color: #c0cfe8; }
 				& .card-cta-btn { background: #1a56db; }

@@ -61,7 +61,7 @@ func Index(venues []models.Venue) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><p class=\"hero-eyebrow\">Free today</p><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Free Now</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button> <button class=\"filter-tab\" data-filter=\"yearround\">Year-Round</button></div><div class=\"toolbar\"><button class=\"toolbar-btn\" id=\"near-me-btn\">Near me</button> <select id=\"kid-age\" class=\"age-select\" aria-label=\"Filter by age\"><option value=\"0\">All ages</option> <option value=\"4\">Has a toddler (under 5)</option> <option value=\"8\">School age (5-12)</option> <option value=\"15\">Teen (13+)</option></select></div></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><p class=\"hero-eyebrow\">Free today</p><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Free Now</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button> <button class=\"filter-tab\" data-filter=\"yearround\">Year-Round</button></div><div class=\"toolbar\"><button class=\"toolbar-btn\" id=\"near-me-btn\" title=\"Sort venues by distance from your location\">Near me</button> <button class=\"toolbar-btn\" id=\"map-toggle-btn\">Show map</button> <select id=\"kid-age\" class=\"age-select\" aria-label=\"Filter by age\"><option value=\"0\">All ages</option> <option value=\"4\">Has a toddler (under 5)</option> <option value=\"8\">School age (5-12)</option> <option value=\"15\">Teen (13+)</option></select></div></div><div id=\"map-panel\" class=\"map-panel\"></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -169,7 +169,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(strings.Join(v.FreeMonths, ","))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 107, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 109, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
@@ -182,7 +182,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.FreeSchedule))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 108, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 110, Col: 40}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -195,7 +195,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.TemporarilyClosed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 109, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 111, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -208,7 +208,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.Program))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 110, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 112, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
@@ -221,7 +221,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lat))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 111, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 113, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
@@ -234,7 +234,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lng))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 112, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 114, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
@@ -247,7 +247,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Address)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 113, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 115, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
@@ -260,7 +260,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.Indoor))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 114, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 116, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
@@ -273,7 +273,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ReservationRequired))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 115, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 117, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
@@ -286,7 +286,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.MinAge))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 116, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 118, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
@@ -299,7 +299,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.MaxAge))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 117, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 119, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
@@ -312,7 +312,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 118, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 120, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
@@ -325,7 +325,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.URL)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 119, Col: 18}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 121, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
@@ -338,7 +338,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Notes)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 120, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 122, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 		if templ_7745c5c3_Err != nil {
@@ -351,7 +351,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ClosureReason)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 121, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 123, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
@@ -364,7 +364,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var21 string
 		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Hours)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 122, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 124, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
 		if templ_7745c5c3_Err != nil {
@@ -377,7 +377,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.AdultsIncluded))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 123, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 125, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var22)
 		if templ_7745c5c3_Err != nil {
@@ -390,7 +390,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ScrapeFailed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 124, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 126, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var23)
 		if templ_7745c5c3_Err != nil {
@@ -403,7 +403,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var24 string
 		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ScrapeError)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 125, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 127, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var24)
 		if templ_7745c5c3_Err != nil {
@@ -436,7 +436,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 137, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 139, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {
@@ -476,7 +476,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var26 string
 			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(freeMonthsLabel(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 151, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 153, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var26))
 			if templ_7745c5c3_Err != nil {
@@ -549,6 +549,8 @@ func filterScript() templ.Component {
   var activeFilter = 'now';
   var kidAge = 0;
   var userLat = null, userLng = null;
+  var mapInitialized = false;
+  var leafletMap = null;
   var modalMap = null;
 
   // === DOM REFS ===
@@ -702,6 +704,75 @@ func filterScript() templ.Component {
     }
   }
 
+  // === FULL MAP ===
+  function initMap() {
+    if (mapInitialized || typeof L === 'undefined') return;
+    mapInitialized = true;
+
+    leafletMap = L.map('map-panel').setView([39.7392, -104.9849], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(leafletMap);
+
+    rows.forEach(function (row) {
+      var lat = parseFloat(row.dataset.lat || '0');
+      var lng = parseFloat(row.dataset.lng || '0');
+      if (!lat || !lng) return;
+
+      var name = row.dataset.name || '';
+      var isFreeNow = freeNow(row);
+      var isClosed = row.dataset.closed === 'true';
+      var isGeneral = row.dataset.program === 'general';
+      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
+
+      var marker = L.circleMarker([lat, lng], {
+        radius: 10,
+        fillColor: color,
+        color: 'white',
+        weight: 2,
+        fillOpacity: 0.88
+      });
+
+      var statusHtml = isClosed
+        ? '<span style="color:#991b1b">Temporarily closed</span>'
+        : (isFreeNow
+          ? '<span style="color:#065f46">Free today</span>'
+          : '<span style="color:#6b7280">Not free this month</span>');
+      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
+      marker.on('click', function () { openModal(row); });
+      marker.addTo(leafletMap);
+    });
+
+    if (userLat && userLng) addUserMarker();
+    setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 100);
+  }
+
+  function toggleMap() {
+    var panel = document.getElementById('map-panel');
+    var btn = document.getElementById('map-toggle-btn');
+    if (!panel) return;
+    var isVisible = panel.classList.contains('visible');
+    panel.classList.toggle('visible', !isVisible);
+    if (btn) { btn.textContent = isVisible ? 'Show map' : 'Hide map'; btn.classList.toggle('active', !isVisible); }
+    if (!isVisible) {
+      initMap();
+      setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 150);
+    }
+  }
+
+  function addUserMarker() {
+    if (!leafletMap || !userLat || !userLng) return;
+    L.circleMarker([userLat, userLng], {
+      radius: 8,
+      fillColor: '#bf0a30',
+      color: 'white',
+      weight: 2,
+      fillOpacity: 0.9
+    }).bindPopup('You are here').addTo(leafletMap);
+    leafletMap.setView([userLat, userLng], 13);
+  }
+
   // === MODAL HELPERS ===
   function slugify(str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -761,13 +832,12 @@ func filterScript() templ.Component {
     if (modalBand) modalBand.style.background = bandColor;
     if (modalTitle) modalTitle.textContent = name;
 
-    // Badges
     if (modalBadges) {
       modalBadges.innerHTML = '';
       if (closed) {
         addBadge(modalBadges, 'temporarily closed', 'badge-red');
       } else {
-        if (isFreeNow) addBadge(modalBadges, 'free now', 'badge-green');
+        if (isFreeNow) addBadge(modalBadges, 'free today', 'badge-green');
         if (adults >= 2) addBadge(modalBadges, 'whole family free', 'badge-green');
         else if (adults === 1) addBadge(modalBadges, 'free +1 adult', 'badge-green');
         else addBadge(modalBadges, 'kids free', 'badge-yellow');
@@ -779,7 +849,6 @@ func filterScript() templ.Component {
       }
     }
 
-    // Details
     if (modalDetails) {
       modalDetails.innerHTML = '';
       var detailText = closed ? closureReason : notes;
@@ -804,7 +873,6 @@ func filterScript() templ.Component {
       }
     }
 
-    // Actions
     if (modalActions) {
       modalActions.innerHTML = '';
       if (url) {
@@ -830,7 +898,6 @@ func filterScript() templ.Component {
       modalActions.appendChild(shareBtn);
     }
 
-    // Map
     if (lat && lng) {
       if (modalMapEl) modalMapEl.style.display = 'block';
       initModalMap(lat, lng, name, bandColor);
@@ -839,7 +906,6 @@ func filterScript() templ.Component {
       if (modalMap) { modalMap.remove(); modalMap = null; }
     }
 
-    // Show modal
     modalOverlay.setAttribute('aria-hidden', 'false');
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -859,7 +925,6 @@ func filterScript() templ.Component {
     if (modalMap) { modalMap.remove(); modalMap = null; }
   }
 
-  // Modal event wiring
   if (modalOverlay) {
     modalOverlay.addEventListener('click', function (e) {
       if (e.target === modalOverlay) closeModal();
@@ -928,8 +993,9 @@ func filterScript() templ.Component {
       function (pos) {
         userLat = pos.coords.latitude;
         userLng = pos.coords.longitude;
-        if (btn) { btn.textContent = 'Near me'; btn.disabled = false; btn.classList.add('active'); }
+        if (btn) { btn.textContent = 'Nearest first'; btn.disabled = false; btn.classList.add('active'); }
         sortByDistance();
+        if (mapInitialized) addUserMarker();
       },
       function () {
         if (btn) { btn.textContent = 'Near me'; btn.disabled = false; }
@@ -998,6 +1064,9 @@ func filterScript() templ.Component {
   // === TOOLBAR ===
   var nearMeBtn = document.getElementById('near-me-btn');
   if (nearMeBtn) nearMeBtn.addEventListener('click', requestLocation);
+
+  var mapToggleBtn = document.getElementById('map-toggle-btn');
+  if (mapToggleBtn) mapToggleBtn.addEventListener('click', toggleMap);
 
   // === INIT ===
   setTab('now');
