@@ -822,6 +822,12 @@ templ Layout(title string) {
 					transform: translateY(-1px);
 				}
 
+				.card-prime-section {
+					padding-top: 1.25rem;
+					border-top: 1px solid var(--border);
+					margin-top: 1.25rem;
+				}
+
 				/* ---- VIEW TRANSITIONS ---- */
 
 				@view-transition { navigation: auto; }
@@ -1044,6 +1050,11 @@ templ Layout(title string) {
 							</ul>
 						</div>
 						<a href="https://apm.activecommunities.com/denver/Membership" class="card-cta-btn" target="_blank" rel="noopener noreferrer">Get a free myDenverCard</a>
+						<div class="card-prime-section">
+							<p class="card-info-heading">For older adults</p>
+							<p class="modal-notes">Denver residents ages 60+ qualify for <strong>myDenverPrime</strong>, a free membership to all Denver rec centers and pools. Sign up in person at any rec center with proof of age and Denver residency.</p>
+							<a href="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Activities-Programs/Active-Older-Adults/My-Denver-Prime" class="modal-action-btn" target="_blank" rel="noopener noreferrer" style="margin-top:0.5rem; display:inline-flex;">Learn about myDenverPrime</a>
+						</div>
 					</div>
 				</div>
 			</div>
