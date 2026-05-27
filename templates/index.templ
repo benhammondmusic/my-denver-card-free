@@ -55,7 +55,16 @@ templ Index(venues []models.Venue) {
 					<button class="month-btn" data-month-name={ monthsFull[i] }>{ abbr }</button>
 				}
 			</div>
+			<div class="toolbar">
+				<button class="toolbar-btn" id="near-me-btn">Near me</button>
+				<button class="toolbar-btn" id="map-toggle-btn">Show map</button>
+				<div class="age-filter">
+					<label for="kid-age">Age:</label>
+					<input type="number" id="kid-age" class="age-input" min="1" max="18" placeholder="any"/>
+				</div>
+			</div>
 		</div>
+		<div id="map-panel" class="map-panel"></div>
 		<p class="venue-count"></p>
 		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
@@ -86,6 +95,13 @@ templ VenueRow(v models.Venue) {
 		data-schedule={ string(v.FreeSchedule) }
 		data-closed={ boolStr(v.TemporarilyClosed) }
 		data-program={ string(v.Program) }
+		data-lat={ fmt.Sprintf("%.6f", v.Lat) }
+		data-lng={ fmt.Sprintf("%.6f", v.Lng) }
+		data-address={ v.Address }
+		data-indoor={ boolStr(v.Indoor) }
+		data-reservation={ boolStr(v.ReservationRequired) }
+		data-min-age={ fmt.Sprintf("%d", v.MinAge) }
+		data-max-age={ fmt.Sprintf("%d", v.MaxAge) }
 	>
 		<div class="venue-band">
 			if v.TemporarilyClosed {
@@ -105,22 +121,40 @@ templ VenueRow(v models.Venue) {
 				if v.ScrapeFailed {
 					<span class="badge badge-red" title={ v.ScrapeError }>data outdated</span>
 				}
+				if v.ReservationRequired {
+					<span class="badge badge-yellow">reservation required</span>
+				}
+				if v.Indoor {
+					<span class="badge badge-gray">indoor</span>
+				}
 			</div>
 			if v.TemporarilyClosed {
 				<p class="closure-reason">{ v.ClosureReason }</p>
 			} else if v.Notes != "" {
 				<p class="venue-notes">{ v.Notes }</p>
 			}
+			if !v.TemporarilyClosed {
+				if v.Hours != "" {
+					<p class="venue-hours">{ v.Hours }</p>
+				}
+				<div class="venue-actions">
+					if v.Address != "" {
+						<button class="action-btn directions-btn">Directions</button>
+					}
+					<button class="action-btn share-btn">Share</button>
+					<button class="action-btn visit-btn">Been here</button>
+				</div>
+			}
 		</div>
 		if !v.TemporarilyClosed {
 			<div class="venue-status">
 				switch {
 					case v.AdultsIncluded >= 2:
-						<span class="badge badge-green">Free +{ fmt.Sprintf("%d", v.AdultsIncluded) } Adults</span>
+						<span class="badge badge-green">Whole family free</span>
 					case v.AdultsIncluded == 1:
-						<span class="badge badge-green">Free +1 Adult</span>
+						<span class="badge badge-green">Free +1 adult</span>
 					default:
-						<span class="badge badge-yellow">Free</span>
+						<span class="badge badge-yellow">Kids free</span>
 				}
 				switch v.FreeSchedule {
 					case models.ScheduleWeekends:
@@ -137,6 +171,7 @@ templ VenueRow(v models.Venue) {
 templ filterScript() {
 	@templ.Raw(`<script>
 (function () {
+  // === DATE / SCHEDULE CONSTANTS ===
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var today = new Date();
   var currentMonthName = MONTHS[today.getMonth()];
@@ -144,7 +179,6 @@ templ filterScript() {
   var dow = today.getDay(); // 0=Sun 6=Sat
   var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
 
-  // Fri/Sat/Sun of the current or upcoming weekend
   var weekendDates = (function () {
     var daysToFri = dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow;
     return [0, 1, 2].map(function (i) {
@@ -164,6 +198,27 @@ templ filterScript() {
   }
   var inBreak = isSchoolBreak(today);
 
+  // === STATE ===
+  var activeFilter = 'now';
+  var activeMonth = null;
+  var kidAge = 0; // 0 = any age
+  var userLat = null, userLng = null;
+  var mapInitialized = false;
+  var leafletMap = null;
+
+  // === VISIT TRACKER ===
+  var visitedSet = new Set(JSON.parse(localStorage.getItem('mdc-visited') || '[]'));
+  function saveVisited() {
+    try { localStorage.setItem('mdc-visited', JSON.stringify(Array.from(visitedSet))); } catch(e) {}
+  }
+
+  // === DOM REFS ===
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
+  var tabs = document.querySelectorAll('.filter-tab');
+  var monthBtns = document.querySelectorAll('.month-btn');
+  var countEl = document.querySelector('.venue-count');
+
+  // === VENUE HELPERS ===
   function freeMonths(row) {
     return (row.dataset.freeMonths || '').split(',').filter(Boolean);
   }
@@ -183,7 +238,6 @@ templ filterScript() {
     return weekendDates.some(function (d) {
       var monthName = MONTHS[d.getMonth()];
       if (freeMonths(row).indexOf(monthName) === -1) return false;
-      // daily venues: free any day; weekends/weekends_and_breaks: Fri/Sat/Sun always qualify
       return true;
     });
   }
@@ -202,28 +256,42 @@ templ filterScript() {
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
-  var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
-  var tabs = document.querySelectorAll('.filter-tab');
-  var monthBtns = document.querySelectorAll('.month-btn');
-  var countEl = document.querySelector('.venue-count');
+  function passesAgeFilter(row) {
+    if (kidAge === 0) return true;
+    var minAge = parseInt(row.dataset.minAge || '0', 10);
+    var maxAge = parseInt(row.dataset.maxAge || '0', 10);
+    if (minAge > 0 && kidAge < minAge) return false;
+    if (maxAge > 0 && kidAge > maxAge) return false;
+    return true;
+  }
 
-  var activeFilter = 'now';
-  var activeMonth = null;
+  // === DISTANCE (Haversine, miles) ===
+  function haversine(lat1, lng1, lat2, lng2) {
+    var R = 3958.8;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLng = (lng2 - lng1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
 
-  function applyFilter() {
+  // === FILTER ===
+  function _doApplyFilter() {
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
+      var ageOk = closed || passesAgeFilter(row);
       var show;
       if (activeMonth) {
-        show = closed || freeInMonth(row, activeMonth);
+        show = closed || (freeInMonth(row, activeMonth) && ageOk);
       } else {
         switch (activeFilter) {
-          case 'now':       show = closed || freeNow(row);          break;
-          case 'weekend':   show = closed || freeThisWeekend(row);  break;
-          case 'summer':    show = closed || isSummer(row);         break;
-          case 'yearround': show = closed || isYearRound(row);      break;
-          default:          show = true;
+          case 'now':       show = closed || (freeNow(row) && ageOk);         break;
+          case 'weekend':   show = closed || (freeThisWeekend(row) && ageOk); break;
+          case 'summer':    show = closed || (isSummer(row) && ageOk);        break;
+          case 'yearround': show = closed || (isYearRound(row) && ageOk);     break;
+          default:          show = closed || ageOk;
         }
       }
       row.classList.toggle('hidden', !show);
@@ -240,9 +308,19 @@ templ filterScript() {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All" or pick a month.';
     }
+    if (kidAge > 0) label += ' (age ' + kidAge + ')';
     if (countEl) countEl.textContent = label;
   }
 
+  function applyFilter() {
+    if (document.startViewTransition) {
+      document.startViewTransition(_doApplyFilter);
+    } else {
+      _doApplyFilter();
+    }
+  }
+
+  // === HERO ===
   function buildHero() {
     var nowChips = document.getElementById('free-now-chips');
     var soonChips = document.getElementById('free-soon-chips');
@@ -297,6 +375,217 @@ templ filterScript() {
     }
   }
 
+  // === MAP ===
+  function initMap() {
+    if (mapInitialized || typeof L === 'undefined') return;
+    mapInitialized = true;
+
+    leafletMap = L.map('map-panel').setView([39.7392, -104.9849], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(leafletMap);
+
+    rows.forEach(function (row) {
+      var lat = parseFloat(row.dataset.lat || '0');
+      var lng = parseFloat(row.dataset.lng || '0');
+      if (!lat || !lng) return;
+
+      var name = (row.querySelector('.venue-name-row a') || {}).textContent || '';
+      var isFreeNow = freeNow(row);
+      var isClosed = row.dataset.closed === 'true';
+      var isGeneral = row.dataset.program === 'general';
+      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
+
+      var marker = L.circleMarker([lat, lng], {
+        radius: 10,
+        fillColor: color,
+        color: 'white',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.88
+      });
+
+      var statusHtml = isClosed
+        ? '<span style="color:#991b1b">Temporarily closed</span>'
+        : (isFreeNow
+          ? '<span style="color:#065f46">Free now</span>'
+          : '<span style="color:#6b7280">Not free this month</span>');
+      marker.bindPopup('<strong>' + name + '</strong><br>' + statusHtml);
+
+      marker.on('click', function () {
+        if (row.classList.contains('hidden')) { setTab('all'); applyFilter(); }
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.add('chip-highlight');
+        setTimeout(function () { row.classList.remove('chip-highlight'); }, 1800);
+      });
+
+      marker.addTo(leafletMap);
+      row._marker = marker;
+    });
+
+    setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 100);
+  }
+
+  function toggleMap() {
+    var panel = document.getElementById('map-panel');
+    var btn = document.getElementById('map-toggle-btn');
+    if (!panel) return;
+    var isVisible = panel.classList.contains('visible');
+    panel.classList.toggle('visible', !isVisible);
+    if (btn) btn.textContent = isVisible ? 'Show map' : 'Hide map';
+    if (btn) btn.classList.toggle('active', !isVisible);
+    if (!isVisible) {
+      initMap();
+      setTimeout(function () { if (leafletMap) leafletMap.invalidateSize(); }, 150);
+    }
+  }
+
+  // === GEOLOCATION / NEAR ME ===
+  function hasBoth(row) {
+    var lat = parseFloat(row.dataset.lat || '0');
+    var lng = parseFloat(row.dataset.lng || '0');
+    return lat !== 0 && lng !== 0;
+  }
+
+  function sortByDistance() {
+    if (!userLat || !userLng) return;
+
+    rows.forEach(function (row) {
+      var lat = parseFloat(row.dataset.lat || '0');
+      var lng = parseFloat(row.dataset.lng || '0');
+      row._distance = hasBoth(row) ? haversine(userLat, userLng, lat, lng) : Infinity;
+    });
+
+    var list = document.getElementById('venue-list');
+    if (!list) return;
+    var divider = list.querySelector('.section-divider');
+
+    var openRows = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
+    var closedRows = rows.filter(function (r) { return r.dataset.closed === 'true'; });
+    openRows.sort(function (a, b) { return a._distance - b._distance; });
+
+    if (divider) divider.style.display = 'none';
+    openRows.forEach(function (r) { list.appendChild(r); });
+    closedRows.forEach(function (r) { list.appendChild(r); });
+
+    showDistanceBadges();
+  }
+
+  function showDistanceBadges() {
+    rows.forEach(function (row) {
+      var existing = row.querySelector('.distance-badge');
+      if (existing) existing.remove();
+      if (row._distance === undefined || row._distance === Infinity) return;
+      var text = row._distance < 0.1 ? 'Here' : row._distance.toFixed(1) + ' mi';
+      var badge = document.createElement('span');
+      badge.className = 'badge badge-gray distance-badge';
+      badge.textContent = text;
+      var statusEl = row.querySelector('.venue-status');
+      if (statusEl) statusEl.appendChild(badge);
+    });
+  }
+
+  function addUserMarker() {
+    if (!leafletMap || !userLat || !userLng) return;
+    L.circleMarker([userLat, userLng], {
+      radius: 8,
+      fillColor: '#bf0a30',
+      color: 'white',
+      weight: 2,
+      fillOpacity: 0.9
+    }).bindPopup('You are here').addTo(leafletMap);
+    leafletMap.setView([userLat, userLng], 13);
+  }
+
+  function requestLocation() {
+    if (!navigator.geolocation) return;
+    var btn = document.getElementById('near-me-btn');
+    if (btn) { btn.textContent = 'Locating...'; btn.disabled = true; }
+
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        userLat = pos.coords.latitude;
+        userLng = pos.coords.longitude;
+        if (btn) { btn.textContent = 'Near me'; btn.disabled = false; btn.classList.add('active'); }
+        sortByDistance();
+        if (mapInitialized) addUserMarker();
+      },
+      function () {
+        if (btn) { btn.textContent = 'Near me'; btn.disabled = false; }
+      }
+    );
+  }
+
+  // === SHARE ===
+  function shareVenue(btn, row) {
+    var a = row.querySelector('.venue-name-row a');
+    var name = a ? a.textContent.trim() : 'Denver venue';
+    var url = a ? a.href : window.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: name + ' is free for Denver kids',
+        text: 'Free admission for Denver kids: ' + name,
+        url: url
+      }).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function () {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = orig; }, 2000);
+      }).catch(function () {});
+    }
+  }
+
+  // === DIRECTIONS ===
+  function getDirections(row) {
+    var addr = row.dataset.address;
+    if (!addr) return;
+    window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr), '_blank', 'noopener,noreferrer');
+  }
+
+  // === VISIT TRACKER ===
+  function applyVisitedState() {
+    rows.forEach(function (row) {
+      var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
+      var btn = row.querySelector('.visit-btn');
+      var isVisited = visitedSet.has(name);
+      if (!btn) return;
+      btn.classList.toggle('visited', isVisited);
+      btn.textContent = isVisited ? 'Visited' : 'Been here';
+    });
+  }
+
+  function toggleVisited(btn, row) {
+    var name = ((row.querySelector('.venue-name-row a') || {}).textContent || '').trim();
+    if (visitedSet.has(name)) { visitedSet.delete(name); } else { visitedSet.add(name); }
+    saveVisited();
+    applyVisitedState();
+  }
+
+  // === AGE FILTER ===
+  var kidAgeInput = document.getElementById('kid-age');
+  if (kidAgeInput) {
+    kidAgeInput.addEventListener('input', function () {
+      kidAge = parseInt(this.value, 10) || 0;
+      applyFilter();
+    });
+  }
+
+  // === WIRE UP ACTION BUTTONS ===
+  rows.forEach(function (row) {
+    var dirBtn = row.querySelector('.directions-btn');
+    if (dirBtn) dirBtn.addEventListener('click', function () { getDirections(row); });
+
+    var shareBtn = row.querySelector('.share-btn');
+    if (shareBtn) shareBtn.addEventListener('click', function () { shareVenue(shareBtn, row); });
+
+    var visitBtn = row.querySelector('.visit-btn');
+    if (visitBtn) visitBtn.addEventListener('click', function () { toggleVisited(visitBtn, row); });
+  });
+
+  // === MONTH STRIP ===
   monthBtns.forEach(function (btn) {
     if (btn.dataset.monthName === currentMonthName) btn.classList.add('current-month');
     btn.addEventListener('click', function () {
@@ -314,6 +603,7 @@ templ filterScript() {
     });
   });
 
+  // === FILTER TABS ===
   function setTab(filter) {
     activeFilter = filter;
     activeMonth = null;
@@ -328,9 +618,18 @@ templ filterScript() {
     });
   });
 
+  // === TOOLBAR BUTTONS ===
+  var nearMeBtn = document.getElementById('near-me-btn');
+  if (nearMeBtn) nearMeBtn.addEventListener('click', requestLocation);
+
+  var mapToggleBtn = document.getElementById('map-toggle-btn');
+  if (mapToggleBtn) mapToggleBtn.addEventListener('click', toggleMap);
+
+  // === INIT ===
   setTab('now');
   applyFilter();
   buildHero();
+  applyVisitedState();
 })();
 </script>`)
 }

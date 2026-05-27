@@ -5,18 +5,8 @@
     "program": "mydenvercard",
     "featured": true,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 1,
@@ -25,18 +15,22 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:36:57.268569Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7503,
+    "lng": -104.9517,
+    "address": "2300 Steele St, Denver, CO 80205",
+    "hours": "9am-5pm daily (last entry 4pm)",
+    "indoor": false,
+    "reservation_required": true,
+    "min_age": 5,
+    "max_age": 18
   },
   {
-    "name": "Denver Museum of Nature \u0026 Science",
+    "name": "Denver Museum of Nature & Science",
     "url": "https://www.dmns.org/visit/pricing-and-discounts/",
     "program": "mydenvercard",
     "featured": true,
-    "free_months": [
-      "June",
-      "July",
-      "August"
-    ],
+    "free_months": ["June", "July", "August"],
     "free_schedule": "daily",
     "adults_included": 0,
     "notes": "Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026.",
@@ -44,18 +38,22 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:36:59.368926Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7476,
+    "lng": -104.9432,
+    "address": "2001 Colorado Blvd, Denver, CO 80205",
+    "hours": "9am-5pm daily",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 0
   },
   {
     "name": "Denver Botanic Gardens",
     "url": "https://www.botanicgardens.org/my-denver-card",
     "program": "mydenvercard",
     "featured": true,
-    "free_months": [
-      "January",
-      "February",
-      "March"
-    ],
+    "free_months": ["January", "February", "March"],
     "free_schedule": "daily",
     "adults_included": 1,
     "notes": "Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events.",
@@ -63,7 +61,15 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:37:00.579082Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7322,
+    "lng": -104.9572,
+    "address": "1007 York St, Denver, CO 80206",
+    "hours": "9am-8pm (May-Sep), 9am-5pm (Oct-Apr)",
+    "indoor": false,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18
   },
   {
     "name": "Denver Recreation Centers and Pools",
@@ -71,18 +77,8 @@
     "program": "mydenvercard",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 0,
@@ -91,7 +87,15 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:37:02.470899Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 0,
+    "lng": 0,
+    "address": "",
+    "hours": "Hours vary by location",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18
   },
   {
     "name": "Clyfford Still Museum",
@@ -99,18 +103,8 @@
     "program": "mydenvercard",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "weekends_and_breaks",
     "adults_included": 1,
@@ -119,7 +113,15 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:37:04.072195Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7308,
+    "lng": -104.9888,
+    "address": "1250 Bannock St, Denver, CO 80204",
+    "hours": "10am-5pm Tue-Sun",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 17
   },
   {
     "name": "Denver Art Museum",
@@ -127,18 +129,8 @@
     "program": "general",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 0,
@@ -147,7 +139,15 @@
     "closure_reason": "",
     "last_checked": "2026-05-24T23:37:05.036747Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7306,
+    "lng": -104.9878,
+    "address": "100 W 14th Ave Pkwy, Denver, CO 80204",
+    "hours": "10am-5pm Tue-Sun (10am-9pm Fri)",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 17
   },
   {
     "name": "History Colorado Center",
@@ -155,27 +155,25 @@
     "program": "general",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 0,
     "notes": "Free for children year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-24T23:37:06.917345Z",
+    "last_checked": "2026-05-24T23:37:06.917347Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7320,
+    "lng": -104.9862,
+    "address": "1200 Broadway, Denver, CO 80203",
+    "hours": "10am-5pm daily",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 0
   },
   {
     "name": "MCA Denver",
@@ -183,27 +181,25 @@
     "program": "mydenvercard",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 2,
     "notes": "Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-24T23:37:08.663262Z",
+    "last_checked": "2026-05-24T23:37:08.663198Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7586,
+    "lng": -105.0019,
+    "address": "1485 Delgany St, Denver, CO 80202",
+    "hours": "11am-5pm Tue-Thu & Sun, 11am-9pm Fri-Sat",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 0
   },
   {
     "name": "Molly Brown House Museum",
@@ -211,27 +207,25 @@
     "program": "mydenvercard",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "weekends_and_breaks",
     "adults_included": 0,
     "notes": "Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-24T23:37:10.521899Z",
+    "last_checked": "2026-05-24T23:37:10.521878Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7363,
+    "lng": -104.9780,
+    "address": "1340 Pennsylvania St, Denver, CO 80203",
+    "hours": "10am-4pm Tue-Sun (guided tours)",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18
   },
   {
     "name": "Museo de las Americas",
@@ -239,27 +233,25 @@
     "program": "general",
     "featured": false,
     "free_months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ],
     "free_schedule": "daily",
     "adults_included": 0,
     "notes": "Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-24T23:37:12.949998Z",
+    "last_checked": "2026-05-24T23:37:12.949978Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7229,
+    "lng": -104.9917,
+    "address": "861 Santa Fe Dr, Denver, CO 80204",
+    "hours": "10am-5pm Tue-Sun",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 13
   },
   {
     "name": "Downtown Denver Rink",
@@ -274,6 +266,14 @@
     "closure_reason": "Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.",
     "last_checked": "2026-05-23T00:00:00Z",
     "scrape_failed": false,
-    "scrape_error": ""
+    "scrape_error": "",
+    "lat": 39.7494,
+    "lng": -104.9982,
+    "address": "Arapahoe St & 15th St, Denver, CO 80202",
+    "hours": "",
+    "indoor": false,
+    "reservation_required": false,
+    "min_age": 0,
+    "max_age": 0
   }
 ]

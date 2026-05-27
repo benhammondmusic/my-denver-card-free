@@ -1,0 +1,16 @@
+{
+  "name": "My Denver Card Free",
+  "short_name": "MDC Free",
+  "description": "Which Denver cultural venues are free for kids with a myDenverCard, and when.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#002868",
+  "theme_color": "#002868",
+  "icons": [
+    {
+      "src": "bear.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
