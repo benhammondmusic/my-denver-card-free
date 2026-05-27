@@ -342,46 +342,17 @@ templ Layout(title string) {
 					outline-offset: 4px;
 				}
 
-				/* ---- SIGN-UP TOAST ---- */
+				/* ---- HEADER ACTIONS ---- */
 
-				.signup-toast {
-					position: fixed;
-					bottom: 1.25rem;
-					right: 1.25rem;
-					background: white;
-					border: 1.5px solid var(--border);
-					border-radius: 0.875rem;
-					padding: 0.75rem 1rem;
-					box-shadow: 0 8px 32px rgba(0,40,104,0.15);
+				.header-actions {
+					position: absolute;
+					top: 0.75rem;
+					right: 1rem;
+					z-index: 10;
 					display: flex;
+					gap: 0.4rem;
 					align-items: center;
-					gap: 0.75rem;
-					font-size: 0.875rem;
-					color: #374151;
-					z-index: 100;
-					max-width: 280px;
 				}
-
-				.toast-link {
-					color: var(--bear-blue);
-					font-weight: 700;
-					text-decoration: underline;
-					white-space: nowrap;
-				}
-
-				.toast-dismiss {
-					background: none;
-					border: none;
-					cursor: pointer;
-					color: var(--stone);
-					font-size: 1.1rem;
-					line-height: 1;
-					padding: 0 0.1rem;
-					margin-left: auto;
-					flex-shrink: 0;
-				}
-
-				.toast-dismiss:hover { color: #111827; }
 
 				/* ---- VENUE COUNT ---- */
 
@@ -763,9 +734,6 @@ templ Layout(title string) {
 					& .venue-name-row a { color: #60a5fa; }
 					& footer { background: #0a1020; color: #5a7090; }
 					& footer a { color: #8099c0; }
-					& .signup-toast { background: #162040; border-color: var(--border); color: #c0d0e8; }
-					& .toast-link { color: #60a5fa; }
-					& .toast-dismiss { color: #7a8fa8; }
 					& .hero-eyebrow { color: #93b4e0; }
 					& .hero-eyebrow.soon { color: #7a8fa8; }
 					& .toolbar-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
@@ -787,25 +755,26 @@ templ Layout(title string) {
 
 				/* ---- THEME TOGGLE ---- */
 
-				.theme-toggle-btn {
-					position: absolute;
-					top: 0.75rem;
-					right: 1rem;
-					z-index: 10;
+				.theme-toggle-btn,
+				.card-signup-btn {
 					background: rgba(255,255,255,0.12);
 					border: 1px solid rgba(255,255,255,0.22);
 					color: rgba(255,255,255,0.65);
 					border-radius: 0.375rem;
-					padding: 0.3rem 0.65rem;
+					padding: 0.35rem 0.5rem;
 					font-size: 0.75rem;
 					font-weight: 600;
 					cursor: pointer;
 					font-family: 'Outfit', sans-serif;
-					letter-spacing: 0.03em;
+					text-decoration: none;
+					display: flex;
+					align-items: center;
 					transition: all 0.15s;
+					line-height: 1;
 				}
 
-				.theme-toggle-btn:hover { background: rgba(255,255,255,0.22); color: white; }
+				.theme-toggle-btn:hover,
+				.card-signup-btn:hover { background: rgba(255,255,255,0.22); color: white; }
 
 				@media (max-width: 560px) {
 					header {
@@ -857,7 +826,12 @@ templ Layout(title string) {
 		</head>
 		<body>
 			<header>
-				<button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button>
+				<div class="header-actions">
+					<a href="https://apm.activecommunities.com/denver/Membership" class="card-signup-btn" target="_blank" rel="noopener noreferrer" aria-label="Get your free myDenverCard" title="Get your free myDenverCard">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+					</a>
+					<button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button>
+				</div>
 				<div class="header-bg" aria-hidden="true">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice">
 						<path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"/>
@@ -924,11 +898,6 @@ templ Layout(title string) {
 				<br/>
 				<a href="https://benhammondmusic.tech" target="_blank" rel="noopener noreferrer" style="font-size:0.7rem; opacity:0.6;">benhammondmusic.tech</a>
 			</footer>
-			<div class="signup-toast" id="signup-toast">
-				<span>No card yet?</span>
-				<a href="https://apm.activecommunities.com/denver/Membership" class="toast-link" target="_blank" rel="noopener noreferrer">Get your card</a>
-				<button class="toast-dismiss" onclick="document.getElementById('signup-toast').style.display='none'" aria-label="Dismiss">x</button>
-			</div>
 			<script>
 				if ('serviceWorker' in navigator) {
 					navigator.serviceWorker.register('sw.js').catch(function(){});
