@@ -23,7 +23,10 @@ func boolStr(b bool) string {
 templ Index(venues []models.Venue) {
 	@Layout("My Denver Card Free: Denver Cultural Venues") {
 		<div class="hero-section">
-			<p class="hero-eyebrow">Free today</p>
+			<div class="hero-header">
+				<p class="hero-eyebrow">Free today</p>
+				<div id="weather-chip" class="weather-chip"></div>
+			</div>
 			<div id="free-now-chips" class="venue-chips"></div>
 			<div id="hero-soon">
 				<div class="hero-divider"></div>
@@ -690,6 +693,61 @@ templ filterScript() {
       applyFilter();
     });
   });
+
+  // === WEATHER ===
+  (function () {
+    var chip = document.getElementById('weather-chip');
+    if (!chip) return;
+
+    function weatherIcon(code) {
+      if (code === 0)  return '☀️';
+      if (code <= 2)   return '⛅';
+      if (code <= 3)   return '☁️';
+      if (code <= 48)  return '🌫️';
+      if (code <= 55)  return '🌦️';
+      if (code <= 67)  return '🌧️';
+      if (code <= 77)  return '❄️';
+      if (code <= 82)  return '🌧️';
+      if (code <= 86)  return '🌨️';
+      return '⛈️';
+    }
+
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
+      '&current=weather_code,temperature_2m,wind_speed_10m' +
+      '&hourly=weather_code,precipitation_probability' +
+      '&temperature_unit=fahrenheit&wind_speed_unit=mph' +
+      '&timezone=America%2FDenver&forecast_days=1')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var cur = data.current;
+        var temp = Math.round(cur.temperature_2m);
+        var wind = Math.round(cur.wind_speed_10m);
+        var currentHour = new Date().getHours();
+
+        var maxPrecip = 0;
+        var worstCode = cur.weather_code;
+        var times = data.hourly.time;
+        times.forEach(function (t, i) {
+          var h = parseInt(t.slice(11, 13), 10);
+          if (h >= currentHour) {
+            if (data.hourly.precipitation_probability[i] > maxPrecip) {
+              maxPrecip = data.hourly.precipitation_probability[i];
+            }
+            if (data.hourly.weather_code[i] > worstCode) {
+              worstCode = data.hourly.weather_code[i];
+            }
+          }
+        });
+
+        var parts = [weatherIcon(worstCode) + ' ' + temp + '°F'];
+        if (maxPrecip >= 40) parts.push(maxPrecip + '% precip');
+        if (wind >= 20) parts.push(wind + ' mph winds');
+
+        chip.textContent = parts.join(' · ');
+        chip.style.display = 'inline-flex';
+      })
+      .catch(function () {});
+  })();
 
   // === INIT ===
   setTab('now');

@@ -202,17 +202,39 @@ templ Layout(title string) {
 					border: 1.5px solid var(--border);
 				}
 
+				.hero-header {
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					margin-bottom: 0.75rem;
+					flex-wrap: wrap;
+				}
+
 				.hero-eyebrow {
 					font-family: 'Bebas Neue', sans-serif;
 					font-size: 0.875rem;
 					letter-spacing: 0.25em;
 					text-transform: uppercase;
 					color: var(--bear-blue);
-					margin-bottom: 0.75rem;
+				}
+
+				.weather-chip {
+					display: none;
+					align-items: center;
+					font-size: 0.8125rem;
+					font-weight: 600;
+					color: var(--stone);
+					background: var(--off-white);
+					border: 1.5px solid var(--border);
+					border-radius: 9999px;
+					padding: 0.2rem 0.7rem;
+					line-height: 1.5;
+					white-space: nowrap;
 				}
 
 				.hero-eyebrow.soon {
 					color: var(--stone);
+					margin-bottom: 0.75rem;
 				}
 
 				.venue-chips {
@@ -872,6 +894,7 @@ templ Layout(title string) {
 					& footer a { color: #8099c0; }
 					& .hero-eyebrow { color: #93b4e0; }
 					& .hero-eyebrow.soon { color: #7a8fa8; }
+					& .weather-chip { background: #0d1a2e; border-color: var(--border); color: #7a8fa8; }
 					& .leaflet-location-btn { background: #1d2f55; color: #93b4e0; border-color: #1e3058; }
 					& .leaflet-location-btn:hover { background: #243a6a; color: #e0e8f5; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
