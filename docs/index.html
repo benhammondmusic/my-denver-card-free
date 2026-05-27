@@ -969,7 +969,8 @@
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All" or pick a month.';
     }
-    if (kidAge > 0) label += ' (age ' + kidAge + ')';
+    var AGE_LABELS = { '4': 'under 5', '8': 'ages 5-12', '15': 'teens 13+' };
+    if (kidAge > 0) label += ' (' + (AGE_LABELS[String(kidAge)] || 'age ' + kidAge) + ')';
     if (countEl) countEl.textContent = label;
   }
 
