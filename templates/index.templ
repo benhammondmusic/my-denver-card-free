@@ -128,10 +128,13 @@ templ VenueRow(v models.Venue) {
 		</div>
 		<div class="venue-body">
 			<p class="venue-name">{ v.Name }</p>
+			if v.TemporarilyClosed && v.ClosureReason != "" {
+				<p class="closure-reason">{ v.ClosureReason }</p>
+			}
 		</div>
 		<div class="venue-status">
 			if v.TemporarilyClosed {
-				<span class="badge badge-red">closed</span>
+				<span class="badge badge-yellow">Temporarily closed</span>
 			} else {
 				switch {
 					case v.AdultsIncluded >= 2:

@@ -463,7 +463,8 @@ templ Layout(title string) {
 					min-width: 0;
 					padding: 0.75rem 0.75rem 0.75rem 1rem;
 					display: flex;
-					align-items: center;
+					flex-direction: column;
+					justify-content: center;
 				}
 
 				/* ---- VENUE NAME ---- */
@@ -477,6 +478,13 @@ templ Layout(title string) {
 
 				.venue-row.venue-closed .venue-name {
 					color: var(--stone);
+				}
+
+				.closure-reason {
+					font-size: 0.8rem;
+					color: var(--stone);
+					margin-top: 0.2rem;
+					line-height: 1.4;
 				}
 
 				/* ---- VENUE STATUS (right summary column) ---- */

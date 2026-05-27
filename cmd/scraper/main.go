@@ -56,10 +56,10 @@ func main() {
 	for i := range venues {
 		v := &venues[i]
 		if v.TemporarilyClosed {
-			log.Printf("skip (closed): %s", v.Name)
-			continue
+			log.Printf("scraping (watching for reopen): %s", v.Name)
+		} else {
+			log.Printf("scraping: %s", v.Name)
 		}
-		log.Printf("scraping: %s", v.Name)
 		if err := scrapeVenue(browser, apiKey, v); err != nil {
 			v.ScrapeFailed = true
 			v.ScrapeError = err.Error()
@@ -177,6 +177,7 @@ Page content:
 
 Return a JSON object with ONLY the fields that differ from the current data, or {} if nothing has changed.
 Valid fields: free_months (array of full English month names), free_schedule ("daily"/"weekends"/"weekends_and_breaks"), adults_included (integer 0-2), notes (string, no em dashes), temporarily_closed (boolean), closure_reason (string).
+If the venue is currently recorded as temporarily_closed=true but the page shows it is now open, return temporarily_closed=false along with any updated free admission details you can find.
 If you cannot determine whether anything has changed, return {"uncertain":true}.
 Return only valid JSON, no other text.`,
 		v.Name, v.URL, string(currentJSON), pageText)
@@ -234,6 +235,9 @@ func applyChanges(v *models.Venue, s scraped) {
 	if s.TemporarilyClosed != nil {
 		log.Printf("  temporarily_closed: %v -> %v", v.TemporarilyClosed, *s.TemporarilyClosed)
 		v.TemporarilyClosed = *s.TemporarilyClosed
+		if !*s.TemporarilyClosed {
+			v.ClosureReason = ""
+		}
 	}
 	if s.ClosureReason != "" {
 		v.ClosureReason = s.ClosureReason
