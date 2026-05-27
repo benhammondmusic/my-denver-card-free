@@ -191,56 +191,6 @@ templ Layout(title string) {
 					box-shadow: 0 4px 16px rgba(0,40,104,0.4);
 				}
 
-				.month-strip {
-					display: flex;
-					gap: 0.3rem;
-					flex-wrap: wrap;
-				}
-
-				.month-btn {
-					flex-shrink: 0;
-					min-width: 2.875rem;
-					padding: 0.35rem 0.4rem;
-					border: 1.5px solid var(--border);
-					border-radius: 0.5rem;
-					background: white;
-					font-family: 'Bebas Neue', sans-serif;
-					font-size: 0.875rem;
-					letter-spacing: 0.06em;
-					cursor: pointer;
-					color: var(--stone);
-					text-align: center;
-					transition: all 0.15s;
-					text-transform: uppercase;
-				}
-
-				.month-btn:hover {
-					border-color: var(--sky-blue);
-					color: var(--sky-blue);
-					background: #f0f5ff;
-				}
-
-				.month-btn.current-month {
-					border-color: var(--gold);
-					background: var(--gold-light);
-					color: #92400e;
-					font-weight: 800;
-				}
-
-				.month-btn.active {
-					background: var(--sky-blue);
-					border-color: var(--sky-blue);
-					color: white;
-					box-shadow: 0 2px 10px rgba(26,86,219,0.4);
-				}
-
-				.month-btn.active.current-month {
-					background: var(--gold);
-					border-color: var(--gold);
-					color: #1c1917;
-					box-shadow: 0 2px 10px rgba(217,119,6,0.45);
-				}
-
 				/* ---- HERO SECTION ---- */
 
 				.hero-section {
@@ -817,9 +767,6 @@ templ Layout(title string) {
 					& .venue-featured { box-shadow: 0 3px 22px rgba(0,0,0,0.5); }
 					& .filter-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .filter-tab:hover { background: #1d2f55; color: #93b4e0; }
-					& .month-btn { background: #162040; border-color: var(--border); color: #7a8fa8; }
-					& .month-btn:hover { background: #1d2f55; }
-					& .month-btn.current-month { background: #3d2600; border-color: var(--gold); color: #fcd34d; }
 					& .venue-count { background: rgba(30,80,160,0.25); color: #93b4e0; }
 					& .venue-name { color: #e0e8f5; }
 					& .venue-row.venue-closed .venue-name { color: #7a8fa8; }
