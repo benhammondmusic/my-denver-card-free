@@ -114,7 +114,7 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</ul><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-band\" id=\"modal-band\"></div><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</ul><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-band\" id=\"modal-band\"></div><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div><div id=\"weather-modal\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-band\" style=\"background:#1a56db;\"></div><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\">Denver Weather</h2><button class=\"modal-close\" id=\"weather-modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div id=\"weather-modal-body\"></div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -178,7 +178,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(strings.Join(v.FreeMonths, ","))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 115, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 132, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
@@ -191,7 +191,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.FreeSchedule))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 116, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 133, Col: 40}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -204,7 +204,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.TemporarilyClosed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 117, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 134, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -217,7 +217,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.Program))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 118, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 135, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
@@ -230,7 +230,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lat))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 119, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 136, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
@@ -243,7 +243,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lng))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 120, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 137, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
@@ -256,7 +256,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Address)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 121, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 138, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
@@ -269,7 +269,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.Indoor))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 122, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 139, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
@@ -282,7 +282,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ReservationRequired))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 123, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 140, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
@@ -295,7 +295,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 124, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 141, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
@@ -308,7 +308,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.URL)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 125, Col: 18}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 142, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
@@ -321,7 +321,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Notes)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 126, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 143, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
@@ -334,7 +334,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ClosureReason)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 127, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 144, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
@@ -347,7 +347,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Hours)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 128, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 145, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 		if templ_7745c5c3_Err != nil {
@@ -360,7 +360,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.AdultsIncluded))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 129, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 146, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
@@ -373,7 +373,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var21 string
 		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ScrapeFailed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 130, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 147, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
 		if templ_7745c5c3_Err != nil {
@@ -386,7 +386,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ScrapeError)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 131, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 148, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var22)
 		if templ_7745c5c3_Err != nil {
@@ -399,7 +399,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.LastChecked.Format("2006-01-02"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 132, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 149, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var23)
 		if templ_7745c5c3_Err != nil {
@@ -412,7 +412,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var24 string
 		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Category)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 133, Col: 28}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 150, Col: 28}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var24)
 		if templ_7745c5c3_Err != nil {
@@ -425,7 +425,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Phone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 134, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 151, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var25)
 		if templ_7745c5c3_Err != nil {
@@ -443,7 +443,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var26 string
 			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.ResolveAttributeValue(poolsJSON(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 136, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 153, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var26)
 			if templ_7745c5c3_Err != nil {
@@ -481,7 +481,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var27 string
 		templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 149, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var27))
 		if templ_7745c5c3_Err != nil {
@@ -499,7 +499,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var28 string
 			templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(v.ClosureReason)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 151, Col: 47}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 47}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 			if templ_7745c5c3_Err != nil {
@@ -544,7 +544,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var29 string
 			templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(freeMonthsLabel(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 183, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 			if templ_7745c5c3_Err != nil {
@@ -1311,6 +1311,9 @@ func filterScript() templ.Component {
     var chip = document.getElementById('weather-chip');
     if (!chip) return;
 
+    var wxModal = document.getElementById('weather-modal');
+    var storedWeather = null;
+
     function weatherIcon(code) {
       if (code === 0)  return '☀️';
       if (code <= 2)   return '⛅';
@@ -1324,13 +1327,144 @@ func filterScript() templ.Component {
       return '⛈️';
     }
 
+    function condText(code) {
+      if (code === 0) return 'Clear sky';
+      if (code === 1) return 'Mainly clear';
+      if (code === 2) return 'Partly cloudy';
+      if (code === 3) return 'Overcast';
+      if (code <= 48) return 'Foggy';
+      if (code <= 55) return 'Drizzle';
+      if (code <= 67) return 'Rain';
+      if (code <= 77) return 'Snow';
+      if (code <= 82) return 'Rain showers';
+      if (code <= 86) return 'Snow showers';
+      return 'Thunderstorm';
+    }
+
+    function uvText(uv) {
+      if (uv <= 2)  return 'Low';
+      if (uv <= 5)  return 'Moderate';
+      if (uv <= 7)  return 'High';
+      if (uv <= 10) return 'Very High';
+      return 'Extreme';
+    }
+
+    function openWxModal() {
+      if (!storedWeather || !wxModal) return;
+      buildWxModal(storedWeather);
+      wxModal.setAttribute('aria-hidden', 'false');
+      wxModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var cb = document.getElementById('weather-modal-close');
+      if (cb) setTimeout(function () { cb.focus(); }, 50);
+    }
+
+    function closeWxModal() {
+      if (!wxModal) return;
+      wxModal.setAttribute('aria-hidden', 'true');
+      wxModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function buildWxModal(data) {
+      var body = document.getElementById('weather-modal-body');
+      if (!body) return;
+
+      var cur = data.current;
+      var daily = data.daily || {};
+      var hourly = data.hourly;
+      var currentHour = new Date().getHours();
+
+      var temp      = Math.round(cur.temperature_2m);
+      var feelsLike = cur.apparent_temperature != null ? Math.round(cur.apparent_temperature) : null;
+      var wind      = Math.round(cur.wind_speed_10m);
+      var humidity  = cur.relative_humidity_2m;
+      var high      = daily.temperature_2m_max ? Math.round(daily.temperature_2m_max[0]) : null;
+      var low       = daily.temperature_2m_min ? Math.round(daily.temperature_2m_min[0]) : null;
+      var uv        = daily.uv_index_max        ? daily.uv_index_max[0]                  : null;
+      var maxPrecip = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
+
+      var html = '';
+
+      // Current conditions
+      html += '<div class="wx-current">';
+      html += '<span class="wx-big-icon">' + weatherIcon(cur.weather_code) + '</span>';
+      html += '<div class="wx-current-info">';
+      html += '<span class="wx-temp">' + temp + '°F</span>';
+      html += '<span class="wx-cond">' + condText(cur.weather_code) + '</span>';
+      if (feelsLike !== null && feelsLike !== temp) {
+        html += '<span class="wx-feels">Feels like ' + feelsLike + '°F</span>';
+      }
+      html += '</div></div>';
+
+      // Stats grid
+      html += '<div class="wx-stats">';
+      if (high !== null && low !== null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">High / Low</span><span class="wx-stat-val">' + high + '° / ' + low + '°</span></div>';
+      }
+      html += '<div class="wx-stat"><span class="wx-stat-label">Wind</span><span class="wx-stat-val">' + wind + ' mph</span></div>';
+      if (humidity != null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">Humidity</span><span class="wx-stat-val">' + humidity + '%</span></div>';
+      }
+      if (maxPrecip > 0) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">Precip chance</span><span class="wx-stat-val">' + maxPrecip + '%</span></div>';
+      }
+      if (uv !== null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">UV Index</span><span class="wx-stat-val">' + uv + ' - ' + uvText(uv) + '</span></div>';
+      }
+      html += '</div>';
+
+      // Hourly strip - next 9 hours
+      html += '<p class="wx-hourly-label">Next several hours</p>';
+      html += '<div class="wx-hourly">';
+      var count = 0;
+      for (var i = 0; i < hourly.time.length && count < 9; i++) {
+        var h = parseInt(hourly.time[i].slice(11, 13), 10);
+        if (h < currentHour) continue;
+        var ht = hourly.temperature_2m ? Math.round(hourly.temperature_2m[i]) : temp;
+        var hp = hourly.precipitation_probability[i] || 0;
+        var ap = h >= 12 ? 'pm' : 'am';
+        var h12 = h % 12 || 12;
+        html += '<div class="wx-hour">';
+        html += '<span class="wx-hour-time">' + h12 + ap + '</span>';
+        html += '<span class="wx-hour-icon">' + weatherIcon(hourly.weather_code[i]) + '</span>';
+        html += '<span class="wx-hour-temp">' + ht + '°</span>';
+        html += '<span class="wx-hour-precip">' + (hp > 0 ? hp + '%' : '') + '</span>';
+        html += '</div>';
+        count++;
+      }
+      html += '</div>';
+
+      body.innerHTML = html;
+    }
+
+    // Wire chip as a button
+    chip.setAttribute('role', 'button');
+    chip.setAttribute('tabindex', '0');
+    chip.addEventListener('click', openWxModal);
+    chip.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWxModal(); }
+    });
+
+    // Wire modal close
+    if (wxModal) {
+      wxModal.addEventListener('click', function (e) { if (e.target === wxModal) closeWxModal(); });
+    }
+    var wxCloseBtn = document.getElementById('weather-modal-close');
+    if (wxCloseBtn) wxCloseBtn.addEventListener('click', closeWxModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && wxModal && wxModal.classList.contains('open')) closeWxModal();
+    });
+
     fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
-      '&current=weather_code,temperature_2m,wind_speed_10m' +
-      '&hourly=weather_code,precipitation_probability' +
+      '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m' +
+      '&hourly=weather_code,temperature_2m,precipitation_probability' +
+      '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max' +
       '&temperature_unit=fahrenheit&wind_speed_unit=mph' +
       '&timezone=America%2FDenver&forecast_days=1')
       .then(function (r) { return r.json(); })
       .then(function (data) {
+        storedWeather = data;
         var cur = data.current;
         var temp = Math.round(cur.temperature_2m);
         var wind = Math.round(cur.wind_speed_10m);
@@ -1338,8 +1472,7 @@ func filterScript() templ.Component {
 
         var maxPrecip = 0;
         var worstCode = cur.weather_code;
-        var times = data.hourly.time;
-        times.forEach(function (t, i) {
+        data.hourly.time.forEach(function (t, i) {
           var h = parseInt(t.slice(11, 13), 10);
           if (h >= currentHour) {
             if (data.hourly.precipitation_probability[i] > maxPrecip) {

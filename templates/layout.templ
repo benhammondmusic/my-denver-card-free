@@ -247,6 +247,119 @@ templ Layout(title string) {
 					padding: 0.2rem 0.7rem;
 					line-height: 1.5;
 					white-space: nowrap;
+					cursor: pointer;
+					transition: background 0.15s, border-color 0.15s;
+				}
+
+				.weather-chip:hover {
+					background: #e8edf8;
+					border-color: var(--sky-blue);
+				}
+
+				/* ---- WEATHER MODAL ---- */
+
+				.wx-current {
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+					padding-bottom: 1rem;
+					margin-bottom: 1rem;
+					border-bottom: 1px solid var(--border);
+				}
+
+				.wx-big-icon { font-size: 2.75rem; line-height: 1; }
+
+				.wx-current-info {
+					display: flex;
+					flex-direction: column;
+					gap: 0.2rem;
+				}
+
+				.wx-temp {
+					font-size: 2.25rem;
+					font-weight: 700;
+					line-height: 1;
+					color: #111827;
+				}
+
+				.wx-cond { font-size: 1rem; color: #374151; }
+
+				.wx-feels { font-size: 0.875rem; color: var(--stone); }
+
+				.wx-stats {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.75rem 1.5rem;
+					padding-bottom: 1rem;
+					margin-bottom: 1rem;
+					border-bottom: 1px solid var(--border);
+				}
+
+				.wx-stat { display: flex; flex-direction: column; gap: 0.15rem; }
+
+				.wx-stat-label {
+					font-size: 0.6875rem;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 0.06em;
+					color: var(--stone);
+				}
+
+				.wx-stat-val {
+					font-size: 0.9375rem;
+					font-weight: 600;
+					color: #111827;
+				}
+
+				.wx-hourly-label {
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.8125rem;
+					letter-spacing: 0.2em;
+					text-transform: uppercase;
+					color: var(--stone);
+					margin-bottom: 0.5rem;
+				}
+
+				.wx-hourly {
+					display: flex;
+					gap: 0.5rem;
+					overflow-x: auto;
+					padding-bottom: 0.5rem;
+					-webkit-overflow-scrolling: touch;
+				}
+
+				.wx-hour {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					gap: 0.2rem;
+					min-width: 3rem;
+					background: var(--off-white);
+					border-radius: 0.75rem;
+					padding: 0.5rem 0.375rem;
+					border: 1.5px solid var(--border);
+					flex-shrink: 0;
+				}
+
+				.wx-hour-time {
+					font-size: 0.6875rem;
+					font-weight: 700;
+					color: var(--stone);
+				}
+
+				.wx-hour-icon { font-size: 1.25rem; line-height: 1; }
+
+				.wx-hour-temp {
+					font-size: 0.875rem;
+					font-weight: 600;
+					color: #111827;
+				}
+
+				.wx-hour-precip {
+					font-size: 0.6875rem;
+					color: #1a56db;
+					font-weight: 700;
+					min-height: 1em;
 				}
 
 				.hero-eyebrow.soon {
@@ -1052,6 +1165,13 @@ templ Layout(title string) {
 				& .card-info-list li { color: #c0cfe8; }
 				& .card-cta-btn { background: #1a56db; }
 				& .card-cta-btn:hover { background: #1e40af; }
+				& .weather-chip:hover { background: #1d2f55; border-color: #3b82f6; }
+				& .wx-temp { color: #e0e8f5; }
+				& .wx-cond { color: #c0cfe8; }
+				& .wx-stat-val { color: #e0e8f5; }
+				& .wx-hour { background: #0d1a2e; border-color: var(--border); }
+				& .wx-hour-temp { color: #e0e8f5; }
+				& .wx-hour-precip { color: #93b4e0; }
 				& .pool-callout { background: #2d2000; border-color: #78350f; color: #fcd34d; }
 				& .call-ahead-warning { background: #2d2000; border-color: #78350f; color: #fcd34d; }
 				& .pool-status-open { background: #064e3b; color: #6ee7b7; border-color: #065f46; }

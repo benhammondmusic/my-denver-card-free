@@ -103,6 +103,23 @@ templ Index(venues []models.Venue) {
 				</div>
 			</div>
 		</div>
+		<div id="weather-modal" class="modal-overlay" aria-hidden="true">
+			<div class="modal-sheet">
+				<div class="modal-band" style="background:#1a56db;"></div>
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title">Denver Weather</h2>
+						<button class="modal-close" id="weather-modal-close" aria-label="Close">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+					</div>
+					<div id="weather-modal-body"></div>
+				</div>
+			</div>
+		</div>
 		@filterScript()
 	}
 }
@@ -897,6 +914,9 @@ templ filterScript() {
     var chip = document.getElementById('weather-chip');
     if (!chip) return;
 
+    var wxModal = document.getElementById('weather-modal');
+    var storedWeather = null;
+
     function weatherIcon(code) {
       if (code === 0)  return '☀️';
       if (code <= 2)   return '⛅';
@@ -910,13 +930,144 @@ templ filterScript() {
       return '⛈️';
     }
 
+    function condText(code) {
+      if (code === 0) return 'Clear sky';
+      if (code === 1) return 'Mainly clear';
+      if (code === 2) return 'Partly cloudy';
+      if (code === 3) return 'Overcast';
+      if (code <= 48) return 'Foggy';
+      if (code <= 55) return 'Drizzle';
+      if (code <= 67) return 'Rain';
+      if (code <= 77) return 'Snow';
+      if (code <= 82) return 'Rain showers';
+      if (code <= 86) return 'Snow showers';
+      return 'Thunderstorm';
+    }
+
+    function uvText(uv) {
+      if (uv <= 2)  return 'Low';
+      if (uv <= 5)  return 'Moderate';
+      if (uv <= 7)  return 'High';
+      if (uv <= 10) return 'Very High';
+      return 'Extreme';
+    }
+
+    function openWxModal() {
+      if (!storedWeather || !wxModal) return;
+      buildWxModal(storedWeather);
+      wxModal.setAttribute('aria-hidden', 'false');
+      wxModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var cb = document.getElementById('weather-modal-close');
+      if (cb) setTimeout(function () { cb.focus(); }, 50);
+    }
+
+    function closeWxModal() {
+      if (!wxModal) return;
+      wxModal.setAttribute('aria-hidden', 'true');
+      wxModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function buildWxModal(data) {
+      var body = document.getElementById('weather-modal-body');
+      if (!body) return;
+
+      var cur = data.current;
+      var daily = data.daily || {};
+      var hourly = data.hourly;
+      var currentHour = new Date().getHours();
+
+      var temp      = Math.round(cur.temperature_2m);
+      var feelsLike = cur.apparent_temperature != null ? Math.round(cur.apparent_temperature) : null;
+      var wind      = Math.round(cur.wind_speed_10m);
+      var humidity  = cur.relative_humidity_2m;
+      var high      = daily.temperature_2m_max ? Math.round(daily.temperature_2m_max[0]) : null;
+      var low       = daily.temperature_2m_min ? Math.round(daily.temperature_2m_min[0]) : null;
+      var uv        = daily.uv_index_max        ? daily.uv_index_max[0]                  : null;
+      var maxPrecip = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
+
+      var html = '';
+
+      // Current conditions
+      html += '<div class="wx-current">';
+      html += '<span class="wx-big-icon">' + weatherIcon(cur.weather_code) + '</span>';
+      html += '<div class="wx-current-info">';
+      html += '<span class="wx-temp">' + temp + '°F</span>';
+      html += '<span class="wx-cond">' + condText(cur.weather_code) + '</span>';
+      if (feelsLike !== null && feelsLike !== temp) {
+        html += '<span class="wx-feels">Feels like ' + feelsLike + '°F</span>';
+      }
+      html += '</div></div>';
+
+      // Stats grid
+      html += '<div class="wx-stats">';
+      if (high !== null && low !== null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">High / Low</span><span class="wx-stat-val">' + high + '° / ' + low + '°</span></div>';
+      }
+      html += '<div class="wx-stat"><span class="wx-stat-label">Wind</span><span class="wx-stat-val">' + wind + ' mph</span></div>';
+      if (humidity != null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">Humidity</span><span class="wx-stat-val">' + humidity + '%</span></div>';
+      }
+      if (maxPrecip > 0) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">Precip chance</span><span class="wx-stat-val">' + maxPrecip + '%</span></div>';
+      }
+      if (uv !== null) {
+        html += '<div class="wx-stat"><span class="wx-stat-label">UV Index</span><span class="wx-stat-val">' + uv + ' - ' + uvText(uv) + '</span></div>';
+      }
+      html += '</div>';
+
+      // Hourly strip - next 9 hours
+      html += '<p class="wx-hourly-label">Next several hours</p>';
+      html += '<div class="wx-hourly">';
+      var count = 0;
+      for (var i = 0; i < hourly.time.length && count < 9; i++) {
+        var h = parseInt(hourly.time[i].slice(11, 13), 10);
+        if (h < currentHour) continue;
+        var ht = hourly.temperature_2m ? Math.round(hourly.temperature_2m[i]) : temp;
+        var hp = hourly.precipitation_probability[i] || 0;
+        var ap = h >= 12 ? 'pm' : 'am';
+        var h12 = h % 12 || 12;
+        html += '<div class="wx-hour">';
+        html += '<span class="wx-hour-time">' + h12 + ap + '</span>';
+        html += '<span class="wx-hour-icon">' + weatherIcon(hourly.weather_code[i]) + '</span>';
+        html += '<span class="wx-hour-temp">' + ht + '°</span>';
+        html += '<span class="wx-hour-precip">' + (hp > 0 ? hp + '%' : '') + '</span>';
+        html += '</div>';
+        count++;
+      }
+      html += '</div>';
+
+      body.innerHTML = html;
+    }
+
+    // Wire chip as a button
+    chip.setAttribute('role', 'button');
+    chip.setAttribute('tabindex', '0');
+    chip.addEventListener('click', openWxModal);
+    chip.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWxModal(); }
+    });
+
+    // Wire modal close
+    if (wxModal) {
+      wxModal.addEventListener('click', function (e) { if (e.target === wxModal) closeWxModal(); });
+    }
+    var wxCloseBtn = document.getElementById('weather-modal-close');
+    if (wxCloseBtn) wxCloseBtn.addEventListener('click', closeWxModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && wxModal && wxModal.classList.contains('open')) closeWxModal();
+    });
+
     fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
-      '&current=weather_code,temperature_2m,wind_speed_10m' +
-      '&hourly=weather_code,precipitation_probability' +
+      '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m' +
+      '&hourly=weather_code,temperature_2m,precipitation_probability' +
+      '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max' +
       '&temperature_unit=fahrenheit&wind_speed_unit=mph' +
       '&timezone=America%2FDenver&forecast_days=1')
       .then(function (r) { return r.json(); })
       .then(function (data) {
+        storedWeather = data;
         var cur = data.current;
         var temp = Math.round(cur.temperature_2m);
         var wind = Math.round(cur.wind_speed_10m);
@@ -924,8 +1075,7 @@ templ filterScript() {
 
         var maxPrecip = 0;
         var worstCode = cur.weather_code;
-        var times = data.hourly.time;
-        times.forEach(function (t, i) {
+        data.hourly.time.forEach(function (t, i) {
           var h = parseInt(t.slice(11, 13), 10);
           if (h >= currentHour) {
             if (data.hourly.precipitation_probability[i] > maxPrecip) {
