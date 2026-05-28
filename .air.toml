@@ -1,0 +1,25 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  bin = "./tmp/main"
+  cmd = "go build -o ./tmp/main ./cmd/server/main.go"
+  delay = 500
+  exclude_dir = ["docs", "tmp", "scraper", "bin", "data"]
+  include_ext = ["go", "templ"]
+  exclude_regex = ["_templ\\.go"]
+  pre_cmd = ["$(go env GOPATH)/bin/templ generate"]
+  kill_delay = "200ms"
+  send_interrupt = true
+
+[log]
+  time = false
+
+[color]
+  main = "magenta"
+  watcher = "cyan"
+  build = "yellow"
+  runner = "green"
+
+[misc]
+  clean_on_exit = true

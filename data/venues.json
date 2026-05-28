@@ -307,10 +307,13 @@
     "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Washington-Park",
     "program": "mydenvercard",
     "featured": false,
-    "free_months": ["June", "July", "August"],
+    "free_months": [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free with My Denver Card. Seasonal outdoor lap pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "notes": "Free with My Denver Card. Year-round indoor lap pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-28T00:00:00Z",
@@ -319,8 +322,8 @@
     "lat": 39.7012,
     "lng": -104.9717,
     "address": "701 S Franklin St, Denver, CO 80209",
-    "hours": "Seasonal outdoor pool",
-    "indoor": false,
+    "hours": "Varies by session",
+    "indoor": true,
     "reservation_required": false,
     "min_age": 5,
     "max_age": 18,
@@ -328,11 +331,9 @@
     "phone": "720-865-3400",
     "pools": [
       {
-        "name": "Outdoor Pool",
+        "name": "Indoor Pool",
         "family_friendly": true,
         "season_label": "Summer 2026",
-        "season_start": "2026-05-25",
-        "season_end": "2026-06-14",
         "sessions": [
           {"type": "open_swim", "days": ["mon","tue","thu"], "open": "14:00", "close": "18:15"},
           {"type": "open_swim", "days": ["wed"], "open": "14:00", "close": "17:15"},
