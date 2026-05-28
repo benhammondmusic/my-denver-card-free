@@ -1429,7 +1429,7 @@ func filterScript() templ.Component {
         html += '<span class="wx-hour-time">' + h12 + ap + '</span>';
         html += '<span class="wx-hour-icon">' + weatherIcon(hourly.weather_code[i]) + '</span>';
         html += '<span class="wx-hour-temp">' + ht + '°</span>';
-        html += '<span class="wx-hour-precip">' + (hp > 0 ? hp + '%' : '') + '</span>';
+        html += '<span class="wx-hour-precip">' + (hp > 0 ? '💧' + hp + '%' : '') + '</span>';
         html += '</div>';
         count++;
       }
