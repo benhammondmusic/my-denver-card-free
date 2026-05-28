@@ -303,6 +303,208 @@
     "max_age": 13
   },
   {
+    "name": "Washington Park Rec Center Pool",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Washington-Park",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": ["June", "July", "August"],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free with My Denver Card. Seasonal outdoor lap pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-28T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 39.7012,
+    "lng": -104.9717,
+    "address": "701 S Franklin St, Denver, CO 80209",
+    "hours": "Seasonal outdoor pool",
+    "indoor": false,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18,
+    "category": "pool",
+    "phone": "720-865-3400",
+    "pools": [
+      {
+        "name": "Outdoor Pool",
+        "family_friendly": true,
+        "season_label": "Summer 2026",
+        "season_start": "2026-05-25",
+        "season_end": "2026-06-14",
+        "sessions": [
+          {"type": "open_swim", "days": ["mon","tue","thu"], "open": "14:00", "close": "18:15"},
+          {"type": "open_swim", "days": ["wed"], "open": "14:00", "close": "17:15"},
+          {"type": "open_swim", "days": ["fri"], "open": "15:00", "close": "19:30"},
+          {"type": "open_swim", "days": ["sat"], "open": "12:30", "close": "15:30"},
+          {"type": "open_swim", "days": ["sun"], "open": "14:00", "close": "15:30"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Carla Madison Rec Center Pool",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Carla-Madison",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-28T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 39.7399,
+    "lng": -104.9521,
+    "address": "2401 E Colfax Ave, Denver, CO 80206",
+    "hours": "Varies by session",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18,
+    "category": "pool",
+    "phone": "720-865-5580",
+    "pools": [
+      {
+        "name": "Leisure Pool",
+        "family_friendly": true,
+        "season_label": "Summer 2026",
+        "sessions": [
+          {"type": "open_swim", "days": ["mon","wed","fri"], "open": "10:00", "close": "19:30"},
+          {"type": "open_swim", "days": ["tue","thu"], "open": "12:00", "close": "19:30"},
+          {"type": "open_swim", "days": ["sat","sun"], "open": "10:00", "close": "15:30"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Central Park Rec Center Pool",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Central-Park",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": ["June", "July", "August"],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free with My Denver Card. Outdoor leisure pool with lazy river, slides, and splash area. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-28T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 39.7574,
+    "lng": -104.8620,
+    "address": "9651 E Martin Luther King Jr Blvd, Denver, CO 80238",
+    "hours": "June 8 - Aug 16, 2026",
+    "indoor": false,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18,
+    "category": "pool",
+    "phone": "720-865-0750",
+    "pools": [
+      {
+        "name": "Leisure Pool",
+        "family_friendly": true,
+        "features": ["lazy river", "slides", "splash area"],
+        "season_label": "Summer 2026",
+        "season_start": "2026-06-08",
+        "season_end": "2026-08-16",
+        "sessions": [
+          {"type": "family_swim", "days": ["mon","wed","fri","sat","sun"], "open": "10:00", "close": "10:30"},
+          {"type": "open_swim", "days": ["mon","wed","fri"], "open": "10:30", "close": "19:30"},
+          {"type": "open_swim", "days": ["tue","thu"], "open": "11:00", "close": "17:00"},
+          {"type": "open_swim", "days": ["sat","sun"], "open": "10:30", "close": "15:30"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ashland Rec Center Pool",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Ashland",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-28T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 39.7079,
+    "lng": -105.0428,
+    "address": "225 S Raleigh St, Denver, CO 80219",
+    "hours": "Varies by session",
+    "indoor": true,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18,
+    "category": "pool",
+    "phone": "720-865-0518",
+    "pools": [
+      {
+        "name": "Leisure Pool",
+        "family_friendly": true,
+        "season_label": "Spring 2026",
+        "sessions": [
+          {"type": "family_swim", "days": ["mon","wed","fri"], "open": "10:00", "close": "14:30"},
+          {"type": "family_swim", "days": ["tue","thu"], "open": "11:15", "close": "14:30"},
+          {"type": "open_swim", "days": ["mon","wed"], "open": "14:30", "close": "17:45"},
+          {"type": "open_swim", "days": ["tue","thu"], "open": "14:30", "close": "19:45"},
+          {"type": "open_swim", "days": ["fri"], "open": "14:30", "close": "18:45"},
+          {"type": "open_swim", "days": ["sat"], "open": "08:00", "close": "13:30"}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Glenarm Rec Center Pool",
+    "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Glenarm",
+    "program": "mydenvercard",
+    "featured": false,
+    "free_months": ["June", "July", "August"],
+    "free_schedule": "daily",
+    "adults_included": 0,
+    "notes": "Free with My Denver Card. Seasonal pool in Curtis Park neighborhood. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm.",
+    "temporarily_closed": false,
+    "closure_reason": "",
+    "last_checked": "2026-05-28T00:00:00Z",
+    "scrape_failed": false,
+    "scrape_error": "",
+    "lat": 39.7513,
+    "lng": -104.9781,
+    "address": "2800 Glenarm Pl, Denver, CO 80205",
+    "hours": "Summer 2026",
+    "indoor": false,
+    "reservation_required": false,
+    "min_age": 5,
+    "max_age": 18,
+    "category": "pool",
+    "phone": "720-865-3380",
+    "pools": [
+      {
+        "name": "Pool",
+        "family_friendly": true,
+        "season_label": "Summer 2026",
+        "sessions": [
+          {"type": "open_swim", "days": ["mon","tue","wed","thu"], "open": "14:00", "close": "17:00"},
+          {"type": "open_swim", "days": ["fri"], "open": "14:00", "close": "17:30"},
+          {"type": "open_swim", "days": ["sat"], "open": "11:30", "close": "13:30"}
+        ]
+      }
+    ]
+  },
+  {
     "name": "Downtown Denver Rink",
     "url": "https://www.winterindenver.com/rink",
     "program": "mydenvercard",

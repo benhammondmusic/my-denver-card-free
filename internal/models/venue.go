@@ -19,6 +19,37 @@ const (
 	ScheduleWeekendsAndBreaks FreeSchedule = "weekends_and_breaks"
 )
 
+type SessionType string
+
+const (
+	SessionOpenSwim    SessionType = "open_swim"
+	SessionFamilySwim  SessionType = "family_swim"
+	SessionLapSwim     SessionType = "lap_swim"
+	SessionAdultSwim   SessionType = "adult_swim"
+	SessionQuietSwim   SessionType = "quiet_swim"
+	SessionAquaFitness SessionType = "aqua_fitness"
+	SessionSwimLessons SessionType = "swim_lessons"
+	SessionSwimTeam    SessionType = "swim_team"
+)
+
+type PoolSession struct {
+	Type  SessionType `json:"type"`
+	Days  []string    `json:"days"`  // lowercase three-letter: "mon","tue","wed","thu","fri","sat","sun"
+	Open  string      `json:"open"`  // 24h "HH:MM"
+	Close string      `json:"close"` // 24h "HH:MM"
+}
+
+type Pool struct {
+	Name           string        `json:"name"`
+	FamilyFriendly bool          `json:"family_friendly"`
+	Features       []string      `json:"features,omitempty"`
+	SeasonLabel    string        `json:"season_label,omitempty"`
+	SeasonStart    string        `json:"season_start,omitempty"` // "YYYY-MM-DD"
+	SeasonEnd      string        `json:"season_end,omitempty"`   // "YYYY-MM-DD"
+	CanvaURL       string        `json:"canva_url,omitempty"`
+	Sessions       []PoolSession `json:"sessions"`
+}
+
 type Venue struct {
 	Name                string       `json:"name"`
 	URL                 string       `json:"url"`
@@ -41,4 +72,7 @@ type Venue struct {
 	ReservationRequired bool         `json:"reservation_required"`
 	MinAge              int          `json:"min_age"` // 0 = no minimum
 	MaxAge              int          `json:"max_age"` // 0 = no maximum
+	Category            string       `json:"category,omitempty"`
+	Phone               string       `json:"phone,omitempty"`
+	Pools               []Pool       `json:"pools,omitempty"`
 }

@@ -616,6 +616,106 @@
 
 				.badge-blue { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
 
+				/* ---- POOL STATUS BADGES ---- */
+
+				.pool-status-open   { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+				.pool-status-soon   { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+				.pool-status-closed { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+
+				/* ---- POOL CALL-AHEAD NOTICE ---- */
+
+				.pool-callout {
+					background: #fffbeb;
+					border: 1.5px solid #fcd34d;
+					border-radius: 0.75rem;
+					padding: 0.75rem 1rem;
+					margin-bottom: 1rem;
+					font-size: 0.875rem;
+					color: #92400e;
+					line-height: 1.5;
+				}
+
+				.pool-callout strong { font-weight: 700; }
+
+				/* ---- POOL SCHEDULE IN MODAL ---- */
+
+				.pool-schedule {
+					margin-top: 0.75rem;
+					border-top: 1px solid var(--border);
+					padding-top: 0.75rem;
+				}
+
+				.pool-schedule-title {
+					font-size: 0.8125rem;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 0.06em;
+					color: var(--stone);
+					margin-bottom: 0.5rem;
+				}
+
+				.pool-session {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+					padding: 0.3rem 0;
+					font-size: 0.875rem;
+					flex-wrap: wrap;
+				}
+
+				.pool-session-now {
+					background: #d1fae5;
+					border-radius: 0.375rem;
+					padding: 0.3rem 0.5rem;
+					margin: 0 -0.5rem;
+				}
+
+				.pool-session-type {
+					font-weight: 600;
+					color: #374151;
+					text-transform: capitalize;
+					flex: 1;
+				}
+
+				.pool-session-time {
+					color: var(--stone);
+					white-space: nowrap;
+				}
+
+				.pool-closed-today {
+					font-size: 0.875rem;
+					color: var(--stone);
+					font-style: italic;
+				}
+
+				.pool-season-note {
+					font-size: 0.75rem;
+					color: var(--stone);
+					margin-top: 0.4rem;
+				}
+
+				.modal-phone {
+					font-size: 0.875rem;
+					color: var(--stone);
+					margin-bottom: 0.4rem;
+				}
+
+				.modal-phone a { color: var(--sky-blue); text-decoration: none; }
+				.modal-phone a:hover { text-decoration: underline; }
+
+				.call-ahead-warning {
+					background: #fffbeb;
+					border: 1.5px solid #fcd34d;
+					border-radius: 0.5rem;
+					padding: 0.6rem 0.75rem;
+					font-size: 0.8125rem;
+					color: #92400e;
+					line-height: 1.5;
+					margin-bottom: 0.75rem;
+				}
+
+				.section-divider.hidden { display: none; }
+
 				/* ---- MAP POPUP ---- */
 
 				.map-popup-btn {
@@ -935,6 +1035,16 @@
 				& .card-info-list li { color: #c0cfe8; }
 				& .card-cta-btn { background: #1a56db; }
 				& .card-cta-btn:hover { background: #1e40af; }
+				& .pool-callout { background: #2d2000; border-color: #78350f; color: #fcd34d; }
+				& .call-ahead-warning { background: #2d2000; border-color: #78350f; color: #fcd34d; }
+				& .pool-status-open { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
+				& .pool-status-soon { background: #78350f; color: #fcd34d; border-color: #92400e; }
+				& .pool-status-closed { background: #1f2937; color: #9ca3af; border-color: #374151; }
+				& .pool-schedule { border-color: var(--border); }
+				& .pool-session-type { color: #c0cfe8; }
+				& .pool-session-now { background: #064e3b; }
+				& .modal-phone { color: #7a8fa8; }
+				& .modal-phone a { color: #93b4e0; }
 				}
 
 				/* ---- THEME TOGGLE ---- */
@@ -1006,7 +1116,7 @@
 
 					.months { text-align: left; }
 				}
-			</style></head><body><header><div class="header-actions"><button id="card-info-btn" class="card-signup-btn" aria-label="About myDenverCard" title="About myDenverCard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></button> <button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button></div><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"> <span class="bear-eye bear-eye-left" aria-hidden="true"></span> <span class="bear-eye bear-eye-right" aria-hidden="true"></span></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Where Denver kids get in free.</p></div></div></header><main><div class="hero-section"><div class="hero-header"><p class="hero-eyebrow">Free today</p><div id="weather-chip" class="weather-chip"></div></div><div id="free-now-chips" class="venue-chips"></div><div id="hero-soon"><div class="hero-divider"></div><p class="hero-eyebrow soon">Free next month</p><div id="free-soon-chips" class="venue-chips"></div></div></div><p class="browse-label">Browse all venues</p><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="weekend">This Weekend</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button></div></div><div id="map-panel" class="map-panel"></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.750300" data-lng="-104.951700" data-address="2300 Steele St, Denver, CO 80205" data-indoor="false" data-reservation="true" data-name="Denver Zoo" data-url="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" data-notes="Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required. Children 2 and under always free (no card needed)." data-closure-reason="" data-hours="9am-5pm daily (last entry 4pm)" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Zoo</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.747600" data-lng="-104.943200" data-address="2001 Colorado Blvd, Denver, CO 80205" data-indoor="true" data-reservation="false" data-name="Denver Museum of Nature &amp; Science" data-url="https://www.dmns.org/visit/pricing-and-discounts/" data-notes="Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026. Children under 3 always free (no card needed)." data-closure-reason="" data-hours="9am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Museum of Nature &amp; Science</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.732200" data-lng="-104.957200" data-address="1007 York St, Denver, CO 80206" data-indoor="false" data-reservation="false" data-name="Denver Botanic Gardens" data-url="https://www.botanicgardens.org/my-denver-card" data-notes="Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events. Children 2 and under always free (no card needed)." data-closure-reason="" data-hours="9am-8pm daily (May-Sep), 9am-5pm daily (Oct-Apr)" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Botanic Gardens</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.730800" data-lng="-104.988800" data-address="1250 Bannock St, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Clyfford Still Museum" data-url="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" data-notes="Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Clyfford Still Museum</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.730600" data-lng="-104.987800" data-address="100 W 14th Ave Pkwy, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Denver Art Museum" data-url="https://www.denverartmuseum.org/en/free-kids" data-notes="Free for all kids under 18 year-round. No myDenverCard required." data-closure-reason="" data-hours="10am-5pm Tue-Thu &amp; Sat-Sun, 10am-9pm Fri" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">Denver Art Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.732000" data-lng="-104.986200" data-address="1200 Broadway, Denver, CO 80203" data-indoor="true" data-reservation="false" data-name="History Colorado Center" data-url="https://www.historycolorado.org/history-colorado-center" data-notes="Free for children year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">History Colorado Center</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.758600" data-lng="-105.001900" data-address="1485 Delgany St, Denver, CO 80202" data-indoor="true" data-reservation="false" data-name="MCA Denver" data-url="https://mcadenver.org/visit" data-notes="Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round." data-closure-reason="" data-hours="11am-5pm Tue-Thu &amp; Sun, 11am-9pm Fri-Sat" data-adults="2" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">MCA Denver</p></div><div class="venue-status"><span class="badge badge-green">Whole family</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.736300" data-lng="-104.978000" data-address="1340 Pennsylvania St, Denver, CO 80203" data-indoor="true" data-reservation="false" data-name="Molly Brown House Museum" data-url="https://mollybrown.org/faq/" data-notes="Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks. Children 5 and under always free (no card needed)." data-closure-reason="" data-hours="10am-4pm Tue-Sun (guided tours)" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Molly Brown House Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.722900" data-lng="-104.991700" data-address="861 Santa Fe Dr, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Museo de las Americas" data-url="https://museo.org/plan-your-visit/" data-notes="Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">Museo de las Americas</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li class="section-divider" aria-hidden="true"><span>City recreation</span></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-name="Denver Recreation Centers" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers" data-notes="Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Children ages 0-1 always free (no card needed). Adults pay regular admission. Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Recreation Centers</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-name="Denver Indoor Pools" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" data-notes="Free at all Denver indoor pools year-round. Ages 5-18. Children ages 0-1 always free (no card needed). Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Indoor Pools</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="false" data-reservation="false" data-name="Denver Outdoor Pools" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" data-notes="Free at all Denver outdoor pools June through August. Ages 5-18. Children ages 0-1 always free (no card needed). Show card at the front desk." data-closure-reason="" data-hours="Seasonal, hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Outdoor Pools</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard" data-lat="39.749400" data-lng="-104.998200" data-address="Arapahoe St &amp; 15th St, Denver, CO 80202" data-indoor="false" data-reservation="false" data-name="Downtown Denver Rink" data-url="https://www.winterindenver.com/rink" data-notes="" data-closure-reason="Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete." data-hours="" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-23"><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><p class="venue-name">Downtown Denver Rink</p><p class="closure-reason">Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</p></div><div class="venue-status"><span class="badge badge-yellow">Temporarily closed</span></div></li></ul><div id="modal-overlay" class="modal-overlay" aria-hidden="true"><div class="modal-sheet"><div class="modal-band" id="modal-band"></div><div class="modal-content"><div class="modal-header"><h2 class="modal-title" id="modal-title"></h2><button class="modal-close" id="modal-close" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="modal-badges" id="modal-badges"></div><div id="modal-map" class="modal-map"></div><div class="modal-details" id="modal-details"></div><div class="modal-actions" id="modal-actions"></div></div></div></div><script>
+			</style></head><body><header><div class="header-actions"><button id="card-info-btn" class="card-signup-btn" aria-label="About myDenverCard" title="About myDenverCard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></button> <button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button></div><div class="header-bg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice"><path fill="white" opacity="0.06" d="M0,180 V65 L80,18 L150,54 L230,8 L310,48 L405,4 L482,42 L572,0 L652,40 L742,0 L824,42 L912,5 L992,45 L1082,3 L1162,42 L1252,5 L1342,42 L1440,12 V180 Z"></path> <g fill="white" opacity="0.045"><rect x="440" y="148" width="22" height="32"></rect> <rect x="465" y="136" width="20" height="44"></rect> <rect x="488" y="148" width="22" height="32"></rect> <rect x="524" y="144" width="24" height="36"></rect> <rect x="551" y="130" width="22" height="50"></rect> <rect x="576" y="116" width="20" height="64"></rect> <rect x="599" y="100" width="18" height="80"></rect> <rect x="620" y="84" width="16" height="96"></rect> <rect x="639" y="68" width="14" height="112"></rect> <rect x="656" y="58" width="13" height="122"></rect> <rect x="672" y="68" width="14" height="112"></rect> <rect x="689" y="82" width="16" height="98"></rect> <rect x="708" y="96" width="18" height="84"></rect> <rect x="729" y="112" width="20" height="68"></rect> <rect x="752" y="126" width="22" height="54"></rect> <rect x="777" y="138" width="24" height="42"></rect> <rect x="820" y="142" width="20" height="38"></rect> <rect x="843" y="130" width="18" height="50"></rect> <rect x="864" y="140" width="20" height="40"></rect> <rect x="910" y="146" width="22" height="34"></rect> <rect x="935" y="136" width="18" height="44"></rect> <rect x="956" y="146" width="22" height="34"></rect></g> <g fill="white" opacity="0.055"><polygon points="28,180 46,146 64,180"></polygon> <polygon points="52,180 74,136 96,180"></polygon> <polygon points="82,180 102,150 122,180"></polygon> <polygon points="108,180 126,158 144,180"></polygon> <polygon points="1296,180 1314,146 1332,180"></polygon> <polygon points="1322,180 1344,136 1366,180"></polygon> <polygon points="1354,180 1374,148 1394,180"></polygon> <polygon points="1388,180 1408,140 1428,180"></polygon></g></svg></div><div class="header-inner"><div class="bear-wrap"><img src="bear.png" alt="The Big Blue Bear"> <span class="bear-eye bear-eye-left" aria-hidden="true"></span> <span class="bear-eye bear-eye-right" aria-hidden="true"></span></div><div class="header-text"><p class="header-eyebrow">MyDenverCard</p><h1>Free.</h1><p class="header-sub">Where Denver kids get in free.</p></div></div></header><main><div class="hero-section"><div class="hero-header"><p class="hero-eyebrow">Free today</p><div id="weather-chip" class="weather-chip"></div></div><div id="free-now-chips" class="venue-chips"></div><div id="hero-soon"><div class="hero-divider"></div><p class="hero-eyebrow soon">Free next month</p><div id="free-soon-chips" class="venue-chips"></div></div></div><p class="browse-label">Browse all venues</p><div class="filter-bar"><div class="filter-tabs"><button class="filter-tab" data-filter="all">All</button> <button class="filter-tab" data-filter="now">Free Now</button> <button class="filter-tab" data-filter="weekend">This Weekend</button> <button class="filter-tab" data-filter="summer">Summer</button> <button class="filter-tab" data-filter="yearround">Year-Round</button> <button class="filter-tab" data-filter="pools">Pools</button></div></div><div id="pool-callout" class="pool-callout hidden"><strong>Call ahead before you go.</strong> Pool schedules change frequently and may not reflect same-day closures or schedule adjustments. The pool desk is your best source for current hours.</div><div id="map-panel" class="map-panel"></div><p class="venue-count"></p><ul class="venue-list" id="venue-list"><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.750300" data-lng="-104.951700" data-address="2300 Steele St, Denver, CO 80205" data-indoor="false" data-reservation="true" data-name="Denver Zoo" data-url="https://denverzoo.org/faq/#accordion-85ab4--can-i-get-in-for-free-with-a-my-denver-card" data-notes="Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required. Children 2 and under always free (no card needed)." data-closure-reason="" data-hours="9am-5pm daily (last entry 4pm)" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Zoo</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.747600" data-lng="-104.943200" data-address="2001 Colorado Blvd, Denver, CO 80205" data-indoor="true" data-reservation="false" data-name="Denver Museum of Nature &amp; Science" data-url="https://www.dmns.org/visit/pricing-and-discounts/" data-notes="Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026. Children under 3 always free (no card needed)." data-closure-reason="" data-hours="9am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Museum of Nature &amp; Science</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row venue-featured" data-free-months="January,February,March" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.732200" data-lng="-104.957200" data-address="1007 York St, Denver, CO 80206" data-indoor="false" data-reservation="false" data-name="Denver Botanic Gardens" data-url="https://www.botanicgardens.org/my-denver-card" data-notes="Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events. Children 2 and under always free (no card needed)." data-closure-reason="" data-hours="9am-8pm daily (May-Sep), 9am-5pm daily (Oct-Apr)" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Botanic Gardens</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">January, February, March</span></div></li><li class="section-divider" aria-hidden="true"><span>More venues</span></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.730800" data-lng="-104.988800" data-address="1250 Bannock St, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Clyfford Still Museum" data-url="https://clyffordstillmuseum.org/plan-your-visit/discounts-promotions/" data-notes="Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="1" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Clyfford Still Museum</p></div><div class="venue-status"><span class="badge badge-green">+1 adult</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.730600" data-lng="-104.987800" data-address="100 W 14th Ave Pkwy, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Denver Art Museum" data-url="https://www.denverartmuseum.org/en/free-kids" data-notes="Free for all kids under 18 year-round. No myDenverCard required." data-closure-reason="" data-hours="10am-5pm Tue-Thu &amp; Sat-Sun, 10am-9pm Fri" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">Denver Art Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.732000" data-lng="-104.986200" data-address="1200 Broadway, Denver, CO 80203" data-indoor="true" data-reservation="false" data-name="History Colorado Center" data-url="https://www.historycolorado.org/history-colorado-center" data-notes="Free for children year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm daily" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">History Colorado Center</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.758600" data-lng="-105.001900" data-address="1485 Delgany St, Denver, CO 80202" data-indoor="true" data-reservation="false" data-name="MCA Denver" data-url="https://mcadenver.org/visit" data-notes="Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round." data-closure-reason="" data-hours="11am-5pm Tue-Thu &amp; Sun, 11am-9pm Fri-Sat" data-adults="2" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">MCA Denver</p></div><div class="venue-status"><span class="badge badge-green">Whole family</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="weekends_and_breaks" data-closed="false" data-program="mydenvercard" data-lat="39.736300" data-lng="-104.978000" data-address="1340 Pennsylvania St, Denver, CO 80203" data-indoor="true" data-reservation="false" data-name="Molly Brown House Museum" data-url="https://mollybrown.org/faq/" data-notes="Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks. Children 5 and under always free (no card needed)." data-closure-reason="" data-hours="10am-4pm Tue-Sun (guided tours)" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Molly Brown House Museum</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row program-general" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="general" data-lat="39.722900" data-lng="-104.991700" data-address="861 Santa Fe Dr, Denver, CO 80204" data-indoor="true" data-reservation="false" data-name="Museo de las Americas" data-url="https://museo.org/plan-your-visit/" data-notes="Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission." data-closure-reason="" data-hours="10am-5pm Tue-Sun" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Always Free</span></div><div class="venue-body"><p class="venue-name">Museo de las Americas</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.701200" data-lng="-104.971700" data-address="701 S Franklin St, Denver, CO 80209" data-indoor="false" data-reservation="false" data-name="Washington Park Rec Center Pool" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Washington-Park" data-notes="Free with My Denver Card. Seasonal outdoor lap pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm." data-closure-reason="" data-hours="Seasonal outdoor pool" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-28" data-category="pool" data-phone="720-865-3400" data-pools="[{&#34;name&#34;:&#34;Outdoor Pool&#34;,&#34;family_friendly&#34;:true,&#34;season_label&#34;:&#34;Summer 2026&#34;,&#34;season_start&#34;:&#34;2026-05-25&#34;,&#34;season_end&#34;:&#34;2026-06-14&#34;,&#34;sessions&#34;:[{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;tue&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;14:00&#34;,&#34;close&#34;:&#34;18:15&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;wed&#34;],&#34;open&#34;:&#34;14:00&#34;,&#34;close&#34;:&#34;17:15&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;fri&#34;],&#34;open&#34;:&#34;15:00&#34;,&#34;close&#34;:&#34;19:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sat&#34;],&#34;open&#34;:&#34;12:30&#34;,&#34;close&#34;:&#34;15:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sun&#34;],&#34;open&#34;:&#34;14:00&#34;,&#34;close&#34;:&#34;15:30&#34;}]}]"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Washington Park Rec Center Pool</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.739900" data-lng="-104.952100" data-address="2401 E Colfax Ave, Denver, CO 80206" data-indoor="true" data-reservation="false" data-name="Carla Madison Rec Center Pool" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Carla-Madison" data-notes="Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm." data-closure-reason="" data-hours="Varies by session" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-28" data-category="pool" data-phone="720-865-5580" data-pools="[{&#34;name&#34;:&#34;Leisure Pool&#34;,&#34;family_friendly&#34;:true,&#34;season_label&#34;:&#34;Summer 2026&#34;,&#34;sessions&#34;:[{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;wed&#34;,&#34;fri&#34;],&#34;open&#34;:&#34;10:00&#34;,&#34;close&#34;:&#34;19:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;tue&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;12:00&#34;,&#34;close&#34;:&#34;19:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sat&#34;,&#34;sun&#34;],&#34;open&#34;:&#34;10:00&#34;,&#34;close&#34;:&#34;15:30&#34;}]}]"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Carla Madison Rec Center Pool</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.757400" data-lng="-104.862000" data-address="9651 E Martin Luther King Jr Blvd, Denver, CO 80238" data-indoor="false" data-reservation="false" data-name="Central Park Rec Center Pool" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Central-Park" data-notes="Free with My Denver Card. Outdoor leisure pool with lazy river, slides, and splash area. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm." data-closure-reason="" data-hours="June 8 - Aug 16, 2026" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-28" data-category="pool" data-phone="720-865-0750" data-pools="[{&#34;name&#34;:&#34;Leisure Pool&#34;,&#34;family_friendly&#34;:true,&#34;features&#34;:[&#34;lazy river&#34;,&#34;slides&#34;,&#34;splash area&#34;],&#34;season_label&#34;:&#34;Summer 2026&#34;,&#34;season_start&#34;:&#34;2026-06-08&#34;,&#34;season_end&#34;:&#34;2026-08-16&#34;,&#34;sessions&#34;:[{&#34;type&#34;:&#34;family_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;wed&#34;,&#34;fri&#34;,&#34;sat&#34;,&#34;sun&#34;],&#34;open&#34;:&#34;10:00&#34;,&#34;close&#34;:&#34;10:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;wed&#34;,&#34;fri&#34;],&#34;open&#34;:&#34;10:30&#34;,&#34;close&#34;:&#34;19:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;tue&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;11:00&#34;,&#34;close&#34;:&#34;17:00&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sat&#34;,&#34;sun&#34;],&#34;open&#34;:&#34;10:30&#34;,&#34;close&#34;:&#34;15:30&#34;}]}]"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Central Park Rec Center Pool</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.707900" data-lng="-105.042800" data-address="225 S Raleigh St, Denver, CO 80219" data-indoor="true" data-reservation="false" data-name="Ashland Rec Center Pool" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Ashland" data-notes="Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm." data-closure-reason="" data-hours="Varies by session" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-28" data-category="pool" data-phone="720-865-0518" data-pools="[{&#34;name&#34;:&#34;Leisure Pool&#34;,&#34;family_friendly&#34;:true,&#34;season_label&#34;:&#34;Spring 2026&#34;,&#34;sessions&#34;:[{&#34;type&#34;:&#34;family_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;wed&#34;,&#34;fri&#34;],&#34;open&#34;:&#34;10:00&#34;,&#34;close&#34;:&#34;14:30&#34;},{&#34;type&#34;:&#34;family_swim&#34;,&#34;days&#34;:[&#34;tue&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;11:15&#34;,&#34;close&#34;:&#34;14:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;wed&#34;],&#34;open&#34;:&#34;14:30&#34;,&#34;close&#34;:&#34;17:45&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;tue&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;14:30&#34;,&#34;close&#34;:&#34;19:45&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;fri&#34;],&#34;open&#34;:&#34;14:30&#34;,&#34;close&#34;:&#34;18:45&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sat&#34;],&#34;open&#34;:&#34;08:00&#34;,&#34;close&#34;:&#34;13:30&#34;}]}]"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Ashland Rec Center Pool</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="39.751300" data-lng="-104.978100" data-address="2800 Glenarm Pl, Denver, CO 80205" data-indoor="false" data-reservation="false" data-name="Glenarm Rec Center Pool" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers/Glenarm" data-notes="Free with My Denver Card. Seasonal pool in Curtis Park neighborhood. Cardholder ages 5-18. Children 0-1 always free. Schedule may change - call ahead to confirm." data-closure-reason="" data-hours="Summer 2026" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-28" data-category="pool" data-phone="720-865-3380" data-pools="[{&#34;name&#34;:&#34;Pool&#34;,&#34;family_friendly&#34;:true,&#34;season_label&#34;:&#34;Summer 2026&#34;,&#34;sessions&#34;:[{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;mon&#34;,&#34;tue&#34;,&#34;wed&#34;,&#34;thu&#34;],&#34;open&#34;:&#34;14:00&#34;,&#34;close&#34;:&#34;17:00&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;fri&#34;],&#34;open&#34;:&#34;14:00&#34;,&#34;close&#34;:&#34;17:30&#34;},{&#34;type&#34;:&#34;open_swim&#34;,&#34;days&#34;:[&#34;sat&#34;],&#34;open&#34;:&#34;11:30&#34;,&#34;close&#34;:&#34;13:30&#34;}]}]"><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Glenarm Rec Center Pool</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li class="section-divider" aria-hidden="true"><span>City recreation</span></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-name="Denver Recreation Centers" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Recreation-Centers" data-notes="Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Children ages 0-1 always free (no card needed). Adults pay regular admission. Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Recreation Centers</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="January,February,March,April,May,June,July,August,September,October,November,December" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="true" data-reservation="false" data-name="Denver Indoor Pools" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" data-notes="Free at all Denver indoor pools year-round. Ages 5-18. Children ages 0-1 always free (no card needed). Show card at the front desk." data-closure-reason="" data-hours="Hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Indoor Pools</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">Year-round</span></div></li><li role="button" tabindex="0" class="venue-row" data-free-months="June,July,August" data-schedule="daily" data-closed="false" data-program="mydenvercard" data-lat="0.000000" data-lng="0.000000" data-address="" data-indoor="false" data-reservation="false" data-name="Denver Outdoor Pools" data-url="https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools" data-notes="Free at all Denver outdoor pools June through August. Ages 5-18. Children ages 0-1 always free (no card needed). Show card at the front desk." data-closure-reason="" data-hours="Seasonal, hours vary by location" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-24" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Free w/ Card</span></div><div class="venue-body"><p class="venue-name">Denver Outdoor Pools</p></div><div class="venue-status"><span class="badge badge-yellow">Kids free</span> <span class="months">June, July, August</span></div></li><li role="button" tabindex="0" class="venue-row venue-closed" data-free-months="" data-schedule="daily" data-closed="true" data-program="mydenvercard" data-lat="39.749400" data-lng="-104.998200" data-address="Arapahoe St &amp; 15th St, Denver, CO 80202" data-indoor="false" data-reservation="false" data-name="Downtown Denver Rink" data-url="https://www.winterindenver.com/rink" data-notes="" data-closure-reason="Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete." data-hours="" data-adults="0" data-scrape-failed="false" data-scrape-error="" data-last-checked="2026-05-23" data-category="" data-phone=""><div class="venue-band"><span class="band-label">Closed</span></div><div class="venue-body"><p class="venue-name">Downtown Denver Rink</p><p class="closure-reason">Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.</p></div><div class="venue-status"><span class="badge badge-yellow">Temporarily closed</span></div></li></ul><div id="modal-overlay" class="modal-overlay" aria-hidden="true"><div class="modal-sheet"><div class="modal-band" id="modal-band"></div><div class="modal-content"><div class="modal-header"><h2 class="modal-title" id="modal-title"></h2><button class="modal-close" id="modal-close" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="modal-badges" id="modal-badges"></div><div id="modal-map" class="modal-map"></div><div class="modal-details" id="modal-details"></div><div class="modal-actions" id="modal-actions"></div></div></div></div><script>
 (function () {
   // === DATE / SCHEDULE CONSTANTS ===
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1035,6 +1145,53 @@
   }
   var inBreak = isSchoolBreak(today);
 
+  // === POOL TIME UTILITIES ===
+  var DOW_MAP = {0:'sun',1:'mon',2:'tue',3:'wed',4:'thu',5:'fri',6:'sat'};
+  var todayDow = DOW_MAP[today.getDay()];
+  var nowMinutes = today.getHours() * 60 + today.getMinutes();
+
+  function parseTime(s) {
+    var p = s.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+
+  function fmtTime(s) {
+    var p = s.split(':'), h = parseInt(p[0], 10), m = parseInt(p[1], 10);
+    var ap = h >= 12 ? 'pm' : 'am';
+    h = h % 12 || 12;
+    return h + (m > 0 ? ':' + (m < 10 ? '0' + m : m) : '') + ap;
+  }
+
+  function titleCase(s) {
+    return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function getPoolStatus(pools) {
+    var earliest = null;
+    for (var i = 0; i < pools.length; i++) {
+      var pool = pools[i];
+      for (var j = 0; j < (pool.sessions || []).length; j++) {
+        var s = pool.sessions[j];
+        if (s.days.indexOf(todayDow) === -1) continue;
+        var o = parseTime(s.open), c = parseTime(s.close);
+        if (nowMinutes >= o && nowMinutes < c) {
+          return {status: 'open', label: 'Open now', type: s.type, open: s.open, close: s.close};
+        }
+        if (nowMinutes < o) {
+          if (!earliest || o < parseTime(earliest.open)) earliest = s;
+        }
+      }
+    }
+    if (earliest) {
+      var diff = parseTime(earliest.open) - nowMinutes;
+      var label = diff <= 60
+        ? 'Opens in ' + diff + ' min'
+        : 'Opens at ' + fmtTime(earliest.open);
+      return {status: 'soon', label: label, type: earliest.type, open: earliest.open, close: earliest.close};
+    }
+    return {status: 'closed', label: 'Closed today'};
+  }
+
   // === STATE ===
   var activeFilter = 'now';
   var userLat = null, userLng = null;
@@ -1055,6 +1212,15 @@
   var modalMapEl = document.getElementById('modal-map');
   var modalDetails = document.getElementById('modal-details');
   var modalActions = document.getElementById('modal-actions');
+  var poolCallout = document.getElementById('pool-callout');
+
+  // Parse pool data attached to rows
+  rows.forEach(function (row) {
+    var raw = row.dataset.pools;
+    if (raw) {
+      try { row._pools = JSON.parse(raw); } catch (e) {}
+    }
+  });
 
   // === VENUE HELPERS ===
   function freeMonths(row) {
@@ -1094,6 +1260,28 @@
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
+  // === POOL ROW INIT ===
+  function initPoolRows() {
+    rows.forEach(function (row) {
+      if (!row._pools) return;
+      var statusEl = row.querySelector('.venue-status');
+      if (!statusEl) return;
+      statusEl.innerHTML = '';
+      var ps = getPoolStatus(row._pools);
+      var chip = document.createElement('span');
+      chip.className = 'badge pool-status pool-status-' + ps.status;
+      chip.textContent = ps.label;
+      statusEl.appendChild(chip);
+      if (ps.type) {
+        var typeSpan = document.createElement('span');
+        typeSpan.className = 'months';
+        typeSpan.textContent = titleCase(ps.type);
+        statusEl.appendChild(typeSpan);
+      }
+      row.dataset.poolStatus = ps.status;
+    });
+  }
+
   // === DISTANCE (Haversine, miles) ===
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 3958.8;
@@ -1107,15 +1295,22 @@
 
   // === FILTER ===
   function _doApplyFilter() {
+    var dividers = document.querySelectorAll('.section-divider');
+    var isPools = activeFilter === 'pools';
+    dividers.forEach(function (d) { d.classList.toggle('hidden', isPools); });
+    if (poolCallout) poolCallout.classList.toggle('hidden', !isPools);
+
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
+      var isPool = row.dataset.category === 'pool';
       var show;
       switch (activeFilter) {
         case 'now':       show = closed || freeNow(row);         break;
         case 'weekend':   show = closed || freeThisWeekend(row); break;
         case 'summer':    show = closed || isSummer(row);        break;
         case 'yearround': show = closed || isYearRound(row);     break;
+        case 'pools':     show = isPool;                         break;
         default:          show = true;
       }
       row.classList.toggle('hidden', !show);
@@ -1129,6 +1324,13 @@
     } else if (activeFilter === 'weekend') {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
+    } else if (activeFilter === 'pools') {
+      var openCount = rows.filter(function (r) { return r.dataset.poolStatus === 'open'; }).length;
+      if (openCount > 0) {
+        label = openCount + (openCount === 1 ? ' pool' : ' pools') + ' open right now';
+      } else {
+        label = visible + (visible === 1 ? ' pool' : ' pools') + ' listed';
+      }
     }
     if (countEl) countEl.textContent = label;
   }
@@ -1151,9 +1353,10 @@
 
     if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
 
-    var nowRows = rows.filter(function (row) { return freeNow(row); });
+    // Exclude individual pool entries from hero to avoid clutter (pools are in the Pools tab)
+    var nowRows = rows.filter(function (row) { return freeNow(row) && row.dataset.category !== 'pool'; });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
+      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true' && row.dataset.category !== 'pool';
     });
 
     function makeChip(row, isSoon) {
@@ -1203,10 +1406,12 @@
       var isFreeNow = freeNow(row);
       var isClosed = row.dataset.closed === 'true';
       var isGeneral = row.dataset.program === 'general';
-      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
+      var isPool = row.dataset.category === 'pool';
+      var poolOpen = isPool && row.dataset.poolStatus === 'open';
+      var color = isClosed ? '#6b7280' : (isPool ? (poolOpen ? '#0369a1' : '#93c5fd') : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd'));
 
       var marker = L.circleMarker([lat, lng], {
-        radius: 10,
+        radius: isPool ? 8 : 10,
         fillColor: color,
         color: 'white',
         weight: 2,
@@ -1215,9 +1420,11 @@
 
       var statusHtml = isClosed
         ? '<span style="color:#991b1b">Temporarily closed</span>'
-        : (isFreeNow
-          ? '<span style="color:#065f46;font-weight:700">Free today</span>'
-          : '<span style="color:#6b7280">Not free this month</span>');
+        : (isPool
+          ? '<span style="color:' + (poolOpen ? '#065f46' : '#6b7280') + ';font-weight:700">' + (poolOpen ? 'Open now' : 'Closed / check schedule') + '</span>'
+          : (isFreeNow
+            ? '<span style="color:#065f46;font-weight:700">Free today</span>'
+            : '<span style="color:#6b7280">Not free this month</span>'));
       var popupHtml = '<div style="min-width:130px"><strong>' + name + '</strong><br>' + statusHtml + '<br><button class="map-popup-btn">View details</button></div>';
       marker.bindPopup(popupHtml, { maxWidth: 220 });
       marker.on('popupopen', (function (r, m) {
@@ -1302,6 +1509,41 @@
     }, 150);
   }
 
+  function buildPoolScheduleHTML(pools) {
+    var html = '';
+    for (var i = 0; i < pools.length; i++) {
+      var pool = pools[i];
+      var sessions = pool.sessions || [];
+      var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
+      html += '<div class="pool-schedule">';
+      html += '<p class="pool-schedule-title">' + pool.name + ' - Today</p>';
+      if (todaySessions.length === 0) {
+        html += '<p class="pool-closed-today">No sessions today</p>';
+      } else {
+        for (var j = 0; j < todaySessions.length; j++) {
+          var s = todaySessions[j];
+          var o = parseTime(s.open), c = parseTime(s.close);
+          var isNow = nowMinutes >= o && nowMinutes < c;
+          html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
+          html += '<span class="pool-session-type">' + titleCase(s.type) + '</span>';
+          html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
+          if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
+          html += '</div>';
+        }
+      }
+      if (pool.season_start && pool.season_end) {
+        html += '<p class="pool-season-note">Season: ' + pool.season_start + ' to ' + pool.season_end + '</p>';
+      } else if (pool.season_label) {
+        html += '<p class="pool-season-note">' + pool.season_label + '</p>';
+      }
+      if (pool.features && pool.features.length) {
+        html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
+      }
+      html += '</div>';
+    }
+    return html;
+  }
+
   // === MODAL ===
   function openModal(row, skipHistory) {
     if (!modalOverlay) return;
@@ -1323,6 +1565,8 @@
     var lat = parseFloat(row.dataset.lat || '0');
     var lng = parseFloat(row.dataset.lng || '0');
     var program = row.dataset.program || 'mydenvercard';
+    var phone = row.dataset.phone || '';
+    var isPool = row.dataset.category === 'pool';
     var isFreeNow = freeNow(row);
 
     var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
@@ -1334,6 +1578,10 @@
       if (closed) {
         addBadge(modalBadges, 'temporarily closed', 'badge-red');
       } else {
+        if (isPool && row._pools) {
+          var ps = getPoolStatus(row._pools);
+          addBadge(modalBadges, ps.label, 'pool-status pool-status-' + ps.status);
+        }
         if (isFreeNow) addBadge(modalBadges, 'free today', 'badge-green');
         if (adults >= 2) addBadge(modalBadges, 'whole family free', 'badge-green');
         else if (adults === 1) addBadge(modalBadges, 'free +1 adult', 'badge-green');
@@ -1348,6 +1596,14 @@
 
     if (modalDetails) {
       modalDetails.innerHTML = '';
+
+      if (isPool) {
+        var warn = document.createElement('div');
+        warn.className = 'call-ahead-warning';
+        warn.innerHTML = '<strong>Call ahead:</strong> Pool schedules change frequently. Call the pool desk to confirm times before you go.';
+        modalDetails.appendChild(warn);
+      }
+
       var detailText = closed ? closureReason : notes;
       if (detailText) {
         var p = document.createElement('p');
@@ -1355,7 +1611,21 @@
         p.textContent = detailText;
         modalDetails.appendChild(p);
       }
-      if (hours) {
+
+      if (isPool && row._pools) {
+        var schedDiv = document.createElement('div');
+        schedDiv.innerHTML = buildPoolScheduleHTML(row._pools);
+        modalDetails.appendChild(schedDiv);
+      }
+
+      if (phone) {
+        var ph = document.createElement('p');
+        ph.className = 'modal-phone';
+        ph.innerHTML = '<strong>Phone:</strong> <a href="tel:' + phone + '">' + phone + '</a>';
+        modalDetails.appendChild(ph);
+      }
+
+      if (hours && !isPool) {
         var h = document.createElement('p');
         h.className = 'modal-hours';
         h.innerHTML = '<strong>Hours:</strong> ' + hours;
@@ -1395,6 +1665,13 @@
         dirBtn.textContent = 'Directions';
         dirBtn.addEventListener('click', function () { getDirections(row); });
         modalActions.appendChild(dirBtn);
+      }
+      if (phone) {
+        var callBtn = document.createElement('a');
+        callBtn.href = 'tel:' + phone;
+        callBtn.className = 'modal-action-btn';
+        callBtn.textContent = 'Call';
+        modalActions.appendChild(callBtn);
       }
       var shareBtn = document.createElement('button');
       shareBtn.className = 'modal-action-btn';
@@ -1617,6 +1894,7 @@
   })();
 
   // === INIT ===
+  initPoolRows();
   setTab('now');
   applyFilter();
   buildHero();

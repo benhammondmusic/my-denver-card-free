@@ -1,6 +1,7 @@
 package templates
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"github.com/benhammondmusic/my-denver-card-free/internal/models"
@@ -18,6 +19,14 @@ func boolStr(b bool) string {
 		return "true"
 	}
 	return "false"
+}
+
+func poolsJSON(v models.Venue) string {
+	if len(v.Pools) == 0 {
+		return ""
+	}
+	b, _ := json.Marshal(v.Pools)
+	return string(b)
 }
 
 templ Index(venues []models.Venue) {
@@ -42,8 +51,12 @@ templ Index(venues []models.Venue) {
 				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
 				<button class="filter-tab" data-filter="yearround">Year-Round</button>
+				<button class="filter-tab" data-filter="pools">Pools</button>
 			</div>
 			</div>
+		<div id="pool-callout" class="pool-callout hidden">
+			<strong>Call ahead before you go.</strong> Pool schedules change frequently and may not reflect same-day closures or schedule adjustments. The pool desk is your best source for current hours.
+		</div>
 		<div id="map-panel" class="map-panel"></div>
 		<p class="venue-count"></p>
 		<ul class="venue-list" id="venue-list">
@@ -117,6 +130,11 @@ templ VenueRow(v models.Venue) {
 		data-scrape-failed={ boolStr(v.ScrapeFailed) }
 		data-scrape-error={ v.ScrapeError }
 		data-last-checked={ v.LastChecked.Format("2006-01-02") }
+		data-category={ v.Category }
+		data-phone={ v.Phone }
+		if len(v.Pools) > 0 {
+			data-pools={ poolsJSON(v) }
+		}
 	>
 		<div class="venue-band">
 			if v.TemporarilyClosed {
@@ -181,6 +199,53 @@ templ filterScript() {
   }
   var inBreak = isSchoolBreak(today);
 
+  // === POOL TIME UTILITIES ===
+  var DOW_MAP = {0:'sun',1:'mon',2:'tue',3:'wed',4:'thu',5:'fri',6:'sat'};
+  var todayDow = DOW_MAP[today.getDay()];
+  var nowMinutes = today.getHours() * 60 + today.getMinutes();
+
+  function parseTime(s) {
+    var p = s.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+
+  function fmtTime(s) {
+    var p = s.split(':'), h = parseInt(p[0], 10), m = parseInt(p[1], 10);
+    var ap = h >= 12 ? 'pm' : 'am';
+    h = h % 12 || 12;
+    return h + (m > 0 ? ':' + (m < 10 ? '0' + m : m) : '') + ap;
+  }
+
+  function titleCase(s) {
+    return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function getPoolStatus(pools) {
+    var earliest = null;
+    for (var i = 0; i < pools.length; i++) {
+      var pool = pools[i];
+      for (var j = 0; j < (pool.sessions || []).length; j++) {
+        var s = pool.sessions[j];
+        if (s.days.indexOf(todayDow) === -1) continue;
+        var o = parseTime(s.open), c = parseTime(s.close);
+        if (nowMinutes >= o && nowMinutes < c) {
+          return {status: 'open', label: 'Open now', type: s.type, open: s.open, close: s.close};
+        }
+        if (nowMinutes < o) {
+          if (!earliest || o < parseTime(earliest.open)) earliest = s;
+        }
+      }
+    }
+    if (earliest) {
+      var diff = parseTime(earliest.open) - nowMinutes;
+      var label = diff <= 60
+        ? 'Opens in ' + diff + ' min'
+        : 'Opens at ' + fmtTime(earliest.open);
+      return {status: 'soon', label: label, type: earliest.type, open: earliest.open, close: earliest.close};
+    }
+    return {status: 'closed', label: 'Closed today'};
+  }
+
   // === STATE ===
   var activeFilter = 'now';
   var userLat = null, userLng = null;
@@ -201,6 +266,15 @@ templ filterScript() {
   var modalMapEl = document.getElementById('modal-map');
   var modalDetails = document.getElementById('modal-details');
   var modalActions = document.getElementById('modal-actions');
+  var poolCallout = document.getElementById('pool-callout');
+
+  // Parse pool data attached to rows
+  rows.forEach(function (row) {
+    var raw = row.dataset.pools;
+    if (raw) {
+      try { row._pools = JSON.parse(raw); } catch (e) {}
+    }
+  });
 
   // === VENUE HELPERS ===
   function freeMonths(row) {
@@ -240,6 +314,28 @@ templ filterScript() {
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
+  // === POOL ROW INIT ===
+  function initPoolRows() {
+    rows.forEach(function (row) {
+      if (!row._pools) return;
+      var statusEl = row.querySelector('.venue-status');
+      if (!statusEl) return;
+      statusEl.innerHTML = '';
+      var ps = getPoolStatus(row._pools);
+      var chip = document.createElement('span');
+      chip.className = 'badge pool-status pool-status-' + ps.status;
+      chip.textContent = ps.label;
+      statusEl.appendChild(chip);
+      if (ps.type) {
+        var typeSpan = document.createElement('span');
+        typeSpan.className = 'months';
+        typeSpan.textContent = titleCase(ps.type);
+        statusEl.appendChild(typeSpan);
+      }
+      row.dataset.poolStatus = ps.status;
+    });
+  }
+
   // === DISTANCE (Haversine, miles) ===
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 3958.8;
@@ -253,15 +349,22 @@ templ filterScript() {
 
   // === FILTER ===
   function _doApplyFilter() {
+    var dividers = document.querySelectorAll('.section-divider');
+    var isPools = activeFilter === 'pools';
+    dividers.forEach(function (d) { d.classList.toggle('hidden', isPools); });
+    if (poolCallout) poolCallout.classList.toggle('hidden', !isPools);
+
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
+      var isPool = row.dataset.category === 'pool';
       var show;
       switch (activeFilter) {
         case 'now':       show = closed || freeNow(row);         break;
         case 'weekend':   show = closed || freeThisWeekend(row); break;
         case 'summer':    show = closed || isSummer(row);        break;
         case 'yearround': show = closed || isYearRound(row);     break;
+        case 'pools':     show = isPool;                         break;
         default:          show = true;
       }
       row.classList.toggle('hidden', !show);
@@ -275,6 +378,13 @@ templ filterScript() {
     } else if (activeFilter === 'weekend') {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
+    } else if (activeFilter === 'pools') {
+      var openCount = rows.filter(function (r) { return r.dataset.poolStatus === 'open'; }).length;
+      if (openCount > 0) {
+        label = openCount + (openCount === 1 ? ' pool' : ' pools') + ' open right now';
+      } else {
+        label = visible + (visible === 1 ? ' pool' : ' pools') + ' listed';
+      }
     }
     if (countEl) countEl.textContent = label;
   }
@@ -297,9 +407,10 @@ templ filterScript() {
 
     if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
 
-    var nowRows = rows.filter(function (row) { return freeNow(row); });
+    // Exclude individual pool entries from hero to avoid clutter (pools are in the Pools tab)
+    var nowRows = rows.filter(function (row) { return freeNow(row) && row.dataset.category !== 'pool'; });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true';
+      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true' && row.dataset.category !== 'pool';
     });
 
     function makeChip(row, isSoon) {
@@ -349,10 +460,12 @@ templ filterScript() {
       var isFreeNow = freeNow(row);
       var isClosed = row.dataset.closed === 'true';
       var isGeneral = row.dataset.program === 'general';
-      var color = isClosed ? '#6b7280' : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd');
+      var isPool = row.dataset.category === 'pool';
+      var poolOpen = isPool && row.dataset.poolStatus === 'open';
+      var color = isClosed ? '#6b7280' : (isPool ? (poolOpen ? '#0369a1' : '#93c5fd') : (isFreeNow ? (isGeneral ? '#d97706' : '#002868') : '#93c5fd'));
 
       var marker = L.circleMarker([lat, lng], {
-        radius: 10,
+        radius: isPool ? 8 : 10,
         fillColor: color,
         color: 'white',
         weight: 2,
@@ -361,9 +474,11 @@ templ filterScript() {
 
       var statusHtml = isClosed
         ? '<span style="color:#991b1b">Temporarily closed</span>'
-        : (isFreeNow
-          ? '<span style="color:#065f46;font-weight:700">Free today</span>'
-          : '<span style="color:#6b7280">Not free this month</span>');
+        : (isPool
+          ? '<span style="color:' + (poolOpen ? '#065f46' : '#6b7280') + ';font-weight:700">' + (poolOpen ? 'Open now' : 'Closed / check schedule') + '</span>'
+          : (isFreeNow
+            ? '<span style="color:#065f46;font-weight:700">Free today</span>'
+            : '<span style="color:#6b7280">Not free this month</span>'));
       var popupHtml = '<div style="min-width:130px"><strong>' + name + '</strong><br>' + statusHtml + '<br><button class="map-popup-btn">View details</button></div>';
       marker.bindPopup(popupHtml, { maxWidth: 220 });
       marker.on('popupopen', (function (r, m) {
@@ -448,6 +563,41 @@ templ filterScript() {
     }, 150);
   }
 
+  function buildPoolScheduleHTML(pools) {
+    var html = '';
+    for (var i = 0; i < pools.length; i++) {
+      var pool = pools[i];
+      var sessions = pool.sessions || [];
+      var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
+      html += '<div class="pool-schedule">';
+      html += '<p class="pool-schedule-title">' + pool.name + ' - Today</p>';
+      if (todaySessions.length === 0) {
+        html += '<p class="pool-closed-today">No sessions today</p>';
+      } else {
+        for (var j = 0; j < todaySessions.length; j++) {
+          var s = todaySessions[j];
+          var o = parseTime(s.open), c = parseTime(s.close);
+          var isNow = nowMinutes >= o && nowMinutes < c;
+          html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
+          html += '<span class="pool-session-type">' + titleCase(s.type) + '</span>';
+          html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
+          if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
+          html += '</div>';
+        }
+      }
+      if (pool.season_start && pool.season_end) {
+        html += '<p class="pool-season-note">Season: ' + pool.season_start + ' to ' + pool.season_end + '</p>';
+      } else if (pool.season_label) {
+        html += '<p class="pool-season-note">' + pool.season_label + '</p>';
+      }
+      if (pool.features && pool.features.length) {
+        html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
+      }
+      html += '</div>';
+    }
+    return html;
+  }
+
   // === MODAL ===
   function openModal(row, skipHistory) {
     if (!modalOverlay) return;
@@ -469,6 +619,8 @@ templ filterScript() {
     var lat = parseFloat(row.dataset.lat || '0');
     var lng = parseFloat(row.dataset.lng || '0');
     var program = row.dataset.program || 'mydenvercard';
+    var phone = row.dataset.phone || '';
+    var isPool = row.dataset.category === 'pool';
     var isFreeNow = freeNow(row);
 
     var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
@@ -480,6 +632,10 @@ templ filterScript() {
       if (closed) {
         addBadge(modalBadges, 'temporarily closed', 'badge-red');
       } else {
+        if (isPool && row._pools) {
+          var ps = getPoolStatus(row._pools);
+          addBadge(modalBadges, ps.label, 'pool-status pool-status-' + ps.status);
+        }
         if (isFreeNow) addBadge(modalBadges, 'free today', 'badge-green');
         if (adults >= 2) addBadge(modalBadges, 'whole family free', 'badge-green');
         else if (adults === 1) addBadge(modalBadges, 'free +1 adult', 'badge-green');
@@ -494,6 +650,14 @@ templ filterScript() {
 
     if (modalDetails) {
       modalDetails.innerHTML = '';
+
+      if (isPool) {
+        var warn = document.createElement('div');
+        warn.className = 'call-ahead-warning';
+        warn.innerHTML = '<strong>Call ahead:</strong> Pool schedules change frequently. Call the pool desk to confirm times before you go.';
+        modalDetails.appendChild(warn);
+      }
+
       var detailText = closed ? closureReason : notes;
       if (detailText) {
         var p = document.createElement('p');
@@ -501,7 +665,21 @@ templ filterScript() {
         p.textContent = detailText;
         modalDetails.appendChild(p);
       }
-      if (hours) {
+
+      if (isPool && row._pools) {
+        var schedDiv = document.createElement('div');
+        schedDiv.innerHTML = buildPoolScheduleHTML(row._pools);
+        modalDetails.appendChild(schedDiv);
+      }
+
+      if (phone) {
+        var ph = document.createElement('p');
+        ph.className = 'modal-phone';
+        ph.innerHTML = '<strong>Phone:</strong> <a href="tel:' + phone + '">' + phone + '</a>';
+        modalDetails.appendChild(ph);
+      }
+
+      if (hours && !isPool) {
         var h = document.createElement('p');
         h.className = 'modal-hours';
         h.innerHTML = '<strong>Hours:</strong> ' + hours;
@@ -541,6 +719,13 @@ templ filterScript() {
         dirBtn.textContent = 'Directions';
         dirBtn.addEventListener('click', function () { getDirections(row); });
         modalActions.appendChild(dirBtn);
+      }
+      if (phone) {
+        var callBtn = document.createElement('a');
+        callBtn.href = 'tel:' + phone;
+        callBtn.className = 'modal-action-btn';
+        callBtn.textContent = 'Call';
+        modalActions.appendChild(callBtn);
       }
       var shareBtn = document.createElement('button');
       shareBtn.className = 'modal-action-btn';
@@ -763,6 +948,7 @@ templ filterScript() {
   })();
 
   // === INIT ===
+  initPoolRows();
   setTab('now');
   applyFilter();
   buildHero();
