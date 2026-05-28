@@ -141,18 +141,17 @@ templ Layout(title string) {
 					display: block;
 				}
 
-				/* Eye positions are approximate; tune left/top % to match bear.png */
 				.bear-eye {
 					position: absolute;
 					width: 13px;
 					height: 9px;
 					border-radius: 50%;
-					cursor: pointer;
 					background: transparent;
+					pointer-events: none;
 					transition: background 0.2s, box-shadow 0.4s;
 				}
-				.bear-eye-left  { left: 52%; top: 11%; }
-				.bear-eye-right { left: 62%; top: 11%; }
+				.bear-eye-left  { left: 44%; top: 28%; }
+				.bear-eye-right { left: 54%; top: 28%; }
 				.bear-eye.lit {
 					background: #bf0a30;
 					box-shadow: 0 0 10px 5px rgba(191,10,48,0.75);
@@ -1156,17 +1155,18 @@ templ Layout(title string) {
 					});
 					update();
 				})();
-				// Bear eye Easter egg + optional scrape trigger
-				// To enable scrape dispatch, create a fine-grained GitHub PAT with
-				// Actions: write scope on this repo only, and paste it below.
+				// Bear eyes Easter egg: triple-tap/click the bear to light up his eyes and
+				// optionally trigger a scrape. To enable scrape dispatch, create a
+				// fine-grained GitHub PAT with Actions: write scope on this repo only.
 				(function () {
 					var SCRAPE_TOKEN = ''; // paste fine-grained PAT here
-					var COOLDOWN_MS = 30 * 60 * 1000; // 30 min between API calls
+					var COOLDOWN_MS = 30 * 60 * 1000;
 					var REPO = 'benhammondmusic/my-denver-card-free';
 					var WORKFLOW = 'scrape.yml';
 
 					var eyes = document.querySelectorAll('.bear-eye');
-					if (!eyes.length) return;
+					var bearWrap = document.querySelector('.bear-wrap');
+					if (!bearWrap) return;
 
 					function lightUp() {
 						eyes.forEach(function (e) { e.classList.add('lit'); });
@@ -1193,11 +1193,31 @@ templ Layout(title string) {
 						}).catch(function () {});
 					}
 
-					eyes.forEach(function (eye) {
-						eye.addEventListener('click', function () {
+					var tapCount = 0;
+					var tapTimer = null;
+					var lastTouch = 0;
+
+					function handleTap() {
+						tapCount++;
+						clearTimeout(tapTimer);
+						if (tapCount >= 3) {
+							tapCount = 0;
 							lightUp();
 							if (canTrigger()) triggerScrape();
-						});
+						} else {
+							tapTimer = setTimeout(function () { tapCount = 0; }, 600);
+						}
+					}
+
+					bearWrap.addEventListener('touchend', function (e) {
+						e.preventDefault();
+						lastTouch = Date.now();
+						handleTap();
+					}, { passive: false });
+
+					bearWrap.addEventListener('click', function () {
+						if (Date.now() - lastTouch < 500) return;
+						handleTap();
 					});
 				})();
 
