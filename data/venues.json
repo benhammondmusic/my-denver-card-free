@@ -699,7 +699,7 @@
     ],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
+    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Both pools close 4:15-4:30 PM daily for a break. Pool closes at 4:15 PM on the 2nd and 4th Friday of each month.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-29T16:47:24.459812Z",
@@ -719,7 +719,7 @@
       {
         "name": "Leisure Pool",
         "family_friendly": true,
-        "season_label": "Spring 2026",
+        "season_label": "Summer 2026",
         "canva_url": "https://www.canva.com/design/DAG98B5lEuQ/view",
         "sessions": [
           {
@@ -728,11 +728,27 @@
               "mon",
               "tue",
               "wed",
-              "thu",
+              "thu"
+            ],
+            "open": "10:00",
+            "close": "20:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "fri"
             ],
-            "open": "14:30",
-            "close": "17:00"
+            "open": "10:00",
+            "close": "19:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "sat",
+              "sun"
+            ],
+            "open": "09:00",
+            "close": "15:30"
           }
         ]
       }
@@ -1392,7 +1408,7 @@
     ],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
+    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Both pools close 4:15-4:30 PM daily for a break. Pool closes at 4:15 PM on the 2nd and 4th Friday of each month.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-29T16:47:24.459814Z",
@@ -1410,47 +1426,11 @@
     "phone": "720-865-0560",
     "pools": [
       {
-        "name": "Indoor Pool",
+        "name": "Leisure Pool",
         "family_friendly": true,
-        "season_label": "Year-round",
+        "season_label": "Summer 2026",
         "canva_url": "https://www.canva.com/design/DAG98sls7I4/view",
         "sessions": [
-          {
-            "family_friendly": true,
-            "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "11:30",
-            "close": "15:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "12:00",
-            "close": "20:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "19:30"
-          },
           {
             "family_friendly": true,
             "days": [
