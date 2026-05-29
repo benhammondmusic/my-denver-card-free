@@ -24,6 +24,7 @@ const (
 	pageTimeout      = 30 * time.Second
 	canvaTimeout     = 45 * time.Second
 	canvaRenderWait  = 3 * time.Second
+	canvaBetweenWait = 2 * time.Second
 	llmModel         = "claude-haiku-4-5-20251001"
 	maxPageChars     = 6000
 	// Denver.gov swimming pools page - section-2 = indoor rec centers, section-3 = outdoor pools
@@ -233,12 +234,17 @@ func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*mo
 	}
 	log.Printf("  found %d Canva embed URLs in page HTML", len(embedURLs))
 
+	first := true
 	for docID, embedURL := range embedURLs {
 		pool, ok := poolMap[docID]
 		if !ok {
 			log.Printf("  no pool mapped for doc ID %s", docID)
 			continue
 		}
+		if !first {
+			time.Sleep(canvaBetweenWait)
+		}
+		first = false
 		log.Printf("  scraping %s", pool.Name)
 		sessions, err := scrapeCanvaEmbed(browser, embedURL)
 		if err != nil {
