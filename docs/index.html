@@ -1821,8 +1821,9 @@
       if (!closed && months.length > 0) {
         var m = document.createElement('p');
         m.className = 'modal-months';
-        var monthsLabel = months.length === 12 ? 'Year-round' : months.join(', ');
-        m.innerHTML = '<strong>Free in:</strong> ' + monthsLabel;
+        m.innerHTML = months.length === 12
+          ? '<strong>Free year-round</strong>'
+          : '<strong>Free in:</strong> ' + months.join(', ');
         modalDetails.appendChild(m);
       }
       if (lastChecked) {
