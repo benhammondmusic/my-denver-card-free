@@ -60,7 +60,8 @@
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
-    "max_age": 0
+    "max_age": 0,
+    "ev_charger": true
   },
   {
     "name": "Denver Botanic Gardens",
@@ -87,7 +88,8 @@
     "indoor": false,
     "reservation_required": false,
     "min_age": 5,
-    "max_age": 18
+    "max_age": 18,
+    "ev_charger": true
   },
   {
     "name": "Clyfford Still Museum",
@@ -2483,7 +2485,8 @@
           }
         ]
       }
-    ]
+    ],
+    "ev_charger": true
   },
   {
     "name": "Harvey Park Rec Center Pool",
@@ -2778,7 +2781,8 @@
       "group fitness classes",
       "game room",
       "racquetball courts"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Carla Madison Rec Center",
@@ -2872,7 +2876,8 @@
       "gymnasium",
       "group fitness classes",
       "game room"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Montbello Rec Center",
@@ -2917,7 +2922,8 @@
       "gymnasium",
       "group fitness classes",
       "game room"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Montclair Rec Center",
@@ -2962,7 +2968,8 @@
       "gymnasium",
       "group fitness classes",
       "game room"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Rude Rec Center",
@@ -3007,7 +3014,8 @@
       "gymnasium",
       "multipurpose rooms",
       "game room"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Scheitler Rec Center",
@@ -3099,7 +3107,8 @@
       "gymnasium",
       "group fitness classes",
       "game room"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Ashland Rec Center",
@@ -3187,7 +3196,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Eisenhower Rec Center",
@@ -3366,7 +3376,9 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "ev_charger": true,
+    "playground": true
   },
   {
     "name": "Harvey Park Rec Center",
@@ -3410,7 +3422,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Hiawatha Davis Jr. Rec Center",
@@ -3454,7 +3467,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "La Familia Rec Center",
@@ -3542,7 +3556,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Twentieth Street Rec Center",
@@ -3672,7 +3687,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Barnum Rec Center",
@@ -3715,7 +3731,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "College View Rec Center",
@@ -3887,7 +3904,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Martin Luther King Jr. Rec Center",
@@ -3931,7 +3949,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "Platt Park Rec Center",
@@ -3974,7 +3993,8 @@
       "gymnasium",
       "game room",
       "multipurpose rooms"
-    ]
+    ],
+    "playground": true
   },
   {
     "name": "St. Charles Rec Center",

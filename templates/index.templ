@@ -60,6 +60,8 @@ templ Index(venues []models.Venue) {
 				<button class="filter-tab" data-filter="summer">Summer</button>
 				<button class="filter-tab" data-filter="yearround">Year-Round</button>
 				<button class="filter-tab" data-filter="pools">Pools</button>
+				<button class="filter-tab" data-filter="playground">Playground</button>
+				<button class="filter-tab" data-filter="evcharger">EV Charger</button>
 			</div>
 			</div>
 		<div id="pool-callout" class="pool-callout hidden">
@@ -167,6 +169,12 @@ templ VenueRow(v models.Venue) {
 		if len(v.Activities) > 0 {
 			data-activities={ activitiesJSON(v) }
 		}
+		if v.Playground {
+			data-playground="true"
+		}
+		if v.EVCharger {
+			data-ev-charger="true"
+		}
 	>
 		<div class="venue-band">
 			if v.TemporarilyClosed {
@@ -196,6 +204,16 @@ templ VenueRow(v models.Venue) {
 						<span class="badge badge-yellow">Kids free</span>
 				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
+			}
+			if v.Playground || v.EVCharger {
+				<div class="venue-amenities">
+					if v.Playground {
+						<span class="amenity-chip">Playground</span>
+					}
+					if v.EVCharger {
+						<span class="amenity-chip">Free EV</span>
+					}
+				</div>
 			}
 		</div>
 	</li>
@@ -476,8 +494,10 @@ templ filterScript() {
         case 'weekend':   show = closed || freeThisWeekend(row); break;
         case 'summer':    show = closed || isSummer(row);        break;
         case 'yearround': show = closed || isYearRound(row);     break;
-        case 'pools':     show = isPool;                         break;
-        default:          show = true;
+        case 'pools':      show = isPool;                                     break;
+        case 'playground': show = row.dataset.playground === 'true';         break;
+        case 'evcharger':  show = row.dataset.evCharger === 'true';           break;
+        default:           show = true;
       }
       row.classList.toggle('hidden', !show);
       if (show && !closed) visible++;
@@ -497,6 +517,10 @@ templ filterScript() {
       } else {
         label = visible + (visible === 1 ? ' pool' : ' pools') + ' listed';
       }
+    } else if (activeFilter === 'playground') {
+      label = visible + (visible === 1 ? ' venue' : ' venues') + ' with a playground';
+    } else if (activeFilter === 'evcharger') {
+      label = visible + (visible === 1 ? ' venue' : ' venues') + ' with free EV charging';
     }
     if (countEl) countEl.textContent = label;
   }
@@ -785,6 +809,8 @@ templ filterScript() {
     var isRecCenter = row.dataset.category === 'rec_center';
     var activities = [];
     try { if (row.dataset.activities) activities = JSON.parse(row.dataset.activities); } catch (e) {}
+    if (row.dataset.playground === 'true') activities = ['Playground'].concat(activities);
+    if (row.dataset.evCharger === 'true') activities = activities.concat(['Free EV charging']);
     var isFreeNow = freeNow(row);
 
     var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');

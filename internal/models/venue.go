@@ -63,4 +63,6 @@ type Venue struct {
 	Phone               string       `json:"phone,omitempty"`
 	Activities          []string     `json:"activities,omitempty"`
 	Pools               []Pool       `json:"pools,omitempty"`
+	Playground          bool         `json:"playground,omitempty"`
+	EVCharger           bool         `json:"ev_charger,omitempty"`
 }

@@ -659,6 +659,26 @@ templ Layout(title string) {
 					line-height: 1.4;
 				}
 
+				.venue-amenities {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.25rem;
+					justify-content: flex-end;
+					margin-top: 0.2rem;
+				}
+
+				.amenity-chip {
+					font-size: 0.68rem;
+					font-weight: 600;
+					padding: 0.15rem 0.5rem;
+					border-radius: 1rem;
+					background: #eff6ff;
+					color: #1d4ed8;
+					border: 1px solid #bfdbfe;
+					letter-spacing: 0.02em;
+					white-space: nowrap;
+				}
+
 				/* ---- BADGES ---- */
 
 				.badge {
@@ -1212,6 +1232,7 @@ templ Layout(title string) {
 					& .weather-chip { background: #0d1a2e; border-color: var(--border); color: #7a8fa8; }
 					& .leaflet-location-btn { background: #1d2f55; color: #93b4e0; border-color: #1e3058; }
 					& .leaflet-location-btn:hover { background: #243a6a; color: #e0e8f5; }
+					& .amenity-chip { background: #1e3a5f; color: #93c5fd; border-color: #1e40af; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }
 					& .badge-gray { background: #1f2937; color: #9ca3af; border-color: #374151; }
