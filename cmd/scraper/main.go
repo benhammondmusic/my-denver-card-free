@@ -45,25 +45,43 @@ type scraped struct {
 
 // ---- POOL SCHEDULE PARSING ----
 
+// sessionType is scraper-internal only; not stored in the model.
+type sessionType string
+
+const (
+	stFamilySwim  sessionType = "family_swim"
+	stOpenSwim    sessionType = "open_swim"
+	stLapSwim     sessionType = "lap_swim"
+	stAdultSwim   sessionType = "adult_swim"
+	stQuietSwim   sessionType = "quiet_swim"
+	stAquaFitness sessionType = "aqua_fitness"
+	stSwimLessons sessionType = "swim_lessons"
+	stSwimTeam    sessionType = "swim_team"
+)
+
+func isFamilyFriendly(t sessionType) bool {
+	return t == stOpenSwim || t == stFamilySwim
+}
+
 var (
-	// Matches "2:00 PM", "10:30 AM", "14:00"
-	reTime = regexp.MustCompile(`(?i)\b(\d{1,2}):(\d{2})\s*(am|pm)?\b`)
+	// Matches "2:00 PM", "10:30 AM", "14:00", and bare-hour forms like "11AM", "9PM".
+	reTime = regexp.MustCompile(`(?i)\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)?`)
 
 	reCanvaDocID = regexp.MustCompile(`/design/([A-Za-z0-9_-]+)/`)
 
-	// Session type keywords mapped to canonical SessionType
+	// Session type keywords mapped to scraper-internal sessionType
 	sessionKeywords = []struct {
 		words []string
-		typ   models.SessionType
+		typ   sessionType
 	}{
-		{[]string{"family"}, models.SessionFamilySwim},
-		{[]string{"open", "public", "recreational"}, models.SessionOpenSwim},
-		{[]string{"lap"}, models.SessionLapSwim},
-		{[]string{"adult"}, models.SessionAdultSwim},
-		{[]string{"quiet"}, models.SessionQuietSwim},
-		{[]string{"aqua", "fitness", "aerobics", "ai chi", "water walking", "arthritis", "aquacise", "zumba", "yoga", "pilates"}, models.SessionAquaFitness},
-		{[]string{"lesson", "learn"}, models.SessionSwimLessons},
-		{[]string{"team", "club", "practice", "masters"}, models.SessionSwimTeam},
+		{[]string{"family"}, stFamilySwim},
+		{[]string{"open", "public", "recreational"}, stOpenSwim},
+		{[]string{"lap"}, stLapSwim},
+		{[]string{"adult"}, stAdultSwim},
+		{[]string{"quiet"}, stQuietSwim},
+		{[]string{"aqua", "fitness", "aerobics", "ai chi", "water walking", "arthritis", "aquacise", "zumba", "yoga", "pilates"}, stAquaFitness},
+		{[]string{"lesson", "learn"}, stSwimLessons},
+		{[]string{"team", "club", "practice", "masters"}, stSwimTeam},
 	}
 
 	// Day name -> 3-letter abbrev
@@ -360,6 +378,14 @@ func parseTable(tbl [][]string) ([]models.PoolSession, error) {
 		if _, col0IsDay := dayColIndex[0]; col0IsDay {
 			return parseAltRows(tbl, dayColIndex)
 		}
+		// Format D (outdoor pools): col 0 header is "TIME"; time ranges are in col 0,
+		// session type names are in the day columns.
+		if len(header) > 0 {
+			h0 := strings.ToLower(strings.TrimSpace(header[0]))
+			if h0 == "time" || h0 == "times" {
+				return parseTimeGrid(tbl, dayColIndex)
+			}
+		}
 		// Format A.
 		return parseDayGrid(tbl, dayColIndex)
 	}
@@ -368,10 +394,65 @@ func parseTable(tbl [][]string) ([]models.PoolSession, error) {
 	return parseRowPerSession(tbl)
 }
 
+// parseTimeGrid handles Format D tables (outdoor pools).
+// Col 0 contains a time range; day columns contain session type names or "CLOSED".
+//
+//	Row 0: ["TIME", "Mon", "Tue", ...]
+//	Row N: ["10:00-12:00PM", "Open Swim", "Open Swim", "", "CLOSED"]
+//	Safety-break rows have non-time text in col 0 and are skipped automatically.
+func parseTimeGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, error) {
+	type key struct{ open, close string }
+	grouped := make(map[key][]string)
+	var keyOrder []key
+
+	for _, row := range tbl[1:] {
+		if len(row) == 0 {
+			continue
+		}
+		open, close, err := parseTimeRange(row[0])
+		if err != nil {
+			continue // safety-break rows, headings, etc.
+		}
+		for colIdx, day := range dayCol {
+			if colIdx >= len(row) {
+				continue
+			}
+			cell := strings.TrimSpace(row[colIdx])
+			if cell == "" {
+				continue
+			}
+			st := detectSessionType(cell)
+			if !isFamilyFriendly(st) {
+				continue
+			}
+			k := key{open, close}
+			if _, exists := grouped[k]; !exists {
+				keyOrder = append(keyOrder, k)
+			}
+			grouped[k] = append(grouped[k], day)
+		}
+	}
+
+	if len(grouped) == 0 {
+		return nil, fmt.Errorf("time-grid: no sessions extracted")
+	}
+
+	var sessions []models.PoolSession
+	for _, k := range keyOrder {
+		sessions = append(sessions, models.PoolSession{
+			FamilyFriendly: true,
+			Days:           sortDays(grouped[k]),
+			Open:           k.open,
+			Close:          k.close,
+		})
+	}
+	return sessions, nil
+}
+
 // parseAltRows handles Format C tables where rows alternate: time row, type row, time row, type row...
 // The type row may have fewer cells than the time row due to HTML colspan merging cells.
 func parseAltRows(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, error) {
-	type key struct{ typ, open, close string }
+	type key struct{ open, close string }
 	grouped := make(map[key][]string)
 	var keyOrder []key
 
@@ -393,17 +474,17 @@ func parseAltRows(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 				continue
 			}
 
-			var sessionType models.SessionType
+			var st sessionType
 			if colIdx < len(typeRow) {
-				sessionType = detectSessionType(typeRow[colIdx])
+				st = detectSessionType(typeRow[colIdx])
 			} else if len(typeRow) > 0 {
-				sessionType = detectSessionType(typeRow[len(typeRow)-1])
+				st = detectSessionType(typeRow[len(typeRow)-1])
 			}
-			if sessionType == "" {
+			if !isFamilyFriendly(st) {
 				continue
 			}
 
-			k := key{string(sessionType), open, close}
+			k := key{open, close}
 			if _, exists := grouped[k]; !exists {
 				keyOrder = append(keyOrder, k)
 			}
@@ -418,10 +499,10 @@ func parseAltRows(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 	var sessions []models.PoolSession
 	for _, k := range keyOrder {
 		sessions = append(sessions, models.PoolSession{
-			Type:  models.SessionType(k.typ),
-			Days:  sortDays(grouped[k]),
-			Open:  k.open,
-			Close: k.close,
+			FamilyFriendly: true,
+			Days:           sortDays(grouped[k]),
+			Open:           k.open,
+			Close:          k.close,
 		})
 	}
 	return sessions, nil
@@ -442,8 +523,8 @@ func detectDayColumns(header []string) map[int]string {
 // parseDayGrid handles Format A tables.
 // Each data row is a session type; each day column contains a time range or is empty.
 func parseDayGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, error) {
-	// group: sessionType+open+close -> []day
-	type key struct{ typ, open, close string }
+	// group: open+close -> []day (only family-friendly sessions are kept)
+	type key struct{ open, close string }
 	grouped := make(map[key][]string)
 	var keyOrder []key
 
@@ -451,8 +532,8 @@ func parseDayGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 		if len(row) == 0 {
 			continue
 		}
-		sessionType := detectSessionType(row[0])
-		if sessionType == "" {
+		st := detectSessionType(row[0])
+		if !isFamilyFriendly(st) {
 			continue
 		}
 		for colIdx, day := range dayCol {
@@ -467,7 +548,7 @@ func parseDayGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 			if err != nil {
 				continue
 			}
-			k := key{string(sessionType), open, close}
+			k := key{open, close}
 			if _, exists := grouped[k]; !exists {
 				keyOrder = append(keyOrder, k)
 			}
@@ -483,10 +564,10 @@ func parseDayGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 	for _, k := range keyOrder {
 		days := sortDays(grouped[k])
 		sessions = append(sessions, models.PoolSession{
-			Type:  models.SessionType(k.typ),
-			Days:  days,
-			Open:  k.open,
-			Close: k.close,
+			FamilyFriendly: true,
+			Days:           days,
+			Open:           k.open,
+			Close:          k.close,
 		})
 	}
 	return sessions, nil
@@ -501,8 +582,8 @@ func parseRowPerSession(tbl [][]string) ([]models.PoolSession, error) {
 		if len(row) < 2 {
 			continue
 		}
-		sessionType := detectSessionType(row[0])
-		if sessionType == "" {
+		st := detectSessionType(row[0])
+		if !isFamilyFriendly(st) {
 			continue
 		}
 
@@ -533,10 +614,10 @@ func parseRowPerSession(tbl [][]string) ([]models.PoolSession, error) {
 			continue
 		}
 		sessions = append(sessions, models.PoolSession{
-			Type:  sessionType,
-			Days:  days,
-			Open:  open,
-			Close: close,
+			FamilyFriendly: true,
+			Days:           days,
+			Open:           open,
+			Close:          close,
 		})
 	}
 	if len(sessions) == 0 {
@@ -545,9 +626,9 @@ func parseRowPerSession(tbl [][]string) ([]models.PoolSession, error) {
 	return sessions, nil
 }
 
-// detectSessionType returns the best-matching SessionType for a string,
-// or SessionOpenSwim as the default when nothing else matches.
-func detectSessionType(s string) models.SessionType {
+// detectSessionType returns the scraper-internal sessionType for a label string,
+// or "" if no keyword matches (unknown types are skipped).
+func detectSessionType(s string) sessionType {
 	lower := strings.ToLower(s)
 	for _, kw := range sessionKeywords {
 		for _, word := range kw.words {
@@ -616,27 +697,45 @@ func parseTimeRange(s string) (open, close string, err error) {
 		return "", "", fmt.Errorf("could not parse times in %q", s)
 	}
 
-	// If only one AM/PM suffix was given (e.g. "2:00-5:00 PM"), apply it to both.
+	// If only one AM/PM suffix was given (e.g. "2:00-5:00 PM"), try to apply it to open too.
+	// Only apply PM when the resulting open time stays before close; otherwise the suffix
+	// belongs to close only (e.g. "11:30-3:30PM" → 11:30+PM=23:30 > 15:30, so open stays 11:30).
 	if !strings.Contains(strings.ToLower(m[1]), "am") && !strings.Contains(strings.ToLower(m[1]), "pm") {
 		suffix := extractAmPm(m[2])
-		if suffix != "" {
-			open = parseTimeStr(m[1] + " " + suffix)
+		if suffix == "pm" {
+			if candidate := parseTimeStr(m[1] + " pm"); candidate != "" && candidate < close {
+				open = candidate
+			}
+		} else if suffix == "am" {
+			if candidate := parseTimeStr(m[1] + " am"); candidate != "" {
+				open = candidate
+			}
 		}
+	}
+
+	// Sanity check: open must precede close.
+	if open >= close {
+		return "", "", fmt.Errorf("open %s not before close %s in %q", open, close, s)
 	}
 	return open, close, nil
 }
 
-// parseTimeStr converts "2:00 PM" or "14:00" to 24-hour "HH:MM".
+// parseTimeStr converts "2:00 PM", "14:00", or bare "11AM" to 24-hour "HH:MM".
 func parseTimeStr(s string) string {
 	s = strings.TrimSpace(s)
 	m := reTime.FindStringSubmatch(s)
-	if len(m) < 3 {
+	if len(m) < 2 || m[1] == "" {
 		return ""
 	}
 	h := atoi(m[1])
-	min := atoi(m[2])
-	ampm := strings.ToLower(strings.TrimSpace(m[3]))
-
+	min := 0
+	if len(m) > 2 && m[2] != "" {
+		min = atoi(m[2])
+	}
+	ampm := ""
+	if len(m) > 3 {
+		ampm = strings.ToLower(strings.TrimSpace(m[3]))
+	}
 	if ampm == "pm" && h != 12 {
 		h += 12
 	} else if ampm == "am" && h == 12 {

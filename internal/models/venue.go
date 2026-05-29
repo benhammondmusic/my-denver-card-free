@@ -19,24 +19,11 @@ const (
 	ScheduleWeekendsAndBreaks FreeSchedule = "weekends_and_breaks"
 )
 
-type SessionType string
-
-const (
-	SessionOpenSwim    SessionType = "open_swim"
-	SessionFamilySwim  SessionType = "family_swim"
-	SessionLapSwim     SessionType = "lap_swim"
-	SessionAdultSwim   SessionType = "adult_swim"
-	SessionQuietSwim   SessionType = "quiet_swim"
-	SessionAquaFitness SessionType = "aqua_fitness"
-	SessionSwimLessons SessionType = "swim_lessons"
-	SessionSwimTeam    SessionType = "swim_team"
-)
-
 type PoolSession struct {
-	Type  SessionType `json:"type"`
-	Days  []string    `json:"days"`  // lowercase three-letter: "mon","tue","wed","thu","fri","sat","sun"
-	Open  string      `json:"open"`  // 24h "HH:MM"
-	Close string      `json:"close"` // 24h "HH:MM"
+	FamilyFriendly bool     `json:"family_friendly"`
+	Days           []string `json:"days"`  // lowercase three-letter: "mon","tue","wed","thu","fri","sat","sun"
+	Open           string   `json:"open"`  // 24h "HH:MM"
+	Close          string   `json:"close"` // 24h "HH:MM"
 }
 
 type Pool struct {

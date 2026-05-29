@@ -634,10 +634,8 @@ func filterScript() templ.Component {
     return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
   }
 
-  var FAMILY_SESSION_TYPES = ['open_swim', 'family_swim'];
-
   function isFamilySession(s) {
-    return FAMILY_SESSION_TYPES.indexOf(s.type) !== -1;
+    return s.family_friendly === true;
   }
 
   function getPoolStatus(pools) {
@@ -652,7 +650,7 @@ func filterScript() templ.Component {
         if (s.days.indexOf(todayDow) === -1) continue;
         var o = parseTime(s.open), c = parseTime(s.close);
         if (nowMinutes >= o && nowMinutes < c) {
-          return {status: 'open', label: 'Open now', type: s.type, open: s.open, close: s.close};
+          return {status: 'open', label: 'Open now', open: s.open, close: s.close};
         }
         if (nowMinutes < o) {
           if (!earliest || o < parseTime(earliest.open)) earliest = s;
@@ -664,7 +662,7 @@ func filterScript() templ.Component {
       var label = diff <= 60
         ? 'Opens in ' + diff + ' min'
         : 'Opens at ' + fmtTime(earliest.open);
-      return {status: 'soon', label: label, type: earliest.type, open: earliest.open, close: earliest.close};
+      return {status: 'soon', label: label, open: earliest.open, close: earliest.close};
     }
     return {status: 'closed', label: 'Closed today'};
   }
@@ -749,12 +747,6 @@ func filterScript() templ.Component {
       chip.className = 'badge pool-status pool-status-' + ps.status;
       chip.textContent = ps.label;
       statusEl.appendChild(chip);
-      if (ps.type) {
-        var typeSpan = document.createElement('span');
-        typeSpan.className = 'months';
-        typeSpan.textContent = titleCase(ps.type);
-        statusEl.appendChild(typeSpan);
-      }
       row.dataset.poolStatus = ps.status;
     });
   }
@@ -1037,7 +1029,6 @@ func filterScript() templ.Component {
             var o = parseTime(s.open), c = parseTime(s.close);
             var isNow = nowMinutes >= o && nowMinutes < c;
             html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
-            html += '<span class="pool-session-type">' + titleCase(s.type) + '</span>';
             html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
             if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
             html += '</div>';

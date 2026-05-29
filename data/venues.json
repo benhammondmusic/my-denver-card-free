@@ -36,7 +36,7 @@
     "max_age": 18
   },
   {
-    "name": "Denver Museum of Nature \u0026 Science",
+    "name": "Denver Museum of Nature & Science",
     "url": "https://www.dmns.org/visit/pricing-and-discounts/",
     "program": "mydenvercard",
     "featured": true,
@@ -254,7 +254,7 @@
     "lat": 39.7306,
     "lng": -104.9878,
     "address": "100 W 14th Ave Pkwy, Denver, CO 80204",
-    "hours": "10am-5pm Tue-Thu \u0026 Sat-Sun, 10am-9pm Fri",
+    "hours": "10am-5pm Tue-Thu & Sat-Sun, 10am-9pm Fri",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -326,7 +326,7 @@
     "lat": 39.7586,
     "lng": -105.0019,
     "address": "1485 Delgany St, Denver, CO 80202",
-    "hours": "11am-5pm Tue-Thu \u0026 Sun, 11am-9pm Fri-Sat",
+    "hours": "11am-5pm Tue-Thu & Sun, 11am-9pm Fri-Sat",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -420,7 +420,7 @@
     "scrape_error": "",
     "lat": 39.7494,
     "lng": -104.9982,
-    "address": "Arapahoe St \u0026 15th St, Denver, CO 80202",
+    "address": "Arapahoe St & 15th St, Denver, CO 80202",
     "hours": "",
     "indoor": false,
     "reservation_required": false,
@@ -472,83 +472,7 @@
         "canva_url": "https://www.canva.com/design/DAG989jxCeU/view",
         "sessions": [
           {
-            "type": "aqua_fitness",
-            "days": [
-              "sun"
-            ],
-            "open": "11:15",
-            "close": "12:15"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "06:00",
-            "close": "08:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "08:00",
-            "close": "09:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "12:30",
-            "close": "13:45"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "fri",
-              "sat"
-            ],
-            "open": "10:00",
-            "close": "11:00"
-          },
-          {
-            "type": "quiet_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "11:45"
-          },
-          {
-            "type": "quiet_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "11:00",
-            "close": "12:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sun"
             ],
@@ -556,26 +480,7 @@
             "close": "15:30"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "12:00",
-            "close": "13:45"
-          },
-          {
-            "type": "quiet_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "11:45"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -583,7 +488,7 @@
             "close": "15:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -593,7 +498,7 @@
             "close": "18:15"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "wed"
             ],
@@ -601,39 +506,12 @@
             "close": "17:15"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "14:45"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
             "open": "15:00",
             "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "18:30",
-            "close": "20:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "wed"
-            ],
-            "open": "17:15",
-            "close": "18:15"
           }
         ]
       }
@@ -682,146 +560,7 @@
         "family_friendly": true,
         "season_label": "Summer 2026",
         "canva_url": "https://www.canva.com/design/DAG98dVBMrE/view",
-        "sessions": [
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "05:30",
-            "close": "09:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "thu"
-            ],
-            "open": "05:30",
-            "close": "13:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "05:30",
-            "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "08:00",
-            "close": "15:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "08:00",
-            "close": "14:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue"
-            ],
-            "open": "05:30",
-            "close": "16:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "thu"
-            ],
-            "open": "14:00",
-            "close": "16:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "14:00",
-            "close": "15:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "16:00",
-            "close": "17:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "10:15",
-            "close": "11:15"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue"
-            ],
-            "open": "17:00",
-            "close": "18:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "18:00",
-            "close": "19:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "11:15",
-            "close": "16:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "19:00",
-            "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "17:00",
-            "close": "19:30"
-          }
-        ]
+        "sessions": []
       }
     ]
   },
@@ -868,34 +607,7 @@
         "canva_url": "https://www.canva.com/design/DAG98XxNrVQ/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "08:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed"
-            ],
-            "open": "06:30",
-            "close": "08:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "06:30",
-            "close": "12:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat",
               "sun"
@@ -904,17 +616,7 @@
             "close": "15:30"
           },
           {
-            "type": "swim_team",
-            "days": [
-              "mon",
-              "tue",
-              "wed"
-            ],
-            "open": "08:00",
-            "close": "09:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -923,83 +625,6 @@
             ],
             "open": "12:00",
             "close": "16:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "09:00",
-            "close": "12:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "16:00",
-            "close": "18:00"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue"
-            ],
-            "open": "10:00",
-            "close": "11:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "wed",
-              "fri"
-            ],
-            "open": "18:00",
-            "close": "19:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "wed",
-              "fri"
-            ],
-            "open": "19:00",
-            "close": "19:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon"
-            ],
-            "open": "18:15",
-            "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue"
-            ],
-            "open": "16:00",
-            "close": "17:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue"
-            ],
-            "open": "17:30",
-            "close": "19:30"
           }
         ]
       }
@@ -1050,41 +675,7 @@
         "canva_url": "https://www.canva.com/design/DAG98B5lEuQ/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "08:00",
-            "close": "13:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "06:00",
-            "close": "14:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "06:00",
-            "close": "09:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "08:00",
-            "close": "14:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1094,59 +685,6 @@
             ],
             "open": "14:30",
             "close": "17:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "11:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "17:00",
-            "close": "17:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "11:15",
-            "close": "14:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "17:00",
-            "close": "18:45"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "18:00",
-            "close": "20:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "17:00",
-            "close": "19:45"
           }
         ]
       }
@@ -1190,64 +728,7 @@
         "canva_url": "https://www.canva.com/design/DAG98fUtZns/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "06:00",
-            "close": "10:00"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "10:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "10:00",
-            "close": "11:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "10:00",
-            "close": "12:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "11:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "14:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -1255,16 +736,7 @@
             "close": "13:30"
           },
           {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1272,7 +744,7 @@
             "close": "17:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1281,43 +753,6 @@
             ],
             "open": "14:00",
             "close": "17:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "17:30",
-            "close": "18:30"
-          },
-          {
-            "type": "swim_team",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "17:00",
-            "close": "18:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "18:00",
-            "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "18:00",
-            "close": "19:00"
           }
         ]
       }
@@ -1368,42 +803,7 @@
         "canva_url": "https://www.canva.com/design/DAG98OnloSo/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "07:00",
-            "close": "09:15"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "07:00",
-            "close": "10:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "09:00",
-            "close": "11:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "12:00",
-            "close": "13:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -1411,7 +811,7 @@
             "close": "14:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sun"
             ],
@@ -1419,28 +819,7 @@
             "close": "15:30"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "09:30",
-            "close": "10:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "10:30",
-            "close": "11:15"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1448,7 +827,7 @@
             "close": "14:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1459,7 +838,7 @@
             "close": "13:30"
           },
           {
-            "type": "family_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1470,7 +849,7 @@
             "close": "14:30"
           },
           {
-            "type": "family_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1478,7 +857,7 @@
             "close": "15:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1489,7 +868,7 @@
             "close": "17:15"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1497,18 +876,7 @@
             "close": "19:30"
           },
           {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "17:30",
-            "close": "18:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue"
             ],
@@ -1564,53 +932,7 @@
         "canva_url": "https://www.canva.com/design/DAG93DKRMhg/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "06:00",
-            "close": "08:55"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "06:00",
-            "close": "10:25"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "10:00",
-            "close": "11:25"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:30",
-            "close": "11:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -1618,26 +940,7 @@
             "close": "13:15"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "10:05",
-            "close": "12:55"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "11:35",
-            "close": "12:55"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
@@ -1646,7 +949,7 @@
             "close": "18:00"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -1655,7 +958,7 @@
             "close": "16:15"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1663,31 +966,12 @@
             "close": "19:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
             "open": "13:30",
             "close": "15:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "thu"
-            ],
-            "open": "18:30",
-            "close": "19:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "16:15",
-            "close": "18:30"
           }
         ]
       }
@@ -1738,52 +1022,7 @@
         "canva_url": "https://www.canva.com/design/DAG98RFXNPY/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "07:15",
-            "close": "09:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "07:15",
-            "close": "10:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "09:00",
-            "close": "12:15"
-          },
-          {
-            "type": "quiet_swim",
-            "days": [
-              "thu"
-            ],
-            "open": "10:30",
-            "close": "11:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "09:15",
-            "close": "10:15"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -1791,7 +1030,7 @@
             "close": "15:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -1802,7 +1041,7 @@
             "close": "13:00"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "thu"
             ],
@@ -1810,7 +1049,7 @@
             "close": "13:00"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu",
@@ -1820,64 +1059,13 @@
             "close": "17:15"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
             ],
             "open": "13:15",
             "close": "16:45"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "17:30",
-            "close": "18:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "17:30",
-            "close": "18:30"
-          },
-          {
-            "type": "swim_team",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "17:00",
-            "close": "19:00"
-          },
-          {
-            "type": "quiet_swim",
-            "days": [
-              "tue"
-            ],
-            "open": "18:35",
-            "close": "19:35"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "17:00",
-            "close": "19:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "thu"
-            ],
-            "open": "18:35",
-            "close": "19:30"
           }
         ]
       }
@@ -1928,34 +1116,7 @@
         "canva_url": "https://www.canva.com/design/DAG98ZT2njY/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "08:00",
-            "close": "13:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "08:00",
-            "close": "10:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "10:00",
-            "close": "11:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
@@ -1964,16 +1125,7 @@
             "close": "15:30"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "11:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -1981,46 +1133,7 @@
             "close": "19:30"
           },
           {
-            "type": "open_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "23:30",
-            "close": "15:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "16:00",
-            "close": "17:00"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "swim_team",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "17:00",
-            "close": "18:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -2029,7 +1142,7 @@
             "close": "15:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -2088,39 +1201,7 @@
         "canva_url": "https://www.canva.com/design/DAG98Up0gDQ/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "07:00",
-            "close": "09:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "09:00",
-            "close": "11:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "09:15",
-            "close": "10:15"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -2128,48 +1209,7 @@
             "close": "12:30"
           },
           {
-            "type": "adult_swim",
-            "days": [
-              "mon"
-            ],
-            "open": "10:15",
-            "close": "11:15"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:30",
-            "close": "14:00"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "wed"
-            ],
-            "open": "10:15",
-            "close": "10:45"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "fri"
-            ],
-            "open": "10:30",
-            "close": "11:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon"
-            ],
-            "open": "11:15",
-            "close": "12:15"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -2178,82 +1218,13 @@
             "close": "16:45"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "wed"
-            ],
-            "open": "10:45",
-            "close": "11:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "11:45",
-            "close": "15:00"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "17:00",
-            "close": "18:50"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "fri"
             ],
             "open": "15:00",
             "close": "18:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon"
-            ],
-            "open": "12:30",
-            "close": "15:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "wed"
-            ],
-            "open": "12:00",
-            "close": "17:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "wed"
-            ],
-            "open": "17:15",
-            "close": "18:15"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "07:00",
-            "close": "18:30"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "09:00",
-            "close": "12:30"
           }
         ]
       }
@@ -2304,42 +1275,7 @@
         "canva_url": "https://www.canva.com/design/DAG98f_t5Jk/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "09:00",
-            "close": "11:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue"
-            ],
-            "open": "09:00",
-            "close": "12:00"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "sat"
-            ],
-            "open": "09:00",
-            "close": "12:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "09:00",
-            "close": "12:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat",
               "sun"
@@ -2348,36 +1284,7 @@
             "close": "15:30"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed",
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu",
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "14:00"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "12:00",
-            "close": "13:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -2388,27 +1295,7 @@
             "close": "16:15"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "13:00",
-            "close": "14:00"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "16:30",
-            "close": "17:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2416,37 +1303,10 @@
             "close": "19:30"
           },
           {
-            "type": "swim_team",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "16:30",
-            "close": "17:30"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "17:30",
-            "close": "18:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
-            ],
-            "open": "18:30",
-            "close": "19:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
             ],
             "open": "18:30",
             "close": "19:30"
@@ -2500,35 +1360,7 @@
         "canva_url": "https://www.canva.com/design/DAG98sls7I4/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "09:00",
-            "close": "11:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "06:00",
-            "close": "08:15"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "06:00",
-            "close": "09:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat",
               "sun"
@@ -2537,54 +1369,7 @@
             "close": "15:30"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "08:30",
-            "close": "09:30"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "09:45",
-            "close": "14:00"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "09:45",
-            "close": "10:45"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "09:30",
-            "close": "10:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -2595,7 +1380,7 @@
             "close": "20:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2603,16 +1388,7 @@
             "close": "12:00"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "16:30",
-            "close": "18:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2620,7 +1396,7 @@
             "close": "19:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -2631,7 +1407,7 @@
             "close": "20:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2639,7 +1415,7 @@
             "close": "19:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat",
               "sun"
@@ -2696,42 +1472,7 @@
         "canva_url": "https://www.canva.com/design/DAG98pRxQmg/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "06:00",
-            "close": "11:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "06:00",
-            "close": "08:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "06:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "08:00",
-            "close": "11:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat",
               "sun"
@@ -2740,49 +1481,7 @@
             "close": "15:30"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "adult_swim",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "14:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "mon"
-            ],
-            "open": "10:15",
-            "close": "14:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -2791,15 +1490,7 @@
             "close": "16:15"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "wed"
-            ],
-            "open": "10:00",
-            "close": "14:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
@@ -2808,16 +1499,7 @@
             "close": "18:30"
           },
           {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "16:15",
-            "close": "17:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2825,16 +1507,7 @@
             "close": "19:30"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "18:30",
-            "close": "19:30"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -2891,46 +1564,7 @@
         "canva_url": "https://www.canva.com/design/DAG984ma1dQ/view",
         "sessions": [
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "06:00",
-            "close": "08:45"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sat"
-            ],
-            "open": "09:15",
-            "close": "12:00"
-          },
-          {
-            "type": "lap_swim",
-            "days": [
-              "sun"
-            ],
-            "open": "09:15",
-            "close": "11:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "09:00",
-            "close": "10:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sat"
             ],
@@ -2938,7 +1572,7 @@
             "close": "15:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "sun"
             ],
@@ -2946,37 +1580,7 @@
             "close": "13:30"
           },
           {
-            "type": "lap_swim",
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu",
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "13:00"
-          },
-          {
-            "type": "aqua_fitness",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "10:00",
-            "close": "10:45"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "10:45"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "fri"
             ],
@@ -2984,7 +1588,7 @@
             "close": "18:30"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "tue",
@@ -2995,25 +1599,7 @@
             "close": "16:45"
           },
           {
-            "type": "swim_lessons",
-            "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "17:00",
-            "close": "17:30"
-          },
-          {
-            "type": "swim_lessons",
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "17:00",
-            "close": "18:00"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon"
             ],
@@ -3021,7 +1607,7 @@
             "close": "20:00"
           },
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue",
               "thu"
@@ -3030,15 +1616,7 @@
             "close": "20:00"
           },
           {
-            "type": "aqua_fitness",
-            "days": [
-              "wed"
-            ],
-            "open": "17:45",
-            "close": "18:45"
-          },
-          {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "wed"
             ],
@@ -3134,7 +1712,7 @@
         "canva_url": "https://www.canva.com/design/DAHIP1Aq-9U/view",
         "sessions": [
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon"
             ],
@@ -3183,7 +1761,7 @@
         "canva_url": "https://www.canva.com/design/DAHIQHl6uj8/view",
         "sessions": [
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon"
             ],
@@ -3232,7 +1810,7 @@
         "canva_url": "https://www.canva.com/design/DAHIQDgAgFU/view",
         "sessions": [
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon"
             ],
@@ -3361,7 +1939,7 @@
         "canva_url": "https://www.canva.com/design/DAHIQ2vh2Bc/view",
         "sessions": [
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "tue"
             ],
@@ -3530,7 +2108,7 @@
         "canva_url": "https://www.canva.com/design/DAHIQ00Zm8k/view",
         "sessions": [
           {
-            "type": "open_swim",
+            "family_friendly": true,
             "days": [
               "mon",
               "wed"
