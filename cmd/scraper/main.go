@@ -325,11 +325,18 @@ func parseSessions(tables [][][]string) ([]models.PoolSession, error) {
 	return nil, fmt.Errorf("no table yielded parseable sessions")
 }
 
-// parseTable handles two common Denver pool schedule formats:
+// parseTable handles three common Denver pool schedule formats:
 //
-//	Format A (day-grid): header row contains day names as column headers.
+//	Format A (day-grid): header row has a session-type column (col 0) then day columns.
 //	  Row 0: ["Session", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 //	  Row N: ["Open Swim", "2:00-5:00 PM", "2:00-5:00 PM", "", ...]
+//
+//	Format C (alt-row): ALL header columns are day names; rows alternate time/type.
+//	  Row 0: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+//	  Row 1 (times): ["6:00-8:45AM", "6:00-8:45AM", ...]
+//	  Row 2 (types): ["Lap Swim", "Lap Swim", ...]
+//	  Row 3 (times): ["2:00-6:15PM", "2:00-6:15PM", ...]
+//	  Row 4 (types): ["Open Swim (No Lanes)", "Open Swim (No Lanes)", ...]
 //
 //	Format B (row-per-session): each row describes one session block.
 //	  ["Open Swim", "Mon/Wed/Fri", "2:00 PM", "5:00 PM"]
@@ -339,14 +346,81 @@ func parseTable(tbl [][]string) ([]models.PoolSession, error) {
 	}
 	header := tbl[0]
 
-	// Detect Format A: does the header contain recognisable day names?
 	dayColIndex := detectDayColumns(header)
 	if len(dayColIndex) >= 2 {
+		// Format C: col 0 of the header is a day name (no session-type column on left).
+		if _, col0IsDay := dayColIndex[0]; col0IsDay {
+			return parseAltRows(tbl, dayColIndex)
+		}
+		// Format A.
 		return parseDayGrid(tbl, dayColIndex)
 	}
 
 	// Fall back to Format B.
 	return parseRowPerSession(tbl)
+}
+
+// parseAltRows handles Format C tables where rows alternate: time row, type row, time row, type row...
+// The type row may have fewer cells than the time row due to HTML colspan merging cells.
+func parseAltRows(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, error) {
+	type key struct{ typ, open, close string }
+	grouped := make(map[key][]string)
+	var keyOrder []key
+
+	rows := tbl[1:] // skip header
+	for i := 0; i+1 < len(rows); i += 2 {
+		timeRow := rows[i]
+		typeRow := rows[i+1]
+
+		for colIdx, day := range dayCol {
+			if colIdx >= len(timeRow) {
+				continue
+			}
+			cell := strings.TrimSpace(timeRow[colIdx])
+			if cell == "" || cell == "-" {
+				continue
+			}
+			open, close, err := parseTimeRange(cell)
+			if err != nil {
+				continue
+			}
+
+			// Get session type from the same column in the type row.
+			// When colspan merges cells, the type row may be shorter; fall back
+			// to the last available cell rather than defaulting to open_swim.
+			sessionType := models.SessionOpenSwim
+			if colIdx < len(typeRow) {
+				if t := detectSessionType(typeRow[colIdx]); t != "" {
+					sessionType = t
+				}
+			} else if len(typeRow) > 0 {
+				if t := detectSessionType(typeRow[len(typeRow)-1]); t != "" {
+					sessionType = t
+				}
+			}
+
+			k := key{string(sessionType), open, close}
+			if _, exists := grouped[k]; !exists {
+				keyOrder = append(keyOrder, k)
+			}
+			grouped[k] = append(grouped[k], day)
+		}
+	}
+
+	if len(grouped) == 0 {
+		return nil, fmt.Errorf("alt-row: no sessions extracted")
+	}
+
+	var sessions []models.PoolSession
+	for _, k := range keyOrder {
+		sessions = append(sessions, models.PoolSession{
+			Type:  models.SessionType(k.typ),
+			Days:  sortDays(grouped[k]),
+			Open:  k.open,
+			Close: k.close,
+		})
+	}
+	return sessions, nil
 }
 
 // detectDayColumns returns a map of column index -> day abbreviation for any
