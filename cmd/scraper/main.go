@@ -4,7 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"regexp"
 	"strings"
@@ -19,11 +21,14 @@ import (
 )
 
 const (
-	pageTimeout     = 30 * time.Second
-	canvaTimeout    = 45 * time.Second
-	canvaRenderWait = 3 * time.Second
-	llmModel        = "claude-haiku-4-5-20251001"
-	maxPageChars    = 6000
+	pageTimeout      = 30 * time.Second
+	canvaTimeout     = 45 * time.Second
+	canvaRenderWait  = 3 * time.Second
+	llmModel         = "claude-haiku-4-5-20251001"
+	maxPageChars     = 6000
+	// Denver.gov swimming pools page - section-2 = indoor rec centers, section-3 = outdoor pools
+	indoorPoolsURL  = "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools#section-2"
+	outdoorPoolsURL = "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools#section-3"
 )
 
 // scraped holds fields the LLM may return as changed for regular venues.
@@ -42,6 +47,8 @@ type scraped struct {
 var (
 	// Matches "2:00 PM", "10:30 AM", "14:00"
 	reTime = regexp.MustCompile(`(?i)\b(\d{1,2}):(\d{2})\s*(am|pm)?\b`)
+
+	reCanvaDocID = regexp.MustCompile(`/design/([A-Za-z0-9_-]+)/`)
 
 	// Session type keywords mapped to canonical SessionType
 	sessionKeywords = []struct {
@@ -90,10 +97,14 @@ func main() {
 		log.Println("warning: ANTHROPIC_API_KEY not set; LLM fallback disabled")
 	}
 
-	// Pass 1: scrape regular venue metadata (skip pool venues - generic URL).
+	// Pass 1: scrape regular venue metadata (skip pool venues and the hub
+	// Swimming-Pools pages, which are Canva-heavy and their notes are stable).
 	for i := range venues {
 		v := &venues[i]
 		if v.Category == "pool" {
+			continue
+		}
+		if strings.Contains(v.URL, "/Swimming-Pools") {
 			continue
 		}
 		if v.TemporarilyClosed {
@@ -113,7 +124,8 @@ func main() {
 		v.LastChecked = time.Now().UTC()
 	}
 
-	// Pass 2: scrape pool session schedules directly from Canva HTML tables.
+	// Build map: Canva doc ID -> pool pointer for fast lookup during iframe scrape.
+	poolMap := make(map[string]*models.Pool)
 	for i := range venues {
 		v := &venues[i]
 		if v.Category != "pool" {
@@ -124,14 +136,26 @@ func main() {
 			if pool.CanvaURL == "" {
 				continue
 			}
-			log.Printf("scraping pool schedule: %s", v.Name)
-			if err := scrapePoolSchedule(browser, pool); err != nil {
-				log.Printf("  FAIL: %v", err)
-			} else {
-				log.Printf("  ok (%d sessions)", len(pool.Sessions))
+			docID := extractCanvaDocID(pool.CanvaURL)
+			if docID != "" {
+				poolMap[docID] = pool
 			}
 		}
-		v.LastChecked = time.Now().UTC()
+	}
+	log.Printf("mapped %d pools with Canva URLs", len(poolMap))
+
+	// Pass 2: fetch Denver.gov pool page once (both sections are on the same
+	// page; the anchor fragments only affect scroll position, not HTTP response).
+	log.Printf("Pass 2: scraping pool schedules via Canva embeds on Denver.gov")
+	if err := scrapePoolPage(browser, indoorPoolsURL, poolMap); err != nil {
+		log.Printf("  FAIL: %v", err)
+	}
+
+	// Update last_checked for all pool venues.
+	for i := range venues {
+		if venues[i].Category == "pool" {
+			venues[i].LastChecked = time.Now().UTC()
+		}
 	}
 
 	out, err := json.MarshalIndent(venues, "", "  ")
@@ -152,43 +176,112 @@ func makeBrowser() *rod.Browser {
 	return rod.New().MustConnect()
 }
 
-// scrapePoolSchedule navigates to the Canva schedule page, reads the HTML
-// tables directly from the DOM, and populates pool.Sessions.
-func scrapePoolSchedule(browser *rod.Browser, pool *models.Pool) error {
+// extractCanvaDocID extracts the Canva document ID from a URL like
+// https://www.canva.com/design/DAG989jxCeU/view or an iframe src.
+func extractCanvaDocID(src string) string {
+	m := reCanvaDocID.FindStringSubmatch(src)
+	if len(m) < 2 {
+		return ""
+	}
+	return m[1]
+}
+
+// reCanvaIframeSrc finds Canva iframe src attributes in raw HTML.
+var reCanvaIframeSrc = regexp.MustCompile(`<iframe[^>]+src="(https://www\.canva\.com/design/[^"]+)"`)
+
+// fetchCanvaEmbedURLs fetches the Denver.gov pool page with a plain HTTP GET
+// (avoids headless-browser detection) and returns a map of
+// Canva doc ID -> full embed URL for every Canva iframe found.
+func fetchCanvaEmbedURLs(pageURL string) (map[string]string, error) {
+	req, err := http.NewRequest(http.MethodGet, pageURL, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", "Mozilla/5.0 (compatible; my-denver-card-scraper)")
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("HTTP GET: %w", err)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("read body: %w", err)
+	}
+
+	matches := reCanvaIframeSrc.FindAllSubmatch(body, -1)
+	result := make(map[string]string)
+	for _, m := range matches {
+		src := string(m[1])
+		docID := extractCanvaDocID(src)
+		if docID != "" {
+			result[docID] = src
+		}
+	}
+	return result, nil
+}
+
+// scrapePoolPage fetches the Denver.gov pool page with HTTP to extract Canva
+// embed URLs (including the auth token needed for unauthenticated access), then
+// loads each embed URL directly with Rod and extracts schedule tables.
+func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*models.Pool) error {
+	embedURLs, err := fetchCanvaEmbedURLs(pageURL)
+	if err != nil {
+		return fmt.Errorf("fetch embed URLs: %w", err)
+	}
+	if len(embedURLs) == 0 {
+		return fmt.Errorf("no Canva iframes found in page HTML")
+	}
+	log.Printf("  found %d Canva embed URLs in page HTML", len(embedURLs))
+
+	for docID, embedURL := range embedURLs {
+		pool, ok := poolMap[docID]
+		if !ok {
+			log.Printf("  no pool mapped for doc ID %s", docID)
+			continue
+		}
+		log.Printf("  scraping %s", pool.Name)
+		sessions, err := scrapeCanvaEmbed(browser, embedURL)
+		if err != nil {
+			log.Printf("  FAIL: %v", err)
+			continue
+		}
+		pool.Sessions = sessions
+		log.Printf("  ok: %d sessions", len(sessions))
+	}
+	return nil
+}
+
+// scrapeCanvaEmbed loads a Canva embed URL with Rod and extracts pool sessions
+// from the HTML tables rendered inside the page.
+func scrapeCanvaEmbed(browser *rod.Browser, embedURL string) ([]models.PoolSession, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), canvaTimeout)
 	defer cancel()
 
-	page, err := browser.Page(proto.TargetCreateTarget{URL: pool.CanvaURL})
+	page, err := browser.Page(proto.TargetCreateTarget{URL: embedURL})
 	if err != nil {
-		return fmt.Errorf("open canva page: %w", err)
+		return nil, fmt.Errorf("open page: %w", err)
 	}
 	defer page.MustClose()
 	page = page.Context(ctx)
 
 	if err := page.WaitLoad(); err != nil {
-		return fmt.Errorf("canva page load: %w", err)
+		return nil, fmt.Errorf("page load: %w", err)
 	}
 	time.Sleep(canvaRenderWait)
 
-	// Extract every table on the page as a 2-D slice of cell text.
 	tables, err := extractTables(page)
-	if err != nil {
-		return err
-	}
-	if len(tables) == 0 {
-		return fmt.Errorf("no tables found on canva page")
+	if err != nil || len(tables) == 0 {
+		return nil, fmt.Errorf("no tables found")
 	}
 
 	sessions, err := parseSessions(tables)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if len(sessions) == 0 {
-		return fmt.Errorf("table found but no sessions parsed")
+		return nil, fmt.Errorf("no sessions parsed")
 	}
-
-	pool.Sessions = sessions
-	return nil
+	return sessions, nil
 }
 
 // extractTables walks every <table> on the page and returns each as a slice

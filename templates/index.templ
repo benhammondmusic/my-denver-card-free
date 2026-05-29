@@ -355,11 +355,13 @@ templ filterScript() {
 
   // === SWIPE TO DISMISS ===
   function setupSwipeDismiss(sheet, contentEl, closeFn) {
-    var startY = 0, lastY = 0, dragging = false;
+    var startY = 0, lastY = 0, dragging = false, blocked = false;
     sheet.addEventListener('touchstart', function (e) {
+      blocked = !!e.target.closest('.modal-map, .leaflet-container');
       startY = e.touches[0].clientY; lastY = startY; dragging = false;
     }, { passive: true });
     sheet.addEventListener('touchmove', function (e) {
+      if (blocked) return;
       lastY = e.touches[0].clientY;
       var dy = lastY - startY;
       if (!dragging && (!contentEl || contentEl.scrollTop === 0) && dy > 8) dragging = true;
@@ -370,6 +372,7 @@ templ filterScript() {
       }
     }, { passive: false });
     sheet.addEventListener('touchend', function () {
+      if (blocked) return;
       if (!dragging) return;
       var dy = lastY - startY;
       sheet.style.transition = '';
@@ -606,7 +609,10 @@ templ filterScript() {
     }, 150);
   }
 
-  function buildPoolScheduleHTML(pools) {
+  var POOLS_PAGE_BASE = 'https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools';
+
+  function buildPoolScheduleHTML(pools, isIndoor) {
+    var scheduleURL = POOLS_PAGE_BASE + (isIndoor ? '#section-2' : '#section-3');
     var html = '';
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
@@ -640,11 +646,9 @@ templ filterScript() {
           html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
         }
       }
-      if (pool.canva_url) {
-        html += '<a href="' + pool.canva_url + '" target="_blank" rel="noopener noreferrer" class="pool-schedule-link">View full schedule</a>';
-      }
       html += '</div>';
     }
+    html += '<a href="' + scheduleURL + '" target="_blank" rel="noopener noreferrer" class="pool-schedule-link">View full schedule on Denver.gov</a>';
     return html;
   }
 
@@ -718,7 +722,7 @@ templ filterScript() {
 
       if (isPool && row._pools) {
         var schedDiv = document.createElement('div');
-        schedDiv.innerHTML = buildPoolScheduleHTML(row._pools);
+        schedDiv.innerHTML = buildPoolScheduleHTML(row._pools, indoor);
         modalDetails.appendChild(schedDiv);
       }
 
