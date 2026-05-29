@@ -748,9 +748,10 @@ templ Layout(title string) {
 
 				/* ---- POOL STATUS BADGES ---- */
 
-				.pool-status-open   { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
-				.pool-status-soon   { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-				.pool-status-closed { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+				.pool-status-open    { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+				.pool-status-soon    { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+				.pool-status-closed  { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+				.pool-status-unknown { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
 
 				/* ---- POOL CALL-AHEAD NOTICE ---- */
 
@@ -823,6 +824,16 @@ templ Layout(title string) {
 					color: var(--stone);
 					margin-top: 0.4rem;
 				}
+
+				.pool-schedule-link {
+					display: inline-block;
+					margin-top: 0.5rem;
+					font-size: 0.8125rem;
+					color: var(--sky-blue);
+					text-decoration: none;
+					font-weight: 500;
+				}
+				.pool-schedule-link:hover { text-decoration: underline; }
 
 				.modal-phone {
 					font-size: 0.875rem;
@@ -1182,12 +1193,14 @@ templ Layout(title string) {
 				& .wx-hour-precip { color: #93b4e0; }
 				& .pool-callout { background: #2d2000; border-color: #78350f; color: #fcd34d; }
 				& .call-ahead-warning { background: #2d2000; border-color: #78350f; color: #fcd34d; }
-				& .pool-status-open { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
-				& .pool-status-soon { background: #78350f; color: #fcd34d; border-color: #92400e; }
-				& .pool-status-closed { background: #1f2937; color: #9ca3af; border-color: #374151; }
+				& .pool-status-open    { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
+				& .pool-status-soon    { background: #78350f; color: #fcd34d; border-color: #92400e; }
+				& .pool-status-closed  { background: #1f2937; color: #9ca3af; border-color: #374151; }
+				& .pool-status-unknown { background: #2e1065; color: #c4b5fd; border-color: #5b21b6; }
 				& .pool-schedule { border-color: var(--border); }
 				& .pool-session-type { color: #c0cfe8; }
 				& .pool-session-now { background: #064e3b; }
+				& .pool-schedule-link { color: #93b4e0; }
 				& .modal-phone { color: #7a8fa8; }
 				& .modal-phone a { color: #93b4e0; }
 				}

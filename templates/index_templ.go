@@ -635,6 +635,8 @@ func filterScript() templ.Component {
   }
 
   function getPoolStatus(pools) {
+    var hasAnySessions = pools.some(function (p) { return (p.sessions || []).length > 0; });
+    if (!hasAnySessions) return {status: 'unknown', label: 'Call for hours'};
     var earliest = null;
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
@@ -1008,30 +1010,37 @@ func filterScript() templ.Component {
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
       var sessions = pool.sessions || [];
-      var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
       html += '<div class="pool-schedule">';
-      html += '<p class="pool-schedule-title">' + pool.name + ' - Today</p>';
-      if (todaySessions.length === 0) {
-        html += '<p class="pool-closed-today">No sessions today</p>';
+      if (sessions.length === 0) {
+        html += '<p class="pool-closed-today">Schedule not available - call the pool desk to confirm times.</p>';
       } else {
-        for (var j = 0; j < todaySessions.length; j++) {
-          var s = todaySessions[j];
-          var o = parseTime(s.open), c = parseTime(s.close);
-          var isNow = nowMinutes >= o && nowMinutes < c;
-          html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
-          html += '<span class="pool-session-type">' + titleCase(s.type) + '</span>';
-          html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
-          if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
-          html += '</div>';
+        var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
+        html += '<p class="pool-schedule-title">' + pool.name + ' - Today</p>';
+        if (todaySessions.length === 0) {
+          html += '<p class="pool-closed-today">No sessions today</p>';
+        } else {
+          for (var j = 0; j < todaySessions.length; j++) {
+            var s = todaySessions[j];
+            var o = parseTime(s.open), c = parseTime(s.close);
+            var isNow = nowMinutes >= o && nowMinutes < c;
+            html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
+            html += '<span class="pool-session-type">' + titleCase(s.type) + '</span>';
+            html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
+            if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
+            html += '</div>';
+          }
+        }
+        if (pool.season_start && pool.season_end) {
+          html += '<p class="pool-season-note">Season: ' + pool.season_start + ' to ' + pool.season_end + '</p>';
+        } else if (pool.season_label) {
+          html += '<p class="pool-season-note">' + pool.season_label + '</p>';
+        }
+        if (pool.features && pool.features.length) {
+          html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
         }
       }
-      if (pool.season_start && pool.season_end) {
-        html += '<p class="pool-season-note">Season: ' + pool.season_start + ' to ' + pool.season_end + '</p>';
-      } else if (pool.season_label) {
-        html += '<p class="pool-season-note">' + pool.season_label + '</p>';
-      }
-      if (pool.features && pool.features.length) {
-        html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
+      if (pool.canva_url) {
+        html += '<a href="' + pool.canva_url + '" target="_blank" rel="noopener noreferrer" class="pool-schedule-link">View full schedule</a>';
       }
       html += '</div>';
     }
