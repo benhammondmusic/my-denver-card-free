@@ -18,13 +18,14 @@ import (
 )
 
 const (
-	pageTimeout  = 30 * time.Second
-	llmModel     = "claude-haiku-4-5-20251001"
-	maxPageChars = 6000
+	pageTimeout     = 30 * time.Second
+	canvaTimeout    = 45 * time.Second
+	canvaRenderWait = 3 * time.Second
+	llmModel        = "claude-haiku-4-5-20251001"
+	maxPageChars    = 6000
 )
 
-// scraped holds fields that the LLM may return as changed.
-// Pointer types let us distinguish "not mentioned" from zero values.
+// scraped holds fields the LLM may return as changed for regular venues.
 type scraped struct {
 	FreeMonths        []string            `json:"free_months,omitempty"`
 	FreeSchedule      models.FreeSchedule `json:"free_schedule,omitempty"`
@@ -33,6 +34,12 @@ type scraped struct {
 	TemporarilyClosed *bool               `json:"temporarily_closed,omitempty"`
 	ClosureReason     string              `json:"closure_reason,omitempty"`
 	Uncertain         bool                `json:"uncertain,omitempty"`
+}
+
+// scrapedSessions holds the parsed pool schedule from a Canva page.
+type scrapedSessions struct {
+	Sessions  []models.PoolSession `json:"sessions"`
+	Uncertain bool                 `json:"uncertain,omitempty"`
 }
 
 func main() {
@@ -53,8 +60,12 @@ func main() {
 		log.Println("warning: ANTHROPIC_API_KEY not set; LLM fallback disabled")
 	}
 
+	// Pass 1: scrape regular venue metadata (skip pool venues - their URL is generic).
 	for i := range venues {
 		v := &venues[i]
+		if v.Category == "pool" {
+			continue
+		}
 		if v.TemporarilyClosed {
 			log.Printf("scraping (watching for reopen): %s", v.Name)
 		} else {
@@ -68,6 +79,27 @@ func main() {
 			v.ScrapeFailed = false
 			v.ScrapeError = ""
 			log.Printf("  ok")
+		}
+		v.LastChecked = time.Now().UTC()
+	}
+
+	// Pass 2: scrape pool session schedules from Canva docs.
+	for i := range venues {
+		v := &venues[i]
+		if v.Category != "pool" {
+			continue
+		}
+		for j := range v.Pools {
+			pool := &v.Pools[j]
+			if pool.CanvaURL == "" {
+				continue
+			}
+			log.Printf("scraping pool schedule: %s", v.Name)
+			if err := scrapePoolSchedule(browser, apiKey, pool); err != nil {
+				log.Printf("  FAIL: %v", err)
+			} else {
+				log.Printf("  ok (%d sessions)", len(pool.Sessions))
+			}
 		}
 		v.LastChecked = time.Now().UTC()
 	}
@@ -88,6 +120,108 @@ func makeBrowser() *rod.Browser {
 		return rod.New().ControlURL(u).MustConnect()
 	}
 	return rod.New().MustConnect()
+}
+
+// scrapePoolSchedule loads pool.CanvaURL, extracts the rendered table text,
+// and uses Claude to parse it into PoolSession entries.
+func scrapePoolSchedule(browser *rod.Browser, apiKey string, pool *models.Pool) error {
+	if apiKey == "" {
+		return fmt.Errorf("ANTHROPIC_API_KEY required for pool schedule scraping")
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), canvaTimeout)
+	defer cancel()
+
+	page, err := browser.Page(proto.TargetCreateTarget{URL: pool.CanvaURL})
+	if err != nil {
+		return fmt.Errorf("open canva page: %w", err)
+	}
+	defer page.MustClose()
+	page = page.Context(ctx)
+
+	if err := page.WaitLoad(); err != nil {
+		return fmt.Errorf("canva page load: %w", err)
+	}
+
+	// Canva needs extra time to hydrate the schedule tables.
+	time.Sleep(canvaRenderWait)
+
+	body, err := page.Element("body")
+	if err != nil {
+		return fmt.Errorf("no body element: %w", err)
+	}
+	pageText, err := body.Text()
+	if err != nil {
+		return fmt.Errorf("body text: %w", err)
+	}
+	if len(pageText) > maxPageChars {
+		pageText = pageText[:maxPageChars] + "\n[truncated]"
+	}
+	if strings.TrimSpace(pageText) == "" {
+		return fmt.Errorf("canva page rendered empty text")
+	}
+
+	return parsePoolScheduleWithLLM(ctx, apiKey, pool, pageText)
+}
+
+func parsePoolScheduleWithLLM(ctx context.Context, apiKey string, pool *models.Pool, pageText string) error {
+	client := anthropic.NewClient(option.WithAPIKey(apiKey))
+
+	prompt := fmt.Sprintf(`You are parsing a Denver public swimming pool schedule from the text of a Canva schedule document.
+
+Pool: %s
+
+Page text:
+%s
+
+Extract every swim session block. Return a JSON object:
+{"sessions": [...]}
+
+Each session object must have:
+- "type": one of "open_swim", "lap_swim", "family_swim", "adult_swim", "quiet_swim", "aqua_fitness", "swim_lessons", "swim_team"
+- "days": array of lowercase 3-letter abbreviations: "mon", "tue", "wed", "thu", "fri", "sat", "sun"
+- "open": 24-hour time string "HH:MM"
+- "close": 24-hour time string "HH:MM"
+
+Rules:
+- Consolidate rows with identical type and times across multiple days into one entry.
+- Convert 12-hour times (e.g. "2:00 PM") to 24-hour format.
+- If the schedule is not present or unreadable, return {"uncertain": true}.
+- Return only valid JSON, no other text.`,
+		pool.Name, pageText)
+
+	msg, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:     anthropic.Model(llmModel),
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
+		},
+	})
+	if err != nil {
+		return fmt.Errorf("LLM request: %w", err)
+	}
+
+	var responseText string
+	for _, block := range msg.Content {
+		if block.Type == "text" {
+			responseText = strings.TrimSpace(block.Text)
+			break
+		}
+	}
+	if responseText == "" {
+		return fmt.Errorf("empty LLM response")
+	}
+
+	var result scrapedSessions
+	if err := json.Unmarshal([]byte(responseText), &result); err != nil {
+		return fmt.Errorf("parse LLM response %q: %w", responseText, err)
+	}
+	if result.Uncertain {
+		return fmt.Errorf("LLM could not parse schedule from page text")
+	}
+
+	pool.Sessions = result.Sessions
+	return nil
 }
 
 func scrapeVenue(browser *rod.Browser, apiKey string, v *models.Venue) error {
@@ -117,8 +251,6 @@ func scrapeVenue(browser *rod.Browser, apiKey string, v *models.Venue) error {
 		pageText = pageText[:maxPageChars] + "\n[truncated]"
 	}
 
-	// Programmatic check: if the key phrases from the notes still appear on the
-	// page, assume nothing has changed. This avoids an LLM call for stable pages.
 	if apiKey != "" && !programmaticMatchOK(v, pageText) {
 		log.Printf("  programmatic check uncertain; calling LLM")
 		return checkWithLLM(ctx, apiKey, v, pageText)
@@ -127,19 +259,15 @@ func scrapeVenue(browser *rod.Browser, apiKey string, v *models.Venue) error {
 	return nil
 }
 
-// programmaticMatchOK returns true when the page still contains enough of
-// the venue's current notes to be confident nothing has changed.
 func programmaticMatchOK(v *models.Venue, pageText string) bool {
 	if v.Notes == "" {
 		return false
 	}
 	lower := strings.ToLower(pageText)
-	// Split notes into meaningful phrases and check at least half still appear.
 	words := strings.Fields(v.Notes)
 	if len(words) < 4 {
 		return false
 	}
-	// Build 3-word phrases and count matches.
 	matches := 0
 	total := 0
 	for i := 0; i+2 < len(words); i++ {
