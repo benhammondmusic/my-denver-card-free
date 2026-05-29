@@ -385,18 +385,14 @@ func parseAltRows(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 				continue
 			}
 
-			// Get session type from the same column in the type row.
-			// When colspan merges cells, the type row may be shorter; fall back
-			// to the last available cell rather than defaulting to open_swim.
-			sessionType := models.SessionOpenSwim
+			var sessionType models.SessionType
 			if colIdx < len(typeRow) {
-				if t := detectSessionType(typeRow[colIdx]); t != "" {
-					sessionType = t
-				}
+				sessionType = detectSessionType(typeRow[colIdx])
 			} else if len(typeRow) > 0 {
-				if t := detectSessionType(typeRow[len(typeRow)-1]); t != "" {
-					sessionType = t
-				}
+				sessionType = detectSessionType(typeRow[len(typeRow)-1])
+			}
+			if sessionType == "" {
+				continue
 			}
 
 			k := key{string(sessionType), open, close}
@@ -448,6 +444,9 @@ func parseDayGrid(tbl [][]string, dayCol map[int]string) ([]models.PoolSession, 
 			continue
 		}
 		sessionType := detectSessionType(row[0])
+		if sessionType == "" {
+			continue
+		}
 		for colIdx, day := range dayCol {
 			if colIdx >= len(row) {
 				continue
@@ -549,11 +548,7 @@ func detectSessionType(s string) models.SessionType {
 			}
 		}
 	}
-	// Skip rows that look like headers or noise
-	if lower == "" || strings.Contains(lower, "session") || strings.Contains(lower, "type") {
-		return ""
-	}
-	return models.SessionOpenSwim
+	return ""
 }
 
 // parseDays extracts recognised day abbreviations from a free-form string
