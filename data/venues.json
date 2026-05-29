@@ -538,7 +538,7 @@
     ],
     "free_schedule": "daily",
     "adults_included": 0,
-    "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
+    "notes": "Free with My Denver Card. Year-round indoor leisure pool with water slide, rock climbing wall over water, and lazy river. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
     "last_checked": "2026-05-29T16:47:24.459811Z",
@@ -558,9 +558,31 @@
       {
         "name": "Leisure Pool",
         "family_friendly": true,
+        "features": [
+          "water slide",
+          "rock climbing wall over water",
+          "lazy river"
+        ],
         "season_label": "Summer 2026",
         "canva_url": "https://www.canva.com/design/DAG98dVBMrE/view",
         "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon"
+            ],
+            "open": "10:00",
+            "close": "19:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "tue",
+              "thu"
+            ],
+            "open": "12:00",
+            "close": "19:30"
+          },
           {
             "family_friendly": true,
             "days": [
@@ -572,20 +594,19 @@
           {
             "family_friendly": true,
             "days": [
+              "fri"
+            ],
+            "open": "10:00",
+            "close": "18:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "sat",
               "sun"
             ],
             "open": "10:00",
             "close": "15:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "12:00",
-            "close": "19:30"
           }
         ]
       }
