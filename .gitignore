@@ -1,3 +1,5 @@
 bin/
 /scraper
 /server
+.DS_Store
+tmp/
