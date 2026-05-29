@@ -59,10 +59,10 @@ var (
 		{[]string{"lap"}, models.SessionLapSwim},
 		{[]string{"adult"}, models.SessionAdultSwim},
 		{[]string{"quiet"}, models.SessionQuietSwim},
-		{[]string{"aqua", "fitness", "aerobics"}, models.SessionAquaFitness},
+		{[]string{"aqua", "fitness", "aerobics", "ai chi", "water walking", "arthritis", "aquacise", "zumba", "yoga", "pilates"}, models.SessionAquaFitness},
 		{[]string{"lesson", "learn"}, models.SessionSwimLessons},
-		{[]string{"team", "club", "practice"}, models.SessionSwimTeam},
-		{[]string{"open", "swim", "public", "recreational"}, models.SessionOpenSwim},
+		{[]string{"team", "club", "practice", "masters"}, models.SessionSwimTeam},
+		{[]string{"open", "public", "recreational"}, models.SessionOpenSwim},
 	}
 
 	// Day name -> 3-letter abbrev
