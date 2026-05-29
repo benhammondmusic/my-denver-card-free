@@ -919,6 +919,20 @@
 					padding: 1.25rem;
 					flex: 1;
 					-webkit-overflow-scrolling: touch;
+					overscroll-behavior: contain;
+				}
+
+				@media (max-width: 599px) {
+					.modal-sheet::before {
+						content: '';
+						display: block;
+						width: 2.5rem;
+						height: 4px;
+						background: rgba(0,0,0,0.12);
+						border-radius: 2px;
+						margin: 0.5rem auto 0;
+						flex-shrink: 0;
+					}
 				}
 
 				.modal-header {
@@ -1402,6 +1416,32 @@
     });
   }
 
+  // === SWIPE TO DISMISS ===
+  function setupSwipeDismiss(sheet, contentEl, closeFn) {
+    var startY = 0, lastY = 0, dragging = false;
+    sheet.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY; lastY = startY; dragging = false;
+    }, { passive: true });
+    sheet.addEventListener('touchmove', function (e) {
+      lastY = e.touches[0].clientY;
+      var dy = lastY - startY;
+      if (!dragging && (!contentEl || contentEl.scrollTop === 0) && dy > 8) dragging = true;
+      if (dragging && dy > 0) {
+        sheet.style.transform = 'translateY(' + dy + 'px)';
+        sheet.style.transition = 'none';
+        e.preventDefault();
+      }
+    }, { passive: false });
+    sheet.addEventListener('touchend', function () {
+      if (!dragging) return;
+      var dy = lastY - startY;
+      sheet.style.transition = '';
+      sheet.style.transform = '';
+      dragging = false;
+      if (dy > 80) closeFn();
+    });
+  }
+
   // === DISTANCE (Haversine, miles) ===
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 3958.8;
@@ -1841,6 +1881,9 @@
     if (modalOverlay && modalOverlay.classList.contains('open')) closeModal(true);
   });
 
+  var venueSheet = modalOverlay ? modalOverlay.querySelector('.modal-sheet') : null;
+  if (venueSheet) setupSwipeDismiss(venueSheet, document.querySelector('#modal-overlay .modal-content'), closeModal);
+
   // === GEOLOCATION / NEAR ME ===
   function hasBoth(row) {
     var lat = parseFloat(row.dataset.lat || '0');
@@ -2108,6 +2151,9 @@
       if (e.key === 'Escape' && wxModal && wxModal.classList.contains('open')) closeWxModal();
     });
 
+    var wxSheet = wxModal ? wxModal.querySelector('.modal-sheet') : null;
+    if (wxSheet) setupSwipeDismiss(wxSheet, wxModal ? wxModal.querySelector('.modal-content') : null, closeWxModal);
+
     fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
       '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m' +
       '&hourly=weather_code,temperature_2m,precipitation_probability' +
@@ -2276,5 +2322,33 @@
 					document.addEventListener('keydown', function (e) {
 						if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) close();
 					});
+
+					// Swipe down to dismiss
+					var sheet = overlay ? overlay.querySelector('.modal-sheet') : null;
+					var content = overlay ? overlay.querySelector('.modal-content') : null;
+					if (sheet) {
+						var sy = 0, ly = 0, drag = false;
+						sheet.addEventListener('touchstart', function (e) {
+							sy = e.touches[0].clientY; ly = sy; drag = false;
+						}, { passive: true });
+						sheet.addEventListener('touchmove', function (e) {
+							ly = e.touches[0].clientY;
+							var dy = ly - sy;
+							if (!drag && (!content || content.scrollTop === 0) && dy > 8) drag = true;
+							if (drag && dy > 0) {
+								sheet.style.transform = 'translateY(' + dy + 'px)';
+								sheet.style.transition = 'none';
+								e.preventDefault();
+							}
+						}, { passive: false });
+						sheet.addEventListener('touchend', function () {
+							if (!drag) return;
+							var dy = ly - sy;
+							sheet.style.transition = '';
+							sheet.style.transform = '';
+							drag = false;
+							if (dy > 80) close();
+						});
+					}
 				})();
 			</script></body></html>

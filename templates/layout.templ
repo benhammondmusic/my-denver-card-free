@@ -936,6 +936,20 @@ templ Layout(title string) {
 					padding: 1.25rem;
 					flex: 1;
 					-webkit-overflow-scrolling: touch;
+					overscroll-behavior: contain;
+				}
+
+				@media (max-width: 599px) {
+					.modal-sheet::before {
+						content: '';
+						display: block;
+						width: 2.5rem;
+						height: 4px;
+						background: rgba(0,0,0,0.12);
+						border-radius: 2px;
+						margin: 0.5rem auto 0;
+						flex-shrink: 0;
+					}
 				}
 
 				.modal-header {
@@ -1474,6 +1488,34 @@ templ Layout(title string) {
 					document.addEventListener('keydown', function (e) {
 						if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) close();
 					});
+
+					// Swipe down to dismiss
+					var sheet = overlay ? overlay.querySelector('.modal-sheet') : null;
+					var content = overlay ? overlay.querySelector('.modal-content') : null;
+					if (sheet) {
+						var sy = 0, ly = 0, drag = false;
+						sheet.addEventListener('touchstart', function (e) {
+							sy = e.touches[0].clientY; ly = sy; drag = false;
+						}, { passive: true });
+						sheet.addEventListener('touchmove', function (e) {
+							ly = e.touches[0].clientY;
+							var dy = ly - sy;
+							if (!drag && (!content || content.scrollTop === 0) && dy > 8) drag = true;
+							if (drag && dy > 0) {
+								sheet.style.transform = 'translateY(' + dy + 'px)';
+								sheet.style.transition = 'none';
+								e.preventDefault();
+							}
+						}, { passive: false });
+						sheet.addEventListener('touchend', function () {
+							if (!drag) return;
+							var dy = ly - sy;
+							sheet.style.transition = '';
+							sheet.style.transform = '';
+							drag = false;
+							if (dy > 80) close();
+						});
+					}
 				})();
 			</script>
 		</body>

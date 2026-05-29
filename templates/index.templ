@@ -353,6 +353,32 @@ templ filterScript() {
     });
   }
 
+  // === SWIPE TO DISMISS ===
+  function setupSwipeDismiss(sheet, contentEl, closeFn) {
+    var startY = 0, lastY = 0, dragging = false;
+    sheet.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY; lastY = startY; dragging = false;
+    }, { passive: true });
+    sheet.addEventListener('touchmove', function (e) {
+      lastY = e.touches[0].clientY;
+      var dy = lastY - startY;
+      if (!dragging && (!contentEl || contentEl.scrollTop === 0) && dy > 8) dragging = true;
+      if (dragging && dy > 0) {
+        sheet.style.transform = 'translateY(' + dy + 'px)';
+        sheet.style.transition = 'none';
+        e.preventDefault();
+      }
+    }, { passive: false });
+    sheet.addEventListener('touchend', function () {
+      if (!dragging) return;
+      var dy = lastY - startY;
+      sheet.style.transition = '';
+      sheet.style.transform = '';
+      dragging = false;
+      if (dy > 80) closeFn();
+    });
+  }
+
   // === DISTANCE (Haversine, miles) ===
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 3958.8;
@@ -792,6 +818,9 @@ templ filterScript() {
     if (modalOverlay && modalOverlay.classList.contains('open')) closeModal(true);
   });
 
+  var venueSheet = modalOverlay ? modalOverlay.querySelector('.modal-sheet') : null;
+  if (venueSheet) setupSwipeDismiss(venueSheet, document.querySelector('#modal-overlay .modal-content'), closeModal);
+
   // === GEOLOCATION / NEAR ME ===
   function hasBoth(row) {
     var lat = parseFloat(row.dataset.lat || '0');
@@ -1058,6 +1087,9 @@ templ filterScript() {
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && wxModal && wxModal.classList.contains('open')) closeWxModal();
     });
+
+    var wxSheet = wxModal ? wxModal.querySelector('.modal-sheet') : null;
+    if (wxSheet) setupSwipeDismiss(wxSheet, wxModal ? wxModal.querySelector('.modal-content') : null, closeWxModal);
 
     fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
       '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m' +
