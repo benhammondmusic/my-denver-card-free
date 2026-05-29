@@ -23,7 +23,7 @@
     "notes": "Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required. Children 2 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:12.17419Z",
+    "last_checked": "2026-05-29T16:43:30.210018Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7503,
@@ -36,7 +36,7 @@
     "max_age": 18
   },
   {
-    "name": "Denver Museum of Nature & Science",
+    "name": "Denver Museum of Nature \u0026 Science",
     "url": "https://www.dmns.org/visit/pricing-and-discounts/",
     "program": "mydenvercard",
     "featured": true,
@@ -50,7 +50,7 @@
     "notes": "Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026. Children under 3 always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:14.746456Z",
+    "last_checked": "2026-05-29T16:43:33.439793Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7476,
@@ -77,7 +77,7 @@
     "notes": "Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events. Children 2 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:16.2446Z",
+    "last_checked": "2026-05-29T16:43:35.34411Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7322,
@@ -113,7 +113,7 @@
     "notes": "Free drop-in admission at all 30+ Denver rec centers year-round. Cardholder ages 5-18 only. Children ages 0-1 always free (no card needed). Adults pay regular admission. Show card at the front desk.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:20.176732Z",
+    "last_checked": "2026-05-29T16:43:38.259378Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 0,
@@ -212,7 +212,7 @@
     "notes": "Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:22.387722Z",
+    "last_checked": "2026-05-29T16:43:41.232762Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7308,
@@ -248,13 +248,13 @@
     "notes": "Free for all kids under 18 year-round. No myDenverCard required.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:24.033826Z",
+    "last_checked": "2026-05-29T16:43:43.297147Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7306,
     "lng": -104.9878,
     "address": "100 W 14th Ave Pkwy, Denver, CO 80204",
-    "hours": "10am-5pm Tue-Thu & Sat-Sun, 10am-9pm Fri",
+    "hours": "10am-5pm Tue-Thu \u0026 Sat-Sun, 10am-9pm Fri",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -284,7 +284,7 @@
     "notes": "Free for children year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:27.338592Z",
+    "last_checked": "2026-05-29T16:43:47.169566Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.732,
@@ -320,13 +320,13 @@
     "notes": "Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:29.531485Z",
+    "last_checked": "2026-05-29T16:43:50.15473Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7586,
     "lng": -105.0019,
     "address": "1485 Delgany St, Denver, CO 80202",
-    "hours": "11am-5pm Tue-Thu & Sun, 11am-9pm Fri-Sat",
+    "hours": "11am-5pm Tue-Thu \u0026 Sun, 11am-9pm Fri-Sat",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -356,7 +356,7 @@
     "notes": "Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks. Children 5 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:31.864929Z",
+    "last_checked": "2026-05-29T16:43:53.303923Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7363,
@@ -392,7 +392,7 @@
     "notes": "Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:45:33.873641Z",
+    "last_checked": "2026-05-29T16:43:56.848653Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7229,
@@ -415,12 +415,12 @@
     "notes": "",
     "temporarily_closed": true,
     "closure_reason": "Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.",
-    "last_checked": "2026-05-29T15:45:34.612006Z",
+    "last_checked": "2026-05-29T16:43:57.909252Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7494,
     "lng": -104.9982,
-    "address": "Arapahoe St & 15th St, Denver, CO 80202",
+    "address": "Arapahoe St \u0026 15th St, Denver, CO 80202",
     "hours": "",
     "indoor": false,
     "reservation_required": false,
@@ -451,7 +451,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604958Z",
+    "last_checked": "2026-05-29T16:47:24.459801Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7012,
@@ -541,7 +541,7 @@
     "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604965Z",
+    "last_checked": "2026-05-29T16:47:24.459811Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7399,
@@ -560,7 +560,34 @@
         "family_friendly": true,
         "season_label": "Summer 2026",
         "canva_url": "https://www.canva.com/design/DAG98dVBMrE/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "wed"
+            ],
+            "open": "10:00",
+            "close": "19:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "sat",
+              "sun"
+            ],
+            "open": "10:00",
+            "close": "15:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "tue",
+              "thu"
+            ],
+            "open": "12:00",
+            "close": "19:30"
+          }
+        ]
       }
     ]
   },
@@ -579,7 +606,7 @@
     "notes": "Free with My Denver Card. Outdoor leisure pool with lazy river, slides, and splash area. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604965Z",
+    "last_checked": "2026-05-29T16:47:24.459812Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7574,
@@ -654,7 +681,7 @@
     "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604965Z",
+    "last_checked": "2026-05-29T16:47:24.459812Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7079,
@@ -705,7 +732,7 @@
     "notes": "Free with My Denver Card. Seasonal pool in Curtis Park neighborhood. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604965Z",
+    "last_checked": "2026-05-29T16:47:24.459812Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7513,
@@ -782,7 +809,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604966Z",
+    "last_checked": "2026-05-29T16:47:24.459812Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7062,
@@ -805,14 +832,6 @@
           {
             "family_friendly": true,
             "days": [
-              "sat"
-            ],
-            "open": "11:00",
-            "close": "14:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "sun"
             ],
             "open": "13:00",
@@ -821,9 +840,9 @@
           {
             "family_friendly": true,
             "days": [
-              "fri"
+              "sat"
             ],
-            "open": "13:00",
+            "open": "11:00",
             "close": "14:30"
           },
           {
@@ -836,6 +855,14 @@
             ],
             "open": "12:00",
             "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "fri"
+            ],
+            "open": "13:00",
+            "close": "14:30"
           },
           {
             "family_friendly": true,
@@ -911,7 +938,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604966Z",
+    "last_checked": "2026-05-29T16:47:24.459812Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.787,
@@ -942,20 +969,20 @@
           {
             "family_friendly": true,
             "days": [
-              "mon",
-              "wed"
-            ],
-            "open": "13:00",
-            "close": "18:00"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "tue",
               "thu"
             ],
             "open": "13:00",
             "close": "16:15"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "wed"
+            ],
+            "open": "13:00",
+            "close": "18:00"
           },
           {
             "family_friendly": true,
@@ -1001,7 +1028,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604966Z",
+    "last_checked": "2026-05-29T16:47:24.459813Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7568,
@@ -1043,20 +1070,20 @@
           {
             "family_friendly": true,
             "days": [
-              "thu"
-            ],
-            "open": "11:30",
-            "close": "13:00"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "tue",
               "thu",
               "fri"
             ],
             "open": "13:15",
             "close": "17:15"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "thu"
+            ],
+            "open": "11:30",
+            "close": "13:00"
           },
           {
             "family_friendly": true,
@@ -1095,7 +1122,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604966Z",
+    "last_checked": "2026-05-29T16:47:24.459813Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7225,
@@ -1131,6 +1158,14 @@
             ],
             "open": "13:00",
             "close": "19:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "sat"
+            ],
+            "open": "11:30",
+            "close": "15:30"
           },
           {
             "family_friendly": true,
@@ -1180,7 +1215,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604967Z",
+    "last_checked": "2026-05-29T16:47:24.459813Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7613,
@@ -1254,7 +1289,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604967Z",
+    "last_checked": "2026-05-29T16:47:24.459813Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7851,
@@ -1339,7 +1374,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604967Z",
+    "last_checked": "2026-05-29T16:47:24.459814Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7116,
@@ -1371,6 +1406,14 @@
           {
             "family_friendly": true,
             "days": [
+              "fri"
+            ],
+            "open": "11:00",
+            "close": "12:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "mon",
               "tue",
               "wed",
@@ -1378,14 +1421,6 @@
             ],
             "open": "12:00",
             "close": "20:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "11:00",
-            "close": "12:00"
           },
           {
             "family_friendly": true,
@@ -1451,7 +1486,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604967Z",
+    "last_checked": "2026-05-29T16:47:24.459814Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7019,
@@ -1492,19 +1527,19 @@
           {
             "family_friendly": true,
             "days": [
+              "fri"
+            ],
+            "open": "14:00",
+            "close": "19:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "mon",
               "wed"
             ],
             "open": "14:00",
             "close": "18:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "14:00",
-            "close": "19:30"
           },
           {
             "family_friendly": true,
@@ -1543,7 +1578,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604968Z",
+    "last_checked": "2026-05-29T16:47:24.459814Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7768,
@@ -1651,7 +1686,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool in Five Points. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.60497Z",
+    "last_checked": "2026-05-29T16:47:24.459816Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7563,
@@ -1689,7 +1724,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in Sunnyside. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.60497Z",
+    "last_checked": "2026-05-29T16:47:24.459816Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7733,
@@ -1714,10 +1749,44 @@
           {
             "family_friendly": true,
             "days": [
-              "mon"
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
             ],
-            "open": "10:45",
-            "close": "11:15"
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:15"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:30",
+            "close": "18:30"
           }
         ]
       }
@@ -1738,7 +1807,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in the Barnum neighborhood. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.60497Z",
+    "last_checked": "2026-05-29T16:47:24.459817Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7051,
@@ -1763,10 +1832,44 @@
           {
             "family_friendly": true,
             "days": [
-              "mon"
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
             ],
-            "open": "10:15",
-            "close": "11:15"
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
           }
         ]
       }
@@ -1787,7 +1890,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Berkeley Lake Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.60497Z",
+    "last_checked": "2026-05-29T16:47:24.459817Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7776,
@@ -1812,9 +1915,42 @@
           {
             "family_friendly": true,
             "days": [
-              "mon"
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
             ],
-            "open": "17:30",
+            "open": "13:15",
+            "close": "15:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:15",
+            "close": "17:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "17:15",
             "close": "18:30"
           }
         ]
@@ -1836,7 +1972,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Congress Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.60497Z",
+    "last_checked": "2026-05-29T16:47:24.459817Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7215,
@@ -1857,7 +1993,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIQEA7onY/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:00",
+            "close": "15:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:15",
+            "close": "17:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "17:15",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -1876,7 +2055,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August near Cherry Creek. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6651,
@@ -1897,7 +2076,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIQ6PaZ9Q/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:00",
+            "close": "15:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:15",
+            "close": "17:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "17:15",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -1916,7 +2138,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6618,
@@ -1941,10 +2163,44 @@
           {
             "family_friendly": true,
             "days": [
-              "tue"
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
             ],
-            "open": "10:30",
-            "close": "11:30"
+            "open": "13:00",
+            "close": "15:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:15",
+            "close": "17:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "17:15",
+            "close": "18:30"
           }
         ]
       }
@@ -1965,7 +2221,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Garfield Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6972,
@@ -1986,7 +2242,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIQ95lNPw/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -2005,7 +2304,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Argo Park in Globeville. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7758,
@@ -2026,7 +2325,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIQwVBv0I/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:00",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -2045,7 +2387,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.787,
@@ -2066,7 +2408,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIQ5rhIBw/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -2085,7 +2470,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August near Harvard Gulch. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604971Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6787,
@@ -2111,9 +2496,40 @@
             "family_friendly": true,
             "days": [
               "mon",
-              "wed"
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
             ],
-            "open": "17:30",
+            "open": "13:00",
+            "close": "15:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "15:15",
+            "close": "17:00"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "tue",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "17:15",
             "close": "18:30"
           }
         ]
@@ -2135,7 +2551,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in SW Denver. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604972Z",
+    "last_checked": "2026-05-29T16:47:24.459818Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6724,
@@ -2156,7 +2572,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIS956iZM/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -2175,7 +2634,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in Lincoln Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604974Z",
+    "last_checked": "2026-05-29T16:47:24.45982Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7213,
@@ -2196,7 +2655,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHISxaXoDk/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   },
@@ -2215,7 +2717,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in SW Denver. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-05-29T15:48:42.604974Z",
+    "last_checked": "2026-05-29T16:47:24.459821Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6522,
@@ -2236,7 +2738,50 @@
         "season_start": "2026-06-08",
         "season_end": "2026-08-16",
         "canva_url": "https://www.canva.com/design/DAHIS6j3FQs/view",
-        "sessions": []
+        "sessions": [
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "11:30",
+            "close": "13:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "13:45",
+            "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "16:00",
+            "close": "18:30"
+          }
+        ]
       }
     ]
   }

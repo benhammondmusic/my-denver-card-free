@@ -326,7 +326,17 @@ func extractTables(page *rod.Page) ([][][]string, error) {
 				txt, _ := cell.Text()
 				txt = strings.ReplaceAll(txt, "\n", " ")
 				txt = strings.ReplaceAll(txt, "\r", " ")
-				r = append(r, strings.TrimSpace(txt))
+				txt = strings.TrimSpace(txt)
+				// Expand colspan so each logical column gets the cell value.
+				span := 1
+				if attr, err := cell.Attribute("colspan"); err == nil && attr != nil {
+					if n := atoi(*attr); n > 1 {
+						span = n
+					}
+				}
+				for i := 0; i < span; i++ {
+					r = append(r, txt)
+				}
 			}
 			if len(r) > 0 {
 				tbl = append(tbl, r)
