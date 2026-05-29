@@ -6,7 +6,25 @@ templ Layout(title string) {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<title>{ title }</title>
+			<title>MyDenverCard Free</title>
+			<meta name="description" content="Where Denver kids get in free with a myDenverCard. See which museums, zoo, botanic gardens, and pools are free today."/>
+			<link rel="canonical" href="https://benhammondmusic.github.io/my-denver-card-free/"/>
+			<link rel="icon" href="favicon.ico" sizes="any"/>
+			<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+			<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+			<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+			<meta name="apple-mobile-web-app-capable" content="yes"/>
+			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+			<meta name="apple-mobile-web-app-title" content="MDC Free"/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:url" content="https://benhammondmusic.github.io/my-denver-card-free/"/>
+			<meta property="og:title" content="MyDenverCard Free"/>
+			<meta property="og:description" content="Where Denver kids get in free with a myDenverCard. See which museums, zoo, botanic gardens, and pools are free today."/>
+			<meta property="og:image" content="https://benhammondmusic.github.io/my-denver-card-free/bear.png"/>
+			<meta name="twitter:card" content="summary_large_image"/>
+			<meta name="twitter:title" content="MyDenverCard Free"/>
+			<meta name="twitter:description" content="Where Denver kids get in free with a myDenverCard. See which museums, zoo, botanic gardens, and pools are free today."/>
+			<meta name="twitter:image" content="https://benhammondmusic.github.io/my-denver-card-free/bear.png"/>
 			<script>
 				// Run before render to avoid flash of wrong theme
 				(function(){
@@ -1325,7 +1343,10 @@ templ Layout(title string) {
 				</div>
 				<div class="header-inner">
 				<div class="bear-wrap">
-					<img src="bear.png" alt="The Big Blue Bear"/>
+					<picture>
+						<source srcset="bear.webp" type="image/webp"/>
+						<img src="bear.png" alt="The Big Blue Bear"/>
+					</picture>
 					<span class="bear-eye bear-eye-left" aria-hidden="true"></span>
 					<span class="bear-eye bear-eye-right" aria-hidden="true"></span>
 				</div>

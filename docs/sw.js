@@ -1,5 +1,15 @@
-const CACHE = 'mdc-v1';
-const ASSETS = ['./', './bear.png', './manifest.json'];
+const CACHE = 'mdc-v2';
+const ASSETS = [
+  './',
+  './bear.png',
+  './bear.webp',
+  './manifest.json',
+  './favicon.ico',
+  './favicon-32x32.png',
+  './apple-touch-icon.png',
+  './icon-192.png',
+  './icon-512.png',
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
