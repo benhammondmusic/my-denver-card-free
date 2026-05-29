@@ -57,13 +57,13 @@ var (
 		typ   models.SessionType
 	}{
 		{[]string{"family"}, models.SessionFamilySwim},
+		{[]string{"open", "public", "recreational"}, models.SessionOpenSwim},
 		{[]string{"lap"}, models.SessionLapSwim},
 		{[]string{"adult"}, models.SessionAdultSwim},
 		{[]string{"quiet"}, models.SessionQuietSwim},
 		{[]string{"aqua", "fitness", "aerobics", "ai chi", "water walking", "arthritis", "aquacise", "zumba", "yoga", "pilates"}, models.SessionAquaFitness},
 		{[]string{"lesson", "learn"}, models.SessionSwimLessons},
 		{[]string{"team", "club", "practice", "masters"}, models.SessionSwimTeam},
-		{[]string{"open", "public", "recreational"}, models.SessionOpenSwim},
 	}
 
 	// Day name -> 3-letter abbrev
@@ -306,6 +306,8 @@ func extractTables(page *rod.Page) ([][][]string, error) {
 			var r []string
 			for _, cell := range cells {
 				txt, _ := cell.Text()
+				txt = strings.ReplaceAll(txt, "\n", " ")
+				txt = strings.ReplaceAll(txt, "\r", " ")
 				r = append(r, strings.TrimSpace(txt))
 			}
 			if len(r) > 0 {
