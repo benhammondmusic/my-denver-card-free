@@ -679,6 +679,17 @@ templ Layout(title string) {
 					white-space: nowrap;
 				}
 
+				.venue-type-chip {
+					font-size: 0.68rem;
+					font-weight: 600;
+					padding: 0.15rem 0.5rem;
+					border-radius: 1rem;
+					letter-spacing: 0.02em;
+					white-space: nowrap;
+				}
+				.venue-type-chip.indoor  { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+				.venue-type-chip.outdoor { background: #f0fdf4; color: #15803d; border: 1px solid #86efac; }
+
 				/* ---- BADGES ---- */
 
 				.badge {
@@ -1233,6 +1244,8 @@ templ Layout(title string) {
 					& .leaflet-location-btn { background: #1d2f55; color: #93b4e0; border-color: #1e3058; }
 					& .leaflet-location-btn:hover { background: #243a6a; color: #e0e8f5; }
 					& .amenity-chip { background: #1e3a5f; color: #93c5fd; border-color: #1e40af; }
+					& .venue-type-chip.indoor  { background: #0c2a3f; color: #7dd3fc; border-color: #0369a1; }
+					& .venue-type-chip.outdoor { background: #052e16; color: #86efac; border-color: #15803d; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }
 					& .badge-gray { background: #1f2937; color: #9ca3af; border-color: #374151; }

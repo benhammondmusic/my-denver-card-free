@@ -81,9 +81,21 @@ templ Index(venues []models.Venue) {
 					@VenueRow(v)
 				}
 			}
-			<li class="section-divider" data-section="rec" aria-hidden="true"><span>Pools and Rec Centers</span></li>
+			<li class="section-divider" data-section="indoor-pool" aria-hidden="true"><span>Indoor Pools</span></li>
 			for _, v := range venues {
-				if (v.Category == "pool" || v.Category == "rec_center") && !v.TemporarilyClosed {
+				if v.Category == "pool" && v.Indoor && !v.TemporarilyClosed {
+					@VenueRow(v)
+				}
+			}
+			<li class="section-divider" data-section="outdoor-pool" aria-hidden="true"><span>Outdoor Pools</span></li>
+			for _, v := range venues {
+				if v.Category == "pool" && !v.Indoor && !v.TemporarilyClosed {
+					@VenueRow(v)
+				}
+			}
+			<li class="section-divider" data-section="rec" aria-hidden="true"><span>Rec Centers</span></li>
+			for _, v := range venues {
+				if v.Category == "rec_center" && !v.TemporarilyClosed {
 					@VenueRow(v)
 				}
 			}
@@ -433,6 +445,10 @@ templ filterScript() {
         row.dataset.poolStatus = ps.status;
       }
       statusEl.appendChild(chip);
+      var typeChip = document.createElement('span');
+      typeChip.className = 'venue-type-chip ' + (row.dataset.indoor === 'true' ? 'indoor' : 'outdoor');
+      typeChip.textContent = row.dataset.indoor === 'true' ? 'Indoor' : 'Outdoor';
+      statusEl.appendChild(typeChip);
     });
   }
 
@@ -479,9 +495,13 @@ templ filterScript() {
   // === FILTER ===
   function _doApplyFilter() {
     var dividers = document.querySelectorAll('.section-divider');
-    var showDividers = activeFilter === 'all';
+    var showAll = activeFilter === 'all';
     var isPools = activeFilter === 'pools';
-    dividers.forEach(function (d) { d.classList.toggle('hidden', !showDividers); });
+    dividers.forEach(function (d) {
+      var sec = d.dataset.section;
+      var isPoolDiv = sec === 'indoor-pool' || sec === 'outdoor-pool';
+      d.classList.toggle('hidden', !(showAll || (isPools && isPoolDiv)));
+    });
     if (poolCallout) poolCallout.classList.toggle('hidden', !isPools);
 
     var visible = 0;
@@ -523,6 +543,18 @@ templ filterScript() {
       label = visible + (visible === 1 ? ' venue' : ' venues') + ' with free EV charging';
     }
     if (countEl) countEl.textContent = label;
+
+    // Sync map markers to match visible rows
+    if (leafletMap) {
+      rows.forEach(function (row) {
+        if (!row._marker) return;
+        if (row.classList.contains('hidden')) {
+          row._marker.remove();
+        } else {
+          row._marker.addTo(leafletMap);
+        }
+      });
+    }
   }
 
   function applyFilter() {
@@ -665,7 +697,10 @@ templ filterScript() {
           if (btn) btn.onclick = function () { m.closePopup(); openModal(r); };
         };
       })(row, marker));
-      marker.addTo(leafletMap);
+      row._marker = marker;
+      if (!row.classList.contains('hidden')) {
+        marker.addTo(leafletMap);
+      }
     });
 
     var LocationControl = L.Control.extend({
