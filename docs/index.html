@@ -731,10 +731,11 @@
 
 				/* ---- POOL STATUS BADGES ---- */
 
-				.pool-status-open    { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
-				.pool-status-soon    { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-				.pool-status-closed  { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
-				.pool-status-unknown { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+				.pool-status-open      { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+				.pool-status-soon      { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+				.pool-status-closed    { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+				.pool-status-unknown   { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+				.pool-status-preseason { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
 
 				/* ---- POOL CALL-AHEAD NOTICE ---- */
 
@@ -1208,10 +1209,11 @@
 				& .wx-hour-precip { color: #93b4e0; }
 				& .pool-callout { background: #2d2000; border-color: #78350f; color: #fcd34d; }
 				& .call-ahead-warning { background: #2d2000; border-color: #78350f; color: #fcd34d; }
-				& .pool-status-open    { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
-				& .pool-status-soon    { background: #78350f; color: #fcd34d; border-color: #92400e; }
-				& .pool-status-closed  { background: #1f2937; color: #9ca3af; border-color: #374151; }
-				& .pool-status-unknown { background: #2e1065; color: #c4b5fd; border-color: #5b21b6; }
+				& .pool-status-open      { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
+				& .pool-status-soon      { background: #78350f; color: #fcd34d; border-color: #92400e; }
+				& .pool-status-closed    { background: #1f2937; color: #9ca3af; border-color: #374151; }
+				& .pool-status-unknown   { background: #2e1065; color: #c4b5fd; border-color: #5b21b6; }
+				& .pool-status-preseason { background: #1e3a5f; color: #93c5fd; border-color: #1e40af; }
 				& .pool-schedule { border-color: var(--border); }
 				& .pool-session-type { color: #c0cfe8; }
 				& .pool-session-now { background: #064e3b; }
@@ -1410,6 +1412,13 @@
   function freeNow(row) {
     if (row.dataset.closed === 'true') return false;
     if (freeMonths(row).indexOf(currentMonthName) === -1) return false;
+    if (row._pools) {
+      var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var ss = getSeasonStart(row._pools);
+      var se = getSeasonEnd(row._pools);
+      if (ss && todayDate < ss) return false;
+      if (se && todayDate > se) return false;
+    }
     var sched = row.dataset.schedule || 'daily';
     if (sched === 'weekends') return isWeekend;
     if (sched === 'weekends_and_breaks') return isWeekend || inBreak;
@@ -1418,10 +1427,16 @@
 
   function freeThisWeekend(row) {
     if (row.dataset.closed === 'true') return false;
-    var sched = row.dataset.schedule || 'daily';
     return weekendDates.some(function (d) {
       var monthName = MONTHS[d.getMonth()];
       if (freeMonths(row).indexOf(monthName) === -1) return false;
+      if (row._pools) {
+        var ss = getSeasonStart(row._pools);
+        var se = getSeasonEnd(row._pools);
+        var dDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        if (ss && dDate < ss) return false;
+        if (se && dDate > se) return false;
+      }
       return true;
     });
   }
@@ -1440,6 +1455,29 @@
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
+  // === POOL SEASON HELPERS ===
+  function getSeasonStart(pools) {
+    var earliest = null;
+    (pools || []).forEach(function (p) {
+      if (!p.season_start) return;
+      var pts = p.season_start.split('-');
+      var d = new Date(+pts[0], +pts[1] - 1, +pts[2]);
+      if (!earliest || d < earliest) earliest = d;
+    });
+    return earliest;
+  }
+
+  function getSeasonEnd(pools) {
+    var latest = null;
+    (pools || []).forEach(function (p) {
+      if (!p.season_end) return;
+      var pts = p.season_end.split('-');
+      var d = new Date(+pts[0], +pts[1] - 1, +pts[2]);
+      if (!latest || d > latest) latest = d;
+    });
+    return latest;
+  }
+
   // === POOL ROW INIT ===
   function initPoolRows() {
     rows.forEach(function (row) {
@@ -1447,12 +1485,25 @@
       var statusEl = row.querySelector('.venue-status');
       if (!statusEl) return;
       statusEl.innerHTML = '';
-      var ps = getPoolStatus(row._pools);
+      var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var ss = getSeasonStart(row._pools);
+      var se = getSeasonEnd(row._pools);
       var chip = document.createElement('span');
-      chip.className = 'badge pool-status pool-status-' + ps.status;
-      chip.textContent = ps.label;
+      if (ss && todayDate < ss) {
+        chip.className = 'badge pool-status pool-status-preseason';
+        chip.textContent = 'Opens ' + MONTHS[ss.getMonth()].slice(0, 3) + ' ' + ss.getDate();
+        row.dataset.poolStatus = 'preseason';
+      } else if (se && todayDate > se) {
+        chip.className = 'badge pool-status pool-status-closed';
+        chip.textContent = 'Season ended';
+        row.dataset.poolStatus = 'season-ended';
+      } else {
+        var ps = getPoolStatus(row._pools);
+        chip.className = 'badge pool-status pool-status-' + ps.status;
+        chip.textContent = ps.label;
+        row.dataset.poolStatus = ps.status;
+      }
       statusEl.appendChild(chip);
-      row.dataset.poolStatus = ps.status;
     });
   }
 

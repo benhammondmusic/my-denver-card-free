@@ -744,6 +744,13 @@ func filterScript() templ.Component {
   function freeNow(row) {
     if (row.dataset.closed === 'true') return false;
     if (freeMonths(row).indexOf(currentMonthName) === -1) return false;
+    if (row._pools) {
+      var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var ss = getSeasonStart(row._pools);
+      var se = getSeasonEnd(row._pools);
+      if (ss && todayDate < ss) return false;
+      if (se && todayDate > se) return false;
+    }
     var sched = row.dataset.schedule || 'daily';
     if (sched === 'weekends') return isWeekend;
     if (sched === 'weekends_and_breaks') return isWeekend || inBreak;
@@ -752,10 +759,16 @@ func filterScript() templ.Component {
 
   function freeThisWeekend(row) {
     if (row.dataset.closed === 'true') return false;
-    var sched = row.dataset.schedule || 'daily';
     return weekendDates.some(function (d) {
       var monthName = MONTHS[d.getMonth()];
       if (freeMonths(row).indexOf(monthName) === -1) return false;
+      if (row._pools) {
+        var ss = getSeasonStart(row._pools);
+        var se = getSeasonEnd(row._pools);
+        var dDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        if (ss && dDate < ss) return false;
+        if (se && dDate > se) return false;
+      }
       return true;
     });
   }
@@ -774,6 +787,29 @@ func filterScript() templ.Component {
     return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
   }
 
+  // === POOL SEASON HELPERS ===
+  function getSeasonStart(pools) {
+    var earliest = null;
+    (pools || []).forEach(function (p) {
+      if (!p.season_start) return;
+      var pts = p.season_start.split('-');
+      var d = new Date(+pts[0], +pts[1] - 1, +pts[2]);
+      if (!earliest || d < earliest) earliest = d;
+    });
+    return earliest;
+  }
+
+  function getSeasonEnd(pools) {
+    var latest = null;
+    (pools || []).forEach(function (p) {
+      if (!p.season_end) return;
+      var pts = p.season_end.split('-');
+      var d = new Date(+pts[0], +pts[1] - 1, +pts[2]);
+      if (!latest || d > latest) latest = d;
+    });
+    return latest;
+  }
+
   // === POOL ROW INIT ===
   function initPoolRows() {
     rows.forEach(function (row) {
@@ -781,12 +817,25 @@ func filterScript() templ.Component {
       var statusEl = row.querySelector('.venue-status');
       if (!statusEl) return;
       statusEl.innerHTML = '';
-      var ps = getPoolStatus(row._pools);
+      var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var ss = getSeasonStart(row._pools);
+      var se = getSeasonEnd(row._pools);
       var chip = document.createElement('span');
-      chip.className = 'badge pool-status pool-status-' + ps.status;
-      chip.textContent = ps.label;
+      if (ss && todayDate < ss) {
+        chip.className = 'badge pool-status pool-status-preseason';
+        chip.textContent = 'Opens ' + MONTHS[ss.getMonth()].slice(0, 3) + ' ' + ss.getDate();
+        row.dataset.poolStatus = 'preseason';
+      } else if (se && todayDate > se) {
+        chip.className = 'badge pool-status pool-status-closed';
+        chip.textContent = 'Season ended';
+        row.dataset.poolStatus = 'season-ended';
+      } else {
+        var ps = getPoolStatus(row._pools);
+        chip.className = 'badge pool-status pool-status-' + ps.status;
+        chip.textContent = ps.label;
+        row.dataset.poolStatus = ps.status;
+      }
       statusEl.appendChild(chip);
-      row.dataset.poolStatus = ps.status;
     });
   }
 

@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -69,6 +70,13 @@ var (
 
 	reCanvaDocID = regexp.MustCompile(`/design/([A-Za-z0-9_-]+)/`)
 
+	// Season date detection: "season opens [Weekday,] Month Day[, Year]"
+	reSeasonOpens = regexp.MustCompile(`(?i)season\s+opens?\s+(?:[a-z]+day,?\s+)?([a-z]+)\s+(\d{1,2})(?:,?\s*(20\d\d))?`)
+	// "Month Day[ Year] through/to/thru Month Day[, Year]"
+	reSeasonRange = regexp.MustCompile(`(?i)([a-z]+)\s+(\d{1,2})(?:,?\s*(20\d\d))?\s+(?:through|to|thru)\s+([a-z]+)\s+(\d{1,2})(?:,?\s*(20\d\d))?`)
+	// Standalone 4-digit year
+	reYear = regexp.MustCompile(`\b(20\d\d)\b`)
+
 	// Session type keywords mapped to scraper-internal sessionType
 	sessionKeywords = []struct {
 		words []string
@@ -97,6 +105,21 @@ var (
 
 	dayOrder = []string{"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
 )
+
+var monthNums = map[string]int{
+	"january": 1, "jan": 1,
+	"february": 2, "feb": 2,
+	"march": 3, "mar": 3,
+	"april": 4, "apr": 4,
+	"may": 5,
+	"june": 6, "jun": 6,
+	"july": 7, "jul": 7,
+	"august": 8, "aug": 8,
+	"september": 9, "sep": 9, "sept": 9,
+	"october": 10, "oct": 10,
+	"november": 11, "nov": 11,
+	"december": 12, "dec": 12,
+}
 
 func main() {
 	raw, err := os.ReadFile("data/venues.json")
@@ -166,8 +189,28 @@ func main() {
 	// Pass 2: fetch Denver.gov pool page once (both sections are on the same
 	// page; the anchor fragments only affect scroll position, not HTTP response).
 	log.Printf("Pass 2: scraping pool schedules via Canva embeds on Denver.gov")
-	if err := scrapePoolPage(browser, indoorPoolsURL, poolMap); err != nil {
-		log.Printf("  FAIL: %v", err)
+	detectedStart, detectedEnd, poolErr := scrapePoolPage(browser, indoorPoolsURL, poolMap)
+	if poolErr != nil {
+		log.Printf("  FAIL: %v", poolErr)
+	}
+
+	// Apply detected outdoor season dates to non-indoor pool venues.
+	// Detected dates override existing values so the scraper stays authoritative.
+	if detectedStart != "" {
+		for i := range venues {
+			v := &venues[i]
+			if v.Category != "pool" || v.Indoor {
+				continue
+			}
+			for j := range v.Pools {
+				p := &v.Pools[j]
+				p.SeasonStart = detectedStart
+				if detectedEnd != "" {
+					p.SeasonEnd = detectedEnd
+				}
+			}
+		}
+		log.Printf("  applied season %s - %s to outdoor pools", detectedStart, detectedEnd)
 	}
 
 	// Update last_checked for all pool venues.
@@ -195,6 +238,65 @@ func makeBrowser() *rod.Browser {
 	return rod.New().MustConnect()
 }
 
+// fmtDate returns "YYYY-MM-DD" for the given year, month (1-12), and day.
+func fmtDate(year, month, day int) string {
+	return fmt.Sprintf("%04d-%02d-%02d", year, month, day)
+}
+
+// detectSeasonDates scans raw page text (HTML is fine) for outdoor pool season
+// open/close dates and returns them as "YYYY-MM-DD" strings. Either value may
+// be empty if not found.
+func detectSeasonDates(text string) (start, end string) {
+	lower := strings.ToLower(text)
+
+	year := time.Now().Year()
+	if ym := reYear.FindString(lower); ym != "" {
+		if y, err := strconv.Atoi(ym); err == nil && y >= year {
+			year = y
+		}
+	}
+
+	// "June 8 through August 16" (range pattern preferred)
+	if m := reSeasonRange.FindStringSubmatch(lower); m != nil {
+		m1 := monthNums[m[1]]
+		d1, _ := strconv.Atoi(m[2])
+		y1 := year
+		if m[3] != "" {
+			if y, err := strconv.Atoi(m[3]); err == nil {
+				y1 = y
+			}
+		}
+		m2 := monthNums[m[4]]
+		d2, _ := strconv.Atoi(m[5])
+		y2 := year
+		if m[6] != "" {
+			if y, err := strconv.Atoi(m[6]); err == nil {
+				y2 = y
+			}
+		}
+		if m1 > 0 && d1 > 0 && m2 > 0 && d2 > 0 {
+			return fmtDate(y1, m1, d1), fmtDate(y2, m2, d2)
+		}
+	}
+
+	// "season opens Monday, June 8" (start-only fallback)
+	if m := reSeasonOpens.FindStringSubmatch(lower); m != nil {
+		mon := monthNums[m[1]]
+		day, _ := strconv.Atoi(m[2])
+		y := year
+		if m[3] != "" {
+			if yy, err := strconv.Atoi(m[3]); err == nil {
+				y = yy
+			}
+		}
+		if mon > 0 && day > 0 {
+			return fmtDate(y, mon, day), ""
+		}
+	}
+
+	return "", ""
+}
+
 // extractCanvaDocID extracts the Canva document ID from a URL like
 // https://www.canva.com/design/DAG989jxCeU/view or an iframe src.
 func extractCanvaDocID(src string) string {
@@ -210,21 +312,22 @@ var reCanvaIframeSrc = regexp.MustCompile(`<iframe[^>]+src="(https://www\.canva\
 
 // fetchCanvaEmbedURLs fetches the Denver.gov pool page with a plain HTTP GET
 // (avoids headless-browser detection) and returns a map of
-// Canva doc ID -> full embed URL for every Canva iframe found.
-func fetchCanvaEmbedURLs(pageURL string) (map[string]string, error) {
+// Canva doc ID -> full embed URL for every Canva iframe found, plus the raw
+// page body text for downstream season-date detection.
+func fetchCanvaEmbedURLs(pageURL string) (map[string]string, string, error) {
 	req, err := http.NewRequest(http.MethodGet, pageURL, nil)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	req.Header.Set("User-Agent", "Mozilla/5.0 (compatible; my-denver-card-scraper)")
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("HTTP GET: %w", err)
+		return nil, "", fmt.Errorf("HTTP GET: %w", err)
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("read body: %w", err)
+		return nil, "", fmt.Errorf("read body: %w", err)
 	}
 
 	matches := reCanvaIframeSrc.FindAllSubmatch(body, -1)
@@ -236,21 +339,28 @@ func fetchCanvaEmbedURLs(pageURL string) (map[string]string, error) {
 			result[docID] = src
 		}
 	}
-	return result, nil
+	return result, string(body), nil
 }
 
 // scrapePoolPage fetches the Denver.gov pool page with HTTP to extract Canva
 // embed URLs (including the auth token needed for unauthenticated access), then
 // loads each embed URL directly with Rod and extracts schedule tables.
-func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*models.Pool) error {
-	embedURLs, err := fetchCanvaEmbedURLs(pageURL)
+// It also scans the page body for outdoor season open/close dates and returns
+// them as "YYYY-MM-DD" strings (either may be empty if not found).
+func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*models.Pool) (seasonStart, seasonEnd string, err error) {
+	embedURLs, body, err := fetchCanvaEmbedURLs(pageURL)
 	if err != nil {
-		return fmt.Errorf("fetch embed URLs: %w", err)
+		return "", "", fmt.Errorf("fetch embed URLs: %w", err)
 	}
 	if len(embedURLs) == 0 {
-		return fmt.Errorf("no Canva iframes found in page HTML")
+		return "", "", fmt.Errorf("no Canva iframes found in page HTML")
 	}
 	log.Printf("  found %d Canva embed URLs in page HTML", len(embedURLs))
+
+	seasonStart, seasonEnd = detectSeasonDates(body)
+	if seasonStart != "" {
+		log.Printf("  detected season: %s to %s", seasonStart, seasonEnd)
+	}
 
 	first := true
 	for docID, embedURL := range embedURLs {
@@ -264,15 +374,15 @@ func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*mo
 		}
 		first = false
 		log.Printf("  scraping %s", pool.Name)
-		sessions, err := scrapeCanvaEmbed(browser, embedURL)
-		if err != nil {
-			log.Printf("  FAIL: %v", err)
+		sessions, scrapeErr := scrapeCanvaEmbed(browser, embedURL)
+		if scrapeErr != nil {
+			log.Printf("  FAIL: %v", scrapeErr)
 			continue
 		}
 		pool.Sessions = sessions
 		log.Printf("  ok: %d sessions", len(sessions))
 	}
-	return nil
+	return seasonStart, seasonEnd, nil
 }
 
 // scrapeCanvaEmbed loads a Canva embed URL with Rod and extracts pool sessions
