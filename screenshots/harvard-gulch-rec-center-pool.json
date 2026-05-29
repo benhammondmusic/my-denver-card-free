@@ -1,0 +1,11 @@
+[
+  {
+    "type": "open_swim",
+    "days": [
+      "mon",
+      "wed"
+    ],
+    "open": "17:30",
+    "close": "18:30"
+  }
+]

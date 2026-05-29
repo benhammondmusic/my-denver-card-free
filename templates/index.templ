@@ -29,6 +29,14 @@ func poolsJSON(v models.Venue) string {
 	return string(b)
 }
 
+func activitiesJSON(v models.Venue) string {
+	if len(v.Activities) == 0 {
+		return ""
+	}
+	b, _ := json.Marshal(v.Activities)
+	return string(b)
+}
+
 templ Index(venues []models.Venue) {
 	@Layout("MyDenverCard Free") {
 		<div class="hero-section">
@@ -65,15 +73,21 @@ templ Index(venues []models.Venue) {
 					@VenueRow(v)
 				}
 			}
-			<li class="section-divider" aria-hidden="true"><span>More venues</span></li>
+			<li class="section-divider" data-section="museum" aria-hidden="true"><span>Art &amp; History</span></li>
 			for _, v := range venues {
-				if !v.Featured && !v.TemporarilyClosed && v.Lat != 0 {
+				if v.Category == "museum" && !v.TemporarilyClosed {
 					@VenueRow(v)
 				}
 			}
-			<li class="section-divider" aria-hidden="true"><span>City recreation</span></li>
+			<li class="section-divider" data-section="rec" aria-hidden="true"><span>Pools and Rec Centers</span></li>
 			for _, v := range venues {
-				if !v.Featured && !v.TemporarilyClosed && v.Lat == 0 {
+				if (v.Category == "pool" || v.Category == "rec_center") && !v.TemporarilyClosed {
+					@VenueRow(v)
+				}
+			}
+			<li class="section-divider" data-section="other" aria-hidden="true"><span>More</span></li>
+			for _, v := range venues {
+				if !v.Featured && v.Category != "museum" && v.Category != "pool" && v.Category != "rec_center" && !v.TemporarilyClosed {
 					@VenueRow(v)
 				}
 			}
@@ -149,6 +163,9 @@ templ VenueRow(v models.Venue) {
 		data-phone={ v.Phone }
 		if len(v.Pools) > 0 {
 			data-pools={ poolsJSON(v) }
+		}
+		if len(v.Activities) > 0 {
+			data-activities={ activitiesJSON(v) }
 		}
 	>
 		<div class="venue-band">
@@ -265,7 +282,7 @@ templ filterScript() {
         : 'Opens at ' + fmtTime(earliest.open);
       return {status: 'soon', label: label, open: earliest.open, close: earliest.close};
     }
-    return {status: 'closed', label: 'Closed today'};
+    return {status: 'closed', label: 'No open swim today'};
   }
 
   // === STATE ===
@@ -395,8 +412,9 @@ templ filterScript() {
   // === FILTER ===
   function _doApplyFilter() {
     var dividers = document.querySelectorAll('.section-divider');
+    var showDividers = activeFilter === 'all';
     var isPools = activeFilter === 'pools';
-    dividers.forEach(function (d) { d.classList.toggle('hidden', isPools); });
+    dividers.forEach(function (d) { d.classList.toggle('hidden', !showDividers); });
     if (poolCallout) poolCallout.classList.toggle('hidden', !isPools);
 
     var visible = 0;
@@ -452,10 +470,13 @@ templ filterScript() {
 
     if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
 
-    // Exclude individual pool entries from hero to avoid clutter (pools are in the Pools tab)
-    var nowRows = rows.filter(function (row) { return freeNow(row) && row.dataset.category !== 'pool'; });
+    // Exclude pools and rec centers from individual hero chips; they get a single group chip each
+    var nowRows = rows.filter(function (row) {
+      return freeNow(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
+    });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true' && row.dataset.category !== 'pool';
+      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true'
+        && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
 
     function makeChip(row, isSoon) {
@@ -469,6 +490,14 @@ templ filterScript() {
       return btn;
     }
 
+    function makeGroupChip(label, isSoon, clickFn) {
+      var btn = document.createElement('button');
+      btn.className = 'venue-chip venue-chip-group' + (isSoon ? ' chip-soon' : '');
+      btn.textContent = label;
+      btn.addEventListener('click', clickFn);
+      return btn;
+    }
+
     if (nowRows.length === 0) {
       var empty = document.createElement('span');
       empty.className = 'chip-empty';
@@ -478,10 +507,41 @@ templ filterScript() {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
+    // Group chip for pools (if any free now)
+    var poolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && freeNow(r); });
+    if (poolsNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Pools', false, function () {
+        setTab('pools'); applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
+    }
+
+    // Group chip for rec centers (free year-round so always show in now hero)
+    var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && freeNow(r); });
+    if (recNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Rec Centers', false, function () {
+        setTab('all'); applyFilter();
+        var recDiv = document.querySelector('.section-divider[data-section="rec"]');
+        if (recDiv) recDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
+    }
+
     if (soonRows.length === 0) {
       if (heroSoon) heroSoon.style.display = 'none';
     } else {
       soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
+    }
+
+    // Group chips for soon section
+    var poolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    });
+    if (poolsSoon.length > 0) {
+      if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
+      soonChips.appendChild(makeGroupChip('Pools', true, function () {
+        setTab('pools'); applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
     }
   }
 
@@ -673,6 +733,9 @@ templ filterScript() {
     var program = row.dataset.program || 'mydenvercard';
     var phone = row.dataset.phone || '';
     var isPool = row.dataset.category === 'pool';
+    var isRecCenter = row.dataset.category === 'rec_center';
+    var activities = [];
+    try { if (row.dataset.activities) activities = JSON.parse(row.dataset.activities); } catch (e) {}
     var isFreeNow = freeNow(row);
 
     var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
@@ -722,6 +785,25 @@ templ filterScript() {
         var schedDiv = document.createElement('div');
         schedDiv.innerHTML = buildPoolScheduleHTML(row._pools, indoor);
         modalDetails.appendChild(schedDiv);
+      }
+
+      if (activities.length > 0) {
+        var actDiv = document.createElement('div');
+        actDiv.className = 'modal-activities';
+        var actLabel = document.createElement('p');
+        actLabel.className = 'modal-activities-label';
+        actLabel.textContent = 'Amenities';
+        actDiv.appendChild(actLabel);
+        var actTags = document.createElement('div');
+        actTags.className = 'activity-tags';
+        activities.forEach(function (a) {
+          var tag = document.createElement('span');
+          tag.className = 'activity-tag';
+          tag.textContent = a;
+          actTags.appendChild(tag);
+        });
+        actDiv.appendChild(actTags);
+        modalDetails.appendChild(actDiv);
       }
 
       if (phone) {

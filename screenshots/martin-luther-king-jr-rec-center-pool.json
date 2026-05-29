@@ -1,0 +1,170 @@
+[
+  {
+    "type": "lap_swim",
+    "days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
+    "open": "07:00",
+    "close": "09:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "sat"
+    ],
+    "open": "09:00",
+    "close": "11:00"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
+    "open": "09:15",
+    "close": "10:15"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "sat"
+    ],
+    "open": "11:00",
+    "close": "12:30"
+  },
+  {
+    "type": "adult_swim",
+    "days": [
+      "mon"
+    ],
+    "open": "10:15",
+    "close": "11:15"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "10:30",
+    "close": "14:00"
+  },
+  {
+    "type": "adult_swim",
+    "days": [
+      "wed"
+    ],
+    "open": "10:15",
+    "close": "10:45"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "fri"
+    ],
+    "open": "10:30",
+    "close": "11:30"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "mon"
+    ],
+    "open": "11:15",
+    "close": "12:15"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "14:00",
+    "close": "16:45"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "wed"
+    ],
+    "open": "10:45",
+    "close": "11:45"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "fri"
+    ],
+    "open": "11:45",
+    "close": "15:00"
+  },
+  {
+    "type": "swim_lessons",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "17:00",
+    "close": "18:50"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "mon",
+      "fri"
+    ],
+    "open": "15:00",
+    "close": "18:30"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "mon"
+    ],
+    "open": "12:30",
+    "close": "15:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "wed"
+    ],
+    "open": "12:00",
+    "close": "17:00"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "wed"
+    ],
+    "open": "17:15",
+    "close": "18:15"
+  },
+  {
+    "type": "adult_swim",
+    "days": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
+    "open": "07:00",
+    "close": "18:30"
+  },
+  {
+    "type": "adult_swim",
+    "days": [
+      "sat"
+    ],
+    "open": "09:00",
+    "close": "12:30"
+  }
+]

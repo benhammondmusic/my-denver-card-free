@@ -61,5 +61,6 @@ type Venue struct {
 	MaxAge              int          `json:"max_age"` // 0 = no maximum
 	Category            string       `json:"category,omitempty"`
 	Phone               string       `json:"phone,omitempty"`
+	Activities          []string     `json:"activities,omitempty"`
 	Pools               []Pool       `json:"pools,omitempty"`
 }

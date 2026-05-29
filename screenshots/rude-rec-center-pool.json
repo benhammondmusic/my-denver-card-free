@@ -1,0 +1,149 @@
+[
+  {
+    "type": "lap_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "06:00",
+    "close": "11:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "mon",
+      "wed"
+    ],
+    "open": "06:00",
+    "close": "08:45"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "fri"
+    ],
+    "open": "06:00",
+    "close": "12:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "sat",
+      "sun"
+    ],
+    "open": "08:00",
+    "close": "11:30"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "sat",
+      "sun"
+    ],
+    "open": "11:30",
+    "close": "15:30"
+  },
+  {
+    "type": "aqua_fitness",
+    "days": [
+      "mon",
+      "wed"
+    ],
+    "open": "09:00",
+    "close": "10:00"
+  },
+  {
+    "type": "adult_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "11:00",
+    "close": "12:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "fri"
+    ],
+    "open": "11:00",
+    "close": "12:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "fri"
+    ],
+    "open": "12:00",
+    "close": "14:00"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "mon"
+    ],
+    "open": "10:15",
+    "close": "14:00"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "12:00",
+    "close": "16:15"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "wed"
+    ],
+    "open": "10:00",
+    "close": "14:00"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "mon",
+      "wed"
+    ],
+    "open": "14:00",
+    "close": "18:30"
+  },
+  {
+    "type": "swim_lessons",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "16:15",
+    "close": "17:30"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "fri"
+    ],
+    "open": "14:00",
+    "close": "19:30"
+  },
+  {
+    "type": "lap_swim",
+    "days": [
+      "mon",
+      "wed"
+    ],
+    "open": "18:30",
+    "close": "19:30"
+  },
+  {
+    "type": "open_swim",
+    "days": [
+      "tue",
+      "thu"
+    ],
+    "open": "17:30",
+    "close": "19:30"
+  }
+]
