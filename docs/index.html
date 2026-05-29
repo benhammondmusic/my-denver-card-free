@@ -1307,14 +1307,21 @@
     return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
   }
 
+  var FAMILY_SESSION_TYPES = ['open_swim', 'family_swim'];
+
+  function isFamilySession(s) {
+    return FAMILY_SESSION_TYPES.indexOf(s.type) !== -1;
+  }
+
   function getPoolStatus(pools) {
-    var hasAnySessions = pools.some(function (p) { return (p.sessions || []).length > 0; });
+    var hasAnySessions = pools.some(function (p) { return (p.sessions || []).filter(isFamilySession).length > 0; });
     if (!hasAnySessions) return {status: 'unknown', label: 'Call for hours'};
     var earliest = null;
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
       for (var j = 0; j < (pool.sessions || []).length; j++) {
         var s = pool.sessions[j];
+        if (!isFamilySession(s)) continue;
         if (s.days.indexOf(todayDow) === -1) continue;
         var o = parseTime(s.open), c = parseTime(s.close);
         if (nowMinutes >= o && nowMinutes < c) {
@@ -1688,9 +1695,9 @@
     var html = '';
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
-      var sessions = pool.sessions || [];
+      var sessions = (pool.sessions || []).filter(isFamilySession);
       html += '<div class="pool-schedule">';
-      if (sessions.length === 0) {
+      if ((pool.sessions || []).length === 0) {
         html += '<p class="pool-closed-today">Schedule not available - call the pool desk to confirm times.</p>';
       } else {
         var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
