@@ -65,8 +65,7 @@ templ Index(venues []models.Venue) {
 		<div class="filter-bar">
 			<div class="category-tabs">
 				<button class="category-tab" data-category="attractions">Attractions</button>
-				<button class="category-tab" data-category="indoor-pools">Indoor Pools</button>
-				<button class="category-tab" data-category="outdoor-pools">Outdoor Pools</button>
+				<button class="category-tab" data-category="pools">Pools</button>
 				<button class="category-tab" data-category="rec-centers">Rec Centers</button>
 				<button class="category-tab" data-category="all">All</button>
 			</div>
@@ -469,13 +468,11 @@ templ filterScript() {
   // === TWO-LEVEL FILTER ===
   function matchesCategory(row) {
     var cat = row.dataset.category || '';
-    var isIndoor = row.dataset.indoor === 'true';
     switch (activeCategory) {
-      case 'all':           return true;
-      case 'indoor-pools':  return cat === 'pool' && isIndoor;
-      case 'outdoor-pools': return cat === 'pool' && !isIndoor;
-      case 'rec-centers':   return cat === 'rec_center';
-      default:              return cat !== 'pool' && cat !== 'rec_center'; // attractions
+      case 'all':          return true;
+      case 'pools':        return cat === 'pool';
+      case 'rec-centers':  return cat === 'rec_center';
+      default:             return cat !== 'pool' && cat !== 'rec_center';
     }
   }
 
@@ -594,7 +591,7 @@ templ filterScript() {
       poolCallout.style.display = anyPoolVisible ? '' : 'none';
     }
 
-    var isPoolCat = activeCategory === 'indoor-pools' || activeCategory === 'outdoor-pools';
+    var isPoolCat = activeCategory === 'pools';
     var label = visible + (visible === 1 ? ' venue' : ' venues');
     if (activeFilter === 'now') {
       label += ' free today';
@@ -783,20 +780,10 @@ templ filterScript() {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && freeNow(r); });
-    if (indoorPoolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
-        setCategory('indoor-pools');
-        setTimeFilter('now');
-        applyFilter();
-        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
-      }));
-    }
-
-    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && freeNow(r); });
-    if (outdoorPoolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
-        setCategory('outdoor-pools');
+    var poolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && freeNow(r); });
+    if (poolsNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Pools', false, function () {
+        setCategory('pools');
         setTimeFilter('now');
         applyFilter();
         document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
@@ -819,26 +806,13 @@ templ filterScript() {
       soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
     }
 
-    var indoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    var poolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
     });
-    if (indoorPoolsSoon.length > 0) {
+    if (poolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Indoor Pools', true, function () {
-        setCategory('indoor-pools');
-        setTimeFilter('now');
-        applyFilter();
-        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
-      }));
-    }
-
-    var outdoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
-    });
-    if (outdoorPoolsSoon.length > 0) {
-      if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Outdoor Pools', true, function () {
-        setCategory('outdoor-pools');
+      soonChips.appendChild(makeGroupChip('Pools', true, function () {
+        setCategory('pools');
         setTimeFilter('now');
         applyFilter();
         document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });

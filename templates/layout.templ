@@ -193,37 +193,38 @@ templ Layout(title string) {
 
 				.category-tabs {
 					display: flex;
-					gap: 0.5rem;
-					margin-bottom: 0.5rem;
-					flex-wrap: wrap;
+					background: rgba(0,40,104,0.07);
+					border-radius: 0.75rem;
+					padding: 0.25rem;
+					gap: 0.2rem;
+					margin-bottom: 0.75rem;
 				}
 
 				.category-tab {
-					padding: 0.45rem 1.25rem;
-					border: 2px solid var(--border);
+					flex: 1;
+					padding: 0.55rem 0.25rem;
+					border: none;
 					border-radius: 0.5rem;
-					background: white;
+					background: transparent;
 					font-family: 'Bebas Neue', sans-serif;
-					font-size: 1.1rem;
-					font-weight: 400;
-					letter-spacing: 0.1em;
+					font-size: 1rem;
+					letter-spacing: 0.08em;
 					cursor: pointer;
 					color: var(--stone);
-					transition: all 0.15s;
+					transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 					text-transform: uppercase;
+					white-space: nowrap;
 				}
 
 				.category-tab:hover {
-					border-color: var(--sky-blue);
-					color: var(--sky-blue);
-					background: #f0f5ff;
+					background: rgba(255,255,255,0.65);
+					color: var(--bear-blue);
 				}
 
 				.category-tab.active {
 					background: var(--bear-blue);
-					border-color: var(--bear-blue);
 					color: white;
-					box-shadow: 0 4px 16px rgba(0,40,104,0.4);
+					box-shadow: 0 2px 8px rgba(0,40,104,0.25);
 				}
 
 				.filter-tabs {
@@ -1359,9 +1360,10 @@ templ Layout(title string) {
 					& footer a { color: #8099c0; }
 					& .hero-eyebrow { color: #93b4e0; }
 					& .hero-eyebrow.soon { color: #7a8fa8; }
-					& .category-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
-					& .category-tab:hover { background: #1d2f55; color: #93b4e0; }
-					& .category-tab.active { background: var(--sky-blue); border-color: var(--sky-blue); color: white; box-shadow: 0 4px 16px rgba(26,86,219,0.4); }
+					& .category-tabs { background: rgba(0,40,104,0.35); }
+					& .category-tab { color: #7a8fa8; }
+					& .category-tab:hover { background: rgba(255,255,255,0.08); color: #93b4e0; }
+					& .category-tab.active { background: var(--sky-blue); color: white; box-shadow: 0 2px 8px rgba(26,86,219,0.4); }
 					& .fav-section-header { color: var(--gold); }
 					& .fav-section-header::before, & .fav-section-header::after { background: rgba(217,119,6,0.15); }
 					& .fav-section-footer { background: rgba(217,119,6,0.15); }
