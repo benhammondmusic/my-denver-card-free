@@ -649,6 +649,15 @@ templ Layout(title string) {
 				.fav-btn:hover { color: rgba(255,255,255,0.85); }
 				.fav-btn.fav-active { color: var(--gold); }
 
+				/* ---- FAVORITE FLASH ---- */
+
+				@keyframes favFlash {
+					0%   { outline: 3px solid transparent; outline-offset: 0; }
+					25%  { outline: 3px solid var(--gold); outline-offset: 3px; box-shadow: 0 0 16px rgba(217,119,6,0.45); }
+					100% { outline: 3px solid transparent; outline-offset: 0; }
+				}
+				.fav-flash { animation: favFlash 0.55s ease-out; }
+
 				/* ---- TOAST ---- */
 
 				.toast {

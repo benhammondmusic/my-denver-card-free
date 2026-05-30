@@ -1112,6 +1112,14 @@ func filterScript() templ.Component {
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
         showToast(nowFav ? 'Added to favorites' : 'Removed from favorites');
+        if (nowFav) {
+          row.classList.add('fav-flash');
+          row.addEventListener('animationend', function () { row.classList.remove('fav-flash'); }, { once: true });
+          setTimeout(function () {
+            var list = document.getElementById('venue-list');
+            if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 250);
+        }
       });
 
       var band = row.querySelector('.venue-band');
