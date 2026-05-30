@@ -51,6 +51,7 @@ templ Index(venues []models.Venue) {
 				<div id="free-soon-chips" class="venue-chips"></div>
 			</div>
 		</div>
+		<div id="map-panel" class="map-panel"></div>
 		<p class="browse-label">Browse all venues</p>
 		<div class="filter-bar">
 			<div class="category-tabs">
@@ -67,11 +68,8 @@ templ Index(venues []models.Venue) {
 				<button class="filter-tab" data-filter="all">All</button>
 			</div>
 		</div>
-		<div id="pool-callout" class="pool-callout hidden">
-			<strong>Call ahead before you go.</strong> Pool schedules change frequently and may not reflect same-day closures or schedule adjustments. The pool desk is your best source for current hours.
-		</div>
-		<div id="map-panel" class="map-panel"></div>
 		<p class="venue-count"></p>
+		<p id="pool-callout" class="pool-callout hidden">Pool schedules change frequently. Call the pool desk before you go.</p>
 		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
 				if v.Featured && !v.TemporarilyClosed {
@@ -632,6 +630,20 @@ templ filterScript() {
     timeFilterTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
   }
 
+  // === TOAST ===
+  var toastEl = null, toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.className = 'toast';
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2000);
+  }
+
   // === INIT FAVORITES BUTTONS ===
   function initFavoriteButtons() {
     var favNames = getFavorites();
@@ -653,10 +665,11 @@ templ filterScript() {
         btn.classList.toggle('fav-active', nowFav);
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
+        showToast(nowFav ? 'Added to favorites' : 'Removed from favorites');
       });
 
-      var body = row.querySelector('.venue-body');
-      if (body) body.appendChild(btn);
+      var band = row.querySelector('.venue-band');
+      if (band) band.insertBefore(btn, band.firstChild);
     });
   }
 
