@@ -1210,9 +1210,19 @@ func filterScript() templ.Component {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    var poolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && freeNow(r); });
-    if (poolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Pools', false, function () {
+    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && freeNow(r); });
+    if (indoorPoolsNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
+        setCategory('pools');
+        setTimeFilter('now');
+        applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
+    }
+
+    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && freeNow(r); });
+    if (outdoorPoolsNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
@@ -1236,12 +1246,25 @@ func filterScript() templ.Component {
       soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
     }
 
-    var poolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    var indoorPoolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
     });
-    if (poolsSoon.length > 0) {
+    if (indoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Pools', true, function () {
+      soonChips.appendChild(makeGroupChip('Indoor Pools', true, function () {
+        setCategory('pools');
+        setTimeFilter('now');
+        applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
+    }
+
+    var outdoorPoolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    });
+    if (outdoorPoolsSoon.length > 0) {
+      if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
+      soonChips.appendChild(makeGroupChip('Outdoor Pools', true, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
