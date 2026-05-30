@@ -59,6 +59,7 @@ templ Index(venues []models.Venue) {
 				<button class="category-tab" data-category="indoor-pools">Indoor Pools</button>
 				<button class="category-tab" data-category="outdoor-pools">Outdoor Pools</button>
 				<button class="category-tab" data-category="rec-centers">Rec Centers</button>
+				<button class="category-tab" data-category="all">All</button>
 			</div>
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="now">Now</button>
@@ -69,7 +70,7 @@ templ Index(venues []models.Venue) {
 			</div>
 		</div>
 		<p class="venue-count"></p>
-		<p id="pool-callout" class="pool-callout hidden">Pool schedules change frequently. Call the pool desk before you go.</p>
+		<p id="pool-callout" class="pool-callout">Pool schedules change frequently. Call the pool desk before you go.</p>
 		<ul class="venue-list" id="venue-list">
 			for _, v := range venues {
 				if v.Featured && !v.TemporarilyClosed {
@@ -459,6 +460,7 @@ templ filterScript() {
     var cat = row.dataset.category || '';
     var isIndoor = row.dataset.indoor === 'true';
     switch (activeCategory) {
+      case 'all':           return true;
       case 'indoor-pools':  return cat === 'pool' && isIndoor;
       case 'outdoor-pools': return cat === 'pool' && !isIndoor;
       case 'rec-centers':   return cat === 'rec_center';
@@ -564,9 +566,6 @@ templ filterScript() {
 
   // === FILTER ===
   function _doApplyFilter() {
-    var isPoolCat = activeCategory === 'indoor-pools' || activeCategory === 'outdoor-pools';
-    if (poolCallout) poolCallout.classList.toggle('hidden', !isPoolCat);
-
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
@@ -576,6 +575,15 @@ templ filterScript() {
       if (show && !closed) visible++;
     });
 
+    // Show pool callout only when at least one pool row is visible
+    if (poolCallout) {
+      var anyPoolVisible = rows.some(function (r) {
+        return r.dataset.category === 'pool' && !r.classList.contains('hidden');
+      });
+      poolCallout.style.display = anyPoolVisible ? '' : 'none';
+    }
+
+    var isPoolCat = activeCategory === 'indoor-pools' || activeCategory === 'outdoor-pools';
     var label = visible + (visible === 1 ? ' venue' : ' venues');
     if (activeFilter === 'now') {
       label += ' free today';
