@@ -2775,12 +2775,12 @@
     "category": "rec_center",
     "phone": "720-865-3400",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "group fitness classes",
-      "game room",
-      "racquetball courts"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Game Room",
+      "Racquetball Courts"
     ],
     "playground": true
   },
@@ -2822,15 +2822,15 @@
     "category": "rec_center",
     "phone": "720-865-5580",
     "activities": [
-      "fitness center",
-      "weight room",
-      "cycle studio",
-      "gymnasium",
-      "group fitness classes",
-      "outdoor climbing wall",
-      "climbing boulder",
-      "dog park",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Cycle Studio",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Outdoor Climbing Wall",
+      "Climbing Boulder",
+      "Dog Park",
+      "Game Room"
     ]
   },
   {
@@ -2871,11 +2871,11 @@
     "category": "rec_center",
     "phone": "720-865-0750",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "group fitness classes",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Game Room"
     ],
     "playground": true
   },
@@ -2917,11 +2917,11 @@
     "category": "rec_center",
     "phone": "720-865-0580",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "group fitness classes",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Game Room"
     ],
     "playground": true
   },
@@ -2963,11 +2963,11 @@
     "category": "rec_center",
     "phone": "720-865-0560",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "group fitness classes",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Game Room"
     ],
     "playground": true
   },
@@ -3009,11 +3009,11 @@
     "category": "rec_center",
     "phone": "720-865-0570",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "multipurpose rooms",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Multipurpose Rooms",
+      "Game Room"
     ],
     "playground": true
   },
@@ -3055,13 +3055,13 @@
     "category": "rec_center",
     "phone": "720-865-0640",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "dance studio",
-      "ballroom",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Dance Studio",
+      "Ballroom",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3102,11 +3102,11 @@
     "category": "rec_center",
     "phone": "720-865-2180",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "group fitness classes",
-      "game room"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Group Fitness Classes",
+      "Game Room"
     ],
     "playground": true
   },
@@ -3148,10 +3148,10 @@
     "category": "rec_center",
     "phone": "720-865-0510",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3192,10 +3192,10 @@
     "category": "rec_center",
     "phone": "720-865-0610",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3237,10 +3237,10 @@
     "category": "rec_center",
     "phone": "720-865-0730",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3281,13 +3281,13 @@
     "category": "rec_center",
     "phone": "720-865-3380",
     "activities": [
-      "fitness center",
-      "weight room",
-      "gymnasium",
-      "racquetball courts",
-      "game room",
-      "art room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Weight Room",
+      "Gymnasium",
+      "Racquetball Courts",
+      "Game Room",
+      "Art Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3328,10 +3328,10 @@
     "category": "rec_center",
     "phone": "720-865-4370",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3372,10 +3372,10 @@
     "category": "rec_center",
     "phone": "720-865-0905",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "ev_charger": true,
     "playground": true
@@ -3418,10 +3418,10 @@
     "category": "rec_center",
     "phone": "720-865-0550",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3463,10 +3463,10 @@
     "category": "rec_center",
     "phone": "720-865-0590",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3508,10 +3508,10 @@
     "category": "rec_center",
     "phone": "720-865-2170",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3552,10 +3552,10 @@
     "category": "rec_center",
     "phone": "720-865-0670",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3597,10 +3597,10 @@
     "category": "rec_center",
     "phone": "720-865-0520",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3641,9 +3641,9 @@
     "category": "rec_center",
     "phone": "720-865-2150",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3684,9 +3684,9 @@
     "category": "rec_center",
     "phone": "720-865-4380",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3728,9 +3728,9 @@
     "category": "rec_center",
     "phone": "720-865-0350",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3772,9 +3772,9 @@
     "category": "rec_center",
     "phone": "720-865-5650",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3815,9 +3815,9 @@
     "category": "rec_center",
     "phone": "720-865-0600",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3858,9 +3858,9 @@
     "category": "rec_center",
     "phone": "720-865-5660",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -3901,9 +3901,9 @@
     "category": "rec_center",
     "phone": "720-865-2200",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3945,10 +3945,10 @@
     "category": "rec_center",
     "phone": "720-865-0530",
     "activities": [
-      "fitness center",
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Fitness Center",
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -3990,9 +3990,9 @@
     "category": "rec_center",
     "phone": "720-865-0630",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ],
     "playground": true
   },
@@ -4034,9 +4034,9 @@
     "category": "rec_center",
     "phone": "720-865-2190",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   },
   {
@@ -4077,9 +4077,9 @@
     "category": "rec_center",
     "phone": "720-865-0540",
     "activities": [
-      "gymnasium",
-      "game room",
-      "multipurpose rooms"
+      "Gymnasium",
+      "Game Room",
+      "Multipurpose Rooms"
     ]
   }
 ]

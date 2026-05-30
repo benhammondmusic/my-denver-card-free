@@ -52,7 +52,6 @@ templ Index(venues []models.Venue) {
 		<div class="hero-section">
 			<div class="hero-header">
 				<p class="hero-eyebrow">Free today</p>
-				<div id="weather-chip" class="weather-chip"></div>
 			</div>
 			<div id="free-now-chips" class="venue-chips"></div>
 			<div id="hero-soon">
@@ -319,6 +318,7 @@ templ filterScript() {
   var userMarker = null;
   var locationBtn = null;
   var favHeader = null;
+  var favFooter = null;
 
   // === STAR ICONS ===
   var STAR_OUTLINE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
@@ -651,7 +651,7 @@ templ filterScript() {
     timeFilterTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
   }
 
-  // === FAVORITES SECTION HEADER ===
+  // === FAVORITES SECTION HEADER/FOOTER ===
   function updateFavSection() {
     var list = document.getElementById('venue-list');
     if (!list) return;
@@ -663,10 +663,18 @@ templ filterScript() {
       favHeader.style.order = '-2';
       list.appendChild(favHeader);
     }
+    if (!favFooter) {
+      favFooter = document.createElement('li');
+      favFooter.className = 'fav-section-footer';
+      favFooter.setAttribute('aria-hidden', 'true');
+      favFooter.style.order = '-1';
+      list.appendChild(favFooter);
+    }
     var anyFavVisible = rows.some(function (r) {
       return r.dataset.favorite === 'true' && !r.classList.contains('hidden');
     });
     favHeader.style.display = anyFavVisible ? '' : 'none';
+    favFooter.style.display = anyFavVisible ? '' : 'none';
   }
 
   // === TOAST ===
@@ -1032,7 +1040,7 @@ templ filterScript() {
     var activities = [];
     try { if (row.dataset.activities) activities = JSON.parse(row.dataset.activities); } catch (e) {}
     if (row.dataset.playground === 'true') activities = ['Playground'].concat(activities);
-    if (row.dataset.evCharger === 'true') activities = activities.concat(['Free EV charging']);
+    if (row.dataset.evCharger === 'true') activities = activities.concat(['Free EV Charging']);
     var isFreeNow = freeNow(row);
 
     var bandColor = closed ? '#6b7280' : (program === 'general' ? '#d97706' : '#002868');
@@ -1057,8 +1065,6 @@ templ filterScript() {
         if (reservation) addBadge(modalBadges, 'reservation required', 'badge-yellow');
         if (indoor && isPool) addBadge(modalBadges, 'indoor pool', 'badge-gray');
         if (!indoor && isPool) addBadge(modalBadges, 'outdoor pool', 'badge-gray');
-        if (row.dataset.playground === 'true') addBadge(modalBadges, 'playground', 'badge-blue');
-        if (row.dataset.evCharger === 'true') addBadge(modalBadges, 'free EV charging', 'badge-blue');
         if (scrapeFailed) addBadge(modalBadges, 'data outdated', 'badge-red', scrapeError);
       }
     }
@@ -1089,9 +1095,9 @@ templ filterScript() {
 
       if (activities.length > 0) {
         var actDiv = document.createElement('div');
-        actDiv.className = 'modal-activities';
+        actDiv.className = 'modal-section';
         var actLabel = document.createElement('p');
-        actLabel.className = 'modal-activities-label';
+        actLabel.className = 'modal-section-label';
         actLabel.textContent = 'Amenities';
         actDiv.appendChild(actLabel);
         var actTags = document.createElement('div');
@@ -1106,33 +1112,33 @@ templ filterScript() {
         modalDetails.appendChild(actDiv);
       }
 
-      if (phone) {
-        var ph = document.createElement('p');
-        ph.className = 'modal-phone';
-        ph.innerHTML = '<strong>Phone:</strong> <a href="tel:' + phone + '">' + phone + '</a>';
-        modalDetails.appendChild(ph);
+      var metaRows = [];
+      if (phone) metaRows.push({ label: 'Phone', html: '<a href="tel:' + phone + '">' + phone + '</a>' });
+      if (hours && !isPool) metaRows.push({ label: 'Hours', html: hours });
+      if (!closed && months.length > 0) {
+        metaRows.push({
+          label: months.length === 12 ? 'Schedule' : 'Free in',
+          html: months.length === 12 ? 'Year-round' : months.join(', ')
+        });
+      }
+      if (metaRows.length > 0) {
+        var metaList = document.createElement('div');
+        metaList.className = 'modal-meta-list';
+        metaRows.forEach(function (r) {
+          var row = document.createElement('div');
+          row.className = 'modal-meta-row';
+          row.innerHTML = '<span class="modal-section-label">' + r.label + '</span><span class="modal-meta-value">' + r.html + '</span>';
+          metaList.appendChild(row);
+        });
+        modalDetails.appendChild(metaList);
       }
 
-      if (hours && !isPool) {
-        var h = document.createElement('p');
-        h.className = 'modal-hours';
-        h.innerHTML = '<strong>Hours:</strong> ' + hours;
-        modalDetails.appendChild(h);
-      }
-      if (!closed && months.length > 0) {
-        var m = document.createElement('p');
-        m.className = 'modal-months';
-        m.innerHTML = months.length === 12
-          ? '<strong>Free year-round</strong>'
-          : '<strong>Free in:</strong> ' + months.join(', ');
-        modalDetails.appendChild(m);
-      }
       if (lastChecked) {
         var d = new Date(lastChecked);
         var dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         var lc = document.createElement('p');
         lc.className = 'modal-last-checked';
-        lc.textContent = 'Data verified ' + dateStr;
+        lc.textContent = 'Verified ' + dateStr;
         modalDetails.appendChild(lc);
       }
     }
