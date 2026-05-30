@@ -78,7 +78,7 @@ func Index(venues []models.Venue) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\">Free today</p><div id=\"weather-chip\" class=\"weather-chip\"></div></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Free Now</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button> <button class=\"filter-tab\" data-filter=\"yearround\">Year-Round</button> <button class=\"filter-tab\" data-filter=\"pools\">Pools</button> <button class=\"filter-tab\" data-filter=\"playground\">Playground</button> <button class=\"filter-tab\" data-filter=\"evcharger\">EV Charger</button></div></div><div id=\"pool-callout\" class=\"pool-callout hidden\"><strong>Call ahead before you go.</strong> Pool schedules change frequently and may not reflect same-day closures or schedule adjustments. The pool desk is your best source for current hours.</div><div id=\"map-panel\" class=\"map-panel\"></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\">Free today</p><div id=\"weather-chip\" class=\"weather-chip\"></div></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"category-tabs\"><button class=\"category-tab\" data-category=\"attractions\">Attractions</button> <button class=\"category-tab\" data-category=\"indoor-pools\">Indoor Pools</button> <button class=\"category-tab\" data-category=\"outdoor-pools\">Outdoor Pools</button> <button class=\"category-tab\" data-category=\"rec-centers\">Rec Centers</button></div><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"now\">Now</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button> <button class=\"filter-tab\" data-filter=\"all\">All</button></div></div><div id=\"pool-callout\" class=\"pool-callout hidden\"><strong>Call ahead before you go.</strong> Pool schedules change frequently and may not reflect same-day closures or schedule adjustments. The pool desk is your best source for current hours.</div><div id=\"map-panel\" class=\"map-panel\"></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -90,10 +90,6 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<li class=\"section-divider\" data-section=\"museum\" aria-hidden=\"true\"><span>Art &amp; History</span></li>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
 			for _, v := range venues {
 				if v.Category == "museum" && !v.TemporarilyClosed {
 					templ_7745c5c3_Err = VenueRow(v).Render(ctx, templ_7745c5c3_Buffer)
@@ -101,10 +97,6 @@ func Index(venues []models.Venue) templ.Component {
 						return templ_7745c5c3_Err
 					}
 				}
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<li class=\"section-divider\" data-section=\"indoor-pool\" aria-hidden=\"true\"><span>Indoor Pools</span></li>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
 			}
 			for _, v := range venues {
 				if v.Category == "pool" && v.Indoor && !v.TemporarilyClosed {
@@ -114,10 +106,6 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<li class=\"section-divider\" data-section=\"outdoor-pool\" aria-hidden=\"true\"><span>Outdoor Pools</span></li>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
 			for _, v := range venues {
 				if v.Category == "pool" && !v.Indoor && !v.TemporarilyClosed {
 					templ_7745c5c3_Err = VenueRow(v).Render(ctx, templ_7745c5c3_Buffer)
@@ -126,10 +114,6 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<li class=\"section-divider\" data-section=\"rec\" aria-hidden=\"true\"><span>Rec Centers</span></li>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
 			for _, v := range venues {
 				if v.Category == "rec_center" && !v.TemporarilyClosed {
 					templ_7745c5c3_Err = VenueRow(v).Render(ctx, templ_7745c5c3_Buffer)
@@ -137,10 +121,6 @@ func Index(venues []models.Venue) templ.Component {
 						return templ_7745c5c3_Err
 					}
 				}
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<li class=\"section-divider\" data-section=\"other\" aria-hidden=\"true\"><span>More</span></li>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
 			}
 			for _, v := range venues {
 				if !v.Featured && v.Category != "museum" && v.Category != "pool" && v.Category != "rec_center" && !v.TemporarilyClosed {
@@ -158,7 +138,7 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</ul><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div><div id=\"weather-modal\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\">Denver Weather</h2><button class=\"modal-close\" id=\"weather-modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div id=\"weather-modal-body\"></div></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</ul><div id=\"hidden-footer\" class=\"hidden-footer\"></div><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div><div id=\"weather-modal\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\">Denver Weather</h2><button class=\"modal-close\" id=\"weather-modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div id=\"weather-modal-body\"></div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -202,7 +182,7 @@ func VenueRow(v models.Venue) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<li role=\"button\" tabindex=\"0\" class=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<li role=\"button\" tabindex=\"0\" class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -215,444 +195,422 @@ func VenueRow(v models.Venue) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" data-free-months=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" data-free-months=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(strings.Join(v.FreeMonths, ","))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 158, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 156, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "\" data-schedule=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" data-schedule=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.FreeSchedule))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 159, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 157, Col: 40}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" data-closed=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" data-closed=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.TemporarilyClosed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 160, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 158, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "\" data-program=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" data-program=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.Program))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 161, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 159, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "\" data-lat=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" data-lat=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lat))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 162, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 160, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" data-lng=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" data-lng=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lng))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 163, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 161, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "\" data-address=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "\" data-address=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Address)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 164, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 162, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "\" data-indoor=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" data-indoor=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.Indoor))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 165, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 163, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "\" data-reservation=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "\" data-reservation=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ReservationRequired))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 164, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "\" data-name=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "\" data-name=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 167, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 165, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "\" data-url=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" data-url=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.URL)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 18}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "\" data-notes=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "\" data-notes=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Notes)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 169, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 167, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "\" data-closure-reason=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "\" data-closure-reason=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ClosureReason)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 170, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "\" data-hours=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "\" data-hours=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Hours)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 171, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 169, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "\" data-adults=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "\" data-adults=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.AdultsIncluded))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 172, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 170, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "\" data-scrape-failed=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "\" data-scrape-failed=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var21 string
 		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ScrapeFailed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 173, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 171, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "\" data-scrape-error=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "\" data-scrape-error=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ScrapeError)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 174, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 172, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var22)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "\" data-last-checked=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "\" data-last-checked=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.LastChecked.Format("2006-01-02"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 175, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 173, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var23)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "\" data-category=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "\" data-category=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var24 string
 		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Category)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 176, Col: 28}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 174, Col: 28}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var24)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "\" data-phone=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "\" data-phone=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Phone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 177, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 175, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var25)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if len(v.Pools) > 0 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, " data-pools=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, " data-pools=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var26 string
 			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.ResolveAttributeValue(poolsJSON(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 179, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 177, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var26)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 31, "\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
 		if len(v.Activities) > 0 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 32, " data-activities=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, " data-activities=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var27 string
 			templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.ResolveAttributeValue(activitiesJSON(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 182, Col: 38}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 180, Col: 38}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var27)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 33, "\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
 		if v.Playground {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 34, " data-playground=\"true\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, " data-playground=\"true\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
 		if v.EVCharger {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 35, " data-ev-charger=\"true\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, " data-ev-charger=\"true\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "><div class=\"venue-band\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 31, "><div class=\"venue-band\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if v.TemporarilyClosed {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 37, "<span class=\"band-label\">Closed</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 32, "<span class=\"band-label\">Closed</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else if v.Program == models.ProgramGeneral {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 38, "<span class=\"band-label\">Always Free</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 33, "<span class=\"band-label\">Always Free</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 39, "<span class=\"band-label\">Free w/ Card</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 34, "<span class=\"band-label\">Free w/ Card</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 40, "</div><div class=\"venue-body\"><p class=\"venue-name\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 35, "</div><div class=\"venue-body\"><p class=\"venue-name\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var28 string
 		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 201, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 199, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "</p>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 36, "</p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if v.TemporarilyClosed && v.ClosureReason != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 42, "<p class=\"closure-reason\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 37, "<p class=\"closure-reason\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var29 string
 			templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(v.ClosureReason)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 203, Col: 47}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 201, Col: 47}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 43, "</p>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 38, "</p>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		if v.Playground || v.EVCharger {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 44, "<div class=\"venue-amenities\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if v.Playground {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 45, "<span class=\"badge amenity-chip\">Playground</span> ")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			if v.EVCharger {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 46, "<span class=\"badge amenity-chip\">Free EV</span>")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 47, "</div>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 48, "</div><div class=\"venue-status\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 39, "</div><div class=\"venue-status\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if v.TemporarilyClosed {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 49, "<span class=\"badge badge-yellow\">Temporarily closed</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 40, "<span class=\"badge badge-yellow\">Temporarily closed</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
 			switch {
 			case v.AdultsIncluded >= 2:
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 50, "<span class=\"badge badge-green\">Whole family</span>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 41, "<span class=\"badge badge-green\">Whole family</span>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			case v.AdultsIncluded == 1:
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 51, "<span class=\"badge badge-green\">+1 adult</span>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 42, "<span class=\"badge badge-green\">+1 adult</span>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			default:
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 52, "<span class=\"badge badge-yellow\">Kids free</span>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 43, "<span class=\"badge badge-yellow\">Kids free</span>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 53, " <span class=\"months\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 44, " <span class=\"months\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var30 string
 			templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(freeMonthsLabel(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 228, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 216, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var30))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 54, "</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 45, "</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 55, "</div></li>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 46, "</div></li>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -727,10 +685,6 @@ func filterScript() templ.Component {
     return h + (m > 0 ? ':' + (m < 10 ? '0' + m : m) : '') + ap;
   }
 
-  function titleCase(s) {
-    return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-  }
-
   function isFamilySession(s) {
     return s.family_friendly === true;
   }
@@ -765,6 +719,7 @@ func filterScript() templ.Component {
   }
 
   // === STATE ===
+  var activeCategory = 'attractions';
   var activeFilter = 'now';
   var userLat = null, userLng = null;
   var mapInitialized = false;
@@ -773,9 +728,14 @@ func filterScript() templ.Component {
   var userMarker = null;
   var locationBtn = null;
 
+  // === STAR ICONS ===
+  var STAR_OUTLINE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+  var STAR_FILLED  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
-  var tabs = document.querySelectorAll('.filter-tab');
+  var categoryTabEls = document.querySelectorAll('.category-tab');
+  var timeFilterTabEls = document.querySelectorAll('.filter-tab');
   var countEl = document.querySelector('.venue-count');
   var modalOverlay = document.getElementById('modal-overlay');
   var modalBand = document.getElementById('modal-band');
@@ -841,10 +801,6 @@ func filterScript() templ.Component {
     return fm.indexOf('June') !== -1 || fm.indexOf('July') !== -1 || fm.indexOf('August') !== -1;
   }
 
-  function isYearRound(row) {
-    return row.dataset.closed !== 'true' && freeMonths(row).length === 12;
-  }
-
   // === POOL SEASON HELPERS ===
   function getSeasonStart(pools) {
     var earliest = null;
@@ -894,11 +850,29 @@ func filterScript() templ.Component {
         row.dataset.poolStatus = ps.status;
       }
       statusEl.appendChild(chip);
-      var typeChip = document.createElement('span');
-      typeChip.className = 'badge venue-type-chip ' + (row.dataset.indoor === 'true' ? 'indoor' : 'outdoor');
-      typeChip.textContent = row.dataset.indoor === 'true' ? 'Indoor' : 'Outdoor';
-      statusEl.appendChild(typeChip);
     });
+  }
+
+  // === TWO-LEVEL FILTER ===
+  function matchesCategory(row) {
+    var cat = row.dataset.category || '';
+    var isIndoor = row.dataset.indoor === 'true';
+    switch (activeCategory) {
+      case 'indoor-pools':  return cat === 'pool' && isIndoor;
+      case 'outdoor-pools': return cat === 'pool' && !isIndoor;
+      case 'rec-centers':   return cat === 'rec_center';
+      default:              return cat !== 'pool' && cat !== 'rec_center'; // attractions
+    }
+  }
+
+  function matchesTimeFilter(row) {
+    var closed = row.dataset.closed === 'true';
+    switch (activeFilter) {
+      case 'now':     return closed || freeNow(row);
+      case 'weekend': return closed || freeThisWeekend(row);
+      case 'summer':  return closed || isSummer(row);
+      default:        return true; // all
+    }
   }
 
   // === SWIPE TO DISMISS ===
@@ -941,33 +915,61 @@ func filterScript() templ.Component {
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
+  // === FAVORITES ===
+  function getFavorites() {
+    try { return JSON.parse(localStorage.getItem('mdc_favorites') || '[]'); } catch (e) { return []; }
+  }
+  function saveFavorites(arr) { localStorage.setItem('mdc_favorites', JSON.stringify(arr)); }
+  function isFavorite(name) { return getFavorites().indexOf(name) !== -1; }
+  function toggleFavorite(name) {
+    var favs = getFavorites();
+    var idx = favs.indexOf(name);
+    if (idx === -1) favs.push(name); else favs.splice(idx, 1);
+    saveFavorites(favs);
+    return idx === -1;
+  }
+
+  // === HIDE ===
+  function getHidden() {
+    try { return JSON.parse(localStorage.getItem('mdc_hidden') || '[]'); } catch (e) { return []; }
+  }
+  function saveHidden(arr) { localStorage.setItem('mdc_hidden', JSON.stringify(arr)); }
+  function hideVenueByName(name) {
+    var hidden = getHidden();
+    if (hidden.indexOf(name) === -1) hidden.push(name);
+    saveHidden(hidden);
+    rows.forEach(function (r) { if (r.dataset.name === name) r.dataset.hidden = 'true'; });
+  }
+
+  function updateHiddenFooter() {
+    var footer = document.getElementById('hidden-footer');
+    if (!footer) return;
+    var hidden = getHidden();
+    if (hidden.length === 0) { footer.innerHTML = ''; return; }
+    var count = hidden.length;
+    footer.innerHTML = '<a href="#" id="show-hidden-link">Show ' + count + ' hidden ' + (count === 1 ? 'venue' : 'venues') + '</a>';
+    var link = document.getElementById('show-hidden-link');
+    if (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        saveHidden([]);
+        rows.forEach(function (r) { r.dataset.hidden = 'false'; });
+        applyFilter();
+        updateHiddenFooter();
+      });
+    }
+  }
+
   // === FILTER ===
   function _doApplyFilter() {
-    var dividers = document.querySelectorAll('.section-divider');
-    var showAll = activeFilter === 'all';
-    var isPools = activeFilter === 'pools';
-    dividers.forEach(function (d) {
-      var sec = d.dataset.section;
-      var isPoolDiv = sec === 'indoor-pool' || sec === 'outdoor-pool';
-      d.classList.toggle('hidden', !(showAll || (isPools && isPoolDiv)));
-    });
-    if (poolCallout) poolCallout.classList.toggle('hidden', !isPools);
+    var isPoolCat = activeCategory === 'indoor-pools' || activeCategory === 'outdoor-pools';
+    if (poolCallout) poolCallout.classList.toggle('hidden', !isPoolCat);
 
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
-      var isPool = row.dataset.category === 'pool';
-      var show;
-      switch (activeFilter) {
-        case 'now':       show = closed || freeNow(row);         break;
-        case 'weekend':   show = closed || freeThisWeekend(row); break;
-        case 'summer':    show = closed || isSummer(row);        break;
-        case 'yearround': show = closed || isYearRound(row);     break;
-        case 'pools':      show = isPool;                                     break;
-        case 'playground': show = row.dataset.playground === 'true';         break;
-        case 'evcharger':  show = row.dataset.evCharger === 'true';           break;
-        default:           show = true;
-      }
+      var hidden = row.dataset.hidden === 'true';
+      var show = !hidden && matchesCategory(row) && matchesTimeFilter(row);
       row.classList.toggle('hidden', !show);
       if (show && !closed) visible++;
     });
@@ -975,25 +977,23 @@ func filterScript() templ.Component {
     var label = visible + (visible === 1 ? ' venue' : ' venues');
     if (activeFilter === 'now') {
       label += ' free today';
-      if (visible === 0) label = 'No venues free right now. Try "All" or pick a filter.';
+      if (visible === 0) label = 'No venues free right now. Try "All" or another category.';
     } else if (activeFilter === 'weekend') {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
-    } else if (activeFilter === 'pools') {
-      var openCount = rows.filter(function (r) { return r.dataset.poolStatus === 'open'; }).length;
+    }
+    if (isPoolCat) {
+      var openCount = rows.filter(function (r) {
+        return !r.classList.contains('hidden') && r.dataset.poolStatus === 'open';
+      }).length;
       if (openCount > 0) {
         label = openCount + (openCount === 1 ? ' pool' : ' pools') + ' open right now';
       } else {
         label = visible + (visible === 1 ? ' pool' : ' pools') + ' listed';
       }
-    } else if (activeFilter === 'playground') {
-      label = visible + (visible === 1 ? ' venue' : ' venues') + ' with a playground';
-    } else if (activeFilter === 'evcharger') {
-      label = visible + (visible === 1 ? ' venue' : ' venues') + ' with free EV charging';
     }
     if (countEl) countEl.textContent = label;
 
-    // Sync map markers to match visible rows
     if (leafletMap) {
       rows.forEach(function (row) {
         if (!row._marker) return;
@@ -1014,6 +1014,53 @@ func filterScript() templ.Component {
     }
   }
 
+  // === TAB SETTERS ===
+  function setCategory(cat) {
+    activeCategory = cat;
+    categoryTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.category === cat); });
+  }
+
+  function setTimeFilter(filter) {
+    activeFilter = filter;
+    timeFilterTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
+  }
+
+  // === INIT FAVORITES BUTTONS ===
+  function initFavoriteButtons() {
+    var favNames = getFavorites();
+    rows.forEach(function (row) {
+      var name = row.dataset.name || '';
+      var fav = favNames.indexOf(name) !== -1;
+      row.dataset.favorite = fav ? 'true' : 'false';
+      row.style.order = fav ? '-1' : '0';
+
+      var btn = document.createElement('button');
+      btn.className = 'fav-btn' + (fav ? ' fav-active' : '');
+      btn.setAttribute('aria-label', fav ? 'Remove from favorites' : 'Add to favorites');
+      btn.innerHTML = fav ? STAR_FILLED : STAR_OUTLINE;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var nowFav = toggleFavorite(name);
+        row.dataset.favorite = nowFav ? 'true' : 'false';
+        row.style.order = nowFav ? '-1' : '0';
+        btn.classList.toggle('fav-active', nowFav);
+        btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
+        btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
+      });
+
+      var body = row.querySelector('.venue-body');
+      if (body) body.appendChild(btn);
+    });
+  }
+
+  // === INIT HIDDEN STATE ===
+  function initHiddenState() {
+    var hiddenNames = getHidden();
+    rows.forEach(function (row) {
+      row.dataset.hidden = hiddenNames.indexOf(row.dataset.name || '') !== -1 ? 'true' : 'false';
+    });
+  }
+
   // === HERO ===
   function buildHero() {
     var nowChips = document.getElementById('free-now-chips');
@@ -1024,7 +1071,6 @@ func filterScript() templ.Component {
 
     if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
 
-    // Exclude pools and rec centers from individual hero chips; they get a single group chip each
     var nowRows = rows.filter(function (row) {
       return freeNow(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
@@ -1061,22 +1107,23 @@ func filterScript() templ.Component {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    // Group chip for pools (if any free now)
     var poolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && freeNow(r); });
     if (poolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Pools', false, function () {
-        setTab('pools'); applyFilter();
+      nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
+        setCategory('outdoor-pools');
+        setTimeFilter('now');
+        applyFilter();
         document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
       }));
     }
 
-    // Group chip for rec centers (free year-round so always show in now hero)
     var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && freeNow(r); });
     if (recNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Rec Centers', false, function () {
-        setTab('all'); applyFilter();
-        var recDiv = document.querySelector('.section-divider[data-section="rec"]');
-        if (recDiv) recDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setCategory('rec-centers');
+        setTimeFilter('now');
+        applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
       }));
     }
 
@@ -1086,14 +1133,15 @@ func filterScript() templ.Component {
       soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
     }
 
-    // Group chips for soon section
     var poolsSoon = rows.filter(function (r) {
       return r.dataset.category === 'pool' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
     });
     if (poolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Pools', true, function () {
-        setTab('pools'); applyFilter();
+      soonChips.appendChild(makeGroupChip('Outdoor Pools', true, function () {
+        setCategory('outdoor-pools');
+        setTimeFilter('now');
+        applyFilter();
         document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
       }));
     }
@@ -1290,7 +1338,6 @@ func filterScript() templ.Component {
     var program = row.dataset.program || 'mydenvercard';
     var phone = row.dataset.phone || '';
     var isPool = row.dataset.category === 'pool';
-    var isRecCenter = row.dataset.category === 'rec_center';
     var activities = [];
     try { if (row.dataset.activities) activities = JSON.parse(row.dataset.activities); } catch (e) {}
     if (row.dataset.playground === 'true') activities = ['Playground'].concat(activities);
@@ -1317,7 +1364,10 @@ func filterScript() templ.Component {
         if (schedule === 'weekends') addBadge(modalBadges, 'weekends only', 'badge-gray');
         else if (schedule === 'weekends_and_breaks') addBadge(modalBadges, 'weekends + breaks', 'badge-gray');
         if (reservation) addBadge(modalBadges, 'reservation required', 'badge-yellow');
-        if (indoor) addBadge(modalBadges, 'indoor', 'badge-gray');
+        if (indoor && isPool) addBadge(modalBadges, 'indoor pool', 'badge-gray');
+        if (!indoor && isPool) addBadge(modalBadges, 'outdoor pool', 'badge-gray');
+        if (row.dataset.playground === 'true') addBadge(modalBadges, 'playground', 'badge-blue');
+        if (row.dataset.evCharger === 'true') addBadge(modalBadges, 'free EV charging', 'badge-blue');
         if (scrapeFailed) addBadge(modalBadges, 'data outdated', 'badge-red', scrapeError);
       }
     }
@@ -1426,6 +1476,19 @@ func filterScript() templ.Component {
       shareBtn.textContent = 'Share';
       shareBtn.addEventListener('click', function () { shareVenue(shareBtn, name); });
       modalActions.appendChild(shareBtn);
+
+      if (!closed) {
+        var hideBtn = document.createElement('button');
+        hideBtn.className = 'modal-hide-btn';
+        hideBtn.textContent = 'Hide this venue';
+        hideBtn.addEventListener('click', function () {
+          hideVenueByName(name);
+          closeModal();
+          applyFilter();
+          updateHiddenFooter();
+        });
+        modalActions.appendChild(hideBtn);
+      }
     }
 
     if (lat && lng) {
@@ -1490,13 +1553,11 @@ func filterScript() templ.Component {
 
     var list = document.getElementById('venue-list');
     if (!list) return;
-    var dividers = list.querySelectorAll('.section-divider');
 
     var openRows = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
     var closedRows = rows.filter(function (r) { return r.dataset.closed === 'true'; });
     openRows.sort(function (a, b) { return a._distance - b._distance; });
 
-    dividers.forEach(function (d) { d.style.display = 'none'; });
     openRows.forEach(function (r) { list.appendChild(r); });
     closedRows.forEach(function (r) { list.appendChild(r); });
 
@@ -1576,15 +1637,17 @@ func filterScript() templ.Component {
     });
   });
 
-  // === FILTER TABS ===
-  function setTab(filter) {
-    activeFilter = filter;
-    tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
-  }
-
-  tabs.forEach(function (tab) {
+  // === WIRE UP TABS ===
+  categoryTabEls.forEach(function (tab) {
     tab.addEventListener('click', function () {
-      setTab(tab.dataset.filter);
+      setCategory(tab.dataset.category);
+      applyFilter();
+    });
+  });
+
+  timeFilterTabEls.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      setTimeFilter(tab.dataset.filter);
       applyFilter();
     });
   });
@@ -1597,12 +1660,14 @@ func filterScript() templ.Component {
     var wxModal = document.getElementById('weather-modal');
     var storedWeather = null;
 
-    function weatherIcon(code) {
-      if (code === 0)  return '☀️';
-      if (code <= 2)   return '⛅';
+    function weatherIcon(code, isDay) {
+      if (isDay === undefined) isDay = true;
+      if (code === 0)  return isDay ? '☀️' : '🌙';
+      if (code <= 1)   return isDay ? '🌤️' : '🌙';
+      if (code <= 2)   return isDay ? '⛅' : '🌙';
       if (code <= 3)   return '☁️';
       if (code <= 48)  return '🌫️';
-      if (code <= 55)  return '🌦️';
+      if (code <= 55)  return isDay ? '🌦️' : '🌧️';
       if (code <= 67)  return '🌧️';
       if (code <= 77)  return '❄️';
       if (code <= 82)  return '🌧️';
@@ -1667,11 +1732,17 @@ func filterScript() templ.Component {
       var uv        = daily.uv_index_max        ? daily.uv_index_max[0]                  : null;
       var maxPrecip = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
 
+      var curIsDay = cur.is_day === 1;
+      var srRaw = daily.sunrise ? daily.sunrise[0] : null;
+      var ssRaw = daily.sunset  ? daily.sunset[0]  : null;
+      var srHour = srRaw ? (function(s){ var d=new Date(s); return d.getHours()+d.getMinutes()/60; })(srRaw) : 6;
+      var ssHour = ssRaw ? (function(s){ var d=new Date(s); return d.getHours()+d.getMinutes()/60; })(ssRaw) : 20;
+      function hourIsDay(h) { return h >= srHour && h < ssHour; }
+
       var html = '';
 
-      // Current conditions
       html += '<div class="wx-current">';
-      html += '<span class="wx-big-icon">' + weatherIcon(cur.weather_code) + '</span>';
+      html += '<span class="wx-big-icon">' + weatherIcon(cur.weather_code, curIsDay) + '</span>';
       html += '<div class="wx-current-info">';
       html += '<span class="wx-temp">' + temp + '°F</span>';
       html += '<span class="wx-cond">' + condText(cur.weather_code) + '</span>';
@@ -1680,7 +1751,6 @@ func filterScript() templ.Component {
       }
       html += '</div></div>';
 
-      // Stats grid
       html += '<div class="wx-stats">';
       if (high !== null && low !== null) {
         html += '<div class="wx-stat"><span class="wx-stat-label">High / Low</span><span class="wx-stat-val">' + high + '° / ' + low + '°</span></div>';
@@ -1697,7 +1767,6 @@ func filterScript() templ.Component {
       }
       html += '</div>';
 
-      // Hourly strip - next 9 hours
       html += '<p class="wx-hourly-label">Next several hours</p>';
       html += '<div class="wx-hourly">';
       var count = 0;
@@ -1710,7 +1779,7 @@ func filterScript() templ.Component {
         var h12 = h % 12 || 12;
         html += '<div class="wx-hour">';
         html += '<span class="wx-hour-time">' + h12 + ap + '</span>';
-        html += '<span class="wx-hour-icon">' + weatherIcon(hourly.weather_code[i]) + '</span>';
+        html += '<span class="wx-hour-icon">' + weatherIcon(hourly.weather_code[i], hourIsDay(h)) + '</span>';
         html += '<span class="wx-hour-temp">' + ht + '°</span>';
         html += '<span class="wx-hour-precip">' + (hp > 0 ? '💧' + hp + '%' : '') + '</span>';
         html += '</div>';
@@ -1721,7 +1790,6 @@ func filterScript() templ.Component {
       body.innerHTML = html;
     }
 
-    // Wire chip as a button
     chip.setAttribute('role', 'button');
     chip.setAttribute('tabindex', '0');
     chip.addEventListener('click', openWxModal);
@@ -1729,7 +1797,6 @@ func filterScript() templ.Component {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWxModal(); }
     });
 
-    // Wire modal close
     if (wxModal) {
       wxModal.addEventListener('click', function (e) { if (e.target === wxModal) closeWxModal(); });
     }
@@ -1743,9 +1810,9 @@ func filterScript() templ.Component {
     if (wxSheet) setupSwipeDismiss(wxSheet, wxModal ? wxModal.querySelector('.modal-content') : null, closeWxModal);
 
     fetch('https://api.open-meteo.com/v1/forecast?latitude=39.7392&longitude=-104.9849' +
-      '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m' +
+      '&current=weather_code,temperature_2m,wind_speed_10m,apparent_temperature,relative_humidity_2m,is_day' +
       '&hourly=weather_code,temperature_2m,precipitation_probability' +
-      '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max' +
+      '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max,sunrise,sunset' +
       '&temperature_unit=fahrenheit&wind_speed_unit=mph' +
       '&timezone=America%2FDenver&forecast_days=1')
       .then(function (r) { return r.json(); })
@@ -1770,7 +1837,7 @@ func filterScript() templ.Component {
           }
         });
 
-        var parts = [weatherIcon(worstCode) + ' ' + temp + '°F'];
+        var parts = [weatherIcon(worstCode, cur.is_day === 1) + ' ' + temp + '°F'];
         if (maxPrecip >= 40) parts.push(maxPrecip + '% precip');
         if (wind >= 20) parts.push(wind + ' mph winds');
 
@@ -1782,10 +1849,14 @@ func filterScript() templ.Component {
 
   // === INIT ===
   initPoolRows();
-  setTab('now');
+  initHiddenState();
+  setCategory('attractions');
+  setTimeFilter('now');
   applyFilter();
+  initFavoriteButtons();
   buildHero();
   initMap();
+  updateHiddenFooter();
 
   // Deep link: auto-open modal if URL has a venue hash
   var initHash = window.location.hash.slice(1);
