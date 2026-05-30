@@ -88,7 +88,7 @@ func Index(venues []models.Venue) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\">Free today</p></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><div id=\"map-panel\" class=\"map-panel\"></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"category-tabs\"><button class=\"category-tab\" data-category=\"attractions\">Attractions</button> <button class=\"category-tab\" data-category=\"pools\">Pools</button> <button class=\"category-tab\" data-category=\"rec-centers\">Rec Centers</button> <button class=\"category-tab\" data-category=\"all\">All</button></div><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Now</button> <button class=\"filter-tab\" data-filter=\"tomorrow\">Tomorrow</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button></div></div><p class=\"venue-count\"></p><p id=\"pool-callout\" class=\"pool-callout\">Pool schedules change frequently. Call the pool desk before you go.</p><ul class=\"venue-list\" id=\"venue-list\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\">Free today</p><p class=\"hero-card-note\">with a <button id=\"hero-card-link\" class=\"hero-card-link-btn\">myDenverCard</button></p></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><div id=\"map-panel\" class=\"map-panel\"></div><p class=\"browse-label\">Browse all venues</p><div class=\"filter-bar\"><div class=\"category-tabs\"><button class=\"category-tab\" data-category=\"attractions\">Highlights</button> <button class=\"category-tab\" data-category=\"pools\">Pools</button> <button class=\"category-tab\" data-category=\"rec-centers\">Rec Centers</button> <button class=\"category-tab\" data-category=\"all\">All</button></div><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Now</button> <button class=\"filter-tab\" data-filter=\"tomorrow\">Tomorrow</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button></div></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -148,7 +148,7 @@ func Index(venues []models.Venue) templ.Component {
 					}
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</ul><div id=\"hidden-footer\" class=\"hidden-footer\"></div><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div><div id=\"weather-modal\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\">Denver Weather</h2><button class=\"modal-close\" id=\"weather-modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div id=\"weather-modal-body\"></div></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</ul><div id=\"modal-overlay\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\" id=\"modal-title\"></h2><button class=\"modal-close\" id=\"modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div class=\"modal-badges\" id=\"modal-badges\"></div><div id=\"modal-map\" class=\"modal-map\"></div><div class=\"modal-details\" id=\"modal-details\"></div><div class=\"modal-actions\" id=\"modal-actions\"></div></div></div></div><div id=\"weather-modal\" class=\"modal-overlay\" aria-hidden=\"true\"><div class=\"modal-sheet\"><div class=\"modal-content\"><div class=\"modal-header\"><h2 class=\"modal-title\">Denver Weather</h2><button class=\"modal-close\" id=\"weather-modal-close\" aria-label=\"Close\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line> <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></button></div><div id=\"weather-modal-body\"></div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -212,7 +212,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(strings.Join(v.FreeMonths, ","))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 164, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 163, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
@@ -225,7 +225,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.FreeSchedule))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 165, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 164, Col: 40}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -238,7 +238,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.TemporarilyClosed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 165, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -251,7 +251,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(string(v.Program))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 167, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 166, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
@@ -264,7 +264,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lat))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 167, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
@@ -277,7 +277,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%.6f", v.Lng))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 169, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
@@ -290,7 +290,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Address)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 170, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 169, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
@@ -303,7 +303,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.Indoor))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 171, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 170, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
@@ -316,7 +316,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ReservationRequired))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 172, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 171, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
@@ -329,7 +329,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 173, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 172, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
@@ -342,7 +342,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.URL)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 174, Col: 18}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 173, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
@@ -355,7 +355,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Notes)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 175, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 174, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
@@ -368,7 +368,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ClosureReason)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 176, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 175, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
@@ -381,7 +381,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Hours)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 177, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 176, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 		if templ_7745c5c3_Err != nil {
@@ -394,7 +394,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("%d", v.AdultsIncluded))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 178, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 177, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
@@ -407,7 +407,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var21 string
 		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.ResolveAttributeValue(boolStr(v.ScrapeFailed))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 179, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 178, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
 		if templ_7745c5c3_Err != nil {
@@ -420,7 +420,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.ScrapeError)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 180, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 179, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var22)
 		if templ_7745c5c3_Err != nil {
@@ -433,7 +433,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.LastChecked.Format("2006-01-02"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 181, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 180, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var23)
 		if templ_7745c5c3_Err != nil {
@@ -446,7 +446,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var24 string
 		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Category)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 182, Col: 28}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 181, Col: 28}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var24)
 		if templ_7745c5c3_Err != nil {
@@ -459,7 +459,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.ResolveAttributeValue(v.Phone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 183, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 182, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var25)
 		if templ_7745c5c3_Err != nil {
@@ -477,7 +477,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var26 string
 			templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.ResolveAttributeValue(poolsJSON(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 185, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 184, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var26)
 			if templ_7745c5c3_Err != nil {
@@ -496,7 +496,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var27 string
 			templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.ResolveAttributeValue(activitiesJSON(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 188, Col: 38}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 187, Col: 38}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var27)
 			if templ_7745c5c3_Err != nil {
@@ -546,7 +546,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var28 string
 		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(v.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 207, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 206, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
@@ -555,7 +555,7 @@ func VenueRow(v models.Venue) templ.Component {
 		var templ_7745c5c3_Var29 string
 		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(poolTypeSuffix(v))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 207, Col: 54}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 206, Col: 54}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
@@ -573,7 +573,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var30 string
 			templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(v.ClosureReason)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 209, Col: 47}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 208, Col: 47}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var30))
 			if templ_7745c5c3_Err != nil {
@@ -618,7 +618,7 @@ func VenueRow(v models.Venue) templ.Component {
 			var templ_7745c5c3_Var31 string
 			templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(freeMonthsLabel(v))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 224, Col: 45}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 223, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 			if templ_7745c5c3_Err != nil {
@@ -765,7 +765,6 @@ func filterScript() templ.Component {
   var modalMapEl = document.getElementById('modal-map');
   var modalDetails = document.getElementById('modal-details');
   var modalActions = document.getElementById('modal-actions');
-  var poolCallout = document.getElementById('pool-callout');
 
   // Parse pool data attached to rows
   rows.forEach(function (row) {
@@ -843,6 +842,17 @@ func filterScript() templ.Component {
     return fm.indexOf('June') !== -1 || fm.indexOf('July') !== -1 || fm.indexOf('August') !== -1;
   }
 
+  // === DATA FRESHNESS ===
+  function daysOld(dateStr) {
+    if (!dateStr) return 0;
+    var d = new Date(dateStr);
+    return (today - d) / (1000 * 60 * 60 * 24);
+  }
+
+  function isDataStale(row) {
+    return row.dataset.scrapeFailed === 'true' || daysOld(row.dataset.lastChecked) > 10;
+  }
+
   // === POOL SEASON HELPERS ===
   function getSeasonStart(pools) {
     var earliest = null;
@@ -887,9 +897,20 @@ func filterScript() templ.Component {
         row.dataset.poolStatus = 'season-ended';
       } else {
         var ps = getPoolStatus(row._pools);
-        chip.className = 'badge pool-status pool-status-' + ps.status;
-        chip.textContent = ps.label;
-        row.dataset.poolStatus = ps.status;
+        var stale = isDataStale(row);
+        if (stale && (ps.status === 'open' || ps.status === 'soon')) {
+          chip.className = 'badge pool-status pool-status-soon';
+          chip.textContent = 'Family swim - confirm first';
+          row.dataset.poolStatus = 'soon';
+        } else if (stale && (ps.status === 'closed' || ps.status === 'unknown')) {
+          chip.className = 'badge pool-status pool-status-closed';
+          chip.textContent = 'Check schedule';
+          row.dataset.poolStatus = ps.status;
+        } else {
+          chip.className = 'badge pool-status pool-status-' + ps.status;
+          chip.textContent = ps.label;
+          row.dataset.poolStatus = ps.status;
+        }
       }
       statusEl.appendChild(chip);
     });
@@ -971,55 +992,15 @@ func filterScript() templ.Component {
     return idx === -1;
   }
 
-  // === HIDE ===
-  function getHidden() {
-    try { return JSON.parse(localStorage.getItem('mdc_hidden') || '[]'); } catch (e) { return []; }
-  }
-  function saveHidden(arr) { localStorage.setItem('mdc_hidden', JSON.stringify(arr)); }
-  function hideVenueByName(name) {
-    var hidden = getHidden();
-    if (hidden.indexOf(name) === -1) hidden.push(name);
-    saveHidden(hidden);
-    rows.forEach(function (r) { if (r.dataset.name === name) r.dataset.hidden = 'true'; });
-  }
-
-  function updateHiddenFooter() {
-    var footer = document.getElementById('hidden-footer');
-    if (!footer) return;
-    var hidden = getHidden();
-    if (hidden.length === 0) { footer.innerHTML = ''; return; }
-    var count = hidden.length;
-    footer.innerHTML = '<a href="#" id="show-hidden-link">Show ' + count + ' hidden ' + (count === 1 ? 'venue' : 'venues') + '</a>';
-    var link = document.getElementById('show-hidden-link');
-    if (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        saveHidden([]);
-        rows.forEach(function (r) { r.dataset.hidden = 'false'; });
-        applyFilter();
-        updateHiddenFooter();
-      });
-    }
-  }
-
   // === FILTER ===
   function _doApplyFilter() {
     var visible = 0;
     rows.forEach(function (row) {
       var closed = row.dataset.closed === 'true';
-      var hidden = row.dataset.hidden === 'true';
-      var show = !hidden && matchesCategory(row) && matchesTimeFilter(row);
+      var show = matchesCategory(row) && matchesTimeFilter(row);
       row.classList.toggle('hidden', !show);
       if (show && !closed) visible++;
     });
-
-    // Show pool callout only when at least one pool row is visible
-    if (poolCallout) {
-      var anyPoolVisible = rows.some(function (r) {
-        return r.dataset.category === 'pool' && !r.classList.contains('hidden');
-      });
-      poolCallout.style.display = anyPoolVisible ? '' : 'none';
-    }
 
     var isPoolCat = activeCategory === 'pools';
     var label = visible + (visible === 1 ? ' venue' : ' venues');
@@ -1153,14 +1134,6 @@ func filterScript() templ.Component {
 
       var band = row.querySelector('.venue-band');
       if (band) band.insertBefore(btn, band.firstChild);
-    });
-  }
-
-  // === INIT HIDDEN STATE ===
-  function initHiddenState() {
-    var hiddenNames = getHidden();
-    rows.forEach(function (row) {
-      row.dataset.hidden = hiddenNames.indexOf(row.dataset.name || '') !== -1 ? 'true' : 'false';
     });
   }
 
@@ -1499,10 +1472,11 @@ func filterScript() templ.Component {
     if (modalDetails) {
       modalDetails.innerHTML = '';
 
-      if (isPool) {
+      var modalDataStale = scrapeFailed || daysOld(lastChecked) > 10;
+      if (isPool && modalDataStale) {
         var warn = document.createElement('div');
         warn.className = 'call-ahead-warning';
-        warn.innerHTML = '<strong>Call ahead:</strong> Pool schedules change frequently. Call the pool desk to confirm times before you go.';
+        warn.textContent = 'Schedule data may be outdated. Confirm times directly with the pool before heading out.';
         modalDetails.appendChild(warn);
       }
 
@@ -1561,11 +1535,12 @@ func filterScript() templ.Component {
       }
 
       if (lastChecked) {
-        var d = new Date(lastChecked);
-        var dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        var ageDays = Math.floor(daysOld(lastChecked));
+        var ageText = ageDays === 0 ? 'today' : ageDays === 1 ? '1 day ago' : ageDays + ' days ago';
+        var ageCls = ageDays <= 7 ? 'badge-green' : ageDays <= 14 ? 'badge-yellow' : 'badge-red';
         var lc = document.createElement('p');
         lc.className = 'modal-last-checked';
-        lc.textContent = 'Verified ' + dateStr;
+        lc.innerHTML = '<span class="badge ' + ageCls + '" style="font-size:0.65rem">Verified ' + ageText + '</span>';
         modalDetails.appendChild(lc);
       }
     }
@@ -1601,18 +1576,6 @@ func filterScript() templ.Component {
       shareBtn.addEventListener('click', function () { shareVenue(shareBtn, name); });
       modalActions.appendChild(shareBtn);
 
-      if (!closed) {
-        var hideBtn = document.createElement('button');
-        hideBtn.className = 'modal-hide-btn';
-        hideBtn.textContent = 'Hide this venue';
-        hideBtn.addEventListener('click', function () {
-          hideVenueByName(name);
-          closeModal();
-          applyFilter();
-          updateHiddenFooter();
-        });
-        modalActions.appendChild(hideBtn);
-      }
     }
 
     if (lat && lng) {
@@ -1973,7 +1936,6 @@ func filterScript() templ.Component {
 
   // === INIT ===
   initPoolRows();
-  initHiddenState();
   setCategory('attractions');
   setTimeFilter('now');
   applyFilter();
@@ -1981,7 +1943,6 @@ func filterScript() templ.Component {
   updateFavSection();
   buildHero();
   initMap();
-  updateHiddenFooter();
 
   // Deep link: auto-open modal if URL has a venue hash
   var initHash = window.location.hash.slice(1);

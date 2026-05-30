@@ -53,6 +53,7 @@ templ Layout(title string) {
 					--off-white: #edf1fb;
 					--stone: #6b7280;
 					--border: #dde3ef;
+					--surface: white;
 				}
 
 				body {
@@ -104,7 +105,7 @@ templ Layout(title string) {
 					font-size: 0.875rem;
 					letter-spacing: 0.3em;
 					text-transform: uppercase;
-					opacity: 0.5;
+					opacity: 0.7;
 					margin-bottom: 0rem;
 				}
 
@@ -124,7 +125,7 @@ templ Layout(title string) {
 				.header-sub {
 					margin-top: 0.6rem;
 					font-size: 0.875rem;
-					opacity: 0.6;
+					opacity: 0.75;
 					font-weight: 400;
 					max-width: 28rem;
 					line-height: 1.4;
@@ -434,6 +435,28 @@ templ Layout(title string) {
 					margin-bottom: 0.75rem;
 				}
 
+				.hero-card-note {
+					font-size: 0.75rem;
+					color: var(--stone);
+					font-weight: 400;
+				}
+
+				.hero-card-link-btn {
+					background: none;
+					border: none;
+					padding: 0;
+					font-size: 0.75rem;
+					color: var(--sky-blue);
+					cursor: pointer;
+					font-family: 'Outfit', sans-serif;
+					font-weight: 500;
+					text-decoration: underline;
+				}
+
+				.hero-card-link-btn:hover {
+					color: var(--bear-blue);
+				}
+
 				.venue-chips {
 					display: flex;
 					flex-wrap: wrap;
@@ -732,35 +755,6 @@ templ Layout(title string) {
 					transform: translateX(-50%) translateY(0);
 				}
 
-				/* ---- HIDDEN FOOTER ---- */
-
-				.hidden-footer {
-					text-align: center;
-					padding: 0.75rem 1rem;
-					font-size: 0.875rem;
-				}
-				.hidden-footer a {
-					color: var(--stone);
-					text-decoration: underline;
-					cursor: pointer;
-				}
-				.hidden-footer a:hover { color: #374151; }
-
-				/* ---- HIDE BUTTON IN MODAL ---- */
-
-				.modal-hide-btn {
-					background: none;
-					border: none;
-					cursor: pointer;
-					font-family: 'Outfit', sans-serif;
-					font-size: 0.8rem;
-					color: var(--stone);
-					text-decoration: underline;
-					padding: 0.5rem 0.25rem;
-					transition: color 0.15s;
-				}
-				.modal-hide-btn:hover { color: #374151; }
-
 				/* ---- VENUE NAME ---- */
 
 				.venue-name {
@@ -918,18 +912,6 @@ templ Layout(title string) {
 				.pool-status-closed    { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
 				.pool-status-unknown   { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
 				.pool-status-preseason { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-
-				/* ---- POOL CALL-AHEAD NOTICE ---- */
-
-				.pool-callout {
-					display: none;
-					font-size: 0.75rem;
-					color: var(--stone);
-					font-style: italic;
-					margin-bottom: 0.75rem;
-					line-height: 1.5;
-					padding: 0 0.25rem;
-				}
 
 				/* ---- POOL SCHEDULE IN MODAL ---- */
 
@@ -1344,6 +1326,7 @@ templ Layout(title string) {
 					--off-white: #0d1a2e;
 					--border: #1e3058;
 					--stone: #7a8fa8;
+					--surface: #162040;
 
 					& body { color: #e0e8f5; }
 					& .hero-section { background: #162040; border-color: var(--border); }
@@ -1372,10 +1355,6 @@ templ Layout(title string) {
 					& .fav-btn.fav-active { color: var(--gold); }
 					& .venue-row.program-general .fav-btn.fav-active { color: white; }
 					& .toast { background: #e0e8f5; color: #111827; }
-					& .hidden-footer a { color: #5a7090; }
-					& .hidden-footer a:hover { color: #93b4e0; }
-					& .modal-hide-btn { color: #5a7090; }
-					& .modal-hide-btn:hover { color: #93b4e0; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }
 					& .badge-gray { background: #1f2937; color: #9ca3af; border-color: #374151; }
@@ -1433,6 +1412,7 @@ templ Layout(title string) {
 					text-decoration: none;
 					display: flex;
 					align-items: center;
+					gap: 0.3rem;
 					transition: all 0.15s;
 					line-height: 1;
 				}
@@ -1493,6 +1473,7 @@ templ Layout(title string) {
 				<div class="header-actions">
 					<button id="card-info-btn" class="card-signup-btn" aria-label="About myDenverCard" title="About myDenverCard">
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+						<span>the card</span>
 					</button>
 					<button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button>
 				</div>
@@ -1705,6 +1686,8 @@ templ Layout(title string) {
 						document.body.style.overflow = '';
 					}
 					if (openBtn) openBtn.addEventListener('click', open);
+					var heroCardLink = document.getElementById('hero-card-link');
+					if (heroCardLink) heroCardLink.addEventListener('click', open);
 					if (closeBtn) closeBtn.addEventListener('click', close);
 					if (overlay) overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
 					document.addEventListener('keydown', function (e) {
