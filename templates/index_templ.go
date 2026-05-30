@@ -701,7 +701,7 @@ func filterScript() templ.Component {
         if (s.days.indexOf(todayDow) === -1) continue;
         var o = parseTime(s.open), c = parseTime(s.close);
         if (nowMinutes >= o && nowMinutes < c) {
-          return {status: 'open', label: 'Open now', open: s.open, close: s.close};
+          return {status: 'open', label: 'Family swim now', open: s.open, close: s.close};
         }
         if (nowMinutes < o) {
           if (!earliest || o < parseTime(earliest.open)) earliest = s;
@@ -711,11 +711,11 @@ func filterScript() templ.Component {
     if (earliest) {
       var diff = parseTime(earliest.open) - nowMinutes;
       var label = diff <= 60
-        ? 'Opens in ' + diff + ' min'
-        : 'Opens at ' + fmtTime(earliest.open);
+        ? 'Family swim in ' + diff + ' min'
+        : 'Family swim at ' + fmtTime(earliest.open);
       return {status: 'soon', label: label, open: earliest.open, close: earliest.close};
     }
-    return {status: 'closed', label: 'No open swim today'};
+    return {status: 'closed', label: 'No family swim today'};
   }
 
   // === STATE ===
