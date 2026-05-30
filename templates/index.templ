@@ -61,6 +61,7 @@ templ Index(venues []models.Venue) {
 			</div>
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="now">Now</button>
+				<button class="filter-tab" data-filter="tomorrow">Tomorrow</button>
 				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
 				<button class="filter-tab" data-filter="all">All</button>
@@ -372,6 +373,27 @@ templ filterScript() {
     });
   }
 
+  function freeTomorrow(row) {
+    if (row.dataset.closed === 'true') return false;
+    var tmrw = new Date(today);
+    tmrw.setDate(today.getDate() + 1);
+    var tmrwMonth = MONTHS[tmrw.getMonth()];
+    if (freeMonths(row).indexOf(tmrwMonth) === -1) return false;
+    if (row._pools) {
+      var ss = getSeasonStart(row._pools);
+      var se = getSeasonEnd(row._pools);
+      var tDate = new Date(tmrw.getFullYear(), tmrw.getMonth(), tmrw.getDate());
+      if (ss && tDate < ss) return false;
+      if (se && tDate > se) return false;
+    }
+    var tDow = tmrw.getDay();
+    var tmrwIsWeekend = tDow === 0 || tDow === 5 || tDow === 6;
+    var sched = row.dataset.schedule || 'daily';
+    if (sched === 'weekends') return tmrwIsWeekend;
+    if (sched === 'weekends_and_breaks') return tmrwIsWeekend || isSchoolBreak(tmrw);
+    return true;
+  }
+
   function freeInMonth(row, m) {
     return row.dataset.closed !== 'true' && freeMonths(row).indexOf(m) !== -1;
   }
@@ -449,10 +471,11 @@ templ filterScript() {
   function matchesTimeFilter(row) {
     var closed = row.dataset.closed === 'true';
     switch (activeFilter) {
-      case 'now':     return closed || freeNow(row);
-      case 'weekend': return closed || freeThisWeekend(row);
-      case 'summer':  return closed || isSummer(row);
-      default:        return true; // all
+      case 'now':      return closed || freeNow(row);
+      case 'tomorrow': return closed || freeTomorrow(row);
+      case 'weekend':  return closed || freeThisWeekend(row);
+      case 'summer':   return closed || isSummer(row);
+      default:         return true; // all
     }
   }
 
@@ -559,6 +582,9 @@ templ filterScript() {
     if (activeFilter === 'now') {
       label += ' free today';
       if (visible === 0) label = 'No venues free right now. Try "All" or another category.';
+    } else if (activeFilter === 'tomorrow') {
+      label += ' free tomorrow';
+      if (visible === 0) label = 'Nothing free tomorrow. Try "All".';
     } else if (activeFilter === 'weekend') {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
@@ -688,8 +714,18 @@ templ filterScript() {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    var poolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && freeNow(r); });
-    if (poolsNow.length > 0) {
+    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && freeNow(r); });
+    if (indoorPoolsNow.length > 0) {
+      nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
+        setCategory('indoor-pools');
+        setTimeFilter('now');
+        applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
+    }
+
+    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && freeNow(r); });
+    if (outdoorPoolsNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
         setCategory('outdoor-pools');
         setTimeFilter('now');
@@ -714,10 +750,23 @@ templ filterScript() {
       soonRows.forEach(function (row) { soonChips.appendChild(makeChip(row, true)); });
     }
 
-    var poolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    var indoorPoolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
     });
-    if (poolsSoon.length > 0) {
+    if (indoorPoolsSoon.length > 0) {
+      if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
+      soonChips.appendChild(makeGroupChip('Indoor Pools', true, function () {
+        setCategory('indoor-pools');
+        setTimeFilter('now');
+        applyFilter();
+        document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
+      }));
+    }
+
+    var outdoorPoolsSoon = rows.filter(function (r) {
+      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+    });
+    if (outdoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
       soonChips.appendChild(makeGroupChip('Outdoor Pools', true, function () {
         setCategory('outdoor-pools');
