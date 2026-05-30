@@ -614,6 +614,28 @@
 				.fav-btn:hover { color: rgba(255,255,255,0.85); }
 				.fav-btn.fav-active { color: var(--gold); }
 
+				/* ---- FAVORITES SECTION HEADER ---- */
+
+				.fav-section-header {
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					padding: 0.25rem 0;
+					color: var(--gold);
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.15em;
+					text-transform: uppercase;
+					list-style: none;
+				}
+				.fav-section-header::before,
+				.fav-section-header::after {
+					content: '';
+					flex: 1;
+					height: 1px;
+					background: rgba(217,119,6,0.25);
+				}
+
 				/* ---- FAVORITE FLASH ---- */
 
 				@keyframes favFlash {
@@ -1272,6 +1294,8 @@
 					& .category-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .category-tab:hover { background: #1d2f55; color: #93b4e0; }
 					& .category-tab.active { background: var(--sky-blue); border-color: var(--sky-blue); color: white; box-shadow: 0 4px 16px rgba(26,86,219,0.4); }
+					& .fav-section-header { color: var(--gold); }
+					& .fav-section-header::before, & .fav-section-header::after { background: rgba(217,119,6,0.15); }
 					& .fav-btn { color: rgba(255,255,255,0.2); }
 					& .fav-btn:hover { color: rgba(255,255,255,0.7); }
 					& .fav-btn.fav-active { color: var(--gold); }
@@ -1479,6 +1503,7 @@
   var modalMap = null;
   var userMarker = null;
   var locationBtn = null;
+  var favHeader = null;
 
   // === STAR ICONS ===
   var STAR_OUTLINE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
@@ -1788,6 +1813,8 @@
         }
       });
     }
+
+    updateFavSection();
   }
 
   function applyFilter() {
@@ -1807,6 +1834,24 @@
   function setTimeFilter(filter) {
     activeFilter = filter;
     timeFilterTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
+  }
+
+  // === FAVORITES SECTION HEADER ===
+  function updateFavSection() {
+    var list = document.getElementById('venue-list');
+    if (!list) return;
+    if (!favHeader) {
+      favHeader = document.createElement('li');
+      favHeader.className = 'fav-section-header';
+      favHeader.setAttribute('aria-hidden', 'true');
+      favHeader.innerHTML = '<span>Favorites</span>';
+      favHeader.style.order = '-2';
+      list.appendChild(favHeader);
+    }
+    var anyFavVisible = rows.some(function (r) {
+      return r.dataset.favorite === 'true' && !r.classList.contains('hidden');
+    });
+    favHeader.style.display = anyFavVisible ? '' : 'none';
   }
 
   // === TOAST ===
@@ -1845,12 +1890,13 @@
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
         showToast(nowFav ? 'Added to favorites' : 'Removed from favorites');
+        updateFavSection();
         if (nowFav) {
           row.classList.add('fav-flash');
           row.addEventListener('animationend', function () { row.classList.remove('fav-flash'); }, { once: true });
           setTimeout(function () {
-            var list = document.getElementById('venue-list');
-            if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var target = favHeader || document.getElementById('venue-list');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 250);
         }
       });
@@ -2684,6 +2730,7 @@
   setTimeFilter('now');
   applyFilter();
   initFavoriteButtons();
+  updateFavSection();
   buildHero();
   initMap();
   updateHiddenFooter();

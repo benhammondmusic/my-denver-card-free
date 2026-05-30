@@ -746,6 +746,7 @@ func filterScript() templ.Component {
   var modalMap = null;
   var userMarker = null;
   var locationBtn = null;
+  var favHeader = null;
 
   // === STAR ICONS ===
   var STAR_OUTLINE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
@@ -1055,6 +1056,8 @@ func filterScript() templ.Component {
         }
       });
     }
+
+    updateFavSection();
   }
 
   function applyFilter() {
@@ -1074,6 +1077,24 @@ func filterScript() templ.Component {
   function setTimeFilter(filter) {
     activeFilter = filter;
     timeFilterTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.filter === filter); });
+  }
+
+  // === FAVORITES SECTION HEADER ===
+  function updateFavSection() {
+    var list = document.getElementById('venue-list');
+    if (!list) return;
+    if (!favHeader) {
+      favHeader = document.createElement('li');
+      favHeader.className = 'fav-section-header';
+      favHeader.setAttribute('aria-hidden', 'true');
+      favHeader.innerHTML = '<span>Favorites</span>';
+      favHeader.style.order = '-2';
+      list.appendChild(favHeader);
+    }
+    var anyFavVisible = rows.some(function (r) {
+      return r.dataset.favorite === 'true' && !r.classList.contains('hidden');
+    });
+    favHeader.style.display = anyFavVisible ? '' : 'none';
   }
 
   // === TOAST ===
@@ -1112,12 +1133,13 @@ func filterScript() templ.Component {
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
         showToast(nowFav ? 'Added to favorites' : 'Removed from favorites');
+        updateFavSection();
         if (nowFav) {
           row.classList.add('fav-flash');
           row.addEventListener('animationend', function () { row.classList.remove('fav-flash'); }, { once: true });
           setTimeout(function () {
-            var list = document.getElementById('venue-list');
-            if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var target = favHeader || document.getElementById('venue-list');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 250);
         }
       });
@@ -1951,6 +1973,7 @@ func filterScript() templ.Component {
   setTimeFilter('now');
   applyFilter();
   initFavoriteButtons();
+  updateFavSection();
   buildHero();
   initMap();
   updateHiddenFooter();
