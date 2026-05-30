@@ -37,6 +37,16 @@ func activitiesJSON(v models.Venue) string {
 	return string(b)
 }
 
+func poolTypeSuffix(v models.Venue) string {
+	if v.Category != "pool" {
+		return ""
+	}
+	if v.Indoor {
+		return " (Indoor)"
+	}
+	return " (Outdoor)"
+}
+
 templ Index(venues []models.Venue) {
 	@Layout("MyDenverCard Free") {
 		<div class="hero-section">
@@ -196,7 +206,7 @@ templ VenueRow(v models.Venue) {
 			}
 		</div>
 		<div class="venue-body">
-			<p class="venue-name">{ v.Name }</p>
+			<p class="venue-name">{ v.Name }{ poolTypeSuffix(v) }</p>
 			if v.TemporarilyClosed && v.ClosureReason != "" {
 				<p class="closure-reason">{ v.ClosureReason }</p>
 			}
