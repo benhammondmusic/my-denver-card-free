@@ -662,31 +662,12 @@ templ Layout(title string) {
 				.venue-amenities {
 					display: flex;
 					flex-wrap: wrap;
-					gap: 0.25rem;
-					justify-content: flex-end;
-					margin-top: 0.2rem;
+					gap: 0.3rem;
+					margin-top: 0.35rem;
 				}
 
-				.amenity-chip {
-					font-size: 0.68rem;
-					font-weight: 600;
-					padding: 0.15rem 0.5rem;
-					border-radius: 1rem;
-					background: #eff6ff;
-					color: #1d4ed8;
-					border: 1px solid #bfdbfe;
-					letter-spacing: 0.02em;
-					white-space: nowrap;
-				}
+				.amenity-chip { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
-				.venue-type-chip {
-					font-size: 0.68rem;
-					font-weight: 600;
-					padding: 0.15rem 0.5rem;
-					border-radius: 1rem;
-					letter-spacing: 0.02em;
-					white-space: nowrap;
-				}
 				.venue-type-chip.indoor  { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
 				.venue-type-chip.outdoor { background: #f0fdf4; color: #15803d; border: 1px solid #86efac; }
 
@@ -1243,7 +1224,7 @@ templ Layout(title string) {
 					& .weather-chip { background: #0d1a2e; border-color: var(--border); color: #7a8fa8; }
 					& .leaflet-location-btn { background: #1d2f55; color: #93b4e0; border-color: #1e3058; }
 					& .leaflet-location-btn:hover { background: #243a6a; color: #e0e8f5; }
-					& .amenity-chip { background: #1e3a5f; color: #93c5fd; border-color: #1e40af; }
+					& .amenity-chip         { background: #1e3a5f; color: #93c5fd; border-color: #1e40af; }
 					& .venue-type-chip.indoor  { background: #0c2a3f; color: #7dd3fc; border-color: #0369a1; }
 					& .venue-type-chip.outdoor { background: #052e16; color: #86efac; border-color: #15803d; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }

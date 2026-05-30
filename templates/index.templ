@@ -202,6 +202,16 @@ templ VenueRow(v models.Venue) {
 			if v.TemporarilyClosed && v.ClosureReason != "" {
 				<p class="closure-reason">{ v.ClosureReason }</p>
 			}
+			if v.Playground || v.EVCharger {
+				<div class="venue-amenities">
+					if v.Playground {
+						<span class="badge amenity-chip">Playground</span>
+					}
+					if v.EVCharger {
+						<span class="badge amenity-chip">Free EV</span>
+					}
+				</div>
+			}
 		</div>
 		<div class="venue-status">
 			if v.TemporarilyClosed {
@@ -216,16 +226,6 @@ templ VenueRow(v models.Venue) {
 						<span class="badge badge-yellow">Kids free</span>
 				}
 				<span class="months">{ freeMonthsLabel(v) }</span>
-			}
-			if v.Playground || v.EVCharger {
-				<div class="venue-amenities">
-					if v.Playground {
-						<span class="amenity-chip">Playground</span>
-					}
-					if v.EVCharger {
-						<span class="amenity-chip">Free EV</span>
-					}
-				</div>
 			}
 		</div>
 	</li>
@@ -446,7 +446,7 @@ templ filterScript() {
       }
       statusEl.appendChild(chip);
       var typeChip = document.createElement('span');
-      typeChip.className = 'venue-type-chip ' + (row.dataset.indoor === 'true' ? 'indoor' : 'outdoor');
+      typeChip.className = 'badge venue-type-chip ' + (row.dataset.indoor === 'true' ? 'indoor' : 'outdoor');
       typeChip.textContent = row.dataset.indoor === 'true' ? 'Indoor' : 'Outdoor';
       statusEl.appendChild(typeChip);
     });
