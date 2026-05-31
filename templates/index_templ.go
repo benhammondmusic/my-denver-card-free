@@ -1973,7 +1973,7 @@ func filterScript() templ.Component {
         if (wind >= 20) parts.push(wind + ' mph winds');
 
         chip.textContent = parts.join(' · ');
-        chip.style.display = 'inline-flex';
+        chip.style.visibility = 'visible';
       })
       .catch(function () {});
   })();
