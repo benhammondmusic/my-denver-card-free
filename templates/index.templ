@@ -62,7 +62,13 @@ templ Index(venues []models.Venue) {
 			</div>
 		</div>
 		<div id="map-panel" class="map-panel"></div>
-		<p class="browse-label">Browse all venues</p>
+		<div class="browse-row">
+			<p class="browse-label">Browse all spots</p>
+			<button id="sort-nearby-btn" class="filter-tab sort-nearby-btn" aria-label="Sort by distance">
+				<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+				Near me
+			</button>
+		</div>
 		<div class="filter-bar">
 			<div class="category-tabs">
 				<button class="category-tab" data-category="attractions">Science &amp; Culture</button>
@@ -76,10 +82,6 @@ templ Index(venues []models.Venue) {
 				<button class="filter-tab" data-filter="tomorrow">Tomorrow</button>
 				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
-				<button id="sort-nearby-btn" class="filter-tab" aria-label="Sort by distance">
-					<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
-					Near me
-				</button>
 			</div>
 		</div>
 		<p class="venue-count"></p>
