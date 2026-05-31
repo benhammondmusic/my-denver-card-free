@@ -76,6 +76,10 @@ templ Index(venues []models.Venue) {
 				<button class="filter-tab" data-filter="tomorrow">Tomorrow</button>
 				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
+				<button id="sort-nearby-btn" class="filter-tab" aria-label="Sort by distance">
+					<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+					Near me
+				</button>
 			</div>
 		</div>
 		<p class="venue-count"></p>
@@ -309,12 +313,14 @@ templ filterScript() {
   // === STATE ===
   var activeCategory = 'attractions';
   var activeFilter = 'now';
+  var sortMode = 'alpha'; // 'alpha' | 'nearby'
   var userLat = null, userLng = null;
   var mapInitialized = false;
   var leafletMap = null;
   var modalMap = null;
   var userMarker = null;
   var locationBtn = null;
+  var nearbyBtn = null;
   var favHeader = null;
   var favFooter = null;
 
@@ -443,6 +449,39 @@ templ filterScript() {
       if (!latest || d > latest) latest = d;
     });
     return latest;
+  }
+
+  // === SORT ===
+  var GROUP_ORDER = { 'museum': 0, 'pool': 1, 'rec_center': 2 };
+
+  function clearDistanceBadges() {
+    rows.forEach(function (row) {
+      var b = row.querySelector('.distance-badge');
+      if (b) b.remove();
+      row._distance = undefined;
+    });
+  }
+
+  function sortAlpha() {
+    var list = document.getElementById('venue-list');
+    if (!list) return;
+    var open = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
+    var closed = rows.filter(function (r) { return r.dataset.closed === 'true'; });
+    if (activeCategory === 'all') {
+      open.sort(function (a, b) {
+        var ga = GROUP_ORDER[a.dataset.category] !== undefined ? GROUP_ORDER[a.dataset.category] : 3;
+        var gb = GROUP_ORDER[b.dataset.category] !== undefined ? GROUP_ORDER[b.dataset.category] : 3;
+        if (ga !== gb) return ga - gb;
+        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+      });
+    } else {
+      open.sort(function (a, b) {
+        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+      });
+    }
+    open.forEach(function (r) { list.appendChild(r); });
+    closed.forEach(function (r) { list.appendChild(r); });
+    clearDistanceBadges();
   }
 
   // === POOL ROW INIT ===
@@ -621,6 +660,7 @@ templ filterScript() {
   function setCategory(cat) {
     activeCategory = cat;
     categoryTabEls.forEach(function (t) { t.classList.toggle('active', t.dataset.category === cat); });
+    if (sortMode === 'nearby') sortByDistance(); else sortAlpha();
   }
 
   function setTimeFilter(filter) {
@@ -1237,22 +1277,30 @@ templ filterScript() {
   function requestLocation() {
     if (!navigator.geolocation) return;
     if (locationBtn) { locationBtn.classList.add('locating'); locationBtn.disabled = true; }
+    if (nearbyBtn) { nearbyBtn.disabled = true; nearbyBtn.style.opacity = '0.5'; }
 
     navigator.geolocation.getCurrentPosition(
       function (pos) {
         userLat = pos.coords.latitude;
         userLng = pos.coords.longitude;
+        sortMode = 'nearby';
         if (locationBtn) {
           locationBtn.classList.remove('locating');
           locationBtn.classList.add('active');
           locationBtn.disabled = false;
           locationBtn.title = 'Re-center on my location';
         }
+        if (nearbyBtn) {
+          nearbyBtn.disabled = false;
+          nearbyBtn.style.opacity = '';
+          nearbyBtn.classList.add('active');
+        }
         sortByDistance();
         addUserMarker();
       },
       function () {
         if (locationBtn) { locationBtn.classList.remove('locating'); locationBtn.disabled = false; }
+        if (nearbyBtn) { nearbyBtn.disabled = false; nearbyBtn.style.opacity = ''; }
       }
     );
   }
@@ -1504,6 +1552,19 @@ templ filterScript() {
   })();
 
   // === INIT ===
+  nearbyBtn = document.getElementById('sort-nearby-btn');
+  if (nearbyBtn) {
+    nearbyBtn.addEventListener('click', function () {
+      if (sortMode === 'nearby') {
+        sortMode = 'alpha';
+        nearbyBtn.classList.remove('active');
+        sortAlpha();
+      } else {
+        requestLocation();
+      }
+    });
+  }
+
   initPoolRows();
   setCategory('attractions');
   setTimeFilter('now');
