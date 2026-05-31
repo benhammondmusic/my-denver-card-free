@@ -758,7 +758,7 @@ func filterScript() templ.Component {
   // === DOM REFS ===
   var rows = Array.prototype.slice.call(document.querySelectorAll('.venue-row'));
   var categoryTabEls = document.querySelectorAll('.category-tab');
-  var timeFilterTabEls = document.querySelectorAll('.filter-tab');
+  var timeFilterTabEls = document.querySelectorAll('.filter-tab:not(#sort-nearby-btn)');
   var countEl = document.querySelector('.venue-count');
   var modalOverlay = document.getElementById('modal-overlay');
   var modalBand = document.getElementById('modal-band');
