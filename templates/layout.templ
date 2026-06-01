@@ -5,7 +5,7 @@ templ Layout(title string) {
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 			<title>MyDenverCard Free</title>
 			<meta name="description" content="Where Denver kids get in free with a myDenverCard. See which museums, zoo, botanic gardens, and pools are free today."/>
 			<link rel="canonical" href="https://benhammondmusic.github.io/my-denver-card-free/"/>
@@ -80,6 +80,7 @@ templ Layout(title string) {
 					overflow: hidden;
 					min-height: 180px;
 					position: relative;
+					padding-top: env(safe-area-inset-top);
 				}
 
 				.header-inner {
@@ -850,7 +851,7 @@ templ Layout(title string) {
 				footer {
 					background: #dde5f5;
 					text-align: center;
-					padding: 1.25rem 1rem 1.75rem;
+					padding: 1.25rem 1rem calc(1.75rem + env(safe-area-inset-bottom));
 					font-size: 0.8125rem;
 					color: #6b7280;
 					line-height: 2;

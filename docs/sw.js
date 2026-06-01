@@ -1,6 +1,7 @@
-const CACHE = 'mdc-v2';
+const CACHE = 'mdc-v3';
 const ASSETS = [
   './',
+  './index.html',
   './bear.png',
   './bear.webp',
   './manifest.json',
@@ -25,11 +26,18 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-// Network-first for navigation (keeps content fresh), cache fallback for offline
+// Network-first for navigation so content stays fresh; cache fallback for offline.
+// Cache-first for static assets (images, icons).
 self.addEventListener('fetch', e => {
   if (e.request.mode === 'navigate') {
     e.respondWith(
-      fetch(e.request).catch(() => caches.match('./'))
+      fetch(e.request)
+        .then(res => {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+          return res;
+        })
+        .catch(() => caches.match('./index.html').then(r => r || caches.match('./')))
     );
   } else {
     e.respondWith(
