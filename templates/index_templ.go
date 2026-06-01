@@ -1204,13 +1204,11 @@ func filterScript() templ.Component {
     var soonLabel = document.querySelector('.hero-eyebrow.soon');
     if (!nowChips || !soonChips) return;
 
-    if (soonLabel) soonLabel.textContent = 'Coming up in ' + nextMonthName;
-
     var nowRows = rows.filter(function (row) {
       return freeNow(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && freeInMonth(row, nextMonthName) && row.dataset.closed !== 'true'
+      return !freeNow(row) && (freeInMonth(row, currentMonthName) || freeInMonth(row, nextMonthName)) && row.dataset.closed !== 'true'
         && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
 
@@ -1279,7 +1277,7 @@ func filterScript() templ.Component {
     }
 
     var indoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (indoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
@@ -1292,7 +1290,7 @@ func filterScript() templ.Component {
     }
 
     var outdoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && freeInMonth(r, nextMonthName) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (outdoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
@@ -1302,6 +1300,14 @@ func filterScript() templ.Component {
         applyFilter();
         document.getElementById('venue-list').scrollIntoView({ behavior: 'smooth' });
       }));
+    }
+
+    // Set "coming up" label based on whether anything opens this month or only next month
+    if (soonLabel) {
+      var anyThisMonth = soonRows.some(function (r) { return freeInMonth(r, currentMonthName); })
+        || indoorPoolsSoon.some(function (r) { return freeInMonth(r, currentMonthName); })
+        || outdoorPoolsSoon.some(function (r) { return freeInMonth(r, currentMonthName); });
+      soonLabel.textContent = anyThisMonth ? 'Opening soon this month' : 'Coming up in ' + nextMonthName;
     }
   }
 
