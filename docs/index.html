@@ -1845,10 +1845,20 @@
     });
 
     var isPoolCat = activeCategory === 'pools';
-    var label = visible + (visible === 1 ? ' venue' : ' venues');
+    var noun, nounPl;
+    if (activeCategory === 'pools') {
+      noun = 'pool'; nounPl = 'pools';
+    } else if (activeCategory === 'rec-centers') {
+      noun = 'rec center'; nounPl = 'rec centers';
+    } else if (activeCategory === 'attractions') {
+      noun = 'science and culture spot'; nounPl = 'science and culture spots';
+    } else {
+      noun = 'spot'; nounPl = 'spots';
+    }
+    var label = visible + ' ' + (visible === 1 ? noun : nounPl);
     if (activeFilter === 'now') {
       label += ' free today';
-      if (visible === 0) label = 'No venues free right now. Try "All" or another category.';
+      if (visible === 0) label = 'No ' + nounPl + ' free right now. Try "All" or another filter.';
     } else if (activeFilter === 'tomorrow') {
       label += ' free tomorrow';
       if (visible === 0) label = 'Nothing free tomorrow. Try "All".';
@@ -1871,6 +1881,8 @@
         ? (visible === 1 ? 'pool' : 'pools')
         : activeCategory === 'rec-centers'
         ? (visible === 1 ? 'rec center' : 'rec centers')
+        : activeCategory === 'attractions'
+        ? (visible === 1 ? 'science and culture spot' : 'science and culture spots')
         : (visible === 1 ? 'spot' : 'spots');
       label = visible + ' ' + catWord + ' near you';
     }
