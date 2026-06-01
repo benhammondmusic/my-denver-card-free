@@ -1058,6 +1058,9 @@ func filterScript() templ.Component {
     } else if (activeFilter === 'weekend') {
       label += ' free this weekend';
       if (visible === 0) label = 'Nothing free this weekend. Try "All".';
+    } else if (activeFilter === 'summer') {
+      label += ' free this summer';
+      if (visible === 0) label = 'No ' + nounPl + ' free this summer. Try "All".';
     }
     if (isPoolCat) {
       var openCount = rows.filter(function (r) {
