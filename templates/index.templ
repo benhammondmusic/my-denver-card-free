@@ -634,6 +634,14 @@ templ filterScript() {
         label = visible + (visible === 1 ? ' pool' : ' pools') + ' listed';
       }
     }
+    if (sortMode === 'nearby') {
+      var catWord = activeCategory === 'pools'
+        ? (visible === 1 ? 'pool' : 'pools')
+        : activeCategory === 'rec-centers'
+        ? (visible === 1 ? 'rec center' : 'rec centers')
+        : (visible === 1 ? 'spot' : 'spots');
+      label = visible + ' ' + catWord + ' near you';
+    }
     if (countEl) countEl.textContent = label;
 
     if (leafletMap) {
@@ -984,31 +992,54 @@ templ filterScript() {
   }
 
   var POOLS_PAGE_BASE = 'https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Recreation-Centers-Pools/Swimming-Pools';
+  var DAY_ABBRS = ['sun','mon','tue','wed','thu','fri','sat'];
+  var DAY_FULL = {sun:'Sunday',mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday'};
 
   function buildPoolScheduleHTML(pools, isIndoor) {
     var scheduleURL = POOLS_PAGE_BASE + (isIndoor ? '#section-2' : '#section-3');
+    var todayIdx = today.getDay();
+
+    // Which days should get the filter highlight (blue)
+    var filterDows = {};
+    if (activeFilter === 'tomorrow') {
+      filterDows[DAY_ABBRS[(todayIdx + 1) % 7]] = true;
+    } else if (activeFilter === 'weekend') {
+      filterDows['fri'] = true; filterDows['sat'] = true; filterDows['sun'] = true;
+    }
+
     var html = '';
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
-      var sessions = (pool.sessions || []).filter(isFamilySession);
+      var familySessions = (pool.sessions || []).filter(isFamilySession);
       html += '<div class="pool-schedule">';
       if ((pool.sessions || []).length === 0) {
-        html += '<p class="pool-closed-today">Schedule not available - call the pool desk to confirm times.</p>';
+        html += '<p class="pool-closed-today">Schedule not available. Confirm times directly with the pool.</p>';
       } else {
-        var todaySessions = sessions.filter(function (s) { return s.days.indexOf(todayDow) !== -1; });
-        html += '<p class="pool-schedule-title">' + pool.name + ' - Today</p>';
-        if (todaySessions.length === 0) {
-          html += '<p class="pool-closed-today">No sessions today</p>';
-        } else {
-          for (var j = 0; j < todaySessions.length; j++) {
-            var s = todaySessions[j];
-            var o = parseTime(s.open), c = parseTime(s.close);
-            var isNow = nowMinutes >= o && nowMinutes < c;
-            html += '<div class="pool-session' + (isNow ? ' pool-session-now' : '') + '">';
-            html += '<span class="pool-session-time">' + fmtTime(s.open) + ' - ' + fmtTime(s.close) + '</span>';
-            if (isNow) html += '<span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
-            html += '</div>';
+        html += '<p class="pool-schedule-title">' + pool.name + '</p>';
+        for (var d = 0; d < 7; d++) {
+          var dayIdx = (todayIdx + d) % 7;
+          var dayAbbr = DAY_ABBRS[dayIdx];
+          var dayLabel = d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : DAY_FULL[dayAbbr];
+          var daySessions = familySessions.filter(function (s) { return s.days.indexOf(dayAbbr) !== -1; });
+          var isToday = d === 0;
+          var rowCls = 'pool-session' + (isToday ? ' pool-session-now' : (filterDows[dayAbbr] ? ' pool-session-hl' : ''));
+          html += '<div class="' + rowCls + '">';
+          html += '<span class="pool-session-day">' + dayLabel + '</span>';
+          if (daySessions.length === 0) {
+            html += '<span class="pool-session-closed">No family swim</span>';
+          } else {
+            var timeParts = [];
+            for (var j = 0; j < daySessions.length; j++) {
+              var s = daySessions[j];
+              var o = parseTime(s.open), c = parseTime(s.close);
+              var isNow = isToday && nowMinutes >= o && nowMinutes < c;
+              var t = fmtTime(s.open) + '–' + fmtTime(s.close);
+              if (isNow) t += ' <span class="badge pool-status-open" style="font-size:0.65rem">now</span>';
+              timeParts.push(t);
+            }
+            html += '<span class="pool-session-time">' + timeParts.join(', ') + '</span>';
           }
+          html += '</div>';
         }
         if (pool.season_start && pool.season_end) {
           html += '<p class="pool-season-note">Season: ' + pool.season_start + ' to ' + pool.season_end + '</p>';
