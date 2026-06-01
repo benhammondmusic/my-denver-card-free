@@ -78,7 +78,7 @@ templ Index(venues []models.Venue) {
 			</div>
 			<div class="filter-tabs">
 				<button class="filter-tab" data-filter="all">All</button>
-				<button class="filter-tab" data-filter="now">Now</button>
+				<button class="filter-tab" data-filter="now">Today</button>
 				<button class="filter-tab" data-filter="tomorrow">Tomorrow</button>
 				<button class="filter-tab" data-filter="weekend">This Weekend</button>
 				<button class="filter-tab" data-filter="summer">Summer</button>
@@ -626,7 +626,7 @@ templ filterScript() {
     var label = visible + ' ' + (visible === 1 ? noun : nounPl);
     if (activeFilter === 'now') {
       label += ' free today';
-      if (visible === 0) label = 'No ' + nounPl + ' free right now. Try "All" or another filter.';
+      if (visible === 0) label = 'No ' + nounPl + ' free today. Try "All" or another filter.';
     } else if (activeFilter === 'tomorrow') {
       label += ' free tomorrow';
       if (visible === 0) label = 'Nothing free tomorrow. Try "All".';
