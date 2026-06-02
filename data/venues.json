@@ -36,7 +36,7 @@
     "max_age": 18
   },
   {
-    "name": "Denver Museum of Nature \u0026 Science",
+    "name": "Denver Museum of Nature & Science",
     "url": "https://www.dmns.org/visit/pricing-and-discounts/",
     "program": "mydenvercard",
     "featured": true,
@@ -158,7 +158,7 @@
     "lat": 39.7306,
     "lng": -104.9878,
     "address": "100 W 14th Ave Pkwy, Denver, CO 80204",
-    "hours": "10am-5pm Tue-Thu \u0026 Sat-Sun, 10am-9pm Fri",
+    "hours": "10am-5pm Tue-Thu & Sat-Sun, 10am-9pm Fri",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -232,7 +232,7 @@
     "lat": 39.7586,
     "lng": -105.0019,
     "address": "1485 Delgany St, Denver, CO 80202",
-    "hours": "11am-5pm Tue-Thu \u0026 Sun, 11am-9pm Fri-Sat",
+    "hours": "11am-5pm Tue-Thu & Sun, 11am-9pm Fri-Sat",
     "indoor": true,
     "reservation_required": false,
     "min_age": 0,
@@ -329,7 +329,7 @@
     "scrape_error": "",
     "lat": 39.7494,
     "lng": -104.9982,
-    "address": "Arapahoe St \u0026 15th St, Denver, CO 80202",
+    "address": "Arapahoe St & 15th St, Denver, CO 80202",
     "hours": "",
     "indoor": false,
     "reservation_required": false,
@@ -1343,34 +1343,6 @@
             ],
             "open": "12:00",
             "close": "19:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "10:00",
-            "close": "20:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "10:00",
-            "close": "19:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "09:00",
-            "close": "15:30"
           }
         ]
       }

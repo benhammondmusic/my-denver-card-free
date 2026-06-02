@@ -1456,7 +1456,9 @@ func filterScript() templ.Component {
     var html = '';
     for (var i = 0; i < pools.length; i++) {
       var pool = pools[i];
-      var familySessions = (pool.sessions || []).filter(isFamilySession);
+      var familySessions = (pool.sessions || []).filter(isFamilySession).sort(function (a, b) {
+        return parseTime(a.open) - parseTime(b.open);
+      });
       html += '<div class="pool-schedule">';
       if ((pool.sessions || []).length === 0) {
         html += '<p class="pool-closed-today">Schedule not available. Confirm times directly with the pool.</p>';
