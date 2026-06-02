@@ -597,8 +597,7 @@
 				/* ---- FAVORITED CARDS ---- */
 
 				.venue-row.venue-favorited {
-					border-top: 3px solid var(--gold);
-					box-shadow: 0 3px 22px rgba(217,119,6,0.22), 0 1px 4px rgba(217,119,6,0.1);
+					box-shadow: inset 0 3px 0 var(--gold), 0 3px 22px rgba(217,119,6,0.22), 0 1px 4px rgba(217,119,6,0.1);
 				}
 
 				/* ---- VENUE BAND (left colored column) ---- */
@@ -721,14 +720,15 @@
 					background: rgba(0,40,104,0.15);
 				}
 
-				/* ---- FAVORITE FLASH ---- */
+				/* ---- STAR POP ---- */
 
-				@keyframes favFlash {
-					0%   { outline: 3px solid transparent; outline-offset: 0; }
-					25%  { outline: 3px solid var(--gold); outline-offset: 3px; box-shadow: 0 0 16px rgba(217,119,6,0.45); }
-					100% { outline: 3px solid transparent; outline-offset: 0; }
+				@keyframes starPop {
+					0%   { transform: scale(1); }
+					40%  { transform: scale(1.6); }
+					70%  { transform: scale(0.88); }
+					100% { transform: scale(1); }
 				}
-				.fav-flash { animation: favFlash 0.55s ease-out; }
+				.fav-btn.star-pop { animation: starPop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
 				/* ---- TOAST ---- */
 
@@ -1355,7 +1355,7 @@
 					& .hero-section { background: #162040; border-color: var(--border); }
 					& .venue-row { background: #162040; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
 					& .venue-row.venue-closed { background: #0d1520; border-color: var(--border); }
-					& .venue-row.venue-favorited { box-shadow: 0 3px 22px rgba(217,119,6,0.35), 0 1px 4px rgba(217,119,6,0.15); }
+					& .venue-row.venue-favorited { box-shadow: inset 0 3px 0 var(--gold), 0 3px 22px rgba(217,119,6,0.35), 0 1px 4px rgba(217,119,6,0.15); }
 					& .filter-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .filter-tab:hover { background: #1d2f55; color: #93b4e0; border-color: var(--sky-blue); }
 					& .filter-tab.active { background: var(--bear-blue); border-color: var(--bear-blue); color: white; box-shadow: 0 2px 8px rgba(0,40,104,0.5); }
@@ -2091,20 +2091,26 @@
         e.stopPropagation();
         var nowFav = toggleFavorite(name);
         row.dataset.favorite = nowFav ? 'true' : 'false';
-        row.style.order = nowFav ? '-1' : '0';
         row.classList.toggle('venue-favorited', nowFav);
         btn.classList.toggle('fav-active', nowFav);
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');
         showToast(nowFav ? 'Added to favorites' : 'Removed from favorites');
-        updateFavSection();
         if (nowFav) {
-          row.classList.add('fav-flash');
-          row.addEventListener('animationend', function () { row.classList.remove('fav-flash'); }, { once: true });
+          btn.classList.add('star-pop');
+          btn.addEventListener('animationend', function () { btn.classList.remove('star-pop'); }, { once: true });
+          // Gold treatment fades in first, then card moves to favorites section
           setTimeout(function () {
-            var target = favHeader || document.getElementById('venue-list');
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 250);
+            row.style.order = '-1';
+            updateFavSection();
+            setTimeout(function () {
+              var target = favHeader || document.getElementById('venue-list');
+              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+          }, 150);
+        } else {
+          row.style.order = '0';
+          updateFavSection();
         }
       });
 
