@@ -1204,7 +1204,7 @@ func filterScript() templ.Component {
       return r.dataset.favorite === 'true' && !r.classList.contains('hidden');
     });
     favHeader.style.display = anyFavVisible ? '' : 'none';
-    favFooter.style.display = anyFavVisible ? '' : 'none';
+    favFooter.style.display = (anyFavVisible && activeCategory !== 'all') ? '' : 'none';
   }
 
   // === TOAST ===
