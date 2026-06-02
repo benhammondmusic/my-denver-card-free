@@ -88,7 +88,7 @@ func Index(venues []models.Venue) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\">Free today</p><p class=\"hero-card-note\">with a <button id=\"hero-card-link\" class=\"hero-card-link-btn\">myDenverCard</button></p></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><div id=\"map-panel\" class=\"map-panel\"></div><div class=\"browse-row\"><p class=\"browse-label\">Browse all spots</p><button id=\"sort-nearby-btn\" class=\"filter-tab sort-nearby-btn\" aria-label=\"Sort by distance\"><svg width=\"11\" height=\"11\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"3\"></circle><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"6\"></line><line x1=\"12\" y1=\"18\" x2=\"12\" y2=\"22\"></line><line x1=\"2\" y1=\"12\" x2=\"6\" y2=\"12\"></line><line x1=\"18\" y1=\"12\" x2=\"22\" y2=\"12\"></line></svg> <span id=\"nearby-btn-label\">Near me</span></button></div><div class=\"filter-bar\"><div class=\"category-tabs\"><button class=\"category-tab\" data-category=\"all\">Everything</button> <button class=\"category-tab\" data-category=\"attractions\">Science &amp; Culture</button> <button class=\"category-tab\" data-category=\"pools\">Pools</button> <button class=\"category-tab\" data-category=\"rec-centers\">Rec Centers</button></div><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Today</button> <button class=\"filter-tab\" data-filter=\"tomorrow\">Tomorrow</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button></div></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"hero-section\"><div class=\"hero-header\"><p class=\"hero-eyebrow\" id=\"hero-now-label\">Free today</p><p class=\"hero-card-note\">with a <button id=\"hero-card-link\" class=\"hero-card-link-btn\">myDenverCard</button></p></div><div id=\"free-now-chips\" class=\"venue-chips\"></div><div id=\"hero-soon\"><div class=\"hero-divider\"></div><p class=\"hero-eyebrow soon\">Free next month</p><div id=\"free-soon-chips\" class=\"venue-chips\"></div></div></div><div id=\"map-panel\" class=\"map-panel\"></div><div class=\"browse-row\"><p class=\"browse-label\">Browse all spots</p><button id=\"sort-nearby-btn\" class=\"filter-tab sort-nearby-btn\" aria-label=\"Sort by distance\"><svg width=\"11\" height=\"11\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"3\"></circle><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"6\"></line><line x1=\"12\" y1=\"18\" x2=\"12\" y2=\"22\"></line><line x1=\"2\" y1=\"12\" x2=\"6\" y2=\"12\"></line><line x1=\"18\" y1=\"12\" x2=\"22\" y2=\"12\"></line></svg> <span id=\"nearby-btn-label\">Near me</span></button></div><div class=\"filter-bar\"><div class=\"category-tabs\"><button class=\"category-tab\" data-category=\"all\">Everything</button> <button class=\"category-tab\" data-category=\"attractions\">Science &amp; Culture</button> <button class=\"category-tab\" data-category=\"pools\">Pools</button> <button class=\"category-tab\" data-category=\"rec-centers\">Rec Centers</button></div><div class=\"filter-tabs\"><button class=\"filter-tab\" data-filter=\"all\">All</button> <button class=\"filter-tab\" data-filter=\"now\">Today</button> <button class=\"filter-tab\" data-filter=\"tomorrow\">Tomorrow</button> <button class=\"filter-tab\" data-filter=\"weekend\">This Weekend</button> <button class=\"filter-tab\" data-filter=\"summer\">Summer</button></div></div><p class=\"venue-count\"></p><ul class=\"venue-list\" id=\"venue-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -663,6 +663,7 @@ func filterScript() templ.Component {
   // === DATE / SCHEDULE CONSTANTS ===
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var today = new Date();
+  var isAfter6pm = today.getHours() >= 18;
   var currentMonthName = MONTHS[today.getMonth()];
   var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
@@ -832,6 +833,11 @@ func filterScript() templ.Component {
     if (sched === 'weekends') return tmrwIsWeekend;
     if (sched === 'weekends_and_breaks') return tmrwIsWeekend || isSchoolBreak(tmrw);
     return true;
+  }
+
+  // After 6pm the hero shows tomorrow's venues instead of today's
+  function heroFree(row) {
+    return isAfter6pm ? freeTomorrow(row) : freeNow(row);
   }
 
   function freeInMonth(row, m) {
@@ -1204,11 +1210,14 @@ func filterScript() templ.Component {
     var soonLabel = document.querySelector('.hero-eyebrow.soon');
     if (!nowChips || !soonChips) return;
 
+    var heroNowLabel = document.getElementById('hero-now-label');
+    if (heroNowLabel) heroNowLabel.textContent = isAfter6pm ? 'Free tomorrow' : 'Free today';
+
     var nowRows = rows.filter(function (row) {
-      return freeNow(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
+      return heroFree(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && (freeInMonth(row, currentMonthName) || freeInMonth(row, nextMonthName)) && row.dataset.closed !== 'true'
+      return !heroFree(row) && (freeInMonth(row, currentMonthName) || freeInMonth(row, nextMonthName)) && row.dataset.closed !== 'true'
         && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
 
@@ -1240,7 +1249,7 @@ func filterScript() templ.Component {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && freeNow(r); });
+    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && heroFree(r); });
     if (indoorPoolsNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
         setCategory('pools');
@@ -1250,7 +1259,7 @@ func filterScript() templ.Component {
       }));
     }
 
-    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && freeNow(r); });
+    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && heroFree(r); });
     if (outdoorPoolsNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
         setCategory('pools');
@@ -1260,7 +1269,7 @@ func filterScript() templ.Component {
       }));
     }
 
-    var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && freeNow(r); });
+    var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && heroFree(r); });
     if (recNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Rec Centers', false, function () {
         setCategory('rec-centers');
@@ -1277,7 +1286,7 @@ func filterScript() templ.Component {
     }
 
     var indoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !heroFree(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (indoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
@@ -1290,7 +1299,7 @@ func filterScript() templ.Component {
     }
 
     var outdoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !heroFree(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (outdoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';

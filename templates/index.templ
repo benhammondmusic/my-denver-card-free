@@ -51,7 +51,7 @@ templ Index(venues []models.Venue) {
 	@Layout("MyDenverCard Free") {
 		<div class="hero-section">
 			<div class="hero-header">
-				<p class="hero-eyebrow">Free today</p>
+				<p class="hero-eyebrow" id="hero-now-label">Free today</p>
 				<p class="hero-card-note">with a <button id="hero-card-link" class="hero-card-link-btn">myDenverCard</button></p>
 			</div>
 			<div id="free-now-chips" class="venue-chips"></div>
@@ -238,6 +238,7 @@ templ filterScript() {
   // === DATE / SCHEDULE CONSTANTS ===
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var today = new Date();
+  var isAfter6pm = today.getHours() >= 18;
   var currentMonthName = MONTHS[today.getMonth()];
   var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
@@ -407,6 +408,11 @@ templ filterScript() {
     if (sched === 'weekends') return tmrwIsWeekend;
     if (sched === 'weekends_and_breaks') return tmrwIsWeekend || isSchoolBreak(tmrw);
     return true;
+  }
+
+  // After 6pm the hero shows tomorrow's venues instead of today's
+  function heroFree(row) {
+    return isAfter6pm ? freeTomorrow(row) : freeNow(row);
   }
 
   function freeInMonth(row, m) {
@@ -779,11 +785,14 @@ templ filterScript() {
     var soonLabel = document.querySelector('.hero-eyebrow.soon');
     if (!nowChips || !soonChips) return;
 
+    var heroNowLabel = document.getElementById('hero-now-label');
+    if (heroNowLabel) heroNowLabel.textContent = isAfter6pm ? 'Free tomorrow' : 'Free today';
+
     var nowRows = rows.filter(function (row) {
-      return freeNow(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
+      return heroFree(row) && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
     var soonRows = rows.filter(function (row) {
-      return !freeNow(row) && (freeInMonth(row, currentMonthName) || freeInMonth(row, nextMonthName)) && row.dataset.closed !== 'true'
+      return !heroFree(row) && (freeInMonth(row, currentMonthName) || freeInMonth(row, nextMonthName)) && row.dataset.closed !== 'true'
         && row.dataset.category !== 'pool' && row.dataset.category !== 'rec_center';
     });
 
@@ -815,7 +824,7 @@ templ filterScript() {
       nowRows.forEach(function (row) { nowChips.appendChild(makeChip(row, false)); });
     }
 
-    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && freeNow(r); });
+    var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && heroFree(r); });
     if (indoorPoolsNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
         setCategory('pools');
@@ -825,7 +834,7 @@ templ filterScript() {
       }));
     }
 
-    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && freeNow(r); });
+    var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && heroFree(r); });
     if (outdoorPoolsNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
         setCategory('pools');
@@ -835,7 +844,7 @@ templ filterScript() {
       }));
     }
 
-    var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && freeNow(r); });
+    var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && heroFree(r); });
     if (recNow.length > 0) {
       nowChips.appendChild(makeGroupChip('Rec Centers', false, function () {
         setCategory('rec-centers');
@@ -852,7 +861,7 @@ templ filterScript() {
     }
 
     var indoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && !heroFree(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (indoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
@@ -865,7 +874,7 @@ templ filterScript() {
     }
 
     var outdoorPoolsSoon = rows.filter(function (r) {
-      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !freeNow(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
+      return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && !heroFree(r) && (freeInMonth(r, currentMonthName) || freeInMonth(r, nextMonthName)) && r.dataset.closed !== 'true';
     });
     if (outdoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
