@@ -494,9 +494,11 @@ templ Layout(title string) {
 					box-shadow: 0 4px 12px rgba(0,40,104,0.3);
 				}
 
-				.venue-chip.general {
-					background: var(--gold);
-					color: #1c1917;
+				.venue-chip.chip-pool {
+					background: #0284c7;
+				}
+				.venue-chip.chip-rec {
+					background: #0d9488;
 				}
 
 				.venue-chip.chip-soon {
@@ -648,6 +650,12 @@ templ Layout(title string) {
 					gap: 0.25rem;
 				}
 
+				.venue-row[data-category="pool"] .venue-band {
+					background: #0284c7;
+				}
+				.venue-row[data-category="rec_center"] .venue-band {
+					background: #0d9488;
+				}
 				.venue-row.venue-closed .venue-band {
 					background: var(--stone);
 				}
@@ -1093,6 +1101,10 @@ templ Layout(title string) {
 					font-weight: 700;
 				}
 				.venue-chip-group:hover { background: #eef2ff; }
+				.venue-chip-group.chip-pool { border-color: #0284c7; color: #0284c7; }
+				.venue-chip-group.chip-pool:hover { background: #e0f2fe; }
+				.venue-chip-group.chip-rec { border-color: #0d9488; color: #0d9488; }
+				.venue-chip-group.chip-rec:hover { background: #f0fdfa; }
 
 				/* ---- MAP POPUP ---- */
 
@@ -1411,6 +1423,10 @@ templ Layout(title string) {
 					& .venue-chip.chip-soon { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .venue-chip-group { background: #0d1a2e; border-color: var(--sky-blue); color: #93b4e0; }
 					& .venue-chip-group:hover { background: #1d2f55; }
+					& .venue-chip-group.chip-pool { border-color: #38bdf8; color: #38bdf8; }
+					& .venue-chip-group.chip-pool:hover { background: #0c2a3e; }
+					& .venue-chip-group.chip-rec { border-color: #2dd4bf; color: #2dd4bf; }
+					& .venue-chip-group.chip-rec:hover { background: #0c2e2b; }
 					& .modal-sheet { background: #162040; }
 					& .modal-title { color: #e0e8f5; }
 					& .modal-close { color: #7a8fa8; }

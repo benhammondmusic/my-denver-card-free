@@ -1283,7 +1283,6 @@ func filterScript() templ.Component {
     function makeChip(row, isSoon) {
       var btn = document.createElement('button');
       var cls = 'venue-chip';
-      if (row.dataset.program === 'general') cls += ' general';
       if (isSoon) cls += ' chip-soon';
       btn.className = cls;
       btn.textContent = row.dataset.name || '';
@@ -1291,9 +1290,10 @@ func filterScript() templ.Component {
       return btn;
     }
 
-    function makeGroupChip(label, isSoon, clickFn) {
+    function makeGroupChip(label, category, isSoon, clickFn) {
       var btn = document.createElement('button');
-      btn.className = 'venue-chip venue-chip-group' + (isSoon ? ' chip-soon' : '');
+      var catCls = category === 'pool' ? ' chip-pool' : category === 'rec_center' ? ' chip-rec' : '';
+      btn.className = 'venue-chip venue-chip-group' + catCls + (isSoon ? ' chip-soon' : '');
       btn.textContent = label;
       btn.addEventListener('click', clickFn);
       return btn;
@@ -1310,7 +1310,7 @@ func filterScript() templ.Component {
 
     var indoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor === 'true' && heroFree(r); });
     if (indoorPoolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Indoor Pools', false, function () {
+      nowChips.appendChild(makeGroupChip('Indoor Pools', 'pool', false, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
@@ -1320,7 +1320,7 @@ func filterScript() templ.Component {
 
     var outdoorPoolsNow = rows.filter(function (r) { return r.dataset.category === 'pool' && r.dataset.indoor !== 'true' && heroFree(r); });
     if (outdoorPoolsNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Outdoor Pools', false, function () {
+      nowChips.appendChild(makeGroupChip('Outdoor Pools', 'pool', false, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
@@ -1330,7 +1330,7 @@ func filterScript() templ.Component {
 
     var recNow = rows.filter(function (r) { return r.dataset.category === 'rec_center' && heroFree(r); });
     if (recNow.length > 0) {
-      nowChips.appendChild(makeGroupChip('Rec Centers', false, function () {
+      nowChips.appendChild(makeGroupChip('Rec Centers', 'rec_center', false, function () {
         setCategory('rec-centers');
         setTimeFilter('now');
         applyFilter();
@@ -1349,7 +1349,7 @@ func filterScript() templ.Component {
     });
     if (indoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Indoor Pools', true, function () {
+      soonChips.appendChild(makeGroupChip('Indoor Pools', 'pool', true, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
@@ -1362,7 +1362,7 @@ func filterScript() templ.Component {
     });
     if (outdoorPoolsSoon.length > 0) {
       if (!soonChips.children.length && heroSoon) heroSoon.style.display = '';
-      soonChips.appendChild(makeGroupChip('Outdoor Pools', true, function () {
+      soonChips.appendChild(makeGroupChip('Outdoor Pools', 'pool', true, function () {
         setCategory('pools');
         setTimeFilter('now');
         applyFilter();
