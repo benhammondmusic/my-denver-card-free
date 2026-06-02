@@ -2138,7 +2138,7 @@ func filterScript() templ.Component {
 
   initPoolRows();
   setCategory('attractions');
-  setTimeFilter('now');
+  setTimeFilter(isAfter6pm ? 'tomorrow' : 'now');
   applyFilter();
   initFavoriteButtons();
   updateFavSection();
