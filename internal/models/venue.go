@@ -30,6 +30,7 @@ type Pool struct {
 	Name           string        `json:"name"`
 	FamilyFriendly bool          `json:"family_friendly"`
 	Features       []string      `json:"features,omitempty"`
+	Notes          string        `json:"notes,omitempty"`
 	SeasonLabel    string        `json:"season_label,omitempty"`
 	SeasonStart    string        `json:"season_start,omitempty"` // "YYYY-MM-DD"
 	SeasonEnd      string        `json:"season_end,omitempty"`   // "YYYY-MM-DD"

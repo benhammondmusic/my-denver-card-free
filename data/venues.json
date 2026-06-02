@@ -1311,21 +1311,12 @@
           {
             "family_friendly": true,
             "days": [
-              "sat",
-              "sun"
-            ],
-            "open": "11:30",
-            "close": "15:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "mon",
               "tue",
               "wed",
               "thu"
             ],
-            "open": "12:00",
+            "open": "10:00",
             "close": "20:30"
           },
           {
@@ -1333,18 +1324,20 @@
             "days": [
               "fri"
             ],
-            "open": "11:00",
-            "close": "12:00"
+            "open": "10:00",
+            "close": "19:30"
           },
           {
             "family_friendly": true,
             "days": [
-              "fri"
+              "sat",
+              "sun"
             ],
-            "open": "12:00",
-            "close": "19:30"
+            "open": "09:00",
+            "close": "15:30"
           }
-        ]
+        ],
+        "notes": "Closes 4:15-4:30pm daily for cleaning. On 2nd and 4th Fridays, pool closes at 4:15pm."
       }
     ]
   },

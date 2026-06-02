@@ -1506,6 +1506,9 @@ func filterScript() templ.Component {
         if (pool.features && pool.features.length) {
           html += '<p class="pool-season-note">Features: ' + pool.features.join(', ') + '</p>';
         }
+        if (pool.notes) {
+          html += '<p class="pool-season-note" style="color:#92400e">' + pool.notes + '</p>';
+        }
       }
       html += '</div>';
     }
