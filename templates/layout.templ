@@ -641,10 +641,6 @@ templ Layout(title string) {
 					gap: 0.25rem;
 				}
 
-				.venue-row.program-general .venue-band {
-					background: var(--gold);
-				}
-
 				.venue-row.venue-closed .venue-band {
 					background: var(--stone);
 				}
@@ -658,10 +654,6 @@ templ Layout(title string) {
 					transform: rotate(180deg);
 					text-transform: uppercase;
 					user-select: none;
-				}
-
-				.venue-row.program-general .band-label {
-					color: rgba(255,255,255,0.8);
 				}
 
 				/* ---- VENUE BODY ---- */
@@ -695,9 +687,6 @@ templ Layout(title string) {
 				.fav-btn.fav-active { color: var(--gold); }
 
 				/* Star on gold band: use white so it's visible */
-				.venue-row.program-general .fav-btn { color: rgba(255,255,255,0.45); }
-				.venue-row.program-general .fav-btn:hover { color: rgba(255,255,255,0.9); }
-				.venue-row.program-general .fav-btn.fav-active { color: white; }
 
 				/* ---- FAVORITES SECTION HEADER ---- */
 
@@ -1404,7 +1393,6 @@ templ Layout(title string) {
 					& .fav-btn { color: rgba(255,255,255,0.2); }
 					& .fav-btn:hover { color: rgba(255,255,255,0.7); }
 					& .fav-btn.fav-active { color: var(--gold); }
-					& .venue-row.program-general .fav-btn.fav-active { color: white; }
 					& .toast { background: #e0e8f5; color: #111827; }
 					& .badge-green { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
 					& .badge-yellow { background: #78350f; color: #fcd34d; border-color: #92400e; }

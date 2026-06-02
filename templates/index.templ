@@ -202,10 +202,6 @@ templ VenueRow(v models.Venue) {
 		<div class="venue-band">
 			if v.TemporarilyClosed {
 				<span class="band-label">Closed</span>
-			} else if v.Program == models.ProgramGeneral {
-				<span class="band-label">Always Free</span>
-			} else {
-				<span class="band-label">Free w/ Card</span>
 			}
 		</div>
 		<div class="venue-body">
@@ -505,7 +501,12 @@ templ filterScript() {
     if (!list) return;
     var open = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
     var closed = rows.filter(function (r) { return r.dataset.closed === 'true'; });
-    var alpha = function (a, b) { return (a.dataset.name || '').localeCompare(b.dataset.name || ''); };
+    var alpha = function (a, b) {
+      var fa = a.classList.contains('venue-featured') ? 0 : 1;
+      var fb = b.classList.contains('venue-featured') ? 0 : 1;
+      if (fa !== fb) return fa - fb;
+      return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+    };
 
     if (activeCategory === 'all') {
       var attractionRows = open.filter(function (r) { return r.dataset.category !== 'pool' && r.dataset.category !== 'rec_center'; });
