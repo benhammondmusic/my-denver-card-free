@@ -1229,6 +1229,7 @@ func filterScript() templ.Component {
       var fav = favNames.indexOf(name) !== -1;
       row.dataset.favorite = fav ? 'true' : 'false';
       row.style.order = fav ? '-1' : '0';
+      row.classList.toggle('venue-favorited', fav);
 
       var btn = document.createElement('button');
       btn.className = 'fav-btn' + (fav ? ' fav-active' : '');
@@ -1239,6 +1240,7 @@ func filterScript() templ.Component {
         var nowFav = toggleFavorite(name);
         row.dataset.favorite = nowFav ? 'true' : 'false';
         row.style.order = nowFav ? '-1' : '0';
+        row.classList.toggle('venue-favorited', nowFav);
         btn.classList.toggle('fav-active', nowFav);
         btn.innerHTML = nowFav ? STAR_FILLED : STAR_OUTLINE;
         btn.setAttribute('aria-label', nowFav ? 'Remove from favorites' : 'Add to favorites');

@@ -627,6 +627,13 @@ templ Layout(title string) {
 					font-size: 1.15rem;
 				}
 
+				/* ---- FAVORITED CARDS ---- */
+
+				.venue-row.venue-favorited {
+					border-top: 3px solid var(--gold);
+					box-shadow: 0 3px 22px rgba(217,119,6,0.22), 0 1px 4px rgba(217,119,6,0.1);
+				}
+
 				/* ---- VENUE BAND (left colored column) ---- */
 
 				.venue-band {
@@ -1371,6 +1378,7 @@ templ Layout(title string) {
 					& .hero-section { background: #162040; border-color: var(--border); }
 					& .venue-row { background: #162040; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
 					& .venue-row.venue-closed { background: #0d1520; border-color: var(--border); }
+					& .venue-row.venue-favorited { box-shadow: 0 3px 22px rgba(217,119,6,0.35), 0 1px 4px rgba(217,119,6,0.15); }
 					& .filter-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .filter-tab:hover { background: #1d2f55; color: #93b4e0; border-color: var(--sky-blue); }
 					& .filter-tab.active { background: var(--bear-blue); border-color: var(--bear-blue); color: white; box-shadow: 0 2px 8px rgba(0,40,104,0.5); }
