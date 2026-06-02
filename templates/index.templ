@@ -326,6 +326,9 @@ templ filterScript() {
   var nearbyBtn = null;
   var favHeader = null;
   var favFooter = null;
+  var sectionHdrAttraction = null;
+  var sectionHdrPools = null;
+  var sectionHdrRec = null;
 
   // === STAR ICONS ===
   var STAR_OUTLINE = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
@@ -470,25 +473,66 @@ templ filterScript() {
     });
   }
 
+  function ensureSectionHeaders() {
+    if (!sectionHdrAttraction) {
+      sectionHdrAttraction = document.createElement('li');
+      sectionHdrAttraction.className = 'venue-section-header';
+      sectionHdrAttraction.setAttribute('aria-hidden', 'true');
+      sectionHdrAttraction.innerHTML = '<span>Science &amp; Culture</span>';
+    }
+    if (!sectionHdrPools) {
+      sectionHdrPools = document.createElement('li');
+      sectionHdrPools.className = 'venue-section-header';
+      sectionHdrPools.setAttribute('aria-hidden', 'true');
+      sectionHdrPools.innerHTML = '<span>Pools</span>';
+    }
+    if (!sectionHdrRec) {
+      sectionHdrRec = document.createElement('li');
+      sectionHdrRec.className = 'venue-section-header';
+      sectionHdrRec.setAttribute('aria-hidden', 'true');
+      sectionHdrRec.innerHTML = '<span>Rec Centers</span>';
+    }
+  }
+
+  function hideSectionHeaders() {
+    if (sectionHdrAttraction) sectionHdrAttraction.style.display = 'none';
+    if (sectionHdrPools) sectionHdrPools.style.display = 'none';
+    if (sectionHdrRec) sectionHdrRec.style.display = 'none';
+  }
+
   function sortAlpha() {
     var list = document.getElementById('venue-list');
     if (!list) return;
     var open = rows.filter(function (r) { return r.dataset.closed !== 'true'; });
     var closed = rows.filter(function (r) { return r.dataset.closed === 'true'; });
+    var alpha = function (a, b) { return (a.dataset.name || '').localeCompare(b.dataset.name || ''); };
+
     if (activeCategory === 'all') {
-      open.sort(function (a, b) {
-        var ga = GROUP_ORDER[a.dataset.category] !== undefined ? GROUP_ORDER[a.dataset.category] : 3;
-        var gb = GROUP_ORDER[b.dataset.category] !== undefined ? GROUP_ORDER[b.dataset.category] : 3;
-        if (ga !== gb) return ga - gb;
-        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
-      });
+      var attractionRows = open.filter(function (r) { return r.dataset.category !== 'pool' && r.dataset.category !== 'rec_center'; });
+      var poolRows = open.filter(function (r) { return r.dataset.category === 'pool'; });
+      var recRows = open.filter(function (r) { return r.dataset.category === 'rec_center'; });
+      attractionRows.sort(alpha);
+      poolRows.sort(alpha);
+      recRows.sort(alpha);
+
+      ensureSectionHeaders();
+      sectionHdrAttraction.style.display = '';
+      sectionHdrPools.style.display = '';
+      sectionHdrRec.style.display = '';
+
+      list.appendChild(sectionHdrAttraction);
+      attractionRows.forEach(function (r) { list.appendChild(r); });
+      list.appendChild(sectionHdrPools);
+      poolRows.forEach(function (r) { list.appendChild(r); });
+      list.appendChild(sectionHdrRec);
+      recRows.forEach(function (r) { list.appendChild(r); });
+      closed.forEach(function (r) { list.appendChild(r); });
     } else {
-      open.sort(function (a, b) {
-        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
-      });
+      hideSectionHeaders();
+      open.sort(alpha);
+      open.forEach(function (r) { list.appendChild(r); });
+      closed.forEach(function (r) { list.appendChild(r); });
     }
-    open.forEach(function (r) { list.appendChild(r); });
-    closed.forEach(function (r) { list.appendChild(r); });
     clearDistanceBadges();
   }
 
@@ -674,6 +718,24 @@ templ filterScript() {
           row._marker.addTo(leafletMap);
         }
       });
+    }
+
+    // Show/hide section headers for "Everything" tab
+    if (activeCategory === 'all' && sortMode !== 'nearby') {
+      if (sectionHdrAttraction) {
+        var anyAttr = rows.some(function (r) { return !r.classList.contains('hidden') && r.dataset.category !== 'pool' && r.dataset.category !== 'rec_center' && r.dataset.closed !== 'true'; });
+        sectionHdrAttraction.style.display = anyAttr ? '' : 'none';
+      }
+      if (sectionHdrPools) {
+        var anyPool = rows.some(function (r) { return !r.classList.contains('hidden') && r.dataset.category === 'pool'; });
+        sectionHdrPools.style.display = anyPool ? '' : 'none';
+      }
+      if (sectionHdrRec) {
+        var anyRec = rows.some(function (r) { return !r.classList.contains('hidden') && r.dataset.category === 'rec_center'; });
+        sectionHdrRec.style.display = anyRec ? '' : 'none';
+      }
+    } else {
+      hideSectionHeaders();
     }
 
     updateFavSection();
@@ -1305,6 +1367,7 @@ templ filterScript() {
 
   function sortByDistance() {
     if (!userLat || !userLng) return;
+    hideSectionHeaders();
 
     rows.forEach(function (row) {
       var lat = parseFloat(row.dataset.lat || '0');

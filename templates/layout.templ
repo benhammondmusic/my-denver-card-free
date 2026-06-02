@@ -740,6 +740,28 @@ templ Layout(title string) {
 					margin: 0.125rem 0 0.25rem;
 				}
 
+				/* ---- VENUE SECTION HEADERS (Everything tab) ---- */
+
+				.venue-section-header {
+					display: flex;
+					align-items: center;
+					gap: 0.75rem;
+					padding: 0.25rem 0;
+					color: var(--bear-blue);
+					font-family: 'Bebas Neue', sans-serif;
+					font-size: 0.875rem;
+					letter-spacing: 0.15em;
+					text-transform: uppercase;
+					list-style: none;
+				}
+				.venue-section-header::before,
+				.venue-section-header::after {
+					content: '';
+					flex: 1;
+					height: 1px;
+					background: rgba(0,40,104,0.15);
+				}
+
 				/* ---- FAVORITE FLASH ---- */
 
 				@keyframes favFlash {
@@ -1388,6 +1410,8 @@ templ Layout(title string) {
 					& .fav-section-header { color: var(--gold); }
 					& .fav-section-header::before, & .fav-section-header::after { background: rgba(217,119,6,0.15); }
 					& .fav-section-footer { background: rgba(217,119,6,0.15); }
+					& .venue-section-header { color: #93c5fd; }
+					& .venue-section-header::before, & .venue-section-header::after { background: rgba(147,197,253,0.15); }
 					& .fav-btn { color: rgba(255,255,255,0.2); }
 					& .fav-btn:hover { color: rgba(255,255,255,0.7); }
 					& .fav-btn.fav-active { color: var(--gold); }
