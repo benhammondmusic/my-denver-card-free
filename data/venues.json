@@ -2745,12 +2745,12 @@
     "category": "rec_center",
     "phone": "720-865-3400",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Group Fitness Classes",
       "Game Room",
-      "Racquetball Courts"
+      "Indoor Lap Pool",
+      "Racquetball Courts",
+      "Pickleball Court",
+      "Pottery Studio"
     ],
     "playground": true
   },
@@ -2792,15 +2792,11 @@
     "category": "rec_center",
     "phone": "720-865-5580",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
-      "Cycle Studio",
       "Gymnasium",
-      "Group Fitness Classes",
+      "Game Room",
+      "Two Indoor Pools",
       "Outdoor Climbing Wall",
-      "Climbing Boulder",
-      "Dog Park",
-      "Game Room"
+      "Climbing Boulder"
     ]
   },
   {
@@ -2841,11 +2837,11 @@
     "category": "rec_center",
     "phone": "720-865-0750",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Group Fitness Classes",
-      "Game Room"
+      "Indoor Leisure Pool",
+      "Lazy River",
+      "Water Slide",
+      "Indoor Lap Pool"
     ],
     "playground": true
   },
@@ -2887,11 +2883,12 @@
     "category": "rec_center",
     "phone": "720-865-0580",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Group Fitness Classes",
-      "Game Room"
+      "Indoor Lap Pool",
+      "Art Room",
+      "Dance Studio",
+      "Pickleball Court",
+      "Outdoor Skate Park"
     ],
     "playground": true
   },
@@ -2933,11 +2930,12 @@
     "category": "rec_center",
     "phone": "720-865-0560",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Group Fitness Classes",
-      "Game Room"
+      "Indoor Lap Pool",
+      "Leisure Pool",
+      "20-ft Water Slide",
+      "Pottery Studio",
+      "Pickleball Court"
     ],
     "playground": true
   },
@@ -2979,11 +2977,9 @@
     "category": "rec_center",
     "phone": "720-865-0570",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Multipurpose Rooms",
-      "Game Room"
+      "Game Room",
+      "Indoor Pool"
     ],
     "playground": true
   },
@@ -3025,13 +3021,12 @@
     "category": "rec_center",
     "phone": "720-865-0640",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Dance Studio",
-      "Ballroom",
       "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Pool",
+      "Outdoor Pool",
+      "Dance Studio",
+      "Pickleball Court"
     ]
   },
   {
@@ -3072,11 +3067,10 @@
     "category": "rec_center",
     "phone": "720-865-2180",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Group Fitness Classes",
-      "Game Room"
+      "Game Room",
+      "Indoor Lap Pool",
+      "Ceramics Studio"
     ],
     "playground": true
   },
@@ -3118,10 +3112,12 @@
     "category": "rec_center",
     "phone": "720-865-0510",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Leisure Pool",
+      "Zero-depth Entry",
+      "Water Slides",
+      "Indoor Lap Pool",
+      "Art Room"
     ]
   },
   {
@@ -3162,10 +3158,12 @@
     "category": "rec_center",
     "phone": "720-865-0610",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Pottery Studio",
+      "Art Room",
+      "Dance Studio"
     ],
     "playground": true
   },
@@ -3207,10 +3205,10 @@
     "category": "rec_center",
     "phone": "720-865-0730",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Pickleball Court"
     ]
   },
   {
@@ -3251,13 +3249,12 @@
     "category": "rec_center",
     "phone": "720-865-3380",
     "activities": [
-      "Fitness Center",
-      "Weight Room",
       "Gymnasium",
-      "Racquetball Courts",
       "Game Room",
-      "Art Room",
-      "Multipurpose Rooms"
+      "Indoor Lap Pool",
+      "Racquetball Courts",
+      "Dance Room",
+      "Art Room"
     ]
   },
   {
@@ -3298,10 +3295,12 @@
     "category": "rec_center",
     "phone": "720-865-4370",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Leisure Pool",
+      "Lazy River",
+      "Water Slide",
+      "Indoor Lap Pool"
     ]
   },
   {
@@ -3342,10 +3341,11 @@
     "category": "rec_center",
     "phone": "720-865-0905",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Art Room",
+      "Pottery Studio"
     ],
     "playground": true,
     "ev_charger": true
@@ -3388,10 +3388,10 @@
     "category": "rec_center",
     "phone": "720-865-0550",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Pickleball Court"
     ],
     "playground": true
   },
@@ -3433,10 +3433,12 @@
     "category": "rec_center",
     "phone": "720-865-0590",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Lap Pool",
+      "Indoor Track",
+      "Computer Lab",
+      "Pickleball Court"
     ],
     "playground": true
   },
@@ -3478,10 +3480,11 @@
     "category": "rec_center",
     "phone": "720-865-2170",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Lap Pool",
+      "Wading Pool",
+      "Pottery Studio"
     ]
   },
   {
@@ -3522,10 +3525,9 @@
     "category": "rec_center",
     "phone": "720-865-0670",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Pickleball Court"
     ],
     "playground": true
   },
@@ -3567,10 +3569,12 @@
     "category": "rec_center",
     "phone": "720-865-0520",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Lap Pool",
+      "Boxing Gym",
+      "Pottery Studio",
+      "Art Room",
+      "Pickleball Court"
     ]
   },
   {
@@ -3612,8 +3616,7 @@
     "phone": "720-865-2150",
     "activities": [
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Pickleball Court"
     ]
   },
   {
@@ -3656,7 +3659,9 @@
     "activities": [
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "Art Room",
+      "Pickleball Court"
     ],
     "playground": true
   },
@@ -3700,7 +3705,8 @@
     "activities": [
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Outdoor Pool",
+      "BMX Pump Track"
     ],
     "playground": true
   },
@@ -3742,9 +3748,7 @@
     "category": "rec_center",
     "phone": "720-865-5650",
     "activities": [
-      "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Gymnasium"
     ]
   },
   {
@@ -3786,8 +3790,7 @@
     "phone": "720-865-0600",
     "activities": [
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Game Room"
     ]
   },
   {
@@ -3829,8 +3832,7 @@
     "phone": "720-865-5660",
     "activities": [
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Pickleball Court"
     ]
   },
   {
@@ -3872,8 +3874,7 @@
     "phone": "720-865-2200",
     "activities": [
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Game Room"
     ],
     "playground": true
   },
@@ -3915,10 +3916,9 @@
     "category": "rec_center",
     "phone": "720-865-0530",
     "activities": [
-      "Fitness Center",
       "Gymnasium",
-      "Game Room",
-      "Multipurpose Rooms"
+      "Indoor Lap Pool",
+      "Racquetball Courts"
     ],
     "playground": true
   },
@@ -3962,7 +3962,7 @@
     "activities": [
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Art Room"
     ]
   },
   {
@@ -4005,7 +4005,7 @@
     "activities": [
       "Gymnasium",
       "Game Room",
-      "Multipurpose Rooms"
+      "Art Room"
     ]
   }
 ]
