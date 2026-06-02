@@ -31,6 +31,7 @@ type Pool struct {
 	FamilyFriendly bool          `json:"family_friendly"`
 	Features       []string      `json:"features,omitempty"`
 	Notes          string        `json:"notes,omitempty"`
+	ManualSessions bool          `json:"manual_sessions,omitempty"` // if true, scraper will not overwrite sessions
 	SeasonLabel    string        `json:"season_label,omitempty"`
 	SeasonStart    string        `json:"season_start,omitempty"` // "YYYY-MM-DD"
 	SeasonEnd      string        `json:"season_end,omitempty"`   // "YYYY-MM-DD"

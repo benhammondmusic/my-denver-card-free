@@ -379,8 +379,12 @@ func scrapePoolPage(browser *rod.Browser, pageURL string, poolMap map[string]*mo
 			log.Printf("  FAIL: %v", scrapeErr)
 			continue
 		}
-		pool.Sessions = sessions
-		log.Printf("  ok: %d sessions", len(sessions))
+		if pool.ManualSessions {
+			log.Printf("  skipping sessions (manual_sessions=true)")
+		} else {
+			pool.Sessions = sessions
+			log.Printf("  ok: %d sessions", len(sessions))
+		}
 	}
 	return seasonStart, seasonEnd, nil
 }
