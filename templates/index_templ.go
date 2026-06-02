@@ -1251,10 +1251,6 @@ func filterScript() templ.Component {
           setTimeout(function () {
             row.style.order = '-1';
             updateFavSection();
-            setTimeout(function () {
-              var target = favHeader || document.getElementById('venue-list');
-              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 200);
           }, 150);
         } else {
           row.style.order = '0';

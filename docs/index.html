@@ -558,8 +558,8 @@
 					border-radius: 1.25rem;
 					overflow: hidden;
 					box-shadow: 0 2px 16px rgba(0,40,104,0.09), 0 1px 3px rgba(0,40,104,0.05);
-					transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s;
-					border: none;
+					transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s, border-top-color 0.3s;
+					border-top: 3px solid transparent;
 					cursor: pointer;
 				}
 
@@ -576,7 +576,10 @@
 				.venue-row.venue-closed {
 					background: #f7f7f8;
 					box-shadow: none;
-					border: 1.5px solid #e5e7eb;
+					border-right: 1.5px solid #e5e7eb;
+					border-bottom: 1.5px solid #e5e7eb;
+					border-left: 1.5px solid #e5e7eb;
+					border-top-color: transparent;
 				}
 
 				.venue-row.venue-closed:hover {
@@ -597,7 +600,8 @@
 				/* ---- FAVORITED CARDS ---- */
 
 				.venue-row.venue-favorited {
-					box-shadow: inset 0 3px 0 var(--gold), 0 3px 22px rgba(217,119,6,0.22), 0 1px 4px rgba(217,119,6,0.1);
+					border-top-color: var(--gold);
+					box-shadow: 0 3px 22px rgba(217,119,6,0.22), 0 1px 4px rgba(217,119,6,0.1);
 				}
 
 				/* ---- VENUE BAND (left colored column) ---- */
@@ -1355,7 +1359,7 @@
 					& .hero-section { background: #162040; border-color: var(--border); }
 					& .venue-row { background: #162040; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
 					& .venue-row.venue-closed { background: #0d1520; border-color: var(--border); }
-					& .venue-row.venue-favorited { box-shadow: inset 0 3px 0 var(--gold), 0 3px 22px rgba(217,119,6,0.35), 0 1px 4px rgba(217,119,6,0.15); }
+					& .venue-row.venue-favorited { border-top-color: var(--gold); box-shadow: 0 3px 22px rgba(217,119,6,0.35), 0 1px 4px rgba(217,119,6,0.15); }
 					& .filter-tab { background: #162040; border-color: var(--border); color: #7a8fa8; }
 					& .filter-tab:hover { background: #1d2f55; color: #93b4e0; border-color: var(--sky-blue); }
 					& .filter-tab.active { background: var(--bear-blue); border-color: var(--bear-blue); color: white; box-shadow: 0 2px 8px rgba(0,40,104,0.5); }
@@ -2103,10 +2107,6 @@
           setTimeout(function () {
             row.style.order = '-1';
             updateFavSection();
-            setTimeout(function () {
-              var target = favHeader || document.getElementById('venue-list');
-              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 200);
           }, 150);
         } else {
           row.style.order = '0';
