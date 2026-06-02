@@ -948,12 +948,25 @@ templ filterScript() {
       }));
     }
 
-    // Set "coming up" label based on whether anything opens this month or only next month
+    // Set "coming up" label based on what's opening and how soon
     if (soonLabel) {
-      var anyThisMonth = soonRows.some(function (r) { return freeInMonth(r, currentMonthName); })
-        || indoorPoolsSoon.some(function (r) { return freeInMonth(r, currentMonthName); })
-        || outdoorPoolsSoon.some(function (r) { return freeInMonth(r, currentMonthName); });
-      soonLabel.textContent = anyThisMonth ? 'Opening soon this month' : 'Coming up in ' + nextMonthName;
+      var thisMonthSoon = soonRows.filter(function (r) { return freeInMonth(r, currentMonthName); })
+        .concat(indoorPoolsSoon.filter(function (r) { return freeInMonth(r, currentMonthName); }))
+        .concat(outdoorPoolsSoon.filter(function (r) { return freeInMonth(r, currentMonthName); }));
+      var anyThisMonth = thisMonthSoon.length > 0;
+      var todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var minDays = Infinity;
+      thisMonthSoon.forEach(function (r) {
+        if (r._pools) {
+          var ss = getSeasonStart(r._pools);
+          if (ss) {
+            var diff = Math.ceil((ss - todayMidnight) / 86400000);
+            if (diff > 0 && diff < minDays) minDays = diff;
+          }
+        }
+      });
+      var thisMonthLabel = (minDays <= 10 || minDays === Infinity) ? 'Opening soon' : 'Opening later this month';
+      soonLabel.textContent = anyThisMonth ? thisMonthLabel : 'Coming up in ' + nextMonthName;
     }
   }
 
