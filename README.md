@@ -87,12 +87,21 @@ Each `Pool` within `pools[]` has:
 | `name` | string | Pool name (e.g., "Leisure Pool") |
 | `family_friendly` | bool | Whether this pool allows family/open swim |
 | `features` | string[] | e.g., "water slide", "lazy river" |
+| `notes` | string | Schedule caveats shown in modal (e.g., mid-day break, early closure days) |
+| `manual_sessions` | bool | If true, scraper skips overwriting `sessions` — use when hand-corrected data is more accurate than the Canva scrape |
 | `season_start` | `"YYYY-MM-DD"` | Outdoor pools only; JS uses this to gate free-now status |
 | `season_end` | `"YYYY-MM-DD"` | Outdoor pools only |
 | `canva_url` | string | Source Canva embed used by scraper to extract sessions |
 | `sessions` | PoolSession[] | Each session: days[], open/close times, family_friendly |
 
 The scraper detects season dates from the Denver.gov pools page body text and writes them automatically.
+
+### Protecting hand-corrected pool data
+
+The weekly scraper overwrites `sessions` for any pool with a `canva_url`. If you manually correct session times (e.g., because the scraper picked up overlapping swim types), set `"manual_sessions": true` on that pool entry. The scraper will log a skip and leave sessions untouched while still updating `season_start`/`season_end`.
+
+Fields the scraper **never** touches: `notes`, `features`, `manual_sessions`.
+Fields the scraper **always** overwrites: `season_start`, `season_end` (from Denver.gov page), `sessions` (from Canva embed, unless `manual_sessions: true`).
 
 ## UI layout
 
