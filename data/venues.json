@@ -23,7 +23,7 @@
     "notes": "Youth cardholders ages 5-18 free + one accompanying adult. Year-round, unlimited visits. Online timed reservations required. Children 2 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:28:58.871090103Z",
+    "last_checked": "2026-08-09T07:01:48.773152275Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7503,
@@ -50,7 +50,7 @@
     "notes": "Free for My Denver Card cardholder (school-age children) only. Adults not included. Current window: June 1 - Aug 31, 2026. Children under 3 always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:03.764507637Z",
+    "last_checked": "2026-08-09T07:01:51.74377079Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7476,
@@ -78,7 +78,7 @@
     "notes": "Unlimited visits Jan-Mar. Ages 5-15: free + one accompanying adult. Ages 16-18: free, no adult included. Valid K-12 only. Not valid for special events. Children 2 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:05.804240644Z",
+    "last_checked": "2026-08-09T07:01:52.783102686Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7322,
@@ -115,7 +115,7 @@
     "notes": "Youth 17 and under free. One accompanying adult free on all weekends and during winter, spring, and summer school breaks. Use code MyDenverCard at online checkout or show ID at the door.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:07.569798695Z",
+    "last_checked": "2026-08-09T07:01:53.953889056Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7308,
@@ -152,7 +152,7 @@
     "notes": "Free for all kids under 18 year-round. No myDenverCard required.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:08.712053934Z",
+    "last_checked": "2026-08-09T07:01:54.971875297Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7306,
@@ -189,7 +189,7 @@
     "notes": "Free for children year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:12.503523637Z",
+    "last_checked": "2026-08-09T07:01:56.847753607Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.732,
@@ -226,7 +226,7 @@
     "notes": "Teens and children always free (no card needed). My Denver Card holders also get two free adults per child year-round.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:14.182129947Z",
+    "last_checked": "2026-08-09T07:01:58.356165467Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7586,
@@ -263,7 +263,7 @@
     "notes": "Children with My Denver Card free. Adults pay full price. Valid Friday-Sunday year-round, plus every day during spring, winter, and summer school breaks. Children 5 and under always free (no card needed).",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:16.838097105Z",
+    "last_checked": "2026-08-09T07:01:59.996131931Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7363,
@@ -300,7 +300,7 @@
     "notes": "Free for children 13 and under year-round. No myDenverCard required. Adults pay regular admission.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:21.763461092Z",
+    "last_checked": "2026-08-09T07:02:02.547555327Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7229,
@@ -324,7 +324,7 @@
     "notes": "",
     "temporarily_closed": true,
     "closure_reason": "Closed for 2025-2026 season due to Skyline Park reconstruction. Expected to reopen when construction is complete.",
-    "last_checked": "2026-08-02T08:29:23.082042346Z",
+    "last_checked": "2026-08-09T07:02:03.106507304Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7494,
@@ -360,7 +360,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858041Z",
+    "last_checked": "2026-08-09T07:05:47.135315948Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7012,
@@ -399,14 +399,6 @@
           {
             "family_friendly": true,
             "days": [
-              "fri"
-            ],
-            "open": "15:00",
-            "close": "19:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "mon",
               "tue",
               "wed",
@@ -414,6 +406,14 @@
             ],
             "open": "14:00",
             "close": "15:45"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "fri"
+            ],
+            "open": "15:00",
+            "close": "19:30"
           },
           {
             "family_friendly": true,
@@ -453,7 +453,7 @@
     "notes": "Free with My Denver Card. Year-round indoor leisure pool with water slide, rock climbing wall over water, and lazy river. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858231Z",
+    "last_checked": "2026-08-09T07:05:47.135316061Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7399,
@@ -523,7 +523,7 @@
     "notes": "Free with My Denver Card. Outdoor leisure pool with lazy river, slides, and splash area. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858402Z",
+    "last_checked": "2026-08-09T07:05:47.135316258Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7574,
@@ -598,7 +598,7 @@
     "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Both pools close 4:15-4:30 PM daily for a break. Pool closes at 4:15 PM on the 2nd and 4th Friday of each month.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858562Z",
+    "last_checked": "2026-08-09T07:05:47.135316417Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7079,
@@ -649,7 +649,7 @@
     "notes": "Free with My Denver Card. Seasonal pool in Curtis Park neighborhood. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858732Z",
+    "last_checked": "2026-08-09T07:05:47.135316507Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7513,
@@ -726,7 +726,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923858933Z",
+    "last_checked": "2026-08-09T07:05:47.135316582Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7062,
@@ -855,7 +855,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923859003Z",
+    "last_checked": "2026-08-09T07:05:47.135316665Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.787,
@@ -886,6 +886,15 @@
           {
             "family_friendly": true,
             "days": [
+              "tue",
+              "thu"
+            ],
+            "open": "13:00",
+            "close": "16:15"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "fri"
             ],
             "open": "13:00",
@@ -907,15 +916,6 @@
             ],
             "open": "13:00",
             "close": "18:15"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "tue",
-              "thu"
-            ],
-            "open": "13:00",
-            "close": "16:15"
           }
         ]
       }
@@ -945,7 +945,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923859283Z",
+    "last_checked": "2026-08-09T07:05:47.135316819Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7568,
@@ -1039,7 +1039,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923859724Z",
+    "last_checked": "2026-08-09T07:05:47.135316935Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7225,
@@ -1062,6 +1062,14 @@
           {
             "family_friendly": true,
             "days": [
+              "sat"
+            ],
+            "open": "11:30",
+            "close": "15:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
               "mon",
               "wed"
             ],
@@ -1079,10 +1087,13 @@
           {
             "family_friendly": true,
             "days": [
-              "sat"
+              "mon",
+              "tue",
+              "wed",
+              "thu"
             ],
-            "open": "11:30",
-            "close": "15:30"
+            "open": "17:00",
+            "close": "19:30"
           },
           {
             "family_friendly": true,
@@ -1092,17 +1103,6 @@
             ],
             "open": "12:00",
             "close": "15:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "mon",
-              "tue",
-              "wed",
-              "thu"
-            ],
-            "open": "18:00",
-            "close": "19:30"
           }
         ]
       }
@@ -1132,7 +1132,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923859884Z",
+    "last_checked": "2026-08-09T07:05:47.135317011Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7613,
@@ -1206,7 +1206,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923860045Z",
+    "last_checked": "2026-08-09T07:05:47.135317094Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7851,
@@ -1238,42 +1238,11 @@
           {
             "family_friendly": true,
             "days": [
+              "tue",
               "thu"
             ],
             "open": "14:00",
-            "close": "51:00"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "fri"
-            ],
-            "open": "12:00",
-            "close": "19:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "mon"
-            ],
-            "open": "12:30",
-            "close": "16:45"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "tue"
-            ],
-            "open": "14:00",
-            "close": "17:15"
-          },
-          {
-            "family_friendly": true,
-            "days": [
-              "wed"
-            ],
-            "open": "12:00",
-            "close": "16:45"
+            "close": "16:00"
           },
           {
             "family_friendly": true,
@@ -1281,16 +1250,15 @@
               "mon",
               "wed"
             ],
-            "open": "18:00",
-            "close": "19:30"
+            "open": "14:00",
+            "close": "17:45"
           },
           {
             "family_friendly": true,
             "days": [
-              "tue",
-              "thu"
+              "fri"
             ],
-            "open": "18:30",
+            "open": "14:00",
             "close": "19:30"
           }
         ]
@@ -1321,7 +1289,7 @@
     "notes": "Free with My Denver Card. Year-round indoor leisure pool. Cardholder ages 5-18. Children 0-1 always free. Both pools close 4:15-4:30 PM daily for a break. Pool closes at 4:15 PM on the 2nd and 4th Friday of each month.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923860235Z",
+    "last_checked": "2026-08-09T07:05:47.1353172Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7116,
@@ -1399,7 +1367,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923860485Z",
+    "last_checked": "2026-08-09T07:05:47.135317264Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7019,
@@ -1491,7 +1459,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923860756Z",
+    "last_checked": "2026-08-09T07:05:47.135317415Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7768,
@@ -1514,18 +1482,18 @@
           {
             "family_friendly": true,
             "days": [
-              "sun"
-            ],
-            "open": "11:00",
-            "close": "13:30"
-          },
-          {
-            "family_friendly": true,
-            "days": [
               "sat"
             ],
             "open": "12:00",
             "close": "15:30"
+          },
+          {
+            "family_friendly": true,
+            "days": [
+              "sun"
+            ],
+            "open": "11:00",
+            "close": "13:30"
           },
           {
             "family_friendly": true,
@@ -1599,7 +1567,7 @@
     "notes": "Free with My Denver Card. Year-round indoor pool in Five Points. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861017Z",
+    "last_checked": "2026-08-09T07:05:47.135317565Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7563,
@@ -1678,7 +1646,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in Sunnyside. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861287Z",
+    "last_checked": "2026-08-09T07:05:47.135317667Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7733,
@@ -1761,7 +1729,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in the Barnum neighborhood. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861447Z",
+    "last_checked": "2026-08-09T07:05:47.135317745Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7051,
@@ -1844,7 +1812,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Berkeley Lake Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861618Z",
+    "last_checked": "2026-08-09T07:05:47.135317926Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7776,
@@ -1926,7 +1894,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Congress Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861778Z",
+    "last_checked": "2026-08-09T07:05:47.135317978Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7215,
@@ -2009,7 +1977,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August near Cherry Creek. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923861938Z",
+    "last_checked": "2026-08-09T07:05:47.135318082Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6651,
@@ -2092,7 +2060,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862088Z",
+    "last_checked": "2026-08-09T07:05:47.135318158Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6618,
@@ -2175,7 +2143,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Garfield Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862159Z",
+    "last_checked": "2026-08-09T07:05:47.135318287Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6972,
@@ -2258,7 +2226,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August at Argo Park in Globeville. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862219Z",
+    "last_checked": "2026-08-09T07:05:47.135318335Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7758,
@@ -2341,7 +2309,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862279Z",
+    "last_checked": "2026-08-09T07:05:47.135318396Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.787,
@@ -2424,7 +2392,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August near Harvard Gulch. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862349Z",
+    "last_checked": "2026-08-09T07:05:47.135318449Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6787,
@@ -2506,7 +2474,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in SW Denver. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862419Z",
+    "last_checked": "2026-08-09T07:05:47.1353185Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6724,
@@ -2589,7 +2557,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in Lincoln Park. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862479Z",
+    "last_checked": "2026-08-09T07:05:47.13531866Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7213,
@@ -2672,7 +2640,7 @@
     "notes": "Free with My Denver Card. Outdoor pool open June through August in SW Denver. Cardholder ages 5-18. Children 0-1 always free. Call ahead to confirm pool schedule.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:33:28.923862549Z",
+    "last_checked": "2026-08-09T07:05:47.13531873Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6522,
@@ -2764,7 +2732,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:30.071022324Z",
+    "last_checked": "2026-08-09T07:02:08.350082757Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7012,
@@ -2811,7 +2779,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:33.662611374Z",
+    "last_checked": "2026-08-09T07:02:11.44085558Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7399,
@@ -2856,7 +2824,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:36.574015298Z",
+    "last_checked": "2026-08-09T07:02:14.115349826Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7574,
@@ -2902,7 +2870,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:39.371593595Z",
+    "last_checked": "2026-08-09T07:02:16.354211872Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7851,
@@ -2949,7 +2917,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:42.133543333Z",
+    "last_checked": "2026-08-09T07:02:18.356386441Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7116,
@@ -2996,7 +2964,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:44.9023557Z",
+    "last_checked": "2026-08-09T07:02:20.598718396Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7019,
@@ -3040,7 +3008,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:47.91289266Z",
+    "last_checked": "2026-08-09T07:02:22.796666487Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7768,
@@ -3086,7 +3054,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round regional rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:51.008883059Z",
+    "last_checked": "2026-08-09T07:02:25.065473716Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7062,
@@ -3131,7 +3099,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:54.159570027Z",
+    "last_checked": "2026-08-09T07:02:27.396528515Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7079,
@@ -3177,7 +3145,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:56.702141334Z",
+    "last_checked": "2026-08-09T07:02:29.23604116Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6651,
@@ -3224,7 +3192,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:29:59.052062706Z",
+    "last_checked": "2026-08-09T07:02:31.188161717Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6618,
@@ -3268,7 +3236,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center in Five Points. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:01.869680306Z",
+    "last_checked": "2026-08-09T07:02:33.280842484Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7513,
@@ -3314,7 +3282,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:04.798535274Z",
+    "last_checked": "2026-08-09T07:02:35.556680598Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.787,
@@ -3360,7 +3328,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:07.260242183Z",
+    "last_checked": "2026-08-09T07:02:37.529345559Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6787,
@@ -3407,7 +3375,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:09.717620193Z",
+    "last_checked": "2026-08-09T07:02:39.55695627Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6724,
@@ -3452,7 +3420,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:12.561378312Z",
+    "last_checked": "2026-08-09T07:02:41.98568057Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7568,
@@ -3499,7 +3467,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:15.359454619Z",
+    "last_checked": "2026-08-09T07:02:44.310525073Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7225,
@@ -3544,7 +3512,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:17.74664711Z",
+    "last_checked": "2026-08-09T07:02:46.252515775Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6522,
@@ -3588,7 +3556,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round local rec center in downtown Denver. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:20.869614899Z",
+    "last_checked": "2026-08-09T07:02:48.773506781Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7563,
@@ -3634,7 +3602,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:23.219906435Z",
+    "last_checked": "2026-08-09T07:02:50.751575727Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.696,
@@ -3676,7 +3644,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:25.539206623Z",
+    "last_checked": "2026-08-09T07:02:52.753667778Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7733,
@@ -3722,7 +3690,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:27.905438079Z",
+    "last_checked": "2026-08-09T07:02:54.826198863Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7051,
@@ -3767,7 +3735,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:30.343537639Z",
+    "last_checked": "2026-08-09T07:02:56.862256661Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.6718,
@@ -3808,7 +3776,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:32.418111797Z",
+    "last_checked": "2026-08-09T07:02:58.665169886Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7535,
@@ -3850,7 +3818,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:34.754926433Z",
+    "last_checked": "2026-08-09T07:03:00.746363661Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7764,
@@ -3892,7 +3860,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:37.137192437Z",
+    "last_checked": "2026-08-09T07:03:02.979459675Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7213,
@@ -3935,7 +3903,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:40.008208883Z",
+    "last_checked": "2026-08-09T07:03:05.253312451Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7613,
@@ -3979,7 +3947,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:42.465436074Z",
+    "last_checked": "2026-08-09T07:03:07.296283703Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.759,
@@ -4022,7 +3990,7 @@
     "notes": "Free drop-in access with My Denver Card. Year-round neighborhood rec center. Ages 5-18.",
     "temporarily_closed": false,
     "closure_reason": "",
-    "last_checked": "2026-08-02T08:30:45.165090331Z",
+    "last_checked": "2026-08-09T07:03:09.58695197Z",
     "scrape_failed": false,
     "scrape_error": "",
     "lat": 39.7794,
