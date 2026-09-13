@@ -1548,6 +1548,9 @@ templ Layout(title string) {
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
 						<span>what card?</span>
 					</button>
+					<button id="share-btn" class="theme-toggle-btn" aria-label="Share this app" title="Share">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+					</button>
 					<button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to dark mode"></button>
 				</div>
 				<div class="header-bg" aria-hidden="true">
@@ -1838,6 +1841,25 @@ templ Layout(title string) {
 				if ('serviceWorker' in navigator) {
 					navigator.serviceWorker.register('sw.js').catch(function(){});
 				}
+				(function () {
+					var shareBtn = document.getElementById('share-btn');
+					if (shareBtn) {
+						shareBtn.addEventListener('click', function () {
+							if (navigator.share) {
+								navigator.share({
+									title: 'MyDenverCard Free',
+									text: 'See which Denver museums, zoo, and pools are free today with a myDenverCard.',
+									url: 'https://benhammondmusic.github.io/my-denver-card-free/'
+								}).catch(function () {});
+							} else {
+								navigator.clipboard.writeText('https://benhammondmusic.github.io/my-denver-card-free/').then(function () {
+									shareBtn.setAttribute('title', 'Link copied!');
+									setTimeout(function () { shareBtn.setAttribute('title', 'Share'); }, 2000);
+								}).catch(function () {});
+							}
+						});
+					}
+				})();
 				(function () {
 					var btn = document.getElementById('theme-toggle');
 					if (!btn) return;
