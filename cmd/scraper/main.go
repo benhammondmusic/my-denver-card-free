@@ -10,6 +10,7 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"slices"
 	"strings"
 	"time"
 
@@ -412,12 +413,18 @@ func scrapeCanvaEmbed(browser *rod.Browser, embedURL string) ([]models.PoolSessi
 		return nil, fmt.Errorf("no tables found")
 	}
 
+	correctedRanges = map[[2]string]string{}
 	sessions, err := parseSessions(tables)
 	if err != nil {
 		return nil, err
 	}
 	if len(sessions) == 0 {
 		return nil, fmt.Errorf("no sessions parsed")
+	}
+	for i := range sessions {
+		if raw, ok := correctedRanges[[2]string{sessions[i].Open, sessions[i].Close}]; ok {
+			sessions[i].TimeCorrected = raw
+		}
 	}
 	return sessions, nil
 }
@@ -837,11 +844,47 @@ func parseTimeRange(s string) (open, close string, err error) {
 		}
 	}
 
-	// Sanity check: open must precede close.
+	// Open must precede close. If it doesn't, assume an AM/PM typo on the
+	// schedule (e.g. "10:00PM-7:30PM" meant 10am) and flip one side.
 	if open >= close {
-		return "", "", fmt.Errorf("open %s not before close %s in %q", open, close, s)
+		fixedOpen, fixedClose, ok := fixAmPmTypo(open, close)
+		if !ok {
+			return "", "", fmt.Errorf("open %s not before close %s in %q", open, close, s)
+		}
+		log.Printf("  assuming AM/PM typo in %q: %s-%s -> %s-%s", s, open, close, fixedOpen, fixedClose)
+		open, close = fixedOpen, fixedClose
+		if correctedRanges != nil {
+			correctedRanges[[2]string{open, close}] = strings.TrimSpace(s)
+		}
 	}
 	return open, close, nil
+}
+
+// correctedRanges records open/close pairs that fixAmPmTypo produced while
+// parsing the current Canva embed, keyed to the original text, so the
+// resulting sessions can be flagged for users. Reset per embed.
+var correctedRanges map[[2]string]string
+
+// fixAmPmTypo tries flipping open from PM to AM, then close from AM to PM,
+// returning the first result where open precedes close and both fall within
+// plausible pool hours (5am to 11pm).
+func fixAmPmTypo(open, close string) (string, string, bool) {
+	shift := func(t string, hours int) string {
+		h, m := atoi(t[:2])+hours, atoi(t[3:])
+		return fmt.Sprintf("%02d:%02d", h, m)
+	}
+	plausible := func(o, c string) bool { return o < c && o >= "05:00" && c <= "23:00" }
+	if atoi(open[:2]) >= 12 {
+		if o := shift(open, -12); plausible(o, close) {
+			return o, close, true
+		}
+	}
+	if atoi(close[:2]) < 12 {
+		if c := shift(close, 12); plausible(open, c) {
+			return open, c, true
+		}
+	}
+	return "", "", false
 }
 
 // parseTimeStr converts "2:00 PM", "14:00", or bare "11AM" to 24-hour "HH:MM".
@@ -921,6 +964,8 @@ func atoi(s string) int {
 
 // ---- REGULAR VENUE SCRAPING ----
 
+var allMonths = []string{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
+
 func scrapeVenue(browser *rod.Browser, apiKey string, v *models.Venue) error {
 	ctx, cancel := context.WithTimeout(context.Background(), pageTimeout)
 	defer cancel()
@@ -961,6 +1006,13 @@ func programmaticMatchOK(v *models.Venue, pageText string) bool {
 		return false
 	}
 	lower := strings.ToLower(pageText)
+	// A month on the page that we don't list may be a new free window
+	// (e.g. DMNS adding December); let the LLM decide.
+	for _, m := range allMonths {
+		if strings.Contains(lower, strings.ToLower(m)) && !slices.Contains(v.FreeMonths, m) {
+			return false
+		}
+	}
 	words := strings.Fields(v.Notes)
 	if len(words) < 4 {
 		return false

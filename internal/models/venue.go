@@ -24,6 +24,9 @@ type PoolSession struct {
 	Days           []string `json:"days"`  // lowercase three-letter: "mon","tue","wed","thu","fri","sat","sun"
 	Open           string   `json:"open"`  // 24h "HH:MM"
 	Close          string   `json:"close"` // 24h "HH:MM"
+	// TimeCorrected holds the original schedule text when the scraper assumed
+	// an AM/PM typo and flipped it (e.g. "10:00PM-7:30PM" read as 10am-7:30pm).
+	TimeCorrected string `json:"time_corrected,omitempty"`
 }
 
 type Pool struct {
