@@ -254,13 +254,13 @@ templ filterScript() {
   var currentMonthName = MONTHS[today.getMonth()];
   var nextMonthName = MONTHS[(today.getMonth() + 1) % 12];
   var dow = today.getDay(); // 0=Sun 6=Sat
-  var isWeekend = dow === 0 || dow === 5 || dow === 6; // Fri Sat Sun
+  var isWeekend = dow === 0 || dow === 6; // Sat Sun
 
   var weekendDates = (function () {
-    var daysToFri = dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow;
-    return [0, 1, 2].map(function (i) {
+    var daysToSat = dow === 0 ? -1 : 6 - dow;
+    return [0, 1].map(function (i) {
       var d = new Date(today);
-      d.setDate(today.getDate() + daysToFri + i);
+      d.setDate(today.getDate() + daysToSat + i);
       return d;
     });
   })();
@@ -416,7 +416,7 @@ templ filterScript() {
       if (se && dDate > se) return false;
     }
     var dDow = d.getDay();
-    var dIsWeekend = dDow === 0 || dDow === 5 || dDow === 6;
+    var dIsWeekend = dDow === 0 || dDow === 6;
     var sched = row.dataset.schedule || 'daily';
     if (sched === 'weekends') return dIsWeekend;
     if (sched === 'weekends_and_breaks') return dIsWeekend || isSchoolBreak(d);
@@ -1165,7 +1165,7 @@ templ filterScript() {
     if (activeFilter === 'tomorrow') {
       filterDows[DAY_ABBRS[(todayIdx + 1) % 7]] = true;
     } else if (activeFilter === 'weekend') {
-      filterDows['fri'] = true; filterDows['sat'] = true; filterDows['sun'] = true;
+      filterDows['sat'] = true; filterDows['sun'] = true;
     } else if (activeFilter === 'date' && pickedDate) {
       filterDows[DAY_ABBRS[pickedDate.getDay()]] = true;
     }
