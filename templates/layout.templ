@@ -272,6 +272,30 @@ templ Layout(title string) {
 
 				.filter-tab:disabled { opacity: 0.5; cursor: default; }
 
+				.chip-when {
+					margin-left: 0.4em;
+					font-weight: 500;
+					opacity: 0.75;
+				}
+				.chip-when::before { content: "· "; }
+
+				.map-legend {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.25rem 0.9rem;
+					margin: -0.5rem 0 1rem;
+					font-size: 0.75rem;
+					color: var(--stone);
+				}
+				.map-legend i {
+					display: inline-block;
+					width: 9px;
+					height: 9px;
+					border-radius: 50%;
+					margin-right: 0.35em;
+					vertical-align: middle;
+				}
+
 				.time-corrected-mark { color: #b45309; font-weight: 700; margin-left: 1px; cursor: help; }
 
 				.date-pick-wrap { position: relative; display: inline-flex; }
