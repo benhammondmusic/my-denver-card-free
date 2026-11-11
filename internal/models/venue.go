@@ -10,7 +10,7 @@ const (
 	ProgramGeneral      Program = "general"
 )
 
-// FreeSchedule values: "daily" = every day of free_months; "weekends" = Fri/Sat/Sun only; "weekends_and_breaks" = weekends + school break periods
+// FreeSchedule values: "daily" = every day of free_months; "weekends" = Sat/Sun only; "weekends_and_breaks" = weekends + school break periods
 type FreeSchedule string
 
 const (
