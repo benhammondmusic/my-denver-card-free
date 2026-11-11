@@ -19,14 +19,15 @@ jobs:
         with:
           go-version: "1.25"
 
-      - name: Install Chromium
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y chromium-browser
+      # apt's chromium-browser is a snap shim that fails intermittently
+      - name: Install Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
 
       - name: Generate templ files
         run: |
-          go install github.com/a-h/templ/cmd/templ@latest
+          # Pin the CLI to go.mod's templ runtime; @latest generated incompatible code
+          go install github.com/a-h/templ/cmd/templ@$(go list -m -f '{{.Version}}' github.com/a-h/templ)
           templ generate
 
       - name: Build scraper
@@ -35,7 +36,7 @@ jobs:
       - name: Run scraper
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          CHROME_BIN: /usr/bin/chromium-browser
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
         run: ./bin/scraper
 
       - name: Build generator
